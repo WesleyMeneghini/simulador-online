@@ -121,13 +121,19 @@ def rasparDados(driver):
             if id_modalidade == "E":
                 id_modalidade = 1
 
+
             plano = plano_modalidade[0].strip()
+
+            if plano == 'AMIL FÁCIL 50 ABC / BX':
+                plano = 'AMIL FÁCIL 50 ABC'
 
             # variaçoes dos nomes dos planos (FORMATACAO)
             plano = plano.split('PREMIUM')[0].strip()
             plano = plano.split('SUPREMO')[0].strip()
             nome_plano = plano
             plano = plano.replace(" ", "")
+
+
 
             sql = f"select * from tbl_tipo_plano where id_operadora = {id_operadora} and replace(titulo, ' ', '') like '{plano}';"
             print(sql)
@@ -231,6 +237,8 @@ def rasparDados(driver):
                         #     print(update)
                         #     cursor.execute(update)
 
+                        print(type(preco0_18), type(valores[0]))
+                        print(preco0_18, valores[0])
                         if not preco0_18 == valores[0] : #and not ultimo_reajuste == data_reajuste
                             print("Atualizar Precos! -----")
 
@@ -255,9 +263,9 @@ def rasparDados(driver):
                                      f"WHERE `id`='{id}';"
                             print(update)
 
-                            res = cursor.execute(update)
+                            # res = cursor.execute(update)
 
-                            # res = 0
+                            res = 1
                             print(res)
                             if res == 1:
 
@@ -267,7 +275,7 @@ def rasparDados(driver):
                                          "values " \
                                          f"({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, {ultimo_reajuste}); "
                                 print(insert)
-                                res = cursor.execute(insert)
+                                # res = cursor.execute(insert)
                                 print(res, "sucesso")
 
 
@@ -372,10 +380,13 @@ def verificarAtualizacao(driver, num):
             tipo_contratacao = list(tipo_contratacao.lower())
             tipo_contratacao = f"{tipo_contratacao[0]+tipo_contratacao[1]+tipo_contratacao[2]}"
 
-    # Verificando apenas AMIL
-    if re.search('AMIL -', str(nome_operadora).upper()):
+    # Verificando apenas AMIL e Amil Facil
+    if re.search('AMIL -', str(nome_operadora).upper()) or re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
         tag_operadora = nome_operadora
-        nome_operadora = str(nome_operadora).split(" ")[0]
+        if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+            nome_operadora = str(nome_operadora).split(" -")[0]
+        else:
+            nome_operadora = str(nome_operadora).split(" ")[0]
 
         # Verificar de a area e de sao paulo
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
@@ -503,7 +514,7 @@ def obterDados(driver, tipo_tabela_option):
 
         for i in range(quantidade_results):
 
-            if i > 4 and i < 23:
+            if i > 22 and i < 50:
                 print("\n")
                 print(f"Lendo resultado: {i}")
 
@@ -539,7 +550,28 @@ def obterDados(driver, tipo_tabela_option):
                     #     else:
                     #         print(False)
 
-                    if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
+                    # Funcionando o AMIL (id_operadora = 2)
+                    # if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
+                    #
+                    #     try:
+                    #         WebDriverWait(driver, 10).until(
+                    #             EC.presence_of_element_located(
+                    #                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                    #         )
+                    #     except:
+                    #         print("Erro ao listar os planos")
+                    #     finally:
+                    #         pass
+                    #
+                    #     print(nome_operadora)
+                    #     if verificarAtualizacao(driver, i):
+                    #         print(True)
+                    #         selecionarPlano(driver, i)
+                    #     else:
+                    #         print(False)
+
+
+                    if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
 
                         try:
                             WebDriverWait(driver, 10).until(
@@ -552,6 +584,7 @@ def obterDados(driver, tipo_tabela_option):
                             pass
 
                         print(nome_operadora)
+                        print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
                         if verificarAtualizacao(driver, i):
                             print(True)
                             selecionarPlano(driver, i)
