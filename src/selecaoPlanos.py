@@ -80,7 +80,7 @@ def rasparDados(driver):
             elif re.search('01 Titular', titulo):
                 qtd_titulares = '1'
 
-        elif re.search('AMIL', nome_operadora):
+        elif re.search('AMIL', nome_operadora) or nome_operadora == 'ONE HEALTH':
             print('-------------')
             min_vidas = 0
             max_vidas = 29
@@ -111,6 +111,7 @@ def rasparDados(driver):
             print(dado)
             dado[0] = str(dado[0]).replace("(R1)", "R1")
             dado[0] = str(dado[0]).replace("(R2)", "R2")
+            dado[0] = str(dado[0]).replace("(R3)", "R3")
 
 
             plano_modalidade = str(dado[0]).split("(")
@@ -214,7 +215,7 @@ def rasparDados(driver):
                     teste = "select * from tbl_preco_faixa_etaria " \
                             f"where id_area = {id_area} and id_operadora = {id_operadora} and id_tipo_plano = {id_plano} and id_modalidade = {id_modalidade} " \
                             f"and id_tipo_contratacao = {tipo_contratacao} and id_coparticipacao = {coparticipacao} and qtd_titulares = {qtd_titulares} " \
-                            f"and min_vidas = {min_vidas} and max_vidas = {max_vidas} and id_sindicato is null;"
+                            f"and min_vidas = {min_vidas} and id_sindicato is null;"
                     print(teste)
                     res = cursor.execute(teste)
                     print(res)
@@ -381,10 +382,16 @@ def verificarAtualizacao(driver, num):
             tipo_contratacao = f"{tipo_contratacao[0]+tipo_contratacao[1]+tipo_contratacao[2]}"
 
     # Verificando apenas AMIL e Amil Facil
-    if re.search('AMIL -', str(nome_operadora).upper()) or re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+    if re.search('AMIL -', str(nome_operadora).upper()) \
+        or re.search('AMIL FÁCIL -', str(nome_operadora).upper()) \
+        or re.search('AMIL ONE -', str(nome_operadora).upper()):
+
         tag_operadora = nome_operadora
+
         if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
             nome_operadora = str(nome_operadora).split(" -")[0]
+        elif re.search('AMIL ONE -', str(nome_operadora).upper()):
+            nome_operadora = 'ONE HEALTH'
         else:
             nome_operadora = str(nome_operadora).split(" ")[0]
 
@@ -430,7 +437,7 @@ def verificarAtualizacao(driver, num):
     data_reajuste = datetime.strptime(str(data_reajuste), '%Y-%m-%d').date()
     print(data_reajuste)
 
-
+    # print(res)
     if res > 0:
         select = cursor.fetchall()[0]
         id_operadora = select[0]
@@ -514,7 +521,7 @@ def obterDados(driver, tipo_tabela_option):
 
         for i in range(quantidade_results):
 
-            if i > 22 and i < 50:
+            if i >= 0 and i < 1000:
                 print("\n")
                 print(f"Lendo resultado: {i}")
 
@@ -571,7 +578,28 @@ def obterDados(driver, tipo_tabela_option):
                     #         print(False)
 
 
-                    if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+                    # Funcionando
+                    # if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+                    #
+                    #     try:
+                    #         WebDriverWait(driver, 10).until(
+                    #             EC.presence_of_element_located(
+                    #                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                    #         )
+                    #     except:
+                    #         print("Erro ao listar os planos")
+                    #     finally:
+                    #         pass
+                    #
+                    #     print(nome_operadora)
+                    #     print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                    #     if verificarAtualizacao(driver, i):
+                    #         print(True)
+                    #         selecionarPlano(driver, i)
+                    #     else:
+                    #         print(False)
+
+                    if re.search('AMIL ONE -', str(nome_operadora).upper()):
 
                         try:
                             WebDriverWait(driver, 10).until(
