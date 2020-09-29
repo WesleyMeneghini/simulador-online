@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 from src.db import conexao
-from src import selecaoPlanos
+from src import selecaoPlanos, selecaoAdesao
 
 count = 0
 def simulador(driver):
@@ -31,6 +31,8 @@ def simulador(driver):
             )
         except:
             print("Nao abriu a pagina de simulacao")
+            driver.close
+            exit()
             # simulador(driver)
         finally:
 
@@ -69,11 +71,11 @@ def simulador(driver):
                             administradora_option = i + 1
 
                     sql = f"select * from tbl_administradora where titulo like '%{nome_administradora}%';"
-                    conn = conexao.conexao()
+                    conn = conexao.myConexao()
                     cursor = conn.cursor()
                     res = cursor.execute(sql)
                     if res > 0:
-                        print(cursor.fetchall()[0][0])
+                        # print(cursor.fetchall()[0][0])
                         id_administradora = cursor.fetchall()[0][0]
                         print(id_administradora)
 
@@ -90,21 +92,35 @@ def simulador(driver):
                     # Selecionando a Entidade
                     print("Seleciona a Entidade!")
 
-                    # while driver.find_element_by_xpath('//*[@id="simulacao_adesao_entidade"]/option[1]').is_selected():
-                    #     time.sleep(0.5)
-                    #
-                    # driver.implicitly_wait(15)
-                    # for i, item in enumerate(
-                    #         driver.find_element_by_id('simulacao_adesao_entidade').find_elements_by_tag_name('option')):
-                    #     if item.get_attribute("selected"):
-                    #         entidade_option = i + 1
+                    while driver.find_element_by_xpath('//*[@id="simulacao_adesao_entidade"]/option[1]').is_selected():
+                        time.sleep(0.5)
 
-                    # print(tipo_tabela_option, administradora_option, operadora_option, entidade_option)
+                    driver.implicitly_wait(15)
+                    for i, item in enumerate(
+                            driver.find_element_by_id('simulacao_adesao_entidade').find_elements_by_tag_name('option')):
+                        if item.get_attribute("selected"):
+                            entidade_option = i + 1
+
+                    print(tipo_tabela_option, administradora_option, operadora_option, entidade_option)
+                    selecaoAdesao.obterDados(driver, tipo_tabela_option, administradora_option, operadora_option, entidade_option)
+
+                elif tipo_tabela_option == 4:
+                    selecaoPlanos.obterDados(driver, tipo_tabela_option)
+
             else:
 
                 tipo_tabela_option = 4
 
-            selecaoPlanos.obterDados(driver, tipo_tabela_option)
+            # selecaoPlanos.obterDados(driver, tipo_tabela_option)
+
+
+            # TESTES PARA ADESAO
+            tipo_tabela_option = 5
+            administradora_option = 16
+            operadora_option = 11
+            entidade_option = 61
+
+            selecaoAdesao.obterDados(driver, tipo_tabela_option, administradora_option, operadora_option, entidade_option)
 
 
 

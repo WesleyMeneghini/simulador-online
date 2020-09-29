@@ -1,4 +1,3 @@
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -6,10 +5,7 @@ from bs4 import BeautifulSoup
 from src.db import conexao
 import time
 import re
-from datetime import date, datetime
-
-
-from selenium.webdriver import Firefox as Driver
+from datetime import datetime
 
 
 id_area = 0
@@ -20,12 +16,12 @@ hospitalar = 0
 tipo_contratacao = 0
 
 min_vidas = 0
-max_vidas = 0
+max_vidas = 29
 data_reajuste = None
 id_administradora = 0
 id_tipo_contratacao_lead = 1
 id_tipo_tabela = None
-
+regional = False
 planos_sem_cadastros = []
 
 def insertDados(sql, values):
@@ -43,6 +39,9 @@ def insertDados(sql, values):
 
 def rasparDados(driver):
 
+    # Ativar ou dasativar a persistencia de dados
+    salvar = False
+
     global id_operadora
     global nome_operadora
     global coparticipacao
@@ -53,6 +52,7 @@ def rasparDados(driver):
     global id_administradora
     global id_tipo_contratacao_lead
     global tipo_contratacao
+    global regional
     qtd_titulares = '0'
     planos_atualizados = []
 
@@ -82,14 +82,34 @@ def rasparDados(driver):
                 qtd_titulares = '1'
 
         elif re.search('AMIL', nome_operadora) or nome_operadora == 'ONE HEALTH':
-            min_vidas = 0
-            max_vidas = 29
-            qtd_titulares = '1'
+            if min_vidas == 0:
+                min_vidas = 0
+                max_vidas = 29
+                qtd_titulares = '1'
+            elif min_vidas > 29:
+                min_vidas = 30
+                max_vidas = 99
+                qtd_titulares = '1'
 
         elif re.search('SULAMÉRICA', nome_operadora):
-            min_vidas = 0
-            max_vidas = 29
-            qtd_titulares = '1'
+            if min_vidas == 0:
+                min_vidas = 0
+                max_vidas = 29
+                qtd_titulares = '1'
+            elif min_vidas > 29:
+                min_vidas = 30
+                max_vidas = 0
+                qtd_titulares = '1'
+
+        elif re.search('SOMPO', nome_operadora):
+            if min_vidas == 0:
+                min_vidas = 0
+                max_vidas = 29
+                qtd_titulares = '1'
+            elif min_vidas > 29:
+                min_vidas = 30
+                max_vidas = 99
+                qtd_titulares = '1'
 
 
 
@@ -136,17 +156,25 @@ def rasparDados(driver):
             if plano == 'AMIL FÁCIL 50 ABC / BX':
                 plano = 'AMIL FÁCIL 50 ABC'
 
+            if regional:
+                plano = f"{plano} REGIONAL"
+
+            if re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano):
+                if id_modalidade == 1:
+                    plano = "CLÁSSICO ENF"
+                elif id_modalidade == 2:
+                    plano = "CLÁSSICO APT"
+
             # Variacao de nome de planos SULAMERICA
             if re.search('SULAMÉRICA', nome_operadora):
                 plano = plano.replace("- ", "")
 
-            # variaçoes dos nomes dos planos (FORMATACAO)
-            plano = plano.split('PREMIUM')[0].strip()
-            plano = plano.split('SUPREMO')[0].strip()
+                # variaçoes dos nomes dos planos (FORMATACAO)
+                plano = plano.split('PREMIUM')[0].strip()
+                plano = plano.split('SUPREMO')[0].strip()
+
             nome_plano = plano
             plano = plano.replace(" ", "")
-
-
 
             sql = f"select * from tbl_tipo_plano where id_operadora = {id_operadora} and replace(titulo, ' ', '') like '{plano}';"
             print(sql)
@@ -250,8 +278,8 @@ def rasparDados(driver):
                         #     print(update)
                         #     cursor.execute(update)
 
-                        print(type(preco0_18), type(valores[0]))
-                        print(preco0_18, valores[0])
+                        # print(type(preco0_18), type(valores[0]))
+                        # print(preco0_18, valores[0])
                         if not preco0_18 == valores[0] : #and not ultimo_reajuste == data_reajuste
                             print("Atualizar Precos! -----")
                             planos_atualizados.append(plano)
@@ -277,9 +305,12 @@ def rasparDados(driver):
                                      f"WHERE `id`='{id}';"
                             print(update)
 
-                            res = cursor.execute(update)
+                            if salvar:
+                                res = cursor.execute(update)
+                            else:
+                                res = 1
 
-                            res = 1
+                            # res = 1
                             print(res)
                             if res == 1:
 
@@ -287,10 +318,11 @@ def rasparDados(driver):
                                 insert = "insert into tbl_historico_precos_planos " \
                                          "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, preco54_58, preco_m59, data_validade ) " \
                                          "values " \
-                                         f"({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, {ultimo_reajuste}); "
+                                         f"({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}'); "
                                 print(insert)
-                                res = cursor.execute(insert)
-                                print(res, "sucesso")
+                                if salvar:
+                                    res = cursor.execute(insert)
+                                    print(res, "sucesso")
 
 
 
@@ -304,16 +336,15 @@ def rasparDados(driver):
                         print("------------------------------- Cadastrar Novo")
                         print(f'{sql} {values}')
 
-                        # if not insertDados(sql, values):
-                        #     print("ERROR: erro ao inserir precos no banco de dados!")
-                        # else:
-                        #     inseridos += 1
+                        if salvar:
+                        # if False:
+
+                            if not insertDados(sql, values):
+                                print("ERROR: erro ao inserir precos no banco de dados!")
+                            else:
+                                inseridos += 1
                     elif res > 1:
-                        print("mais de um plano cadastrado")
-
-
-
-
+                        print("Mais de um plano cadastrado")
 
 
 
@@ -346,6 +377,7 @@ def verificarAtualizacao(driver, num):
     global tipo_contratacao
     global coparticipacao
     global hospitalar
+    global regional
 
 
     conn = conexao.myConexao()
@@ -365,10 +397,23 @@ def verificarAtualizacao(driver, num):
 
         if re.search('HOSPITALAR', nome_operadora):
             tipo_contratacao = 2
-        else:
-            tipo_contratacao = str(driver.find_element_by_xpath(
-                f'//*[@id="div-planos-loaded"]/table/tbody/tr[{num + 1}]/td[1]/b').text)
-        pass
+        # else:
+        #     tipo_contratacao = str(driver.find_element_by_xpath(
+        #         f'//*[@id="div-planos-loaded"]/table/tbody/tr[{num + 1}]/td[1]/b').text)
+        # pass
+
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located(
+                    (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{num + 1}]/td[1]/b'))
+            )
+        except:
+            tipo_contratacao = None
+        finally:
+            if not tipo_contratacao == None:
+                tipo_contratacao = str(driver.find_element_by_xpath(
+                    f'//*[@id="div-planos-loaded"]/table/tbody/tr[{num + 1}]/td[1]/b').text)
+            pass
 
     print(nome_operadora)
     print(tipo_contratacao, "\n")
@@ -498,6 +543,48 @@ def verificarAtualizacao(driver, num):
                 tipo_contratacao = 'OPCI'
 
 
+    if re.search('SOMPO', str(nome_operadora).upper()):
+
+        tag_operadora = nome_operadora
+        nome_operadora = "SOMPO SAÚDE"
+
+        # Verificar de a area e de sao paulo
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
+
+            if re.search('SEM COPART', str(tag_operadora).upper()):
+                coparticipacao = 2
+            elif re.search('COM COPART', str(tag_operadora).upper()):
+
+                if re.search('10', tipo_contratacao):
+                    coparticipacao = 1
+                elif re.search('20', tipo_contratacao):
+                    coparticipacao = 3
+                elif re.search('30', tipo_contratacao):
+                    coparticipacao = 5
+
+
+            # Verificar se e hospitalar
+            if re.search('HOSPITALAR', tag_operadora):
+                hospitalar = 2
+            else:
+                hospitalar = 1
+
+            if re.search('INTERIOR', str(tag_operadora).upper()):
+                area = 'INTERIOR 1'
+            else:
+                area = 'SP CAPITAL'
+
+            if re.search('REGIONAL', str(tipo_contratacao).upper()):
+                regional = True
+            else:
+                regional = False
+
+            if re.search('OPCIONAL', str(tipo_contratacao).upper()):
+                tipo_contratacao = 'OPCI'
+            else:
+                tipo_contratacao = 'COMP'
+
+
 
     sql = f"select * from tbl_operadora, tbl_area, tbl_tipo_contratacao where tbl_operadora.titulo like '{nome_operadora}' and tbl_area.area like '%{area}%' and  tbl_tipo_contratacao.titulo like '%{tipo_contratacao}%';"
     print(sql)
@@ -530,7 +617,7 @@ def verificarAtualizacao(driver, num):
           f"and id_coparticipacao = {coparticipacao} " \
           f"and ultimo_reajuste = '{data_reajuste}';"
 
-    print(f"\n ${sql}")
+    print(f"\n{sql}")
 
     res = cursor.execute(sql)
     print(res)
@@ -575,7 +662,10 @@ def obterDados(driver, tipo_tabela_option):
     for i in range(10):
         # driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(Keys.DELETE)
         driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').clear()
-        driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(1)
+        if min_vidas >= 29 and i == 5:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(30)
+        else:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(1)
 
     # pesquisar
     time.sleep(1)
@@ -601,9 +691,10 @@ def obterDados(driver, tipo_tabela_option):
 
             if i >= 0 and i < 1000:
                 print("\n")
-                print(f"Lendo resultado: {i}")
+                print(f"Lendo resultado: {i+1}")
 
                 if driver.find_element_by_id('btn-get-planos').is_displayed():
+                    # time.sleep(1)
                     driver.find_element_by_id('btn-get-planos').click()
                     time.sleep(1)
                 try:
@@ -611,7 +702,7 @@ def obterDados(driver, tipo_tabela_option):
                         EC.presence_of_element_located((By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
                     )
                 finally:
-
+                    # time.sleep(1)
                     nome_operadora = driver.find_element_by_xpath(
                         f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
 
@@ -669,8 +760,8 @@ def obterDados(driver, tipo_tabela_option):
                     #     finally:
                     #         pass
                     #
-                    #     print(nome_operadora)
-                    #     print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                    #     # print(nome_operadora)
+                    #     # print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
                     #     if verificarAtualizacao(driver, i):
                     #         print(True)
                     #         selecionarPlano(driver, i)
@@ -678,25 +769,25 @@ def obterDados(driver, tipo_tabela_option):
                     #         print(False)
 
                     # Amil ONE (funcionando)
-                    if re.search('AMIL ONE -', str(nome_operadora).upper()):
-
-                        try:
-                            WebDriverWait(driver, 10).until(
-                                EC.presence_of_element_located(
-                                    (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
-                            )
-                        except:
-                            print("Erro ao listar os planos")
-                        finally:
-                            pass
-
-                        print(nome_operadora)
-                        print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
-                        if verificarAtualizacao(driver, i):
-                            print(True)
-                            selecionarPlano(driver, i)
-                        else:
-                            print(False)
+                    # if re.search('AMIL ONE -', str(nome_operadora).upper()):
+                    #
+                    #     try:
+                    #         WebDriverWait(driver, 10).until(
+                    #             EC.presence_of_element_located(
+                    #                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                    #         )
+                    #     except:
+                    #         print("Erro ao listar os planos")
+                    #     finally:
+                    #         pass
+                    #
+                    #     print(nome_operadora)
+                    #     print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                    #     if verificarAtualizacao(driver, i):
+                    #         print(True)
+                    #         selecionarPlano(driver, i)
+                    #     else:
+                    #         print(False)
 
 
                     # if re.search('SULAMÉRICA', str(nome_operadora).upper()):
@@ -718,3 +809,40 @@ def obterDados(driver, tipo_tabela_option):
                     #             selecionarPlano(driver, i)
                     #         else:
                     #             print(False)
+
+                    # if re.search('SOMPO', str(nome_operadora).upper()):
+                    #
+                    #     try:
+                    #         WebDriverWait(driver, 10).until(
+                    #             EC.presence_of_element_located(
+                    #                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                    #         )
+                    #     except:
+                    #         print("Erro ao listar os planos")
+                    #     finally:
+                    #         pass
+                    #
+                    #     # print(nome_operadora)
+                    #     # print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                    #     if verificarAtualizacao(driver, i):
+                    #         print(True)
+                    #         selecionarPlano(driver, i)
+                    #     else:
+                    #         print(False)
+                    try:
+                        WebDriverWait(driver, 10).until(
+                            EC.presence_of_element_located(
+                                (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                        )
+                    except:
+                        print("Erro ao listar os planos")
+                    finally:
+                        pass
+
+                    # print(nome_operadora)
+                    # print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                    if verificarAtualizacao(driver, i):
+                        print(True)
+                        selecionarPlano(driver, i)
+                    else:
+                        print(False)

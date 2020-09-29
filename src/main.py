@@ -12,22 +12,19 @@ if __name__ == '__main__':
 
     driver = webBrowser.browser()
     # driver.minimize_window()
-    driver.get(acesso.getSite)
-
     try:
-        WebDriverWait(driver, 5).until(
-            EC.presence_of_element_located((By.XPATH, '//*[@id="ara_cliente"]/iframe'))
-        )
+        driver.get(acesso.getSite)
     except:
-        print("Nao achou o iframe")
+        print("SEM INTERNET!")
+        exec()
     finally:
+        pass
 
-        try:
-            login.login(driver)
-        except:
-            driver.get('https://app.simuladoronline.com/inicio')
+    resLogin = login.login(driver)
+    while not resLogin:
+        resLogin = login.login(driver)
 
-        simular.simulador(driver)
+    simular.simulador(driver)
 
-        time.sleep(4)
-        driver.close()
+
+    driver.close()
