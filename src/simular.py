@@ -117,8 +117,8 @@ def simulador(driver):
             # TESTES PARA ADESAO
             tipo_tabela_option = 5
             administradora_option = 16
-            operadora_option = 11
-            entidade_option = 61
+            operadora_option = 2
+            entidade_option = 1
 
             selecaoAdesao.obterDados(driver, tipo_tabela_option, administradora_option, operadora_option, entidade_option)
 
