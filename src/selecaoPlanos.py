@@ -14,6 +14,7 @@ nome_operadora = ""
 coparticipacao = 2
 hospitalar = 0
 tipo_contratacao = 0
+id_tipo_empresa = 2
 
 min_vidas = 0
 max_vidas = 29
@@ -53,6 +54,7 @@ def rasparDados(driver):
     global id_tipo_contratacao_lead
     global tipo_contratacao
     global regional
+    global id_tipo_empresa
     qtd_titulares = '0'
     planos_atualizados = []
 
@@ -100,6 +102,9 @@ def rasparDados(driver):
                 min_vidas = 30
                 max_vidas = 0
                 qtd_titulares = '1'
+
+            if re.search(' MEI', titulo):
+                id_tipo_empresa = 1
 
         elif re.search('SOMPO', nome_operadora):
             if min_vidas == 0:
@@ -159,7 +164,7 @@ def rasparDados(driver):
             if regional:
                 plano = f"{plano} REGIONAL"
 
-            if re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano):
+            if (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and (id_operadora == 2 or id_operadora == 5 or id_operadora == 8) :
                 if id_modalidade == 1:
                     plano = "CLÁSSICO ENF"
                 elif id_modalidade == 2:
@@ -245,7 +250,7 @@ def rasparDados(driver):
                         hospitalar,  # hospitalar
                         min_vidas,  # min_vidas
                         max_vidas,  # max_vidas
-                        2,  # id_tipo_empresa
+                        id_tipo_empresa,  # id_tipo_empresa
                         id_administradora,  # id_administradora
                         data_reajuste,  # ultimo_reajuste
                         id_tipo_contratacao_lead,  # id_tipo_contratacao_lead
@@ -255,7 +260,7 @@ def rasparDados(driver):
                     teste = "select * from tbl_preco_faixa_etaria " \
                             f"where id_area = {id_area} and id_operadora = {id_operadora} and id_tipo_plano = {id_plano} and id_modalidade = {id_modalidade} " \
                             f"and id_tipo_contratacao = {tipo_contratacao} and id_coparticipacao = {coparticipacao} and qtd_titulares = {qtd_titulares} " \
-                            f"and min_vidas = {min_vidas} and id_sindicato is null;"
+                            f"and min_vidas = {min_vidas} and id_sindicato is null and id_tipo_empresa = {id_tipo_empresa} and hospitalar = {hospitalar};"
                     print(teste)
                     res = cursor.execute(teste)
                     print(res)
@@ -272,7 +277,7 @@ def rasparDados(driver):
 
                         print(select[1:28], f"ID: {id} -- banco de dados")
 
-
+                        # Condicao para alterar a data do reajuste caso os precos estejam iguais mais sem data
                         # if ultimo_reajuste is None:
                         #     update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{data_reajuste}' WHERE `id`='{id}';"
                         #     print(update)
@@ -789,7 +794,6 @@ def obterDados(driver, tipo_tabela_option):
                     #     else:
                     #         print(False)
 
-
                     # if re.search('SULAMÉRICA', str(nome_operadora).upper()):
                     #
                     #     try:
@@ -829,20 +833,42 @@ def obterDados(driver, tipo_tabela_option):
                     #         selecionarPlano(driver, i)
                     #     else:
                     #         print(False)
-                    try:
-                        WebDriverWait(driver, 10).until(
-                            EC.presence_of_element_located(
-                                (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
-                        )
-                    except:
-                        print("Erro ao listar os planos")
-                    finally:
-                        pass
 
-                    # print(nome_operadora)
-                    # print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
-                    if verificarAtualizacao(driver, i):
-                        print(True)
-                        selecionarPlano(driver, i)
-                    else:
-                        print(False)
+                    if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search(' MEI', str(nome_operadora).upper()):
+
+                        try:
+                            WebDriverWait(driver, 10).until(
+                                EC.presence_of_element_located(
+                                    (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                            )
+                        except:
+                            print("Erro ao listar os planos")
+                        finally:
+                            pass
+
+                            # print(nome_operadora)
+                            # print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                            if verificarAtualizacao(driver, i):
+                                print(True)
+                                selecionarPlano(driver, i)
+                            else:
+                                print(False)
+
+
+                    # try:
+                    #     WebDriverWait(driver, 10).until(
+                    #         EC.presence_of_element_located(
+                    #             (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                    #     )
+                    # except:
+                    #     print("Erro ao listar os planos")
+                    # finally:
+                    #     pass
+                    #
+                    # # print(nome_operadora)
+                    # # print(driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i+1}]/td[1]/b').text, "\n")
+                    # if verificarAtualizacao(driver, i):
+                    #     print(True)
+                    #     selecionarPlano(driver, i)
+                    # else:
+                    #     print(False)
