@@ -37,11 +37,13 @@ min_vidas = 0
 max_vidas = 0
 ultimo = False
 
+
 def aguardandoCarregamento(string, element):
     if string == element:
         return False
     else:
         return True
+
 
 def insertDados(sql, values):
     conn = conexao.myConexao()
@@ -59,7 +61,6 @@ def insertDados(sql, values):
 
 def pegarDados(driver, cursor, id_sindicato, data_reajuste):
     # Ativar ou dasativar a persistencia de dados
-
 
     salvar = conexao.inserirRegistro()
     deletar_duplicados = conexao.deletarRegistroDuplicado()
@@ -106,7 +107,7 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
         hospitalar = 2
 
     print("Pegando precos!")
-    if ultimo :
+    if ultimo:
         quant = 1
     else:
         quant = 2
@@ -117,7 +118,8 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
             titulo = str(driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[2]/div[2]/b').text)
 
             info_sindicato = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[2]/div[3]').text
-            sindicato_name = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[2]/div[3]/b').text
+            sindicato_name = driver.find_element_by_xpath(
+                '//*[@id="geral-content"]/section/div[2]/div[2]/div[3]/b').text
 
         if num_tables == 1:
             titulo = str(driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[2]/div[5]/b').text)
@@ -201,6 +203,11 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
                     # variaçoes dos nomes dos planos (FORMATACAO)
                     plano = plano.split('PREMIUM')[0].strip()
                     plano = plano.split('SUPREMO')[0].strip()
+
+                    # variaçoes dos nomes de planos da AMIL FACIL
+                    if id_operadora == 8:
+                        min_vidas = 0
+                        max_vidas = 0
 
                     # variaçoes dos nomes de planos da BRADESCO
                     if id_operadora == 3:
@@ -346,6 +353,7 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
                                              f"`preco49_53`='{valores[7]}', " \
                                              f"`preco54_58`='{valores[8]}', " \
                                              f"`preco_m59`='{valores[9]}', " \
+                                             f"id_tipo_tabela = {id_tipo_tabela}, " \
                                              f"`ultimo_reajuste`='{data_reajuste}' " \
                                              f"WHERE `id`='{id}';"
                                     print(update)
@@ -359,9 +367,10 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
                                     if res == 1:
 
                                         insert = "insert into tbl_historico_precos_planos " \
-                                                 "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, preco54_58, preco_m59, data_validade ) " \
-                                                 "values " \
-                                                 f"({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}'); "
+                                                 "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, " \
+                                                 "preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, " \
+                                                 "preco54_58, preco_m59, data_validade ) " \
+                                                 f"values ({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, {ultimo_reajuste});"
                                         print(insert)
                                         if salvar:
                                             res = cursor.execute(insert)
@@ -431,14 +440,12 @@ def simulacaoAdesao(driver, administradora_option, operadora_option, entidade_op
                                      driver.find_element_by_id('div-adesao').get_attribute('style')):
             pass
         if not str(nome_administradora_option) == str(driver.find_element_by_xpath(
-                   f'//*[@id="simulacao_adesao_administradora"]/option[{administradora_option}]').text):
+                f'//*[@id="simulacao_adesao_administradora"]/option[{administradora_option}]').text):
             simulacaoAdesao(driver, administradora_option, operadora_option, entidade_option)
     # Selecionar a Adimistradora
     administradora = driver.find_element_by_xpath(
         f'//*[@id="simulacao_adesao_administradora"]/option[{administradora_option}]')
     administradora.click()
-
-
 
     try:
         WebDriverWait(driver, 10).until(
@@ -459,7 +466,8 @@ def simulacaoAdesao(driver, administradora_option, operadora_option, entidade_op
 
     # Selecionando a operadora
     operadora = driver.find_element_by_xpath(f'//*[@id="simulacao_adesao_opes"]/option[{operadora_option}]').click()
-    while aguardandoCarregamento("display: block; position: static; zoom: 1;", driver.find_element_by_id('div-adesao').get_attribute('style')):
+    while aguardandoCarregamento("display: block; position: static; zoom: 1;",
+                                 driver.find_element_by_id('div-adesao').get_attribute('style')):
         pass
 
     try:
@@ -480,7 +488,8 @@ def simulacaoAdesao(driver, administradora_option, operadora_option, entidade_op
             simulacaoAdesao(driver, administradora_option, operadora_option, entidade_option)
 
     driver.find_element_by_xpath(f'//*[@id="simulacao_adesao_entidade"]/option[{entidade_option}]').click()
-    while aguardandoCarregamento("display: block; position: static; zoom: 1;", driver.find_element_by_id('div-adesao').get_attribute('style')):
+    while aguardandoCarregamento("display: block; position: static; zoom: 1;",
+                                 driver.find_element_by_id('div-adesao').get_attribute('style')):
         pass
 
     # pesquisar
@@ -524,7 +533,8 @@ def obterDados(driver, tipo_tabela_option, administradora_option, operadora_opti
 
     # Tipo de Tabela
     driver.find_element_by_xpath(f'//*[@id="simulacao_tipoTabela"]/option[{tipo_tabela_option}]').click()
-    while aguardandoCarregamento("display: block; position: static; zoom: 1;", driver.find_element_by_id('div-adesao').get_attribute('style')):
+    while aguardandoCarregamento("display: block; position: static; zoom: 1;",
+                                 driver.find_element_by_id('div-adesao').get_attribute('style')):
         pass
 
     try:
@@ -545,7 +555,8 @@ def obterDados(driver, tipo_tabela_option, administradora_option, operadora_opti
     nome_administradora_option = administradora.text
     if nome_administradora_option != '':
         administradora.click()
-        while aguardandoCarregamento("display: block; position: static; zoom: 1;", driver.find_element_by_id('div-adesao').get_attribute('style')):
+        while aguardandoCarregamento("display: block; position: static; zoom: 1;",
+                                     driver.find_element_by_id('div-adesao').get_attribute('style')):
             pass
         try:
             WebDriverWait(driver, 10).until(
@@ -587,7 +598,8 @@ def obterDados(driver, tipo_tabela_option, administradora_option, operadora_opti
                     hospitalar = 2
 
                 operadora.click()
-                while aguardandoCarregamento("display: block; position: static; zoom: 1;", driver.find_element_by_id('div-adesao').get_attribute('style')):
+                while aguardandoCarregamento("display: block; position: static; zoom: 1;",
+                                             driver.find_element_by_id('div-adesao').get_attribute('style')):
                     pass
                 try:
                     WebDriverWait(driver, 10).until(
@@ -605,7 +617,8 @@ def obterDados(driver, tipo_tabela_option, administradora_option, operadora_opti
                     f'//*[@id="simulacao_adesao_entidade"]/option[{entidade_option}]')
                 nome_entidade_option = entidades_selecionada.text
                 entidades_selecionada.click()
-                while aguardandoCarregamento("display: block; position: static; zoom: 1;", driver.find_element_by_id('div-adesao').get_attribute('style')):
+                while aguardandoCarregamento("display: block; position: static; zoom: 1;",
+                                             driver.find_element_by_id('div-adesao').get_attribute('style')):
                     pass
 
                 # quantidade de entidades
@@ -632,9 +645,8 @@ def obterDados(driver, tipo_tabela_option, administradora_option, operadora_opti
 
                         # print(f"\nLendo resultados {i} e {i + 1} ...")
 
-
                         if i >= 0 and i <= 1000:
-                            print(f"\nLendo resultados {i+1} e {i + 2} ...")
+                            print(f"\nLendo resultados {i + 1} e {i + 2} ...")
                             if count > 0:
                                 simulacaoAdesao(driver, administradora_option, operadora_option, entidade_option)
 
@@ -687,7 +699,7 @@ def obterDados(driver, tipo_tabela_option, administradora_option, operadora_opti
                                         # if res > 0:
                                         # print(f"Nome do sindicato '{entidade_nome}'")
 
-                                        if i+1 >= quantidade_results:
+                                        if i + 1 >= quantidade_results:
                                             driver.execute_script(
                                                 f"document.getElementsByClassName('select-all')[{i}].click();")
                                             ultimo = True

@@ -111,16 +111,16 @@ def simulador(driver):
 
                 tipo_tabela_option = 4
 
-            # selecaoPlanos.obterDados(driver, tipo_tabela_option)
+            selecaoPlanos.obterDados(driver, tipo_tabela_option)
 
-
-            # TESTES PARA ADESAO
-            tipo_tabela_option = 5
-            administradora_option = 16
-            operadora_option = 2
-            entidade_option = 1
-
-            selecaoAdesao.obterDados(driver, tipo_tabela_option, administradora_option, operadora_option, entidade_option)
+            # for i in range(2, 15):
+            #     # TESTES PARA ADESAO
+            #     tipo_tabela_option = 5
+            #     administradora_option = 16
+            #     operadora_option = i
+            #     entidade_option = 1
+            #
+            #     selecaoAdesao.obterDados(driver, tipo_tabela_option, administradora_option, operadora_option, entidade_option)
 
 
 
