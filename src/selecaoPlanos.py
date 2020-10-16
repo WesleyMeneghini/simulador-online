@@ -17,8 +17,9 @@ tipo_contratacao = 0
 id_tipo_empresa = 2
 id_tipo_contratacao = 0
 
-min_vidas = 0
-max_vidas = 29
+min_vidas_pesquisa = 30
+min_vidas = 30
+max_vidas = 0
 data_reajuste = None
 id_administradora = 0
 id_tipo_contratacao_lead = 1
@@ -49,6 +50,7 @@ def rasparDados(driver):
     global coparticipacao
     global hospitalar
     global min_vidas
+    global min_vidas_pesquisa
     global max_vidas
     global data_reajuste
     global id_administradora
@@ -81,6 +83,13 @@ def rasparDados(driver):
                 max_vidas = 29
 
             if re.search('4 vidas', titulo):
+                min_vidas = 0
+                max_vidas = 29
+
+            if min_vidas_pesquisa == 30:
+                min_vidas = 30
+                max_vidas = 0
+            elif min_vidas_pesquisa == 0:
                 min_vidas = 0
                 max_vidas = 29
 
@@ -332,7 +341,9 @@ def rasparDados(driver):
                                      f"`preco44_48`='{valores[6]}', " \
                                      f"`preco49_53`='{valores[7]}', " \
                                      f"`preco54_58`='{valores[8]}', " \
-                                     f"`preco_m59`='{valores[9]}', " \
+                                     f"`preco_m59`='{valores[9]}'," \
+                                     f"`min_vidas`='{min_vidas}', " \
+                                     f"`max_vidas`='{max_vidas}', " \
                                      f"`ultimo_reajuste`='{data_reajuste}' " \
                                      f"WHERE `id`='{id}';"
                             print(update)
@@ -398,7 +409,7 @@ def rasparDados(driver):
                 if ref_plano:
                     planos_sem_cadastros.append(f"{nome_plano}")
 
-        print(f"Total de preços de planos atulizados: {inseridos}")
+        print(f"Total de preços de planos atualizados: {inseridos}")
     cursor.close()
     conn.commit()
     conn.close()
@@ -471,29 +482,31 @@ def verificarAtualizacao(driver, num):
                 area = 'INTERIOR 2'
             else:
                 area = 'SP CAPITAL'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').is_selected():
+            area = 'RIO DE JANEIRO'
 
-            # Verificar se e hospitalar
-            if re.search('HOSPITALAR', tag_operadora):
-                hospitalar = 2
-            else:
-                hospitalar = 1
+        # Verificar se e hospitalar
+        if re.search('HOSPITALAR', tag_operadora):
+            hospitalar = 2
+        else:
+            hospitalar = 1
 
-            tipo_contratacao = str(tipo_contratacao).split("-")
-            print(tipo_contratacao)
-            if len(tipo_contratacao) > 1:
-                coparticipacao = tipo_contratacao[1]
+        tipo_contratacao = str(tipo_contratacao).split("-")
+        print(tipo_contratacao)
+        if len(tipo_contratacao) > 1:
+            coparticipacao = tipo_contratacao[1]
 
-                if re.search('10', coparticipacao):
-                    coparticipacao = 1
-                elif re.search('20', coparticipacao):
-                    coparticipacao = 3
-                elif re.search('30', coparticipacao):
-                    coparticipacao = 5
+            if re.search('10', coparticipacao):
+                coparticipacao = 1
+            elif re.search('20', coparticipacao):
+                coparticipacao = 3
+            elif re.search('30', coparticipacao):
+                coparticipacao = 5
 
-            tipo_contratacao = tipo_contratacao[0].strip()
+        tipo_contratacao = tipo_contratacao[0].strip()
 
-            tipo_contratacao = list(tipo_contratacao.lower())
-            tipo_contratacao = f"{tipo_contratacao[0]+tipo_contratacao[1]+tipo_contratacao[2]}"
+        tipo_contratacao = list(tipo_contratacao.lower())
+        tipo_contratacao = f"{tipo_contratacao[0]+tipo_contratacao[1]+tipo_contratacao[2]}"
 
     # Verificando apenas AMIL e Amil Facil
     if re.search('AMIL -', str(nome_operadora).upper()) \
@@ -732,11 +745,18 @@ def selecionarPlano(driver, num):
 
 
 def obterDados(driver, tipo_tabela_option):
+    estadoSaoPaulo = True
+    estadoRioDeJaneiro = False
+    if estadoRioDeJaneiro:
+        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').click()
+
     # TIPO DE PLANO -> saude
     driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()
 
     # Tipo de Tabela
     driver.find_element_by_xpath(f'//*[@id="simulacao_tipoTabela"]/option[{tipo_tabela_option}]').click()
+
+
 
     # desmarcar as informaçoes opcionais
     for i in range(5):
@@ -793,7 +813,8 @@ def obterDados(driver, tipo_tabela_option):
                     # FUNCIONANDO - BRADESCO SEM O 4 VIDAS
                     # if re.search('BRADESCO', nome_operadora) and not re.search('4 vidas', nome_operadora):
                     if re.search('BRADESCO', nome_operadora):
-
+                        print("\n")
+                        print(f"Lendo resultado: {i+1}")
                         try:
                             WebDriverWait(driver, 10).until(
                                 EC.presence_of_element_located(
