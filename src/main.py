@@ -1,30 +1,33 @@
 from src.config import webBrowser
 from src import acesso, login, simular
-
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-
-
-import time
+from src.portoSeguroPrecos import obterPrecos
 
 if __name__ == '__main__':
 
     driver = webBrowser.browser()
-    # driver.minimize_window()
+
+    simuladorOnline = True
+    affinityPortoSeguro = False
+
     try:
-        driver.get(acesso.getSite)
+        if simuladorOnline:
+            driver.get(acesso.getSite)
     except:
         print("SEM INTERNET!")
         exec()
     finally:
         pass
 
-    resLogin = login.login(driver)
-    while not resLogin:
+    # fazer login no simulador Online
+    if simuladorOnline:
         resLogin = login.login(driver)
+        while not resLogin:
+            resLogin = login.login(driver)
 
-    simular.simulador(driver)
+        simular.simulador(driver)
 
+    # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)
+    if affinityPortoSeguro:
+        obterPrecos(driver)
 
     driver.close()
