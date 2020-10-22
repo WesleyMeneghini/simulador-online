@@ -17,7 +17,7 @@ def insertDados(sql, values):
         return False
 
 def obterPrecos(driver):
-    site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-riodejaneiro.html?_ijt=j1c6u12e2s0u3rppupltalsc9i'
+    site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-litoral-paulista.html?_ijt=qt4vpasdsr6su1238mkr3q1fnh'
     driver.get(site)
     planos_atualizados = []
     planos_sem_cadastros = []
@@ -90,6 +90,9 @@ def obterPrecos(driver):
                     conn = conexao.myConexao()
                     cursor = conn.cursor()
 
+                    if plano == 'OURO MAIS':
+                        plano = 'OURO MAIS Q'
+
                     sql = f"SELECT * FROM tbl_tipo_plano where titulo like '{plano}' and id_operadora = 11;"
                     print(sql)
                     res = cursor.execute(sql)
@@ -100,7 +103,7 @@ def obterPrecos(driver):
                         id_plano = result_select[0]
                         id_categoria_plano = result_select[3]
 
-                        id_area = 4
+                        id_area = 18
                         id_operadora = 11
                         id_tipo_contratacao = 2
                         qtd_titulares = 1
