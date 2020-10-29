@@ -28,8 +28,9 @@ regional = False
 planos_sem_cadastros = []
 
 #Estado de Pesquisa
-estadoSaoPaulo = False
-estadoRioDeJaneiro = True
+estadoSaoPaulo = True
+estadoRioDeJaneiro = False
+estadoSergipe = False
 
 
 
@@ -340,10 +341,11 @@ def rasparDados(driver):
                         print(select[1:28], f"ID: {id} -- banco de dados")
 
                         # Condicao para alterar a data do reajuste caso os precos estejam iguais mais sem data
-                        # if ultimo_reajuste is None:
-                        #     update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{data_reajuste}' WHERE `id`='{id}';"
-                        #     print(update)
-                        #     cursor.execute(update)
+                        if ultimo_reajuste is None or not( ultimo_reajuste == data_reajuste):
+                            print('Atualizar Data')
+                            update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{data_reajuste}' WHERE `id`='{id}';"
+                            print(update)
+                            # cursor.execute(update)
 
                         # print(type(preco0_18), type(valores[0]))
                         # print(preco0_18, valores[0])
@@ -544,14 +546,17 @@ def verificarAtualizacao(driver, num):
         else:
             nome_operadora = str(nome_operadora).split(" ")[0]
 
-        # Verificar de a area e de sao paulo
+        # Verificar o estado
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
             if re.search('INTERIOR', str(tipo_contratacao).upper()) or re.search('INTERIOR', str(tag_operadora).upper()):
                 area = 'INTERIOR 1'
             else:
                 area = 'SP CAPITAL'
+
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').is_selected():
             area = 'RIO DE JANEIRO'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[26]').is_selected():
+            area = 'SERGIPE'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -796,9 +801,14 @@ def selecionarPlano(driver, num):
 def obterDados(driver, tipo_tabela_option):
     global estadoSaoPaulo
     global estadoRioDeJaneiro
+    global estadoSergipe
 
-    if estadoRioDeJaneiro:
+    if estadoSaoPaulo:
+        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').click()
+    elif estadoRioDeJaneiro:
         driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').click()
+    elif estadoSergipe:
+        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[26]').click()
 
     # TIPO DE PLANO -> saude
     driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()
@@ -857,10 +867,12 @@ def obterDados(driver, tipo_tabela_option):
 
                     refNomeOperadora = False
 
-                    if re.search('BRADESCO', nome_operadora) and not re.search('4 vidas', nome_operadora):
-                        refNomeOperadora = False
-                    if re.search('BRADESCO', nome_operadora) and re.search('2 Titulares', nome_operadora):
-                        refNomeOperadora = False
+                    if re.search('BRADESCO', nome_operadora):
+                        refNomeOperadora = True
+                    # if re.search('BRADESCO', nome_operadora) and not re.search('4 vidas', nome_operadora):
+                    #     refNomeOperadora = False
+                    # if re.search('BRADESCO', nome_operadora) and re.search('2 Titulares', nome_operadora):
+                    #     refNomeOperadora = False
                     if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
                         refNomeOperadora = False
                     if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
@@ -870,6 +882,8 @@ def obterDados(driver, tipo_tabela_option):
                     if re.search('SULAMÉRICA', str(nome_operadora).upper()):
                         refNomeOperadora = False
                     if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
+                        refNomeOperadora = False
+                    if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
                         refNomeOperadora = False
                     if re.search('SOMPO', str(nome_operadora).upper()):
                         refNomeOperadora = False
