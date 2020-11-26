@@ -165,7 +165,7 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
             if res > 0:
                 select = cursor.fetchall()[0]
                 id_area = select[0]
-                id_administradora = select[2]
+                id_administradora = select[3]
 
                 trs = tables[num_tables + 1].find_all('tr')
 
@@ -370,7 +370,7 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
                                                  "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, " \
                                                  "preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, " \
                                                  "preco54_58, preco_m59, data_validade ) " \
-                                                 f"values ({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, {ultimo_reajuste});"
+                                                 f"values ({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}');"
                                         print(insert)
                                         if salvar:
                                             res = cursor.execute(insert)
