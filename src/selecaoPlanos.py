@@ -31,7 +31,8 @@ planos_sem_cadastros = []
 estadoSaoPaulo = False
 estadoRioDeJaneiro = False
 estadoSergipe = False
-estadoSantaCatarina = True
+estadoSantaCatarina = False
+estadoMinasGerais = True
 
 
 
@@ -533,6 +534,8 @@ def verificarAtualizacao(driver, num):
             area = 'RIO DE JANEIRO'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[24]').is_selected():
             area = 'SANTA CATARINA'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
+            area = 'MINAS GERAIS'
 
         # Verificar se e hospitalar
         if re.search('HOSPITALAR', tag_operadora):
@@ -577,11 +580,12 @@ def verificarAtualizacao(driver, num):
                 area = 'INTERIOR 1'
             else:
                 area = 'SP CAPITAL'
-
-        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').is_selected():
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').is_selected():
             area = 'RIO DE JANEIRO'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[26]').is_selected():
             area = 'SERGIPE'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
+            area = 'MINAS GERAIS'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -615,23 +619,6 @@ def verificarAtualizacao(driver, num):
         # Verificar de a area e de sao paulo
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
 
-            if re.search('SEM COPART', str(tag_operadora).upper()):
-                coparticipacao = 2
-            elif re.search('COM COPART', str(tag_operadora).upper()):
-
-                if re.search('10', tipo_contratacao):
-                    coparticipacao = 1
-                elif re.search('20', tipo_contratacao):
-                    coparticipacao = 3
-                elif re.search('30', tipo_contratacao):
-                    coparticipacao = 5
-
-            # Verificar se e hospitalar
-            if re.search('HOSPITALAR', tag_operadora):
-                hospitalar = 2
-            else:
-                hospitalar = 1
-
             if re.search('TARIFA 1', str(tag_operadora).upper()):
                 area = 'SP CAPITAL'
             elif re.search('TARIFA 2', str(tag_operadora).upper()):
@@ -640,13 +627,32 @@ def verificarAtualizacao(driver, num):
                 area = 'INTERIOR 2'
             else:
                 area = 'SP CAPITAL'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
+            area = "MINAS GERAIS"
 
-            if re.search('COMPULSÓRIO', str(tag_operadora).upper()):
-                tipo_contratacao = 'COMP'
-            elif re.search('FLEX', str(tag_operadora).upper()):
-                tipo_contratacao = 'OPCI'
-            else:
-                tipo_contratacao = 'OPCI'
+        if re.search('SEM COPART', str(tag_operadora).upper()):
+            coparticipacao = 2
+        elif re.search('COM COPART', str(tag_operadora).upper()):
+
+            if re.search('10', tipo_contratacao):
+                coparticipacao = 1
+            elif re.search('20', tipo_contratacao):
+                coparticipacao = 3
+            elif re.search('30', tipo_contratacao):
+                coparticipacao = 5
+
+        # Verificar se e hospitalar
+        if re.search('HOSPITALAR', tag_operadora):
+            hospitalar = 2
+        else:
+            hospitalar = 1
+
+        if re.search('COMPULSÓRIO', str(tag_operadora).upper()):
+            tipo_contratacao = 'COMP'
+        elif re.search('FLEX', str(tag_operadora).upper()):
+            tipo_contratacao = 'OPCI'
+        else:
+            tipo_contratacao = 'OPCI'
 
     if re.search('SOMPO', str(nome_operadora).upper()):
 
@@ -738,6 +744,8 @@ def verificarAtualizacao(driver, num):
             area = 'SP CAPITAL'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').is_selected():
             area = 'RIO DE JANEIRO'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
+            area = 'MINAS GERAIS'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -858,6 +866,7 @@ def obterDados(driver, tipo_tabela_option):
     global estadoSaoPaulo
     global estadoRioDeJaneiro
     global estadoSergipe
+    global estadoMinasGerais
 
     if estadoSaoPaulo:
         driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').click()
@@ -867,6 +876,8 @@ def obterDados(driver, tipo_tabela_option):
         driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[26]').click()
     elif estadoSantaCatarina:
         driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[24]').click()
+    elif estadoMinasGerais:
+        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').click()
 
     # TIPO DE PLANO -> saude
     driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()
@@ -923,34 +934,32 @@ def obterDados(driver, tipo_tabela_option):
                     nome_operadora = driver.find_element_by_xpath(
                         f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
 
-                    refNomeOperadora = False
+                    refNomeOperadora = True
+                    buscarTodasOperadoras = True
 
-                    if re.search('BRADESCO', nome_operadora):
-                        refNomeOperadora = True
-                    # if re.search('BRADESCO', nome_operadora) and not re.search('4 vidas', nome_operadora):
-                    #     refNomeOperadora = False
-                    # if re.search('BRADESCO', nome_operadora) and re.search('2 Titulares', nome_operadora):
-                    #     refNomeOperadora = False
-                    if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
-                        refNomeOperadora = False
-                    if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-                        refNomeOperadora = False
-                    if re.search('AMIL ONE -', str(nome_operadora).upper()):
-                        refNomeOperadora = False
-                    if re.search('SULAMÉRICA', str(nome_operadora).upper()):
-                        refNomeOperadora = False
-                    if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
-                        refNomeOperadora = False
-                    if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
-                        refNomeOperadora = False
-                    if re.search('SOMPO', str(nome_operadora).upper()):
-                        refNomeOperadora = False
-                    if re.search('PORTO SEGURO', nome_operadora):
-                        refNomeOperadora = False
-                    if re.search('ALLIANZ', nome_operadora):
-                        refNomeOperadora = False
-                    if re.search('NOTREDAME', nome_operadora):
-                        refNomeOperadora = False
+                    if not buscarTodasOperadoras:
+                        if re.search('BRADESCO', nome_operadora):
+                            refNomeOperadora = True
+                        if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
+                            refNomeOperadora = False
+                        if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+                            refNomeOperadora = False
+                        if re.search('AMIL ONE -', str(nome_operadora).upper()):
+                            refNomeOperadora = False
+                        if re.search('SULAMÉRICA', str(nome_operadora).upper()):
+                            refNomeOperadora = False
+                        if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
+                            refNomeOperadora = False
+                        if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
+                            refNomeOperadora = False
+                        if re.search('SOMPO', str(nome_operadora).upper()):
+                            refNomeOperadora = False
+                        if re.search('PORTO SEGURO', nome_operadora):
+                            refNomeOperadora = False
+                        if re.search('ALLIANZ', nome_operadora):
+                            refNomeOperadora = False
+                        if re.search('NOTREDAME', nome_operadora):
+                            refNomeOperadora = False
 
                     if refNomeOperadora:
                         print("\n")
