@@ -7,9 +7,9 @@ if __name__ == '__main__':
 
     driver = webBrowser.browser()
 
-    simuladorOnline = True
+    simuladorOnline = False
     affinityPortoSeguro = False
-    affinityOmint = False
+    affinityOmint = True
 
     try:
         if simuladorOnline:
@@ -27,7 +27,9 @@ if __name__ == '__main__':
             resLogin = login.login(driver)
 
         simular.simulador(driver)
-        tabela.navegacao(driver)
+
+
+        # tabela.navegacao(driver)
 
     # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)
     if affinityPortoSeguro:

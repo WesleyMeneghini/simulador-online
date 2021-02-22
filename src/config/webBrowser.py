@@ -1,9 +1,10 @@
 from selenium import webdriver
-
+import os
 
 def browser():
-    chromedriver = r"/home/wesley/dev/drivers/chromedriver"
+    chromedriver = r"src/config/chromedriver"
+    # chromedriver = f'{os.getcwd()}/src/config/chromedriver'
     options = webdriver.ChromeOptions()
-    options.headless = False
+    options.headless = True
 
     return webdriver.Chrome(executable_path=chromedriver, options=options)
