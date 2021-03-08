@@ -22,7 +22,7 @@ min_vidas = 0
 max_vidas = 29
 data_reajuste = None
 id_administradora = 0
-id_tipo_contratacao_lead = 1
+id_tipo_contratacao_lead = 0
 id_tipo_tabela = None
 regional = False
 planos_sem_cadastros = []
@@ -32,7 +32,8 @@ estadoSaoPaulo = False
 estadoRioDeJaneiro = False
 estadoSergipe = False
 estadoSantaCatarina = False
-estadoMinasGerais = True
+estadoMinasGerais = False
+estadoEspiritoSanto = False
 
 
 
@@ -53,6 +54,7 @@ def insertDados(sql, values):
 def rasparDados(driver):
     # Ativar ou dasativar a persistencia de dados
     salvar = conexao.inserirRegistro()
+    updatePrecoPlano = conexao.updatePrecoPlano()
 
     atualizarDataReajuste = conexao.atualizaDataReajuste()
 
@@ -72,7 +74,8 @@ def rasparDados(driver):
     global id_tipo_empresa
     global estadoSaoPaulo
     global estadoRioDeJaneiro
-    qtd_titulares = '0'
+    global estadoEspiritoSanto
+    qtd_titulares = '1'
     planos_atualizados = []
 
     conn = conexao.myConexao()
@@ -81,8 +84,50 @@ def rasparDados(driver):
     print("Obtendo dados")
     time.sleep(5)
 
+
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     tables = soup.find_all('table', attrs={"static small ta-c"})
+
+    tablesReembolso = driver.find_elements_by_class_name('bloco')
+
+    for table in tablesReembolso:
+        h4s = table.find_elements_by_tag_name('h4')
+        refReembolso = False
+        for h4 in h4s:
+            print(h4.text)
+            if re.search("Reembolso", h4.text):
+                refReembolso = True
+
+        if refReembolso:
+            refReembolso = False
+
+            trsReembolso = table.find_elements_by_tag_name('tr')
+
+            reembolsoArray = []
+
+            for n, tr in enumerate(trsReembolso):
+                aux = []
+                if n == 0:
+                    for td in tr.find_elements_by_tag_name('td'):
+                        reembolsoArray.append([td.text])
+                if n == 1:
+                    for num, td in enumerate(tr.find_elements_by_tag_name('td')):
+                        reembolsoArray[num].append(td.text)
+            del(reembolsoArray[0])
+            print(reembolsoArray)
+
+            for reemb in reembolsoArray:
+                planoRee = reemb[0].strip()
+                valorRee = str(reemb[1]).split(" ")[1].replace(".", "").replace(",", ".")
+                sql = f"UPDATE tbl_tipo_plano SET reembolso = '{valorRee}' " \
+                      f"WHERE id_operadora = {id_operadora} AND titulo LIKE '{planoRee}' and id > 0 limit 1;"
+                print(sql)
+                if not planoRee == "" and not valorRee == "":
+                    res = cursor.execute(sql)
+                    print(res)
+
+
+
 
     for num_tables in range(1):
 
@@ -123,12 +168,12 @@ def rasparDados(driver):
                 qtd_titulares = '1'
             elif min_vidas > 29:
                 min_vidas = 30
-                max_vidas = 99
+                max_vidas = 0
                 qtd_titulares = '1'
 
         elif re.search('SULAMÉRICA', nome_operadora):
             if min_vidas == 0:
-                min_vidas = 0
+                min_vidas = 3
                 max_vidas = 29
                 qtd_titulares = '1'
             elif min_vidas > 29:
@@ -154,7 +199,7 @@ def rasparDados(driver):
                 qtd_titulares = '1'
             elif min_vidas > 29:
                 min_vidas = 30
-                max_vidas = 99
+                max_vidas = 0
                 qtd_titulares = '1'
 
         elif re.search('PORTO SEGURO', nome_operadora):
@@ -239,6 +284,13 @@ def rasparDados(driver):
             if regional:
                 plano = f"{plano} REGIONAL"
 
+            if (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and id_operadora == 12 and id_modalidade == 1:
+                plano = "CLÁSSICO ENF"
+            elif (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and id_operadora == 12 and id_modalidade == 2:
+                plano = "CLÁSSICO APT"
+
+
+
             if (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and (
                     id_operadora == 2 or id_operadora == 5 or id_operadora == 8):
                 if id_modalidade == 1:
@@ -272,7 +324,6 @@ def rasparDados(driver):
             plano = plano.replace(" ", "")
 
             sql = f"select * from tbl_tipo_plano where id_operadora = {id_operadora} and replace(titulo, ' ', '') like '{plano.upper()}';"
-            print(sql)
             res = cursor.execute(sql)
             valores = []
             # print(res)
@@ -350,7 +401,7 @@ def rasparDados(driver):
                     teste = "select * from tbl_preco_faixa_etaria " \
                             f"where id_area = {id_area} and id_operadora = {id_operadora} and id_tipo_plano = {id_plano} and id_modalidade = {id_modalidade} " \
                             f"and id_tipo_contratacao = {tipo_contratacao} and id_coparticipacao = {coparticipacao} and qtd_titulares = {qtd_titulares} " \
-                            f"and min_vidas = {min_vidas} and id_sindicato is null and id_tipo_empresa = {id_tipo_empresa} and hospitalar = {hospitalar};"
+                            f"and min_vidas = {min_vidas} and max_vidas = {max_vidas} and id_sindicato is null and id_tipo_empresa = {id_tipo_empresa} and hospitalar = {hospitalar};"
                     print(teste)
                     res = cursor.execute(teste)
                     print()
@@ -404,13 +455,13 @@ def rasparDados(driver):
                                      f"WHERE `id`='{id}';"
                             print(update)
 
-                            if salvar:
+                            if updatePrecoPlano:
                                 res = cursor.execute(update)
                             else:
                                 res = 1
 
                             # print(res)
-                            if res == 1:
+                            if res == 1 and updatePrecoPlano:
 
                                 if ultimo_reajuste == None or ultimo_reajuste == "null":
                                     insert = "insert into tbl_historico_precos_planos " \
@@ -536,6 +587,8 @@ def verificarAtualizacao(driver, num):
             area = 'SANTA CATARINA'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
             area = 'MINAS GERAIS'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[7]').is_selected():
+            area = 'ESPIRITO SANTO'
 
         # Verificar se e hospitalar
         if re.search('HOSPITALAR', tag_operadora):
@@ -586,6 +639,10 @@ def verificarAtualizacao(driver, num):
             area = 'SERGIPE'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
             area = 'MINAS GERAIS'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[7]').is_selected():
+            area = 'ESPIRITO SANTO'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[24]').is_selected():
+            area = 'SANTA CATARINA'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -814,13 +871,16 @@ def verificarAtualizacao(driver, num):
     data_reajuste = datetime.strptime(str(data_reajuste), '%Y-%m-%d').date()
     # print(data_reajuste)
 
-    # print(res)
+    print(res)
     if res > 0:
         select = cursor.fetchall()[0]
+        print(select)
+
         id_operadora = select[0]
         id_area = select[3]
         tipo_contratacao = select[6]
         id_tipo_contratacao = select[6]
+
 
         # print(id_operadora, id_area, tipo_contratacao)
 
@@ -867,114 +927,162 @@ def obterDados(driver, tipo_tabela_option):
     global estadoRioDeJaneiro
     global estadoSergipe
     global estadoMinasGerais
+    global estadoEspiritoSanto
 
-    if estadoSaoPaulo:
-        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').click()
-    elif estadoRioDeJaneiro:
-        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').click()
-    elif estadoSergipe:
-        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[26]').click()
-    elif estadoSantaCatarina:
-        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[24]').click()
-    elif estadoMinasGerais:
-        driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').click()
+    # 7 -> Sergipe
+    # 25 -> Sao Paulo
 
-    # TIPO DE PLANO -> saude
-    driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()
+    estados = [7, 25, 19, 26, 24, 13]
+    # estados = [24]
 
-    # Tipo de Tabela
-    driver.find_element_by_xpath(f'//*[@id="simulacao_tipoTabela"]/option[{tipo_tabela_option}]').click()
+    for estado in estados:
+        if estadoSaoPaulo:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Sao Paulo")
+        elif estadoRioDeJaneiro:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Rio de Janeiro")
+        elif estadoSergipe:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Sergipe")
+        elif estadoSantaCatarina:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Santa Catarina")
+        elif estadoMinasGerais:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Minas Gerais")
+        elif estadoEspiritoSanto:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Espirito Santo")
 
-    # desmarcar as informaçoes opcionais
-    for i in range(5):
-        driver.find_element_by_id(f"simulacao_info_{str(i)}").click()
+        # TIPO DE PLANO -> saude
+        driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()
 
-    # colocar no minimo uma vida por faixa_etaria
-    for i in range(10):
-        # driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(Keys.DELETE)
-        driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').clear()
-        if min_vidas >= 29 and i == 5:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(30)
-        else:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(1)
+        # Tipo de Tabela
+        driver.find_element_by_xpath(f'//*[@id="simulacao_tipoTabela"]/option[{tipo_tabela_option}]').click()
 
-    # pesquisar
-    time.sleep(1)
-    driver.find_element_by_id('btn-get-planos').click()
-    time.sleep(3)
+        # desmarcar as informaçoes opcionais
+        for i in range(5):
+            if driver.find_element_by_id(f"simulacao_info_{str(i)}").is_selected() and not i == 2:
+                driver.find_element_by_id(f"simulacao_info_{str(i)}").click()
 
-    try:
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CLASS_NAME, 'sim-op-planos'))
-        )
-    except:
-        print("Erro ao listar os planos")
-        driver.close()
-    finally:
+        # colocar no minimo uma vida por faixa_etaria
+        for i in range(10):
+            # driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(Keys.DELETE)
+            driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').clear()
+            if min_vidas >= 29 and i == 5:
+                driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(30)
+            else:
+                driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(1)
+
+        # pesquisar
+
         time.sleep(1)
-        quantidade_results = len(driver.find_elements_by_class_name('sim-op-planos'))
-        print(f"Achou {quantidade_results} na pesquisa!")
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.ID, 'btn-get-planos'))
+            )
+        finally:
+            time.sleep(2)
+            try:
+                driver.execute_script("document.getElementById('btn-get-planos').click()")
+            except:
+                time.sleep(2)
+                driver.find_element_by_id('btn-get-planos').click()
+            finally:
+                pass
+        time.sleep(3)
 
-        # if quantidade_results == 0:
-        #     obterDados(driver, tipo_tabela_option)
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CLASS_NAME, 'sim-op-planos'))
+            )
+        except:
+            print("Erro ao listar os planos")
+            driver.close()
+        finally:
+            time.sleep(1)
+            quantidade_results = len(driver.find_elements_by_class_name('sim-op-planos'))
+            print(f"Achou {quantidade_results} na pesquisa!")
 
-        for i in range(quantidade_results):
+            # if quantidade_results == 0:
+            #     obterDados(driver, tipo_tabela_option)
 
-            if i >= 0 and i <= 1000:
+            for i in range(quantidade_results):
 
-                if driver.find_element_by_id('btn-get-planos').is_displayed():
-                    driver.find_element_by_id('btn-get-planos').click()
-                    time.sleep(1)
-                try:
-                    WebDriverWait(driver, 10).until(
-                        EC.presence_of_element_located(
-                            (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
-                    )
-                finally:
-                    nome_operadora = driver.find_element_by_xpath(
-                        f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
-
-                    refNomeOperadora = True
-                    buscarTodasOperadoras = True
-
-                    if not buscarTodasOperadoras:
-                        if re.search('BRADESCO', nome_operadora):
-                            refNomeOperadora = True
-                        if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
-                            refNomeOperadora = False
-                        if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-                            refNomeOperadora = False
-                        if re.search('AMIL ONE -', str(nome_operadora).upper()):
-                            refNomeOperadora = False
-                        if re.search('SULAMÉRICA', str(nome_operadora).upper()):
-                            refNomeOperadora = False
-                        if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
-                            refNomeOperadora = False
-                        if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
-                            refNomeOperadora = False
-                        if re.search('SOMPO', str(nome_operadora).upper()):
-                            refNomeOperadora = False
-                        if re.search('PORTO SEGURO', nome_operadora):
-                            refNomeOperadora = False
-                        if re.search('ALLIANZ', nome_operadora):
-                            refNomeOperadora = False
-                        if re.search('NOTREDAME', nome_operadora):
-                            refNomeOperadora = False
-
-                    if refNomeOperadora:
-                        print("\n")
-                        print(f"Lendo resultado: {i + 1}")
+                if i >= 0 and i <= 1000:
+                    try:
+                        if driver.find_element_by_id('btn-get-planos').is_displayed():
+                            try:
+                                driver.find_element_by_id('btn-get-planos').click()
+                                time.sleep(1)
+                            except:
+                                time.sleep(3)
+                                driver.execute_script("document.getElementById('btn-get-planos').click()")
+                            finally:
+                                time.sleep(1)
+                    except:
+                        time.sleep(2)
                         try:
-                            WebDriverWait(driver, 10).until(
-                                EC.presence_of_element_located(
-                                    (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
-                            )
+                            driver.find_element_by_id('btn-get-planos').click()
+                            time.sleep(1)
                         except:
-                            print("Erro ao listar os planos")
+                            time.sleep(3)
+                            driver.execute_script("document.getElementById('btn-get-planos').click()")
                         finally:
-                            pass
+                            time.sleep(1)
+                    finally:
+                        pass
+                    try:
+                        WebDriverWait(driver, 10).until(
+                            EC.presence_of_element_located(
+                                (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                        )
+                    finally:
+                        nome_operadora = driver.find_element_by_xpath(
+                            f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
 
-                        if verificarAtualizacao(driver, i):
-                            selecionarPlano(driver, i)
-                        else:
-                            print(False)
+                        refNomeOperadora = False
+                        buscarTodasOperadoras = False
+
+                        if not buscarTodasOperadoras:
+                            if re.search('BRADESCO', nome_operadora):
+                                refNomeOperadora = True
+                            if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
+                                refNomeOperadora = True
+                            if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+                                refNomeOperadora = True
+                            if re.search('AMIL ONE -', str(nome_operadora).upper()):
+                                refNomeOperadora = True
+                            if re.search('SULAMÉRICA', str(nome_operadora).upper()):
+                                refNomeOperadora = True
+                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
+                                refNomeOperadora = True
+                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
+                                refNomeOperadora = True
+                            if re.search('SOMPO', str(nome_operadora).upper()):
+                                refNomeOperadora = True
+                            if re.search('PORTO SEGURO', nome_operadora):
+                                refNomeOperadora = True
+                            if re.search('ALLIANZ', nome_operadora):
+                                refNomeOperadora = True
+                            if re.search('NOTREDAME', nome_operadora):
+                                refNomeOperadora = True
+
+                        if refNomeOperadora:
+                            print("\n")
+                            print(f"Lendo resultado: {i + 1}")
+                            try:
+                                WebDriverWait(driver, 10).until(
+                                    EC.presence_of_element_located(
+                                        (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                                )
+                            except:
+                                print("Erro ao listar os planos")
+                            finally:
+                                pass
+
+                            if verificarAtualizacao(driver, i):
+                                selecionarPlano(driver, i)
+                            else:
+                                print(False)

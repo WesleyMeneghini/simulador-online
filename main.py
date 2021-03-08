@@ -7,9 +7,9 @@ if __name__ == '__main__':
 
     driver = webBrowser.browser()
 
-    simuladorOnline = False
+    simuladorOnline = True
     affinityPortoSeguro = False
-    affinityOmint = True
+    affinityOmint = False
 
     try:
         if simuladorOnline:
@@ -27,7 +27,6 @@ if __name__ == '__main__':
             resLogin = login.login(driver)
 
         simular.simulador(driver)
-
 
         # tabela.navegacao(driver)
 
