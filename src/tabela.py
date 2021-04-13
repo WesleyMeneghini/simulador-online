@@ -20,6 +20,8 @@ salvar = conexao.inserirRegistro()
 atualizarDataReajuste = conexao.atualizaDataReajuste()
 updatePrecoPlano = conexao.updatePrecoPlano()
 
+idArea = 0
+
 
 def insertDados(sql, values):
     conn = conexao.myConexao()
@@ -33,6 +35,7 @@ def insertDados(sql, values):
         return True
     else:
         return False
+
 
 def obterPrecos(table):
     trs = table.find_elements_by_tag_name('tr')
@@ -59,18 +62,16 @@ def obterPrecos(table):
     print([dados, id_modalidade])
     return [dados, id_modalidade]
 
+
 def dadosPlano(driver, title):
+    global idArea
     print("Pagina com os Preços")
 
     idCoparticipacao = 0
 
-
     if re.search('COM REMISSÃO', title):
         driver.execute_script("history.back()")
         return
-
-
-
 
     # Tipo empresa
     if re.search('- MEI ', title):
@@ -86,29 +87,24 @@ def dadosPlano(driver, title):
         id_tipo_empresa = None
         idCoparticipacao = 1
 
-
-
     # Tipo de contratacao
     if re.search('FLEX', title):
         idTipoContratacao = 1
     else:
         idTipoContratacao = 2
 
-
-
-    # Area
-    if re.search('Tarifa 1', title):
-        idArea = 1
-    elif re.search('Tarifa 2', title):
-        idArea = 2
-    elif re.search('Tarifa 3', title):
-        idArea = 3
-    else:
-        idArea = 1
-
+    if idArea == 0:
+        # Area
+        if re.search('Tarifa 1', title):
+            idArea = 1
+        elif re.search('Tarifa 2', title):
+            idArea = 2
+        elif re.search('Tarifa 3', title):
+            idArea = 3
+        else:
+            idArea = 1
 
     textBoxSubtitle = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[4]').text
-
 
     hospitalar = 1
 
@@ -124,7 +120,8 @@ def dadosPlano(driver, title):
     elif re.search('HOSPITALAR', title):
         idCoparticipacao = 2
         hospitalar = 2
-
+    elif not re.search('QSAÚDE', title) :
+        idCoparticipacao = 2
 
     elemestsClassTaC = driver.find_elements_by_class_name('ta-c')
 
@@ -151,9 +148,9 @@ def dadosPlano(driver, title):
                     refPrecos = False
                 testeQsaude += 1
 
-
             countPrecosTabela += 1
-            ultimaAlteracao = driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text.split(": ")[1].split("/")
+            ultimaAlteracao = driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text.split(": ")[1].split(
+                "/")
             ultimaAlteracao = f"{ultimaAlteracao[2]}-{ultimaAlteracao[1]}-{ultimaAlteracao[0]}"
             ultimaAlteracao = datetime.strptime(str(ultimaAlteracao), '%Y-%m-%d').date()
 
@@ -180,9 +177,11 @@ def dadosPlano(driver, title):
                     id_plano = result_select[0]
                     id_categoria_plano = result_select[3]
                     if id_plano > 0:
-                        for i, valor in enumerate(dado):
-                            if i > 0:
+                        for u, valor in enumerate(dado):
+                            if u > 0 and not valor == "-":
                                 valores.append(float(str(valor).split(" ")[1].replace(".", "").replace(",", ".")))
+                            elif u > 0 and valor == "-":
+                                valores.append(0)
 
                         sql = "insert into tbl_preco_faixa_etaria (" \
                               "id_area, " \
@@ -246,7 +245,7 @@ def dadosPlano(driver, title):
                             id_tipo_empresa,  # id_tipo_empresa
                             id_administradora,  # id_administradora
                             ultimaAlteracao,  # ultimo_reajuste
-                            1,  # id_tipo_contratacao_lead
+                            0,  # id_tipo_contratacao_lead
                             None  # id_tipo_tabela
                         )
 
@@ -254,7 +253,6 @@ def dadosPlano(driver, title):
                             id_tipo_empresa_txt = 'is null'
                         else:
                             id_tipo_empresa_txt = f"= {id_tipo_empresa}"
-
 
                         teste = "select * from tbl_preco_faixa_etaria " \
                                 f"where id_area = {idArea} and id_operadora = {idOperadora} and id_tipo_plano = {id_plano} and id_modalidade = {id_modalidade} " \
@@ -264,15 +262,14 @@ def dadosPlano(driver, title):
                         res = cursor.execute(teste)
 
                         print(values, " -- extraidos do simulador")
-
-                        if res == 1:
+                        print(res)
+                        if res == 1 and valores[0] > 0:
                             select = cursor.fetchall()[0]
 
                             idSelect = select[0]
                             preco0_18 = select[8]
                             preco59 = select[17]
                             ultimo_reajuste = select[25]
-
 
                             print(select[1:28], f"ID: {idSelect} -- banco de dados")
 
@@ -348,7 +345,7 @@ def dadosPlano(driver, title):
                                 #     print("Deletando registro desatualizado")
                                 #     delete = f"delete from tbl_preco_faixa_etaria where id = {id}"
                                 #     cursor.execute(delete)
-                        elif res == 0:
+                        elif res == 0 and valores[0] > 0:
                             print("------------------------------- Cadastrar Novo")
                             print(f'{sql} {values}')
 
@@ -362,12 +359,7 @@ def dadosPlano(driver, title):
                         elif res > 1:
                             print("Mais de um plano cadastrado")
 
-
-
-
-
-
-        if re.search('vidas/beneficiários', ele.text) :
+        if re.search('vidas/beneficiários', ele.text):
             textVidas = ele.text
 
             if re.search('2 à 2 vidas', textVidas):
@@ -386,12 +378,9 @@ def dadosPlano(driver, title):
             teste = 0
             refPrecos = True
 
-        if idOperadora == 16 and (re.search('2021', ele.text) ):
+        if idOperadora == 16 and (re.search('2021', ele.text)):
             teste += 1
             elemQsaude = driver.find_elements_by_class_name('static small ta-c')
-
-
-
 
             tipoContrato = driver.find_element_by_xpath(
                 '//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[3]').text
@@ -413,9 +402,6 @@ def dadosPlano(driver, title):
 
     conn.commit()
 
-
-
-
     # try:
     #     textVidas = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[7]').text
     # except:
@@ -432,30 +418,22 @@ def dadosPlano(driver, title):
     #
     # print(idOperadora, idTipoContratacao, idCoparticipacao, minVidas, maxVidas)
 
-
-
-
-
-
-
-
-
-
-
-
-
     driver.execute_script("history.back()")
 
 
-
 def navegacao(driver):
-
+    global idArea
     driver.find_element_by_xpath('//*[@id="geral-content"]/nav/ul/li[1]/a').click()
 
-    driver.find_element_by_id('tabela_tiposTabela_1').click()
-    driver.find_element_by_id('tabela_tiposTabela_2').click()
+    # driver.find_element_by_id('tabela_tiposTabela_1').click()
+    # driver.find_element_by_id('tabela_tiposTabela_2').click()
     driver.find_element_by_id('tabela_tiposTabela_3').click()
     driver.find_element_by_id('tabela_tiposPlano_1').click()
+
+    # Estado de Santa Catarina
+    driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[19]').click()
+    idArea = 4
+
     time.sleep(1)
     try:
         WebDriverWait(driver, 20).until(
@@ -468,7 +446,6 @@ def navegacao(driver):
     driver.find_element_by_id('btn-get-opes').click()
     # driver.execute_script('document.getElementById("btn-get-opes").click()')
 
-
     try:
         WebDriverWait(driver, 20).until(
             EC.presence_of_element_located(
@@ -480,8 +457,8 @@ def navegacao(driver):
     qttResults = int(str(driver.find_element_by_class_name('bgGray').text).split("(")[1].split(")")[0])
 
     voltar = False
-    # for i in range(0, qttResults-1):
-    for i in range(235, 242):
+    for i in range(0, qttResults-1):
+        # for i in range(235, 242):
 
         if voltar:
             driver.find_element_by_id('btn-get-opes').click()
@@ -496,7 +473,8 @@ def navegacao(driver):
         finally:
             pass
         try:
-            textBox = driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i+1}]').find_element_by_class_name("text").text
+            textBox = driver.find_element_by_xpath(
+                f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').find_element_by_class_name("text").text
         except:
             time.sleep(3)
             textBox = driver.find_element_by_xpath(
@@ -512,8 +490,9 @@ def navegacao(driver):
         #     print("Enviar mensagem pelo whats")
 
         refCheckBoxDesabilited = driver.find_element_by_xpath(
-                f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_property('class')
-        refCheckBoxDesabilited = driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_attribute('class')
+            f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_property('class')
+        refCheckBoxDesabilited = driver.find_element_by_xpath(
+            f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_attribute('class')
         if re.search("beautyCheck fullwidth opcy-7", refCheckBoxDesabilited):
             refCheckBoxDesabilited = True
         else:
@@ -521,18 +500,17 @@ def navegacao(driver):
         # print(refCheckBoxDesabilited)
 
         if re.search('SULAMÉRICA', textBox) and (not re.search('COM REMISSÃO', textBox)
-                                                 and not re.search('SEM REMISSÃO', textBox)) and not refCheckBoxDesabilited:
+                                                 and not re.search('SEM REMISSÃO',
+                                                                   textBox)) and not refCheckBoxDesabilited:
             refOperadora = True
         elif re.search('QSAÚDE', textBox):
             refOperadora = True
 
         if refOperadora:
-
-            driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i+1}]/input').click()
+            driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()
             # driver.execute_script(f"document.getElementsByName('tabela[tabelas][]')[{i}].click()")
             time.sleep(2)
             driver.execute_script("document.getElementById('btSubmit').click()")
-
 
             print(f"\n------------------------------------------------------------------------"
                   f"------------------------------------------\nLendo {i}: {textBox}")
