@@ -41,6 +41,7 @@ def obterPrecos(table):
     trs = table.find_elements_by_tag_name('tr')
 
     dados = []
+    id_modalidade = 0
     for i, tr in enumerate(trs):
         tds = tr.find_elements_by_tag_name('td')
         del (tds[0])
@@ -50,7 +51,9 @@ def obterPrecos(table):
                 id_modalidade = 1
             elif re.search("Apartamento", str(tr.text).strip()):
                 id_modalidade = 2
-            print(f"Modalidade: {id_modalidade}")
+            # else:
+            #     id_modalidade = 2
+            print(f"Modalidade--: {id_modalidade}")
         if i == 1:
             for td in tds:
                 aux = [td.text]
@@ -86,6 +89,8 @@ def dadosPlano(driver, title):
         idOperadora = 16
         id_tipo_empresa = None
         idCoparticipacao = 1
+    elif re.search('CENTRAL NACIONAL UNIMED ', title):
+        idOperadora = 6
 
     # Tipo de contratacao
     if re.search('FLEX', title):
@@ -125,6 +130,8 @@ def dadosPlano(driver, title):
 
     elemestsClassTaC = driver.find_elements_by_class_name('ta-c')
 
+    # print(len(elemestsClassTaC))
+
     refPrecos = False
     countPrecosTabela = 0
     planos_atualizados = []
@@ -134,7 +141,11 @@ def dadosPlano(driver, title):
     maxVidas = 0
     teste = 0
     testeQsaude = 0
+
+
     for i, ele in enumerate(elemestsClassTaC):
+        # print(ele.get_attribute("class"))
+        # exit()
 
         if refPrecos:
             print(f"CONFIGURACOES: \nidOperadora: {idOperadora} "
@@ -147,10 +158,12 @@ def dadosPlano(driver, title):
                 if testeQsaude == 1:
                     refPrecos = False
                 testeQsaude += 1
+            elif idOperadora == 6:
+                refPrecos = False
 
             countPrecosTabela += 1
-            ultimaAlteracao = driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text.split(": ")[1].split(
-                "/")
+            # print(driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text)
+            ultimaAlteracao = driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text.split(": ")[1].split("/")
             ultimaAlteracao = f"{ultimaAlteracao[2]}-{ultimaAlteracao[1]}-{ultimaAlteracao[0]}"
             ultimaAlteracao = datetime.strptime(str(ultimaAlteracao), '%Y-%m-%d').date()
 
@@ -166,6 +179,9 @@ def dadosPlano(driver, title):
 
                 plano = plano.replace(" ", "")
                 plano = plano.replace("-", "")
+
+                if idOperadora == 6:
+                    plano = f"{plano}NACIONAL"
 
                 sql = f"select * from tbl_tipo_plano where id_operadora = {idOperadora} and replace(titulo, ' ', '') like '{plano.upper()}';"
                 # print(sql)
@@ -358,6 +374,8 @@ def dadosPlano(driver, title):
                                     inseridos += 1
                         elif res > 1:
                             print("Mais de um plano cadastrado")
+                else:
+                    print("nothing")
 
         if re.search('vidas/beneficiários', ele.text):
             textVidas = ele.text
@@ -370,7 +388,16 @@ def dadosPlano(driver, title):
                 maxVidas = 29
             elif re.search('30 à 99 vidas', textVidas):
                 minVidas = 30
-                maxVidas = 0
+                if idOperadora == 6:
+                    maxVidas = 99
+                else:
+                    maxVidas = 0
+            elif re.search('100 à 199 vidas', textVidas):
+                minVidas = 100
+                maxVidas = 199
+            elif re.search('2 à 29', textVidas):
+                minVidas = 0
+                maxVidas = 29
 
             refPrecos = True
 
@@ -402,22 +429,6 @@ def dadosPlano(driver, title):
 
     conn.commit()
 
-    # try:
-    #     textVidas = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[7]').text
-    # except:
-    #     textVidas = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[6]').text
-    # finally:
-    #     pass
-    #
-    # if re.search('3 à 29 vidas', textVidas):
-    #     minVidas = 3
-    #     maxVidas = 29
-    # elif re.search('30 à 99 vidas', textVidas):
-    #     minVidas = 30
-    #     maxVidas = 99
-    #
-    # print(idOperadora, idTipoContratacao, idCoparticipacao, minVidas, maxVidas)
-
     driver.execute_script("history.back()")
 
 
@@ -430,9 +441,8 @@ def navegacao(driver):
     driver.find_element_by_id('tabela_tiposTabela_3').click()
     driver.find_element_by_id('tabela_tiposPlano_1').click()
 
-    # Estado de Santa Catarina
-    driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[19]').click()
-    idArea = 4
+    driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[25]').click()
+    idArea = 1
 
     time.sleep(1)
     try:
@@ -443,8 +453,8 @@ def navegacao(driver):
     finally:
         pass
 
-    driver.find_element_by_id('btn-get-opes').click()
-    # driver.execute_script('document.getElementById("btn-get-opes").click()')
+    # driver.find_element_by_id('btn-get-opes').click()
+    driver.execute_script('document.getElementById("btn-get-opes").click()')
 
     try:
         WebDriverWait(driver, 20).until(
@@ -504,6 +514,8 @@ def navegacao(driver):
                                                                    textBox)) and not refCheckBoxDesabilited:
             refOperadora = True
         elif re.search('QSAÚDE', textBox):
+            refOperadora = True
+        elif re.search('CENTRAL NACIONAL UNIMED', textBox):
             refOperadora = True
 
         if refOperadora:
