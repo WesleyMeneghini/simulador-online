@@ -100,8 +100,10 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
 
     if re.search('COM COPART', operadora_tipocoparticipacao.upper()):
         id_coparticipacao = 1
+        hospitalar = 1
     elif re.search('SEM COPART', operadora_tipocoparticipacao.upper()):
         id_coparticipacao = 2
+        hospitalar = 1
     elif re.search('HOSPITALAR', operadora_tipocoparticipacao.upper()):
         id_coparticipacao = 2
         hospitalar = 2
@@ -160,7 +162,7 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
                 max_vidas = 0
 
             sql = f"select * from tbl_area, tbl_administradora where area like '%{area}%' and  titulo like 'QUALICORP';"
-            # print(sql)
+            print(sql)
             res = cursor.execute(sql)
             if res > 0:
                 select = cursor.fetchall()[0]
@@ -366,12 +368,25 @@ def pegarDados(driver, cursor, id_sindicato, data_reajuste):
                                     print(res)
                                     if res == 1:
 
-                                        insert = "insert into tbl_historico_precos_planos " \
-                                                 "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, " \
-                                                 "preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, " \
-                                                 "preco54_58, preco_m59, data_validade ) " \
-                                                 f"values ({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}');"
+                                        if ultimo_reajuste == None or ultimo_reajuste == "null":
+                                            insert = "insert into tbl_historico_precos_planos " \
+                                                     "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, preco54_58, preco_m59 ) " \
+                                                     "values " \
+                                                     f"({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}); "
+                                        else:
+                                            insert = "insert into tbl_historico_precos_planos " \
+                                                     "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, preco54_58, preco_m59, data_validade) " \
+                                                     "values " \
+                                                     f"({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}'); "
+
                                         print(insert)
+
+                                        # insert = "insert into tbl_historico_precos_planos " \
+                                        #          "(id_preco_faixa_etaria, preco0_18, preco19_23, preco24_28, " \
+                                        #          "preco29_33, preco34_38, preco39_43, preco44_48, preco49_53, " \
+                                        #          "preco54_58, preco_m59, data_validade ) " \
+                                        #          f"values ({id}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}');"
+                                        # print(insert)
                                         if salvar:
                                             res = cursor.execute(insert)
                                             print(res, "sucesso")
