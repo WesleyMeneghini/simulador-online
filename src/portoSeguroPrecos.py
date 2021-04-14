@@ -17,13 +17,36 @@ def insertDados(sql, values):
         return False
 
 def obterPrecos(driver):
-    site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-litoral-paulista.html?_ijt=qt4vpasdsr6su1238mkr3q1fnh'
+    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-saoapaulo.html?_ijt=tfjtds1aq142iso2a15d35tmd9'
+    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-saopaulointerior.html?_ijt=g693dve6jbqj4fof7stdhil8fj'
+    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-litoral-paulista.html?_ijt=5qm0m1o6utu94tm7j2igpsu83c'
+    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-vale-do-paraiba.html?_ijt=mm8p81e7en2ohl276l6aj1qe25'
+    site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-riodejaneiro.html?_ijt=tks21fagp6a87slb08bgbmu75v'
+
+
+    if re.search("porto-seguro-saoapaulo.html", site):
+        id_area = 1
+    elif re.search("porto-seguro-saopaulointerior.html", site):
+        id_area = 2
+    elif re.search("porto-seguro-litoral-paulista.html", site):
+        id_area = 18
+    elif re.search("porto-seguro-vale-do-paraiba.html", site):
+        id_area = 19
+    elif re.search("porto-seguro-riodejaneiro.html", site):
+        id_area = 4
+
+
+
     driver.get(site)
     planos_atualizados = []
     planos_sem_cadastros = []
     planos_inseridos = []
     salvar = conexao.inserirRegistro()
     inseridos = 0
+
+
+
+
     try:
         num = 1
         while driver.find_element_by_xpath(f'//*[@id="tab-produto"]/div/h4[{num}]'):
@@ -36,7 +59,7 @@ def obterPrecos(driver):
             max_vidas = None
             titulo = str(titulo).upper()
             if re.search('03 A 09 VIDAS', titulo):
-                min_vidas = 3
+                min_vidas = 0
                 max_vidas = 9
             elif re.search('10 A 19 VIDAS', titulo):
                 min_vidas = 10
@@ -103,15 +126,14 @@ def obterPrecos(driver):
                         id_plano = result_select[0]
                         id_categoria_plano = result_select[3]
 
-                        id_area = 18
                         id_operadora = 11
                         id_tipo_contratacao = 2
                         qtd_titulares = 1
                         hospitalar = 1
                         id_tipo_empresa = 2
                         id_administradora = 0
-                        data_reajuste = '2020-09-01'
-                        id_tipo_contratacao_lead = 1
+                        data_reajuste = '2021-03-22'
+                        id_tipo_contratacao_lead = 0
                         id_tipo_tabela = None
 
                         print("id_area => ", id_area)
@@ -234,6 +256,7 @@ def obterPrecos(driver):
                                          f"`preco_m59`='{precos[9]}'," \
                                          f"`min_vidas`='{min_vidas}', " \
                                          f"`max_vidas`='{max_vidas}', " \
+                                         f"`status`='1', " \
                                          f"`ultimo_reajuste`='{data_reajuste}' " \
                                          f"WHERE `id`='{id}';"
                                 print(update)
