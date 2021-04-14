@@ -20,6 +20,7 @@ id_tipo_contratacao = 0
 min_vidas_pesquisa = 0
 min_vidas = 0
 max_vidas = 29
+
 data_reajuste = None
 id_administradora = 0
 id_tipo_contratacao_lead = 0
@@ -28,12 +29,13 @@ regional = False
 planos_sem_cadastros = []
 
 #Estado de Pesquisa
-estadoSaoPaulo = False
+estadoSaoPaulo = True
 estadoRioDeJaneiro = False
 estadoSergipe = False
 estadoSantaCatarina = False
 estadoMinasGerais = False
 estadoEspiritoSanto = False
+estadoMatoGrosso = False
 
 
 
@@ -75,6 +77,8 @@ def rasparDados(driver):
     global estadoSaoPaulo
     global estadoRioDeJaneiro
     global estadoEspiritoSanto
+    global estadoMatoGrosso
+
     qtd_titulares = '1'
     planos_atualizados = []
 
@@ -585,16 +589,12 @@ def verificarAtualizacao(driver, num):
             area = 'RIO DE JANEIRO'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[24]').is_selected():
             area = 'SANTA CATARINA'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
+            area = 'MATO GROSSO'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
             area = 'MINAS GERAIS'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[7]').is_selected():
             area = 'ESPIRITO SANTO'
-
-        # Verificar se e hospitalar
-        if re.search('HOSPITALAR', tag_operadora):
-            hospitalar = 2
-        else:
-            hospitalar = 1
 
         tipo_contratacao = str(tipo_contratacao).split("-")
         print(tipo_contratacao)
@@ -607,7 +607,15 @@ def verificarAtualizacao(driver, num):
                 coparticipacao = 3
             elif re.search('30', coparticipacao):
                 coparticipacao = 5
+            else:
+                coparticipacao = 2
 
+        # Verificar se e hospitalar
+        if re.search('HOSPITALAR', tag_operadora):
+            hospitalar = 2
+            coparticipacao = 2
+        else:
+            hospitalar = 1
         tipo_contratacao = tipo_contratacao[0].strip()
 
         tipo_contratacao = list(tipo_contratacao.lower())
@@ -643,6 +651,8 @@ def verificarAtualizacao(driver, num):
             area = 'ESPIRITO SANTO'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[24]').is_selected():
             area = 'SANTA CATARINA'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
+            area = 'MATO GROSSO'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -686,6 +696,9 @@ def verificarAtualizacao(driver, num):
                 area = 'SP CAPITAL'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
             area = "MINAS GERAIS"
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
+            area = 'MATO GROSSO'
+
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -928,12 +941,15 @@ def obterDados(driver, tipo_tabela_option):
     global estadoSergipe
     global estadoMinasGerais
     global estadoEspiritoSanto
+    global estadoMatoGrosso
 
-    # 7 -> Sergipe
+    # 07 -> Espirito Santo
+    # 11 -> Mato Grosso
+    # 19 -> Rio de Janeiro
     # 25 -> Sao Paulo
 
     estados = [7, 25, 19, 26, 24, 13]
-    # estados = [24]
+    # estados = [25]
 
     for estado in estados:
         if estadoSaoPaulo:
@@ -951,6 +967,9 @@ def obterDados(driver, tipo_tabela_option):
         elif estadoMinasGerais:
             driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
             print("Estado de Minas Gerais")
+        elif estadoMatoGrosso:
+            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
+            print("Estado de Mato Grosso")
         elif estadoEspiritoSanto:
             driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
             print("Estado de Espirito Santo")

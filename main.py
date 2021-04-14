@@ -2,14 +2,16 @@ from src.config import webBrowser
 from src import acesso, login, simular, tabela
 from src.portoSeguroPrecos import obterPrecos
 import src.omintPrecos as omintPrecos
+import src.sompoPrecos as sompoPrecos
 
 if __name__ == '__main__':
 
     driver = webBrowser.browser()
 
     simuladorOnline = True
-    affinityPortoSeguro = False
-    affinityOmint = False
+    affinityPortoSeguro = True
+    affinityOmint = True
+    affinitySompo = True
 
     try:
         if simuladorOnline:
@@ -28,7 +30,7 @@ if __name__ == '__main__':
 
         simular.simulador(driver)
 
-        # tabela.navegacao(driver)
+        tabela.navegacao(driver)
 
     # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)
     if affinityPortoSeguro:
@@ -36,5 +38,8 @@ if __name__ == '__main__':
 
     if affinityOmint:
         omintPrecos.obterPrecos(driver=driver)
+
+    if affinitySompo:
+        sompoPrecos.obterPrecos(driver=driver)
 
     driver.close()
