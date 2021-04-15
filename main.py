@@ -7,6 +7,7 @@ import src.sompoPrecos as sompoPrecos
 if __name__ == '__main__':
 
     driver = webBrowser.browser()
+    driver.maximize_window()
 
     simuladorOnline = True
     affinityPortoSeguro = True

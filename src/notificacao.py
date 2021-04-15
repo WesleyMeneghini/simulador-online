@@ -55,7 +55,7 @@ def notificacao(driver):
                     resSelect = cursor.fetchone()
                     qtt = resSelect[0]
 
-                    if qtt == 0:
+                    if qtt == 0 and conexao.notificationWhats():
                         res = apiWhats.sendMessage(message=message, number=number)
 
                         if int(res.status_code) == 200:
@@ -69,6 +69,7 @@ def notificacao(driver):
                     else:
                         print("Mensagem ja consta como enviada no sistema!")
 
+    driver.switch_to.default_content()
     cursor.close()
     conn.commit()
     conn.close()
