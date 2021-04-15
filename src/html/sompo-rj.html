@@ -1,0 +1,2017 @@
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>Painel do Corretor | Sompo Saúde - Rio de Janeiro</title>
+<meta name="viewport" content="width=device-width">
+<link href="/content/styles?v=KXojy2qX3ZJ_OYOsQu1SuygA87La8-w8EE-z46Y8WLM1" rel="stylesheet">
+<style>
+        .ajax-loader {
+            margin: 50px auto;
+            width: 250px;
+        }
+
+        table table td {
+            vertical-align: middle !important;
+        }
+
+        .produto-selector {
+            margin-bottom: 20px;
+            position: relative;
+            float: right;
+            /*width: 250px;*/
+        }
+
+            .produto-selector ul {
+                list-style: none;
+                margin: 0;
+                max-height: 60px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border: 1px solid #d0dde9;
+                border-top: none;
+                box-sizing: border-box;
+                padding-left: 2px;
+            }
+
+                .produto-selector ul li {
+                    white-space: nowrap;
+                }
+
+                .produto-selector ul li {
+                    margin-left: 15px;
+                    margin-right: 5px;
+                    position: relative;
+                }
+
+                    .produto-selector ul li a {
+                        color: inherit;
+                        text-overflow: ellipsis;
+                        display: block;
+                        overflow: hidden;
+                    }
+
+                    .produto-selector ul li.selected:before {
+                        content: "\f14a";
+                        font-family: FontAwesome;
+                        color: green;
+                        left: -13px;
+                        position: absolute;
+                    }
+
+            .produto-selector input {
+                width: 100%;
+                border-radius: 0;
+                padding-right: 25px;
+            }
+
+            .produto-selector i {
+                position: absolute;
+                top: 27px;
+                right: 7px;
+                color: lightgray;
+            }
+
+        .operadora-item {
+            margin-right: 10px;
+        }
+
+        .stretch-item {
+            vertical-align: top;
+        }
+    </style>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body style="">
+<div class="wrapper">
+
+<div class="navbar navbar-inverse">
+<div class="navbar-inner">
+<div class="container">
+<button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="brand" href="/">Painel do Corretor</a>
+<div class="">
+ <div class="pull-right">
+<form action="/Account/Logout" class="hide" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="s-3liovu0ewNo1ne0YNIyC7U3DpYxzTAayFx320NpnEVeS6NpSXOCuFrGiL84VhOQWPn-SxBm1AUq-cApUZs76srAe6_vv3lrImPpIUCEJxxHHEteeVMKDLqxb4gsjM1hADqS1runGzyzqvNeKJdaA2"></form> <input type="hidden" id="currentUserId" value="139031">
+<input type="hidden" id="currentCorretoraId" value="64329">
+<ul class="nav pull-right">
+<li class="hidden-phone">
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="hidden-phone">Bem vindo JOAO</span> <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="#" id="user-edit">
+<i class="icon-user"></i>
+Meu perfil
+</a>
+</li>
+<li>
+<a href="https://account.trindadetecnologia.com.br/profile/manage/changepassword" target="_blank">
+<i class="icon-lock"></i>
+Alterar senha
+</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="javascript:document.getElementById('logoutForm').submit()">
+<i class="icon-off"></i>
+Sair
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="sidebar-nav">
+<ul id="dashboard-menu">
+<li>
+<a href="/">
+<i class="icon-home"></i>
+<span>Início</span>
+</a>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-th-large"></i>
+<span>Produtos</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/Individual">
+<span data-refresh="true">Saúde</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/Individual">
+<span data-refresh="true">Individual</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Individual/84/111" target="">Aacl</a>
+</li>
+<li>
+<a href="/produtos/Individual/1436/1185" target="">Biosaude</a>
+</li>
+<li>
+<a href="/produtos/Individual/1436/4125" target="">Biosaude Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1353/4076" target="">Biovida</a>
+</li>
+<li>
+<a href="/produtos/Individual/1353/4075" target="">Biovida Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/49/750" target="">Blue Med</a>
+</li>
+<li>
+<a href="/produtos/Individual/49/4008" target="">Blue Med Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1506/5951" target="">Clinipam</a>
+</li>
+<li>
+<a href="/produtos/Individual/3764/5668" target="">Cruz Azul</a>
+</li>
+<li>
+<a href="/produtos/Individual/5/5678" target="">Gndi</a>
+</li>
+<li>
+<a href="/produtos/Individual/1347/651" target="">Gs Garantia</a>
+</li>
+<li>
+<a href="/produtos/Individual/1428/1161" target="">Health Santaris</a>
+</li>
+<li>
+<a href="/produtos/Individual/1389/847" target="">Med Tour</a>
+</li>
+<li>
+<a href="/produtos/Individual/1430/5651" target="">Medical Health</a>
+</li>
+<li>
+<a href="/produtos/Individual/1440/1197" target="">Plena Saude</a>
+</li>
+<li>
+<a href="/produtos/Individual/1582/2760" target="">Prevent Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/37/5610" target="">Sao Cristovao</a>
+</li>
+<li>
+<a href="/produtos/Individual/37/2868" target="">Sao Cristovao Viva Melhor</a>
+</li>
+<li>
+<a href="/produtos/Individual/1487/1418" target="">Sao Miguel Saude</a>
+</li>
+<li>
+<a href="/produtos/Individual/3752/5643" target="">Saude Santa Casa Maua</a>
+</li>
+<li>
+<a href="/produtos/Individual/3712/5441" target="">Total Medcare</a>
+</li>
+<li>
+<a href="/produtos/Individual/3712/5916" target="">Total Medcare Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/50/841" target="">Trasmontano</a>
+</li>
+<li>
+<a href="/produtos/Individual/50/5564" target="">Trasmontano Pop Consulta</a>
+</li>
+<li>
+<a href="/produtos/Individual/50/1155" target="">Trasmontano Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1444/2784" target="">Unihosp</a>
+</li>
+<li>
+<a href="/produtos/Individual/1444/2878" target="">Unihosp Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1416/1112" target="">Unimed Guarulhos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/Familiar">
+<span data-refresh="true">Familiar</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Familiar/84/111" target="">Aacl</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1436/1185" target="">Biosaude</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1436/4125" target="">Biosaude Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1353/4076" target="">Biovida</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1353/4075" target="">Biovida Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/49/750" target="">Blue Med</a>
+</li>
+<li>
+<a href="/produtos/Familiar/49/4008" target="">Blue Med Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1506/5951" target="">Clinipam</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3764/5668" target="">Cruz Azul</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1347/651" target="">Gs Garantia</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1428/1161" target="">Health Santaris</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1389/847" target="">Med Tour</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1430/5651" target="">Medical Health</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1440/1197" target="">Plena Saude</a>
+</li>
+<li>
+<a href="/produtos/Familiar/37/5610" target="">Sao Cristovao</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1487/1418" target="">Sao Miguel Saude</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3752/5643" target="">Saude Santa Casa Maua</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3712/5441" target="">Total Medcare</a>
+</li>
+<li>
+<a href="/produtos/Familiar/50/841" target="">Trasmontano</a>
+</li>
+<li>
+<a href="/produtos/Familiar/50/5564" target="">Trasmontano Pop Consulta</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1444/2784" target="">Unihosp</a>
+</li>
+<li>
+ <a href="/produtos/Familiar/1444/2878" target="">Unihosp Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1416/1112" target="">Unimed Guarulhos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/Pme">
+<span data-refresh="true">PME</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Pme/84/111" target="">Aacl</a>
+</li>
+<li>
+<a href="/produtos/Pme/1370/1475" target="">Allcare</a>
+</li>
+<li>
+<a href="/produtos/Pme/59/1258" target="">Allianz</a>
+</li>
+<li>
+<a href="/produtos/Pme/1356/6082" target="">Ameplan</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5689" target="">Amil Facil Linha Selecionada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5953" target="">Amil Linha Coordenada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5692" target="">Amil Linha Selecionada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5710" target="">Amil One Linha Selecionada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5432" target="">Amil Saude</a>
+</li>
+<li>
+<a href="/produtos/Pme/1436/1185" target="">Biosaude</a>
+</li>
+<li>
+<a href="/produtos/Pme/1353/4076" target="">Biovida</a>
+</li>
+<li>
+<a href="/produtos/Pme/49/750" target="">Blue Med</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/3982" target="">Bradesco Efetivo</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/1323" target="">Bradesco Hospitalar</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/923" target="">Bradesco Nacional</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/622" target="">Bradesco Nacional Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/1039" target="">Bradesco Preferencial Plus</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/5995" target="">Bradesco Saude 1</a>
+</li>
+<li>
+<a href="/produtos/Pme/91/370" target="">Care Plus</a>
+</li>
+<li>
+<a href="/produtos/Pme/1445/1227" target="">Central Nacional Unimed</a>
+</li>
+<li>
+<a href="/produtos/Pme/1506/5951" target="">Clinipam</a>
+</li>
+<li>
+<a href="/produtos/Pme/1413/670" target="">Corpore</a>
+</li>
+<li>
+<a href="/produtos/Pme/3764/5668" target="">Cruz Azul</a>
+</li>
+<li>
+<a href="/produtos/Pme/5/1261" target="">Gndi</a>
+</li>
+<li>
+<a href="/produtos/Pme/5/3889" target="">Gndi Mei</a>
+</li>
+<li>
+<a href="/produtos/Pme/1496/5468" target="">Golden Cross</a>
+</li>
+<li>
+<a href="/produtos/Pme/1347/651" target="">Gs Garantia</a>
+</li>
+<li>
+<a href="/produtos/Pme/1428/1161" target="">Health Santaris</a>
+</li>
+<li>
+<a href="/produtos/Pme/1389/847" target="">Med Tour</a>
+</li>
+<li>
+<a href="/produtos/Pme/1430/5651" target="">Medical Health</a>
+</li>
+<li>
+<a href="/produtos/Pme/28/5573" target="">Omint</a>
+</li>
+<li>
+<a href="/produtos/Pme/1440/1197" target="">Plena Saude</a>
+</li>
+<li>
+<a href="/produtos/Pme/30/638" target="">Porto</a>
+</li>
+<li>
+<a href="/produtos/Pme/33/1475" target="">Qualicorp</a>
+</li>
+<li>
+<a href="/produtos/Pme/1359/678" target="">Santa Helena</a>
+</li>
+<li>
+<a href="/produtos/Pme/37/5610" target="">Sao Cristovao</a>
+</li>
+<li>
+<a href="/produtos/Pme/1487/1418" target="">Sao Miguel Saude</a>
+</li>
+<li>
+<a href="/produtos/Pme/3752/5643" target="">Saude Santa Casa Maua</a>
+</li>
+<li>
+<a href="/produtos/Pme/114/1280" target="">Seguros Unimed</a>
+</li>
+<li>
+<a href="/produtos/Pme/1471/1366" target="">Sompo Seguros</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/5681" target="">Sul America Direto</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/5961" target="">Sul America Direto Empresario Individual</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/5682" target="">Sul America Direto Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/1377" target="">Sul America Empresario Individual</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/2669" target="">Sul America Hospitalar Empresario Individual</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/2724" target="">Sul America Hospitalar Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/2621" target="">Sul America Mais Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/655" target="">Sulamerica Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/768" target="">Sulamerica Hospitalar</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/646" target="">Sulamerica Mais</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/324" target="">Sulamerica Pme</a>
+</li>
+<li>
+<a href="/produtos/Pme/3712/5441" target="">Total Medcare</a>
+</li>
+<li>
+<a href="/produtos/Pme/50/841" target="">Trasmontano</a>
+</li>
+<li>
+<a href="/produtos/Pme/1444/2784" target="">Unihosp</a>
+</li>
+<li>
+<a href="/produtos/Pme/1416/1112" target="">Unimed Guarulhos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/Adesao">
+<span data-refresh="true">Adesão</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Adesao?operadora=1404" target="">Affix</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1370" target="">Allcare</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1575" target="">Clube de Saude</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1413" target="">Corpore</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1419" target="">Hebrom</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=3642" target="">Muito Mais Saúde</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1398" target="">Nunes e Grossi</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=3634" target="">Plural</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=33" target="">Qualicorp</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=3729" target="">Safelife</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=46" target="">Voce Clube</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/PmeAdesao">
+<span data-refresh="true">PME adesão</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/PmeAdesao?operadora=1413" target="">Corpore</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/IndividualOdonto">
+<span data-refresh="true">Odonto</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/IndividualOdonto">
+<span data-refresh="true">Individual</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/IndividualOdonto/93/5472" target="">Amil Dental</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1485/106" target="">Bradesco Dental</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1485/5334" target="">Bradesco Dental Kids</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1429/1163" target="">Dental Plus</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1410/5628" target="">Dentalpar</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1496/2876" target="">Goldental</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/27/17" target="">Odontoprev</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/37/661" target="">Sao Cristovao Odonto</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/4/3914" target="">Sulamerica Odonto</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/FamiliarOdonto">
+<span data-refresh="true">Familiar</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/FamiliarOdonto/93/5472" target="">Amil Dental</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1485/106" target="">Bradesco Dental</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1429/1163" target="">Dental Plus</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1410/5628" target="">Dentalpar</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1496/2876" target="">Goldental</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/27/17" target="">Odontoprev</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/37/661" target="">Sao Cristovao Odonto</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/4/3914" target="">Sulamerica Odonto</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/PmeOdonto">
+<span data-refresh="true">PME</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/PmeOdonto/93/5472" target="">Amil Dental</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1485/106" target="">Bradesco Dental</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/117/986" target="">Caixa Seguradora</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/91/1117" target="">Care Plus</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1429/1163" target="">Dental Plus</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1410/5628" target="">Dentalpar</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1496/2876" target="">Goldental</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1564/4170" target="">Hapvida Odonto</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/21/47" target="">Interodonto</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/27/17" target="">Odontoprev</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/28/624" target="">Omint</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/83/109" target="">Prevident</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/37/661" target="">Sao Cristovao Odonto</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/4/1110" target="">Sulamerica Odonto Pme</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/4/1111" target="">Sulamerica Odonto Pme Mais</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/AdesaoOdonto">
+<span data-refresh="true">Adesão</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/AdesaoOdonto?operadora=1419" target="">Hebrom</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/PetGrupal">
+<span data-refresh="true">Pet</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/PetGrupal">
+<span data-refresh="true">Pet</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/PetGrupal/1406/985" target="">Health For Pet</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-group"></i>
+<span>Clientes</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/indicacao">
+<span data-refresh="true">Indicações</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/indicacaofonte" target="">Fontes</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="/estudo" target="">Estudos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-paste"></i>
+<span>Corretora</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/producao" target="">Produções</a>
+</li>
+<li>
+<a href="/comissao" target="">Comissões</a>
+</li>
+<li>
+<a href="/notafiscal" target="">Notas Fiscais</a>
+</li>
+<li>
+<a href="/corretora" target="">Cadastro</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-wrench"></i>
+<span>Ferramentas</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/redecredenciada" target="">Rede credenciada</a>
+</li>
+<li>
+<a href="/ferramenta/calculoimc" target="">Cálculo de IMC</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div class="content">
+
+<div class="breadcrumbs" id="breadcrumbs">
+<ul class="breadcrumb">
+<li>
+<i class="icon-home home-icon"></i>
+<a href="/" target="">Início</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+Produtos
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Individual" target="">Saúde</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Pme" target="">PME</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Pme/1471/1366" target="">Sompo Seguros</a>
+</li>
+</ul>
+</div>
+<div class="container-fluid">
+<div id="pad-wrapper">
+
+<div id="main" class="main">
+<div class="row-fluid ">
+<div class="span8">
+<div class="stretch-item">
+<a class="thumbnail operadora-item">
+<span style="background-image:url('https://storage.googleapis.com/trindade-cdn-painel-v1-mr-us-prod/logotipos/sompo-seguros.png')" class="logo-center"></span>
+</a>
+</div>
+<div class="stretch-item stretch">
+<h3 class="row-fluid">Sompo Saúde - Rio de Janeiro</h3>
+<strong class="text-left">Aviso Importante: informativo de caráter referencial. Valores, regras de comercialização, rede credenciada e condições contratuais são determinadas pelas seguradoras/operadoras e podem ser alterados pelas mesmas a qualquer momento. Os preços e condições estão sujeitos a confirmação no ato do fechamento do contrato.</strong>
+</div>
+</div>
+<div class="span4">
+<div class="produto-selector">
+<strong>Mais opções:</strong><br>
+<input type="text" class="search" placeholder="Busca"><i class="icon-search"></i>
+<br>
+<ul>
+<li class="" title="Sompo Saúde - Grupo de Estados">
+<a href="/produtos/Pme/1471/1366">
+Sompo Saúde - Grupo de Estados
+</a>
+</li>
+<li class="" title="Sompo Saúde - Grupo de Municípios">
+<a href="/produtos/Pme/1471/5833">
+Sompo Saúde - Grupo de Municípios
+</a>
+</li>
+<li class="" title="Sompo Saúde - Interior/SP">
+<a href="/produtos/Pme/1471/5491">
+Sompo Saúde - Interior/SP
+</a>
+</li>
+<li class="selected" title="Sompo Saúde - Rio de Janeiro">
+<a href="/produtos/Pme/1471/5914">
+Sompo Saúde - Rio de Janeiro
+</a>
+</li>
+</ul>
+<input data-val="true" data-val-number="The field ProdutoId must be a number." id="ProdutoId" name="ProdutoId" type="hidden" value="5914">
+</div>
+</div>
+</div>
+<div class="row-fluid">
+<div class="span12">
+<fieldset class="produto-filter form-horizontal">
+<div class="control-group">
+<label class="control-label">Coparticipação</label>
+<div class="controls">
+<select name="Coparticipacao">
+<option value="">Indiferente</option>
+<option value="false">Sem coparticipação</option>
+<option value="true">Com coparticipação</option>
+</select>
+</div>
+</div>
+ </fieldset>
+<hr>
+<div class="tabbable" id="tab">
+<ul class="nav nav-tabs hidden-phone">
+<li class="active"><a href="#tab-produto" title="Preços" data-toggle="tab" data-get="getprecotabela">Preços</a></li>
+<li><a href="#tab-redeCredenciada" title="Rede Credenciada" data-toggle="tab" data-get="getredecredenciada">Rede Credenciada</a></li>
+<li><a href="#tab-manualCorretor" title="Manual do Corretor" data-toggle="tab" data-get="getmanual">Manual do Corretor</a></li>
+<li><a href="#tab-criteriosReducao" title="Critérios de Redução" data-toggle="tab" data-get="getcriterioreducao">Critérios de Redução</a></li>
+<li><a href="#tab-anexos" title="Anexos" data-toggle="tab" data-get="getanexos">Anexos</a></li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" title="Mais Opções" data-toggle="dropdown">Mais Opções&nbsp;<i class="icon-caret-down"></i></a>
+<ul class="dropdown-menu">
+<li>
+<a href="/ProdutoPrint/GetPrintModal?IdComercializacaoGrupo=14390&amp;ProdutoId=5914&amp;OperadoraId=1471&amp;Modalidade=Pme&amp;Operadora=Sompo%20Seguros&amp;Produto=Sompo%20Sa%C3%BAde%20-%20Rio%20de%20Janeiro&amp;Logotipo=https%3A%2F%2Fstorage.googleapis.com%2Ftrindade-cdn-painel-v1-mr-us-prod%2Flogotipos%2Fsompo-seguros.png&amp;Manutencao=False&amp;Alvo=Indiferente&amp;Entidades=System.Collections.Generic.List%601%5BSisWebClient.Presentation.Web.Models.EntidadeModel%5D" class="btn-print">
+<i class="icon-print"></i>
+Imprimir
+</a>
+</li>
+<li>
+<a href="/ProdutoPrint/GetEmailModal?IdComercializacaoGrupo=14390&amp;ProdutoId=5914&amp;OperadoraId=1471&amp;Modalidade=Pme&amp;Operadora=Sompo%20Seguros&amp;Produto=Sompo%20Sa%C3%BAde%20-%20Rio%20de%20Janeiro&amp;Logotipo=https%3A%2F%2Fstorage.googleapis.com%2Ftrindade-cdn-painel-v1-mr-us-prod%2Flogotipos%2Fsompo-seguros.png&amp;Manutencao=False&amp;Alvo=Indiferente&amp;Entidades=System.Collections.Generic.List%601%5BSisWebClient.Presentation.Web.Models.EntidadeModel%5D" class="btn-print">
+<i class="icon-envelope"></i>
+Enviar por email
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<div class="visible-phone">
+<select class="span12" id="cboProdutosMobile">
+<option value="#tab-produto">Preços</option>
+<option value="#tab-redeCredenciada">Rede Credenciada</option>
+<option value="#tab-manualCorretor">Manual do Corretor</option>
+<option value="#tab-criteriosReducao">Critérios de Redução</option>
+<option value="#tab-anexos">Anexos</option>
+<option value="#print-modal" data-mode="print">Imprimir</option>
+</select>
+</div>
+<div class="alert alert-warning" style="background-color: white">
+<table class="table table-condensed">
+<tbody><tr>
+<td class="no-wrap">
+<strong>Taxa de Cadastro</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;">R$ 6,00 por vida.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="no-wrap">
+<strong>Formação do Grupo</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;"><strong>PME</strong> de 03 a 29 vidas.<br>Mínimo de 01 titular com vínculo + 02 dependentes</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="no-wrap">
+<strong>Composição</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;"><strong>Agregados</strong>: pai, mãe, sogro e sogra até 58 anos 11 meses e 29 dias&nbsp;para empresas a partir&nbsp;de&nbsp;21 vidas que devem estar no plano anterior. Para vidas entre 59 e&nbsp;70 anos, verificar a TABELA PARA VIDAS A PARTIR DE 59 ANOS</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+</tbody></table>
+<strong class="text-right">Aviso Importante: informativo de caráter referencial. Valores, regras de comercialização, rede credenciada e condições contratuais são determinadas pelas seguradoras/operadoras e podem ser alterados pelas mesmas a qualquer momento. Os preços e condições estão sujeitos a confirmação no ato do fechamento do contrato.</strong>
+</div>
+<div class="tab-content">
+<div class="tab-pane active" id="tab-produto">
+<div class="tab-inner-content">
+<h4>Compulsório - Rio de Janeiro de 03 a 29 Vidas SEM Coparticipação - 1 Tit + 2 Dep</h4>
+<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">238,06</td>
+<td class="text-right " data-title="Acesso [A]">264,70</td>
+<td class="text-right " data-title="Classico [E]">270,38</td>
+<td class="text-right " data-title="Classico [A]">291,10</td>
+<td class="text-right " data-title="Estilo A [A]">348,87</td>
+<td class="text-right " data-title="Estilo B [A]">404,19</td>
+<td class="text-right " data-title="Absoluto A [A]">724,29</td>
+<td class="text-right " data-title="Absoluto B [A]">781,69</td>
+<td class="text-right " data-title="Absoluto C [A]">870,83</td>
+<td class="text-right " data-title="Supremo A [A]">952,31</td>
+<td class="text-right " data-title="Supremo B [A]">1.058,12</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">289,33</td>
+<td class="text-right " data-title="Acesso [A]">321,71</td>
+<td class="text-right " data-title="Classico [E]">328,62</td>
+<td class="text-right " data-title="Classico [A]">353,80</td>
+<td class="text-right " data-title="Estilo A [A]">424,01</td>
+<td class="text-right " data-title="Estilo B [A]">491,25</td>
+<td class="text-right " data-title="Absoluto A [A]">880,31</td>
+<td class="text-right " data-title="Absoluto B [A]">950,08</td>
+<td class="text-right " data-title="Absoluto C [A]">1.058,41</td>
+<td class="text-right " data-title="Supremo A [A]">1.157,44</td>
+<td class="text-right " data-title="Supremo B [A]">1.286,04</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">357,32</td>
+<td class="text-right " data-title="Acesso [A]">397,32</td>
+<td class="text-right " data-title="Classico [E]">405,84</td>
+<td class="text-right " data-title="Classico [A]">436,94</td>
+<td class="text-right " data-title="Estilo A [A]">523,66</td>
+<td class="text-right " data-title="Estilo B [A]">606,70</td>
+<td class="text-right " data-title="Absoluto A [A]">1.087,18</td>
+<td class="text-right " data-title="Absoluto B [A]">1.173,33</td>
+<td class="text-right " data-title="Absoluto C [A]">1.307,13</td>
+<td class="text-right " data-title="Supremo A [A]">1.429,44</td>
+<td class="text-right " data-title="Supremo B [A]">1.588,27</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+ <td class="text-right " data-title="Acesso [E]">391,27</td>
+<td class="text-right " data-title="Acesso [A]">435,06</td>
+<td class="text-right " data-title="Classico [E]">444,40</td>
+<td class="text-right " data-title="Classico [A]">478,46</td>
+<td class="text-right " data-title="Estilo A [A]">573,41</td>
+<td class="text-right " data-title="Estilo B [A]">664,34</td>
+<td class="text-right " data-title="Absoluto A [A]">1.190,46</td>
+<td class="text-right " data-title="Absoluto B [A]">1.284,80</td>
+<td class="text-right " data-title="Absoluto C [A]">1.431,31</td>
+<td class="text-right " data-title="Supremo A [A]">1.565,23</td>
+<td class="text-right " data-title="Supremo B [A]">1.739,15</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">424,53</td>
+<td class="text-right " data-title="Acesso [A]">472,04</td>
+<td class="text-right " data-title="Classico [E]">482,17</td>
+<td class="text-right " data-title="Classico [A]">519,12</td>
+<td class="text-right " data-title="Estilo A [A]">622,15</td>
+<td class="text-right " data-title="Estilo B [A]">720,81</td>
+<td class="text-right " data-title="Absoluto A [A]">1.291,65</td>
+<td class="text-right " data-title="Absoluto B [A]">1.394,02</td>
+<td class="text-right " data-title="Absoluto C [A]">1.552,98</td>
+<td class="text-right " data-title="Supremo A [A]">1.698,27</td>
+<td class="text-right " data-title="Supremo B [A]">1.886,97</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">490,33</td>
+<td class="text-right " data-title="Acesso [A]">545,21</td>
+<td class="text-right " data-title="Classico [E]">556,91</td>
+<td class="text-right " data-title="Classico [A]">599,59</td>
+<td class="text-right " data-title="Estilo A [A]">718,58</td>
+<td class="text-right " data-title="Estilo B [A]">832,54</td>
+<td class="text-right " data-title="Absoluto A [A]">1.491,85</td>
+<td class="text-right " data-title="Absoluto B [A]">1.610,08</td>
+<td class="text-right " data-title="Absoluto C [A]">1.793,68</td>
+<td class="text-right " data-title="Supremo A [A]">1.961,51</td>
+<td class="text-right " data-title="Supremo B [A]">2.179,46</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">587,66</td>
+<td class="text-right " data-title="Acesso [A]">653,43</td>
+<td class="text-right " data-title="Classico [E]">667,45</td>
+<td class="text-right " data-title="Classico [A]">718,61</td>
+<td class="text-right " data-title="Estilo A [A]">861,21</td>
+<td class="text-right " data-title="Estilo B [A]">997,79</td>
+<td class="text-right " data-title="Absoluto A [A]">1.787,99</td>
+<td class="text-right " data-title="Absoluto B [A]">1.929,69</td>
+<td class="text-right " data-title="Absoluto C [A]">2.149,73</td>
+<td class="text-right " data-title="Supremo A [A]">2.350,87</td>
+<td class="text-right " data-title="Supremo B [A]">2.612,08</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">695,03</td>
+<td class="text-right " data-title="Acesso [A]">772,81</td>
+<td class="text-right " data-title="Classico [E]">789,40</td>
+<td class="text-right " data-title="Classico [A]">849,89</td>
+<td class="text-right " data-title="Estilo A [A]">1.018,55</td>
+<td class="text-right " data-title="Estilo B [A]">1.180,08</td>
+<td class="text-right " data-title="Absoluto A [A]">2.114,65</td>
+<td class="text-right " data-title="Absoluto B [A]">2.282,24</td>
+<td class="text-right " data-title="Absoluto C [A]">2.542,49</td>
+<td class="text-right " data-title="Supremo A [A]">2.780,38</td>
+<td class="text-right " data-title="Supremo B [A]">3.089,31</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">843,07</td>
+<td class="text-right " data-title="Acesso [A]">937,41</td>
+<td class="text-right " data-title="Classico [E]">957,54</td>
+<td class="text-right " data-title="Classico [A]">1.030,91</td>
+<td class="text-right " data-title="Estilo A [A]">1.235,51</td>
+<td class="text-right " data-title="Estilo B [A]">1.431,45</td>
+<td class="text-right " data-title="Absoluto A [A]">2.565,07</td>
+<td class="text-right " data-title="Absoluto B [A]">2.768,37</td>
+<td class="text-right " data-title="Absoluto C [A]">3.084,04</td>
+<td class="text-right " data-title="Supremo A [A]">3.372,60</td>
+<td class="text-right " data-title="Supremo B [A]">3.747,33</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.428,16</td>
+<td class="text-right " data-title="Acesso [A]">1.587,99</td>
+<td class="text-right " data-title="Classico [E]">1.622,07</td>
+<td class="text-right " data-title="Classico [A]">1.746,38</td>
+<td class="text-right " data-title="Estilo A [A]">2.092,95</td>
+<td class="text-right " data-title="Estilo B [A]">2.424,86</td>
+<td class="text-right " data-title="Absoluto A [A]">4.345,23</td>
+<td class="text-right " data-title="Absoluto B [A]">4.689,61</td>
+<td class="text-right " data-title="Absoluto C [A]">5.224,36</td>
+<td class="text-right " data-title="Supremo A [A]">5.713,18</td>
+<td class="text-right " data-title="Supremo B [A]">6.347,98</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Rio de Janeiro de 03 a 29 Vidas COM 20% de Coparticipação - 1 Tit + 2 Dep</h4>
+<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">214,25</td>
+<td class="text-right " data-title="Acesso [A]">238,23</td>
+<td class="text-right " data-title="Classico [E]">243,34</td>
+<td class="text-right " data-title="Classico [A]">261,99</td>
+<td class="text-right " data-title="Estilo A [A]">313,98</td>
+<td class="text-right " data-title="Estilo B [A]">363,77</td>
+<td class="text-right " data-title="Absoluto A [A]">651,86</td>
+<td class="text-right " data-title="Absoluto B [A]">703,52</td>
+<td class="text-right " data-title="Absoluto C [A]">783,74</td>
+<td class="text-right " data-title="Supremo A [A]">857,08</td>
+<td class="text-right " data-title="Supremo B [A]">952,31</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">260,40</td>
+<td class="text-right " data-title="Acesso [A]">289,54</td>
+<td class="text-right " data-title="Classico [E]">295,76</td>
+<td class="text-right " data-title="Classico [A]">318,42</td>
+<td class="text-right " data-title="Estilo A [A]">381,61</td>
+<td class="text-right " data-title="Estilo B [A]">442,12</td>
+<td class="text-right " data-title="Absoluto A [A]">792,28</td>
+<td class="text-right " data-title="Absoluto B [A]">855,07</td>
+<td class="text-right " data-title="Absoluto C [A]">952,57</td>
+<td class="text-right " data-title="Supremo A [A]">1.041,69</td>
+<td class="text-right " data-title="Supremo B [A]">1.157,44</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">321,59</td>
+<td class="text-right " data-title="Acesso [A]">357,58</td>
+<td class="text-right " data-title="Classico [E]">365,26</td>
+<td class="text-right " data-title="Classico [A]">393,25</td>
+<td class="text-right " data-title="Estilo A [A]">471,29</td>
+<td class="text-right " data-title="Estilo B [A]">546,03</td>
+<td class="text-right " data-title="Absoluto A [A]">978,46</td>
+<td class="text-right " data-title="Absoluto B [A]">1.056,00</td>
+<td class="text-right " data-title="Absoluto C [A]">1.176,42</td>
+<td class="text-right " data-title="Supremo A [A]">1.286,49</td>
+<td class="text-right " data-title="Supremo B [A]">1.429,44</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">352,14</td>
+<td class="text-right " data-title="Acesso [A]">391,55</td>
+<td class="text-right " data-title="Classico [E]">399,96</td>
+<td class="text-right " data-title="Classico [A]">430,61</td>
+<td class="text-right " data-title="Estilo A [A]">516,07</td>
+<td class="text-right " data-title="Estilo B [A]">597,91</td>
+<td class="text-right " data-title="Absoluto A [A]">1.071,41</td>
+<td class="text-right " data-title="Absoluto B [A]">1.156,32</td>
+<td class="text-right " data-title="Absoluto C [A]">1.288,18</td>
+<td class="text-right " data-title="Supremo A [A]">1.408,71</td>
+<td class="text-right " data-title="Supremo B [A]">1.565,24</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">382,08</td>
+<td class="text-right " data-title="Acesso [A]">424,84</td>
+ <td class="text-right " data-title="Classico [E]">433,95</td>
+<td class="text-right " data-title="Classico [A]">467,21</td>
+<td class="text-right " data-title="Estilo A [A]">559,93</td>
+<td class="text-right " data-title="Estilo B [A]">648,73</td>
+<td class="text-right " data-title="Absoluto A [A]">1.162,49</td>
+<td class="text-right " data-title="Absoluto B [A]">1.254,62</td>
+<td class="text-right " data-title="Absoluto C [A]">1.397,68</td>
+<td class="text-right " data-title="Supremo A [A]">1.528,45</td>
+<td class="text-right " data-title="Supremo B [A]">1.698,28</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">441,30</td>
+<td class="text-right " data-title="Acesso [A]">490,69</td>
+<td class="text-right " data-title="Classico [E]">501,22</td>
+<td class="text-right " data-title="Classico [A]">539,63</td>
+<td class="text-right " data-title="Estilo A [A]">646,72</td>
+<td class="text-right " data-title="Estilo B [A]">749,29</td>
+<td class="text-right " data-title="Absoluto A [A]">1.342,67</td>
+<td class="text-right " data-title="Absoluto B [A]">1.449,07</td>
+<td class="text-right " data-title="Absoluto C [A]">1.614,31</td>
+<td class="text-right " data-title="Supremo A [A]">1.765,36</td>
+<td class="text-right " data-title="Supremo B [A]">1.961,51</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">528,90</td>
+<td class="text-right " data-title="Acesso [A]">588,09</td>
+<td class="text-right " data-title="Classico [E]">600,71</td>
+<td class="text-right " data-title="Classico [A]">646,75</td>
+<td class="text-right " data-title="Estilo A [A]">775,09</td>
+<td class="text-right " data-title="Estilo B [A]">898,01</td>
+<td class="text-right " data-title="Absoluto A [A]">1.609,19</td>
+<td class="text-right " data-title="Absoluto B [A]">1.736,72</td>
+<td class="text-right " data-title="Absoluto C [A]">1.934,75</td>
+<td class="text-right " data-title="Supremo A [A]">2.115,78</td>
+<td class="text-right " data-title="Supremo B [A]">2.350,88</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">625,53</td>
+<td class="text-right " data-title="Acesso [A]">695,53</td>
+<td class="text-right " data-title="Classico [E]">710,46</td>
+<td class="text-right " data-title="Classico [A]">764,90</td>
+<td class="text-right " data-title="Estilo A [A]">916,69</td>
+<td class="text-right " data-title="Estilo B [A]">1.062,07</td>
+<td class="text-right " data-title="Absoluto A [A]">1.903,18</td>
+<td class="text-right " data-title="Absoluto B [A]">2.054,02</td>
+<td class="text-right " data-title="Absoluto C [A]">2.288,24</td>
+<td class="text-right " data-title="Supremo A [A]">2.502,34</td>
+<td class="text-right " data-title="Supremo B [A]">2.780,38</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">758,77</td>
+<td class="text-right " data-title="Acesso [A]">843,67</td>
+<td class="text-right " data-title="Classico [E]">861,79</td>
+<td class="text-right " data-title="Classico [A]">927,82</td>
+<td class="text-right " data-title="Estilo A [A]">1.111,96</td>
+<td class="text-right " data-title="Estilo B [A]">1.288,31</td>
+<td class="text-right " data-title="Absoluto A [A]">2.308,56</td>
+<td class="text-right " data-title="Absoluto B [A]">2.491,53</td>
+<td class="text-right " data-title="Absoluto C [A]">2.775,63</td>
+<td class="text-right " data-title="Supremo A [A]">3.035,34</td>
+<td class="text-right " data-title="Supremo B [A]">3.372,59</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.285,35</td>
+<td class="text-right " data-title="Acesso [A]">1.429,19</td>
+<td class="text-right " data-title="Classico [E]">1.459,86</td>
+<td class="text-right " data-title="Classico [A]">1.571,74</td>
+<td class="text-right " data-title="Estilo A [A]">1.883,65</td>
+<td class="text-right " data-title="Estilo B [A]">2.182,38</td>
+<td class="text-right " data-title="Absoluto A [A]">3.910,71</td>
+<td class="text-right " data-title="Absoluto B [A]">4.220,65</td>
+<td class="text-right " data-title="Absoluto C [A]">4.701,93</td>
+<td class="text-right " data-title="Supremo A [A]">5.141,86</td>
+<td class="text-right " data-title="Supremo B [A]">5.713,18</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Rio de Janeiro de 03 a 29 Vidas COM 30% de Coparticipação - 1 Tit + 2 Dep</h4>
+<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">202,35</td>
+<td class="text-right " data-title="Acesso [A]">224,99</td>
+<td class="text-right " data-title="Classico [E]">229,82</td>
+<td class="text-right " data-title="Classico [A]">247,43</td>
+<td class="text-right " data-title="Estilo A [A]">296,54</td>
+<td class="text-right " data-title="Estilo B [A]">343,56</td>
+<td class="text-right " data-title="Absoluto A [A]">615,65</td>
+<td class="text-right " data-title="Absoluto B [A]">664,44</td>
+<td class="text-right " data-title="Absoluto C [A]">740,20</td>
+<td class="text-right " data-title="Supremo A [A]">809,47</td>
+<td class="text-right " data-title="Supremo B [A]">899,40</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">245,93</td>
+<td class="text-right " data-title="Acesso [A]">273,45</td>
+<td class="text-right " data-title="Classico [E]">279,33</td>
+ <td class="text-right " data-title="Classico [A]">300,73</td>
+<td class="text-right " data-title="Estilo A [A]">360,41</td>
+<td class="text-right " data-title="Estilo B [A]">417,56</td>
+<td class="text-right " data-title="Absoluto A [A]">748,26</td>
+<td class="text-right " data-title="Absoluto B [A]">807,57</td>
+<td class="text-right " data-title="Absoluto C [A]">899,65</td>
+<td class="text-right " data-title="Supremo A [A]">983,82</td>
+<td class="text-right " data-title="Supremo B [A]">1.093,14</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">303,72</td>
+<td class="text-right " data-title="Acesso [A]">337,72</td>
+<td class="text-right " data-title="Classico [E]">344,96</td>
+<td class="text-right " data-title="Classico [A]">371,40</td>
+<td class="text-right " data-title="Estilo A [A]">445,11</td>
+<td class="text-right " data-title="Estilo B [A]">515,70</td>
+<td class="text-right " data-title="Absoluto A [A]">924,10</td>
+<td class="text-right " data-title="Absoluto B [A]">997,33</td>
+<td class="text-right " data-title="Absoluto C [A]">1.111,06</td>
+<td class="text-right " data-title="Supremo A [A]">1.215,02</td>
+<td class="text-right " data-title="Supremo B [A]">1.350,03</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">332,58</td>
+<td class="text-right " data-title="Acesso [A]">369,80</td>
+<td class="text-right " data-title="Classico [E]">377,74</td>
+<td class="text-right " data-title="Classico [A]">406,69</td>
+<td class="text-right " data-title="Estilo A [A]">487,40</td>
+<td class="text-right " data-title="Estilo B [A]">564,69</td>
+<td class="text-right " data-title="Absoluto A [A]">1.011,89</td>
+<td class="text-right " data-title="Absoluto B [A]">1.092,08</td>
+<td class="text-right " data-title="Absoluto C [A]">1.216,61</td>
+<td class="text-right " data-title="Supremo A [A]">1.330,45</td>
+<td class="text-right " data-title="Supremo B [A]">1.478,28</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">360,85</td>
+<td class="text-right " data-title="Acesso [A]">401,23</td>
+<td class="text-right " data-title="Classico [E]">409,85</td>
+<td class="text-right " data-title="Classico [A]">441,25</td>
+<td class="text-right " data-title="Estilo A [A]">528,83</td>
+<td class="text-right " data-title="Estilo B [A]">612,69</td>
+<td class="text-right " data-title="Absoluto A [A]">1.097,90</td>
+<td class="text-right " data-title="Absoluto B [A]">1.184,91</td>
+<td class="text-right " data-title="Absoluto C [A]">1.320,03</td>
+<td class="text-right " data-title="Supremo A [A]">1.443,53</td>
+<td class="text-right " data-title="Supremo B [A]">1.603,93</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">416,78</td>
+<td class="text-right " data-title="Acesso [A]">463,43</td>
+<td class="text-right " data-title="Classico [E]">473,37</td>
+<td class="text-right " data-title="Classico [A]">509,65</td>
+<td class="text-right " data-title="Estilo A [A]">610,79</td>
+<td class="text-right " data-title="Estilo B [A]">707,66</td>
+<td class="text-right " data-title="Absoluto A [A]">1.268,07</td>
+<td class="text-right " data-title="Absoluto B [A]">1.368,57</td>
+<td class="text-right " data-title="Absoluto C [A]">1.524,63</td>
+<td class="text-right " data-title="Supremo A [A]">1.667,28</td>
+<td class="text-right " data-title="Supremo B [A]">1.852,54</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">499,51</td>
+<td class="text-right " data-title="Acesso [A]">555,41</td>
+<td class="text-right " data-title="Classico [E]">567,34</td>
+<td class="text-right " data-title="Classico [A]">610,82</td>
+<td class="text-right " data-title="Estilo A [A]">732,03</td>
+<td class="text-right " data-title="Estilo B [A]">848,12</td>
+<td class="text-right " data-title="Absoluto A [A]">1.519,79</td>
+<td class="text-right " data-title="Absoluto B [A]">1.640,23</td>
+<td class="text-right " data-title="Absoluto C [A]">1.827,27</td>
+<td class="text-right " data-title="Supremo A [A]">1.998,24</td>
+<td class="text-right " data-title="Supremo B [A]">2.220,27</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">590,77</td>
+<td class="text-right " data-title="Acesso [A]">656,89</td>
+<td class="text-right " data-title="Classico [E]">670,99</td>
+<td class="text-right " data-title="Classico [A]">722,41</td>
+<td class="text-right " data-title="Estilo A [A]">865,76</td>
+<td class="text-right " data-title="Estilo B [A]">1.003,07</td>
+<td class="text-right " data-title="Absoluto A [A]">1.797,45</td>
+<td class="text-right " data-title="Absoluto B [A]">1.939,91</td>
+<td class="text-right " data-title="Absoluto C [A]">2.161,11</td>
+<td class="text-right " data-title="Supremo A [A]">2.363,32</td>
+<td class="text-right " data-title="Supremo B [A]">2.625,91</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">716,61</td>
+<td class="text-right " data-title="Acesso [A]">796,80</td>
+<td class="text-right " data-title="Classico [E]">813,91</td>
+<td class="text-right " data-title="Classico [A]">876,28</td>
+<td class="text-right " data-title="Estilo A [A]">1.050,18</td>
+<td class="text-right " data-title="Estilo B [A]">1.216,73</td>
+<td class="text-right " data-title="Absoluto A [A]">2.180,31</td>
+<td class="text-right " data-title="Absoluto B [A]">2.353,11</td>
+<td class="text-right " data-title="Absoluto C [A]">2.621,43</td>
+<td class="text-right " data-title="Supremo A [A]">2.866,71</td>
+<td class="text-right " data-title="Supremo B [A]">3.185,23</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.213,94</td>
+<td class="text-right " data-title="Acesso [A]">1.349,79</td>
+<td class="text-right " data-title="Classico [E]">1.378,76</td>
+<td class="text-right " data-title="Classico [A]">1.484,42</td>
+<td class="text-right " data-title="Estilo A [A]">1.779,00</td>
+<td class="text-right " data-title="Estilo B [A]">2.061,13</td>
+<td class="text-right " data-title="Absoluto A [A]">3.693,45</td>
+<td class="text-right " data-title="Absoluto B [A]">3.986,17</td>
+<td class="text-right " data-title="Absoluto C [A]">4.440,71</td>
+<td class="text-right " data-title="Supremo A [A]">4.856,20</td>
+<td class="text-right " data-title="Supremo B [A]">5.395,78</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Grupos de 30 a 99 Vidas SEM Coparticipaçao</h4>
+<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">218,31</td>
+<td class="text-right " data-title="Acesso [A]">244,00</td>
+<td class="text-right " data-title="Classico [E]">260,20</td>
+<td class="text-right " data-title="Classico [A]">280,15</td>
+<td class="text-right " data-title="Estilo A [A]">332,52</td>
+<td class="text-right " data-title="Estilo B [A]">374,29</td>
+<td class="text-right " data-title="Absoluto A [A]">706,73</td>
+<td class="text-right " data-title="Absoluto B [A]">762,73</td>
+<td class="text-right " data-title="Absoluto C [A]">849,70</td>
+<td class="text-right " data-title="Supremo A [A]">929,23</td>
+<td class="text-right " data-title="Supremo B [A]">1.032,47</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">265,33</td>
+<td class="text-right " data-title="Acesso [A]">296,55</td>
+<td class="text-right " data-title="Classico [E]">316,25</td>
+<td class="text-right " data-title="Classico [A]">340,49</td>
+<td class="text-right " data-title="Estilo A [A]">404,15</td>
+<td class="text-right " data-title="Estilo B [A]">454,90</td>
+<td class="text-right " data-title="Absoluto A [A]">858,96</td>
+<td class="text-right " data-title="Absoluto B [A]">927,04</td>
+<td class="text-right " data-title="Absoluto C [A]">1.032,74</td>
+<td class="text-right " data-title="Supremo A [A]">1.129,37</td>
+<td class="text-right " data-title="Supremo B [A]">1.254,85</td>
+</tr>
+ <tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">327,68</td>
+<td class="text-right " data-title="Acesso [A]">366,25</td>
+<td class="text-right " data-title="Classico [E]">390,56</td>
+<td class="text-right " data-title="Classico [A]">420,50</td>
+<td class="text-right " data-title="Estilo A [A]">499,13</td>
+<td class="text-right " data-title="Estilo B [A]">561,81</td>
+<td class="text-right " data-title="Absoluto A [A]">1.060,83</td>
+<td class="text-right " data-title="Absoluto B [A]">1.144,89</td>
+<td class="text-right " data-title="Absoluto C [A]">1.275,44</td>
+<td class="text-right " data-title="Supremo A [A]">1.394,77</td>
+<td class="text-right " data-title="Supremo B [A]">1.549,75</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">358,81</td>
+<td class="text-right " data-title="Acesso [A]">401,03</td>
+<td class="text-right " data-title="Classico [E]">427,67</td>
+<td class="text-right " data-title="Classico [A]">460,45</td>
+<td class="text-right " data-title="Estilo A [A]">546,55</td>
+<td class="text-right " data-title="Estilo B [A]">615,19</td>
+<td class="text-right " data-title="Absoluto A [A]">1.161,60</td>
+<td class="text-right " data-title="Absoluto B [A]">1.253,65</td>
+<td class="text-right " data-title="Absoluto C [A]">1.396,61</td>
+<td class="text-right " data-title="Supremo A [A]">1.527,28</td>
+<td class="text-right " data-title="Supremo B [A]">1.696,99</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">389,31</td>
+<td class="text-right " data-title="Acesso [A]">435,14</td>
+<td class="text-right " data-title="Classico [E]">464,02</td>
+<td class="text-right " data-title="Classico [A]">499,58</td>
+<td class="text-right " data-title="Estilo A [A]">593,00</td>
+<td class="text-right " data-title="Estilo B [A]">667,47</td>
+<td class="text-right " data-title="Absoluto A [A]">1.260,34</td>
+<td class="text-right " data-title="Absoluto B [A]">1.360,21</td>
+<td class="text-right " data-title="Absoluto C [A]">1.515,32</td>
+<td class="text-right " data-title="Supremo A [A]">1.657,09</td>
+<td class="text-right " data-title="Supremo B [A]">1.841,22</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">449,65</td>
+<td class="text-right " data-title="Acesso [A]">502,57</td>
+<td class="text-right " data-title="Classico [E]">535,94</td>
+<td class="text-right " data-title="Classico [A]">577,02</td>
+<td class="text-right " data-title="Estilo A [A]">684,92</td>
+<td class="text-right " data-title="Estilo B [A]">770,94</td>
+<td class="text-right " data-title="Absoluto A [A]">1.455,69</td>
+<td class="text-right " data-title="Absoluto B [A]">1.571,05</td>
+<td class="text-right " data-title="Absoluto C [A]">1.750,20</td>
+<td class="text-right " data-title="Supremo A [A]">1.913,95</td>
+<td class="text-right " data-title="Supremo B [A]">2.126,61</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+ <td class="text-right " data-title="Acesso [E]">538,90</td>
+<td class="text-right " data-title="Acesso [A]">602,34</td>
+<td class="text-right " data-title="Classico [E]">642,32</td>
+<td class="text-right " data-title="Classico [A]">691,55</td>
+<td class="text-right " data-title="Estilo A [A]">820,86</td>
+<td class="text-right " data-title="Estilo B [A]">923,96</td>
+<td class="text-right " data-title="Absoluto A [A]">1.744,64</td>
+<td class="text-right " data-title="Absoluto B [A]">1.882,90</td>
+<td class="text-right " data-title="Absoluto C [A]">2.097,61</td>
+<td class="text-right " data-title="Supremo A [A]">2.293,86</td>
+<td class="text-right " data-title="Supremo B [A]">2.548,74</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">637,37</td>
+<td class="text-right " data-title="Acesso [A]">712,38</td>
+<td class="text-right " data-title="Classico [E]">759,68</td>
+<td class="text-right " data-title="Classico [A]">817,90</td>
+<td class="text-right " data-title="Estilo A [A]">970,83</td>
+<td class="text-right " data-title="Estilo B [A]">1.092,77</td>
+<td class="text-right " data-title="Absoluto A [A]">2.063,38</td>
+<td class="text-right " data-title="Absoluto B [A]">2.226,91</td>
+<td class="text-right " data-title="Absoluto C [A]">2.480,84</td>
+<td class="text-right " data-title="Supremo A [A]">2.712,95</td>
+<td class="text-right " data-title="Supremo B [A]">3.014,39</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">773,13</td>
+<td class="text-right " data-title="Acesso [A]">864,12</td>
+<td class="text-right " data-title="Classico [E]">921,49</td>
+<td class="text-right " data-title="Classico [A]">992,11</td>
+<td class="text-right " data-title="Estilo A [A]">1.177,63</td>
+<td class="text-right " data-title="Estilo B [A]">1.325,53</td>
+<td class="text-right " data-title="Absoluto A [A]">2.502,88</td>
+<td class="text-right " data-title="Absoluto B [A]">2.701,23</td>
+<td class="text-right " data-title="Absoluto C [A]">3.009,25</td>
+<td class="text-right " data-title="Supremo A [A]">3.290,82</td>
+<td class="text-right " data-title="Supremo B [A]">3.656,46</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.309,68</td>
+<td class="text-right " data-title="Acesso [A]">1.463,83</td>
+<td class="text-right " data-title="Classico [E]">1.561,00</td>
+<td class="text-right " data-title="Classico [A]">1.680,64</td>
+<td class="text-right " data-title="Estilo A [A]">1.994,89</td>
+<td class="text-right " data-title="Estilo B [A]">2.245,45</td>
+<td class="text-right " data-title="Absoluto A [A]">4.239,89</td>
+<td class="text-right " data-title="Absoluto B [A]">4.575,90</td>
+<td class="text-right " data-title="Absoluto C [A]">5.097,68</td>
+<td class="text-right " data-title="Supremo A [A]">5.574,65</td>
+<td class="text-right " data-title="Supremo B [A]">6.194,05</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Grupos de 30 a 99 Vidas COM 20% de Coparticipaçao</h4>
+<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">196,48</td>
+<td class="text-right " data-title="Acesso [A]">219,60</td>
+<td class="text-right " data-title="Classico [E]">234,18</td>
+<td class="text-right " data-title="Classico [A]">252,13</td>
+<td class="text-right " data-title="Estilo A [A]">299,27</td>
+<td class="text-right " data-title="Estilo B [A]">336,86</td>
+<td class="text-right " data-title="Absoluto A [A]">636,06</td>
+<td class="text-right " data-title="Absoluto B [A]">686,46</td>
+<td class="text-right " data-title="Absoluto C [A]">764,73</td>
+<td class="text-right " data-title="Supremo A [A]">836,30</td>
+<td class="text-right " data-title="Supremo B [A]">929,22</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">238,80</td>
+<td class="text-right " data-title="Acesso [A]">266,89</td>
+<td class="text-right " data-title="Classico [E]">284,62</td>
+<td class="text-right " data-title="Classico [A]">306,44</td>
+<td class="text-right " data-title="Estilo A [A]">363,73</td>
+<td class="text-right " data-title="Estilo B [A]">409,41</td>
+<td class="text-right " data-title="Absoluto A [A]">773,07</td>
+<td class="text-right " data-title="Absoluto B [A]">834,33</td>
+<td class="text-right " data-title="Absoluto C [A]">929,47</td>
+<td class="text-right " data-title="Supremo A [A]">1.016,43</td>
+<td class="text-right " data-title="Supremo B [A]">1.129,37</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">294,91</td>
+<td class="text-right " data-title="Acesso [A]">329,63</td>
+<td class="text-right " data-title="Classico [E]">351,50</td>
+<td class="text-right " data-title="Classico [A]">378,45</td>
+<td class="text-right " data-title="Estilo A [A]">449,21</td>
+<td class="text-right " data-title="Estilo B [A]">505,63</td>
+<td class="text-right " data-title="Absoluto A [A]">954,74</td>
+<td class="text-right " data-title="Absoluto B [A]">1.030,40</td>
+<td class="text-right " data-title="Absoluto C [A]">1.147,90</td>
+<td class="text-right " data-title="Supremo A [A]">1.255,30</td>
+<td class="text-right " data-title="Supremo B [A]">1.394,78</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">322,93</td>
+<td class="text-right " data-title="Acesso [A]">360,93</td>
+<td class="text-right " data-title="Classico [E]">384,90</td>
+<td class="text-right " data-title="Classico [A]">414,40</td>
+<td class="text-right " data-title="Estilo A [A]">491,89</td>
+<td class="text-right " data-title="Estilo B [A]">553,67</td>
+<td class="text-right " data-title="Absoluto A [A]">1.045,44</td>
+<td class="text-right " data-title="Absoluto B [A]">1.128,29</td>
+<td class="text-right " data-title="Absoluto C [A]">1.256,95</td>
+<td class="text-right " data-title="Supremo A [A]">1.374,56</td>
+<td class="text-right " data-title="Supremo B [A]">1.527,29</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">350,38</td>
+<td class="text-right " data-title="Acesso [A]">391,62</td>
+<td class="text-right " data-title="Classico [E]">417,62</td>
+<td class="text-right " data-title="Classico [A]">449,62</td>
+<td class="text-right " data-title="Estilo A [A]">533,70</td>
+<td class="text-right " data-title="Estilo B [A]">600,72</td>
+<td class="text-right " data-title="Absoluto A [A]">1.134,30</td>
+<td class="text-right " data-title="Absoluto B [A]">1.224,19</td>
+<td class="text-right " data-title="Absoluto C [A]">1.363,79</td>
+<td class="text-right " data-title="Supremo A [A]">1.491,38</td>
+<td class="text-right " data-title="Supremo B [A]">1.657,10</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">404,69</td>
+<td class="text-right " data-title="Acesso [A]">452,32</td>
+<td class="text-right " data-title="Classico [E]">482,34</td>
+<td class="text-right " data-title="Classico [A]">519,32</td>
+<td class="text-right " data-title="Estilo A [A]">616,43</td>
+<td class="text-right " data-title="Estilo B [A]">693,84</td>
+<td class="text-right " data-title="Absoluto A [A]">1.310,12</td>
+<td class="text-right " data-title="Absoluto B [A]">1.413,94</td>
+<td class="text-right " data-title="Absoluto C [A]">1.575,18</td>
+<td class="text-right " data-title="Supremo A [A]">1.722,55</td>
+<td class="text-right " data-title="Supremo B [A]">1.913,95</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">485,01</td>
+<td class="text-right " data-title="Acesso [A]">542,11</td>
+<td class="text-right " data-title="Classico [E]">578,09</td>
+<td class="text-right " data-title="Classico [A]">622,40</td>
+<td class="text-right " data-title="Estilo A [A]">738,78</td>
+<td class="text-right " data-title="Estilo B [A]">831,56</td>
+<td class="text-right " data-title="Absoluto A [A]">1.570,18</td>
+<td class="text-right " data-title="Absoluto B [A]">1.694,61</td>
+<td class="text-right " data-title="Absoluto C [A]">1.887,85</td>
+<td class="text-right " data-title="Supremo A [A]">2.064,48</td>
+<td class="text-right " data-title="Supremo B [A]">2.293,87</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">573,63</td>
+<td class="text-right " data-title="Acesso [A]">641,14</td>
+<td class="text-right " data-title="Classico [E]">683,71</td>
+<td class="text-right " data-title="Classico [A]">736,11</td>
+<td class="text-right " data-title="Estilo A [A]">873,75</td>
+<td class="text-right " data-title="Estilo B [A]">983,49</td>
+<td class="text-right " data-title="Absoluto A [A]">1.857,04</td>
+<td class="text-right " data-title="Absoluto B [A]">2.004,22</td>
+<td class="text-right " data-title="Absoluto C [A]">2.232,76</td>
+<td class="text-right " data-title="Supremo A [A]">2.441,66</td>
+<td class="text-right " data-title="Supremo B [A]">2.712,96</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">695,82</td>
+<td class="text-right " data-title="Acesso [A]">777,70</td>
+<td class="text-right " data-title="Classico [E]">829,34</td>
+<td class="text-right " data-title="Classico [A]">892,90</td>
+<td class="text-right " data-title="Estilo A [A]">1.059,86</td>
+<td class="text-right " data-title="Estilo B [A]">1.192,98</td>
+<td class="text-right " data-title="Absoluto A [A]">2.252,59</td>
+<td class="text-right " data-title="Absoluto B [A]">2.431,10</td>
+<td class="text-right " data-title="Absoluto C [A]">2.708,32</td>
+<td class="text-right " data-title="Supremo A [A]">2.961,73</td>
+<td class="text-right " data-title="Supremo B [A]">3.290,81</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.178,71</td>
+<td class="text-right " data-title="Acesso [A]">1.317,45</td>
+<td class="text-right " data-title="Classico [E]">1.404,90</td>
+<td class="text-right " data-title="Classico [A]">1.512,58</td>
+<td class="text-right " data-title="Estilo A [A]">1.795,41</td>
+<td class="text-right " data-title="Estilo B [A]">2.020,90</td>
+<td class="text-right " data-title="Absoluto A [A]">3.815,90</td>
+<td class="text-right " data-title="Absoluto B [A]">4.118,31</td>
+<td class="text-right " data-title="Absoluto C [A]">4.587,92</td>
+<td class="text-right " data-title="Supremo A [A]">5.017,18</td>
+<td class="text-right " data-title="Supremo B [A]">5.574,65</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Grupos de 30 a 99 Vidas COM 30% de Coparticipaçao</h4>
+<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">185,57</td>
+<td class="text-right " data-title="Acesso [A]">207,40</td>
+<td class="text-right " data-title="Classico [E]">221,17</td>
+<td class="text-right " data-title="Classico [A]">238,12</td>
+<td class="text-right " data-title="Estilo A [A]">282,64</td>
+<td class="text-right " data-title="Estilo B [A]">318,15</td>
+<td class="text-right " data-title="Absoluto A [A]">600,72</td>
+<td class="text-right " data-title="Absoluto B [A]">648,32</td>
+<td class="text-right " data-title="Absoluto C [A]">722,25</td>
+<td class="text-right " data-title="Supremo A [A]">789,84</td>
+<td class="text-right " data-title="Supremo B [A]">877,60</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">225,53</td>
+<td class="text-right " data-title="Acesso [A]">252,07</td>
+<td class="text-right " data-title="Classico [E]">268,81</td>
+<td class="text-right " data-title="Classico [A]">289,41</td>
+<td class="text-right " data-title="Estilo A [A]">343,53</td>
+<td class="text-right " data-title="Estilo B [A]">386,67</td>
+<td class="text-right " data-title="Absoluto A [A]">730,12</td>
+<td class="text-right " data-title="Absoluto B [A]">787,98</td>
+<td class="text-right " data-title="Absoluto C [A]">877,83</td>
+<td class="text-right " data-title="Supremo A [A]">959,96</td>
+<td class="text-right " data-title="Supremo B [A]">1.066,63</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">278,53</td>
+<td class="text-right " data-title="Acesso [A]">311,31</td>
+<td class="text-right " data-title="Classico [E]">331,98</td>
+<td class="text-right " data-title="Classico [A]">357,42</td>
+<td class="text-right " data-title="Estilo A [A]">424,26</td>
+<td class="text-right " data-title="Estilo B [A]">477,54</td>
+<td class="text-right " data-title="Absoluto A [A]">901,70</td>
+<td class="text-right " data-title="Absoluto B [A]">973,15</td>
+<td class="text-right " data-title="Absoluto C [A]">1.084,12</td>
+<td class="text-right " data-title="Supremo A [A]">1.185,56</td>
+<td class="text-right " data-title="Supremo B [A]">1.317,29</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">304,99</td>
+<td class="text-right " data-title="Acesso [A]">340,88</td>
+<td class="text-right " data-title="Classico [E]">363,52</td>
+<td class="text-right " data-title="Classico [A]">391,38</td>
+<td class="text-right " data-title="Estilo A [A]">464,56</td>
+<td class="text-right " data-title="Estilo B [A]">522,91</td>
+<td class="text-right " data-title="Absoluto A [A]">987,36</td>
+<td class="text-right " data-title="Absoluto B [A]">1.065,61</td>
+<td class="text-right " data-title="Absoluto C [A]">1.187,12</td>
+<td class="text-right " data-title="Supremo A [A]">1.298,19</td>
+<td class="text-right " data-title="Supremo B [A]">1.442,44</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">330,91</td>
+<td class="text-right " data-title="Acesso [A]">369,86</td>
+<td class="text-right " data-title="Classico [E]">394,41</td>
+<td class="text-right " data-title="Classico [A]">424,64</td>
+<td class="text-right " data-title="Estilo A [A]">504,05</td>
+<td class="text-right " data-title="Estilo B [A]">567,35</td>
+<td class="text-right " data-title="Absoluto A [A]">1.071,29</td>
+<td class="text-right " data-title="Absoluto B [A]">1.156,18</td>
+<td class="text-right " data-title="Absoluto C [A]">1.288,02</td>
+<td class="text-right " data-title="Supremo A [A]">1.408,53</td>
+<td class="text-right " data-title="Supremo B [A]">1.565,04</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">382,21</td>
+<td class="text-right " data-title="Acesso [A]">427,19</td>
+<td class="text-right " data-title="Classico [E]">455,55</td>
+<td class="text-right " data-title="Classico [A]">490,47</td>
+<td class="text-right " data-title="Estilo A [A]">582,18</td>
+<td class="text-right " data-title="Estilo B [A]">655,30</td>
+<td class="text-right " data-title="Absoluto A [A]">1.237,33</td>
+<td class="text-right " data-title="Absoluto B [A]">1.335,39</td>
+<td class="text-right " data-title="Absoluto C [A]">1.487,67</td>
+<td class="text-right " data-title="Supremo A [A]">1.626,85</td>
+<td class="text-right " data-title="Supremo B [A]">1.807,62</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">458,07</td>
+<td class="text-right " data-title="Acesso [A]">511,99</td>
+<td class="text-right " data-title="Classico [E]">545,97</td>
+<td class="text-right " data-title="Classico [A]">587,82</td>
+<td class="text-right " data-title="Estilo A [A]">697,74</td>
+<td class="text-right " data-title="Estilo B [A]">785,36</td>
+<td class="text-right " data-title="Absoluto A [A]">1.482,95</td>
+<td class="text-right " data-title="Absoluto B [A]">1.600,47</td>
+<td class="text-right " data-title="Absoluto C [A]">1.782,97</td>
+<td class="text-right " data-title="Supremo A [A]">1.949,78</td>
+<td class="text-right " data-title="Supremo B [A]">2.166,43</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">541,76</td>
+<td class="text-right " data-title="Acesso [A]">605,52</td>
+<td class="text-right " data-title="Classico [E]">645,73</td>
+<td class="text-right " data-title="Classico [A]">695,22</td>
+<td class="text-right " data-title="Estilo A [A]">825,20</td>
+<td class="text-right " data-title="Estilo B [A]">928,85</td>
+<td class="text-right " data-title="Absoluto A [A]">1.753,87</td>
+<td class="text-right " data-title="Absoluto B [A]">1.892,87</td>
+<td class="text-right " data-title="Absoluto C [A]">2.108,71</td>
+<td class="text-right " data-title="Supremo A [A]">2.306,01</td>
+<td class="text-right " data-title="Supremo B [A]">2.562,24</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">657,16</td>
+<td class="text-right " data-title="Acesso [A]">734,50</td>
+<td class="text-right " data-title="Classico [E]">783,26</td>
+<td class="text-right " data-title="Classico [A]">843,30</td>
+<td class="text-right " data-title="Estilo A [A]">1.000,98</td>
+<td class="text-right " data-title="Estilo B [A]">1.126,70</td>
+<td class="text-right " data-title="Absoluto A [A]">2.127,45</td>
+<td class="text-right " data-title="Absoluto B [A]">2.296,04</td>
+<td class="text-right " data-title="Absoluto C [A]">2.557,86</td>
+<td class="text-right " data-title="Supremo A [A]">2.797,19</td>
+<td class="text-right " data-title="Supremo B [A]">3.107,99</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.113,23</td>
+<td class="text-right " data-title="Acesso [A]">1.244,26</td>
+<td class="text-right " data-title="Classico [E]">1.326,85</td>
+<td class="text-right " data-title="Classico [A]">1.428,55</td>
+<td class="text-right " data-title="Estilo A [A]">1.695,66</td>
+<td class="text-right " data-title="Estilo B [A]">1.908,63</td>
+<td class="text-right " data-title="Absoluto A [A]">3.603,90</td>
+<td class="text-right " data-title="Absoluto B [A]">3.889,51</td>
+<td class="text-right " data-title="Absoluto C [A]">4.333,03</td>
+<td class="text-right " data-title="Supremo A [A]">4.738,45</td>
+<td class="text-right " data-title="Supremo B [A]">5.264,95</td>
+</tr>
+</tbody>
+</table>
+<br></div>
+</div>
+<div class="tab-pane" id="tab-redeCredenciada">
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-manualCorretor">
+<i class="icon icon-info-sign text-info"></i> Informações exclusivas para o corretor. Não é enviado no estudo.<br>
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-criteriosReducao">
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-anexos">
+<div class="tab-inner-content"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="print-modal-container"></div>
+<input data-val="true" data-val-number="The field OperadoraId must be a number." id="OperadoraId" name="OperadoraId" type="hidden" value="1471">
+<input data-val="true" data-val-number="The field IdComercializacaoGrupo must be a number." id="IdComercializacaoGrupo" name="IdComercializacaoGrupo" type="hidden" value="14390">
+<input id="ProdutoId" name="ProdutoId" type="hidden" value="5914">
+<input id="Modalidade" name="Modalidade" type="hidden" value="Pme">
+<input id="Entidade" name="Entidade" type="hidden" value="">
+</div>
+<footer>
+<hr>
+<span class="pull-left">© Trindade Tecnologia 2021</span>
+</footer>
+</div>
+</div>
+</div>
+</div>
+
+<div id="user-edit-container"></div>
+<div id="end" class="hide"></div>
+
+<script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">
+        var api = 'https://api.paineldocorretor.com.br/';
+        var rootUrl = '/';
+    </script>
+<script src="/scripts/jquery?v=OZk0hXAKMXUlU8eIlQQ5e2KbMwS3FaTejU3DpNE1gsI1"></script>
+<script src="/scripts/fileupload?v=QOrNixLQ3Pog9OrDnu3KDC63MKfI5GwBQpytu_CDTHg1"></script>
+<script>
+        var userId = "8.139031";
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-44915231-5', 'paineldocorretor.com.br');
+        if(userId !== '') ga('set', 'userId', userId);
+        ga('send', 'pageview');
+    </script>
+<script src="/scripts/jqueryval"></script>
+<script src="/scripts/produto?v=Qy47i79tqPpyyMEnUeMLGQugg3nTE5yzIFF_gAXe6Ik1"></script>
+<script>
+        $(function () {
+
+            var $produtoSelector = $('.produto-selector');
+
+            if ($produtoSelector.length) {
+                $produtoSelector.find('input.search').change(function () {
+                    var filter = $(this).val().toLowerCase();
+                    $.each($produtoSelector.find('ul li'), function () {
+                        var text = $(this).text().toLowerCase();
+                        if (text.indexOf(filter) == -1)
+                            $(this).addClass('hide');
+                        else
+                            $(this).removeClass('hide');
+                    });
+                });
+
+                var top = $produtoSelector.find('ul li.selected').offset().top - 260;
+                $produtoSelector.find('ul').scrollTop(top);
+            }
+        })
+    </script>
+
+</body></html>

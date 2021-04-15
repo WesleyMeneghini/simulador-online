@@ -1,0 +1,3525 @@
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>Painel do Corretor | Porto Seguro Saúde - Litoral Paulista</title>
+<meta name="viewport" content="width=device-width">
+<link href="/content/styles?v=KXojy2qX3ZJ_OYOsQu1SuygA87La8-w8EE-z46Y8WLM1" rel="stylesheet">
+<style>
+        .ajax-loader {
+            margin: 50px auto;
+            width: 250px;
+        }
+
+        table table td {
+            vertical-align: middle !important;
+        }
+
+        .produto-selector {
+            margin-bottom: 20px;
+            position: relative;
+            float: right;
+            /*width: 250px;*/
+        }
+
+            .produto-selector ul {
+                list-style: none;
+                margin: 0;
+                max-height: 60px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border: 1px solid #d0dde9;
+                border-top: none;
+                box-sizing: border-box;
+                padding-left: 2px;
+            }
+
+                .produto-selector ul li {
+                    white-space: nowrap;
+                }
+
+                .produto-selector ul li {
+                    margin-left: 15px;
+                    margin-right: 5px;
+                    position: relative;
+                }
+
+                    .produto-selector ul li a {
+                        color: inherit;
+                        text-overflow: ellipsis;
+                        display: block;
+                        overflow: hidden;
+                    }
+
+                    .produto-selector ul li.selected:before {
+                        content: "\f14a";
+                        font-family: FontAwesome;
+                        color: green;
+                        left: -13px;
+                        position: absolute;
+                    }
+
+            .produto-selector input {
+                width: 100%;
+                border-radius: 0;
+                padding-right: 25px;
+            }
+
+            .produto-selector i {
+                position: absolute;
+                top: 27px;
+                right: 7px;
+                color: lightgray;
+            }
+
+        .operadora-item {
+            margin-right: 10px;
+        }
+
+        .stretch-item {
+            vertical-align: top;
+        }
+    </style>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body style="">
+<div class="wrapper">
+
+<div class="navbar navbar-inverse">
+<div class="navbar-inner">
+<div class="container">
+<button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="brand" href="/">Painel do Corretor</a>
+<div class="">
+ <div class="pull-right">
+<form action="/Account/Logout" class="hide" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="j7NNFAfIXBDhJ8CrJYr42ahpfBkEfV44RNG44Xn4h4PDoHTPC4CzpppH9dKV1zOEnaUUpHl4V_He29fQyujRnLP_5EdARMfvBB1QV5vsnwSXbYHTtJkG3XE8Ao6OG0n64vnTUXpgGuwcbE2vSaLiIA2"></form> <input type="hidden" id="currentUserId" value="139031">
+<input type="hidden" id="currentCorretoraId" value="64329">
+<ul class="nav pull-right">
+<li class="hidden-phone">
+</li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="hidden-phone">Bem vindo JOAO</span> <b class="caret"></b></a>
+<ul class="dropdown-menu">
+<li>
+<a href="#" id="user-edit">
+<i class="icon-user"></i>
+Meu perfil
+</a>
+</li>
+<li>
+<a href="https://account.trindadetecnologia.com.br/profile/manage/changepassword" target="_blank">
+<i class="icon-lock"></i>
+Alterar senha
+</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="javascript:document.getElementById('logoutForm').submit()">
+<i class="icon-off"></i>
+Sair
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="sidebar-nav">
+<ul id="dashboard-menu">
+<li>
+<a href="/">
+<i class="icon-home"></i>
+<span>Início</span>
+</a>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-th-large"></i>
+<span>Produtos</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/Individual">
+<span data-refresh="true">Saúde</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/Individual">
+<span data-refresh="true">Individual</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Individual/84/111" target="">Aacl</a>
+</li>
+<li>
+<a href="/produtos/Individual/1366/746" target="">Ativia</a>
+</li>
+<li>
+<a href="/produtos/Individual/1436/1185" target="">Biosaude</a>
+</li>
+<li>
+<a href="/produtos/Individual/1436/4125" target="">Biosaude Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1353/4076" target="">Biovida</a>
+</li>
+<li>
+<a href="/produtos/Individual/1353/4075" target="">Biovida Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/49/750" target="">Blue Med</a>
+</li>
+<li>
+<a href="/produtos/Individual/49/4008" target="">Blue Med Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1506/5951" target="">Clinipam</a>
+</li>
+<li>
+<a href="/produtos/Individual/3764/5668" target="">Cruz Azul</a>
+</li>
+<li>
+<a href="/produtos/Individual/5/5678" target="">Gndi</a>
+</li>
+<li>
+<a href="/produtos/Individual/1597/5559" target="">Grupo Sao Jose</a>
+</li>
+<li>
+<a href="/produtos/Individual/1347/651" target="">Gs Garantia</a>
+</li>
+<li>
+<a href="/produtos/Individual/1428/1161" target="">Health Santaris</a>
+</li>
+<li>
+<a href="/produtos/Individual/1389/847" target="">Med Tour</a>
+</li>
+<li>
+<a href="/produtos/Individual/1430/5651" target="">Medical Health</a>
+</li>
+<li>
+<a href="/produtos/Individual/1440/1197" target="">Plena Saude</a>
+</li>
+<li>
+<a href="/produtos/Individual/1582/2760" target="">Prevent Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1448/1240" target="">Santa Casa de Sao Jose dos Campos</a>
+</li>
+<li>
+<a href="/produtos/Individual/1448/4157" target="">Santa Casa de Sao Jose dos Campos Plano Qualivida</a>
+</li>
+<li>
+<a href="/produtos/Individual/37/5610" target="">Sao Cristovao</a>
+</li>
+<li>
+<a href="/produtos/Individual/37/2868" target="">Sao Cristovao Viva Melhor</a>
+</li>
+<li>
+<a href="/produtos/Individual/1487/1418" target="">Sao Miguel Saude</a>
+</li>
+<li>
+<a href="/produtos/Individual/3752/5643" target="">Saude Santa Casa Maua</a>
+</li>
+<li>
+<a href="/produtos/Individual/3712/5441" target="">Total Medcare</a>
+</li>
+<li>
+<a href="/produtos/Individual/3712/5916" target="">Total Medcare Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/50/841" target="">Trasmontano</a>
+</li>
+<li>
+<a href="/produtos/Individual/50/5564" target="">Trasmontano Pop Consulta</a>
+</li>
+<li>
+<a href="/produtos/Individual/50/1155" target="">Trasmontano Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/1444/2784" target="">Unihosp</a>
+</li>
+<li>
+<a href="/produtos/Individual/1444/2878" target="">Unihosp Senior</a>
+</li>
+<li>
+<a href="/produtos/Individual/3809/5818" target="">Unimed Guaratingueta</a>
+</li>
+<li>
+<a href="/produtos/Individual/1416/1112" target="">Unimed Guarulhos</a>
+</li>
+<li>
+<a href="/produtos/Individual/1395/920" target="">Unimed Sao Jose dos Campos</a>
+</li>
+<li>
+<a href="/produtos/Individual/3688/5289" target="">Unimed Taubate</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/Familiar">
+<span data-refresh="true">Familiar</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Familiar/84/111" target="">Aacl</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1366/746" target="">Ativia</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1436/1185" target="">Biosaude</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1436/4125" target="">Biosaude Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1353/4076" target="">Biovida</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1353/4075" target="">Biovida Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/49/750" target="">Blue Med</a>
+</li>
+<li>
+<a href="/produtos/Familiar/49/4008" target="">Blue Med Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1506/5951" target="">Clinipam</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3764/5668" target="">Cruz Azul</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1597/5559" target="">Grupo Sao Jose</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1347/651" target="">Gs Garantia</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1428/1161" target="">Health Santaris</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1389/847" target="">Med Tour</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1430/5651" target="">Medical Health</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1440/1197" target="">Plena Saude</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1448/1240" target="">Santa Casa de Sao Jose dos Campos</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1448/4157" target="">Santa Casa de Sao Jose dos Campos Plano Qualivida</a>
+</li>
+<li>
+<a href="/produtos/Familiar/37/5610" target="">Sao Cristovao</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1487/1418" target="">Sao Miguel Saude</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3752/5643" target="">Saude Santa Casa Maua</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3712/5441" target="">Total Medcare</a>
+</li>
+<li>
+<a href="/produtos/Familiar/50/841" target="">Trasmontano</a>
+</li>
+<li>
+<a href="/produtos/Familiar/50/5564" target="">Trasmontano Pop Consulta</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1444/2784" target="">Unihosp</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1444/2878" target="">Unihosp Senior</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3809/5818" target="">Unimed Guaratingueta</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1416/1112" target="">Unimed Guarulhos</a>
+</li>
+<li>
+<a href="/produtos/Familiar/1395/920" target="">Unimed Sao Jose dos Campos</a>
+</li>
+<li>
+<a href="/produtos/Familiar/3688/5289" target="">Unimed Taubate</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/Pme">
+<span data-refresh="true">PME</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Pme/84/111" target="">Aacl</a>
+</li>
+<li>
+<a href="/produtos/Pme/1370/1475" target="">Allcare</a>
+</li>
+<li>
+<a href="/produtos/Pme/59/1258" target="">Allianz</a>
+</li>
+<li>
+<a href="/produtos/Pme/1356/6082" target="">Ameplan</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5689" target="">Amil Facil Linha Selecionada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5953" target="">Amil Linha Coordenada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5692" target="">Amil Linha Selecionada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5710" target="">Amil One Linha Selecionada</a>
+</li>
+<li>
+<a href="/produtos/Pme/93/5432" target="">Amil Saude</a>
+</li>
+<li>
+<a href="/produtos/Pme/1366/746" target="">Ativia</a>
+</li>
+<li>
+<a href="/produtos/Pme/1436/1185" target="">Biosaude</a>
+</li>
+<li>
+<a href="/produtos/Pme/1353/4076" target="">Biovida</a>
+</li>
+<li>
+<a href="/produtos/Pme/49/750" target="">Blue Med</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/3982" target="">Bradesco Efetivo</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/1323" target="">Bradesco Hospitalar</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/923" target="">Bradesco Nacional</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/622" target="">Bradesco Nacional Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/1039" target="">Bradesco Preferencial Plus</a>
+</li>
+<li>
+<a href="/produtos/Pme/6/5995" target="">Bradesco Saude 1</a>
+</li>
+<li>
+<a href="/produtos/Pme/91/370" target="">Care Plus</a>
+ </li>
+<li>
+<a href="/produtos/Pme/1445/1227" target="">Central Nacional Unimed</a>
+</li>
+<li>
+<a href="/produtos/Pme/1506/5951" target="">Clinipam</a>
+</li>
+<li>
+<a href="/produtos/Pme/1413/670" target="">Corpore</a>
+</li>
+<li>
+<a href="/produtos/Pme/3764/5668" target="">Cruz Azul</a>
+</li>
+<li>
+<a href="/produtos/Pme/5/1261" target="">Gndi</a>
+</li>
+<li>
+<a href="/produtos/Pme/5/3889" target="">Gndi Mei</a>
+</li>
+<li>
+<a href="/produtos/Pme/1496/5468" target="">Golden Cross</a>
+</li>
+<li>
+<a href="/produtos/Pme/1597/5559" target="">Grupo Sao Jose</a>
+</li>
+<li>
+<a href="/produtos/Pme/1347/651" target="">Gs Garantia</a>
+</li>
+<li>
+<a href="/produtos/Pme/1428/1161" target="">Health Santaris</a>
+</li>
+<li>
+<a href="/produtos/Pme/1389/847" target="">Med Tour</a>
+</li>
+<li>
+<a href="/produtos/Pme/1430/5651" target="">Medical Health</a>
+</li>
+<li>
+<a href="/produtos/Pme/28/5573" target="">Omint</a>
+</li>
+<li>
+<a href="/produtos/Pme/1440/1197" target="">Plena Saude</a>
+</li>
+<li>
+<a href="/produtos/Pme/30/638" target="">Porto</a>
+</li>
+<li>
+<a href="/produtos/Pme/1448/1240" target="">Santa Casa de Sao Jose dos Campos</a>
+</li>
+<li>
+<a href="/produtos/Pme/1359/678" target="">Santa Helena</a>
+</li>
+<li>
+<a href="/produtos/Pme/37/5610" target="">Sao Cristovao</a>
+</li>
+<li>
+<a href="/produtos/Pme/1487/1418" target="">Sao Miguel Saude</a>
+</li>
+<li>
+<a href="/produtos/Pme/3752/5643" target="">Saude Santa Casa Maua</a>
+</li>
+<li>
+<a href="/produtos/Pme/114/1280" target="">Seguros Unimed</a>
+</li>
+<li>
+<a href="/produtos/Pme/1471/1366" target="">Sompo Seguros</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/5681" target="">Sul America Direto</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/5961" target="">Sul America Direto Empresario Individual</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/5682" target="">Sul America Direto Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/1377" target="">Sul America Empresario Individual</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/2669" target="">Sul America Hospitalar Empresario Individual</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/2724" target="">Sul America Hospitalar Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/2621" target="">Sul America Mais Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/655" target="">Sulamerica Flex</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/768" target="">Sulamerica Hospitalar</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/646" target="">Sulamerica Mais</a>
+</li>
+<li>
+<a href="/produtos/Pme/4/324" target="">Sulamerica Pme</a>
+</li>
+<li>
+<a href="/produtos/Pme/3712/5441" target="">Total Medcare</a>
+</li>
+<li>
+<a href="/produtos/Pme/50/841" target="">Trasmontano</a>
+</li>
+<li>
+<a href="/produtos/Pme/1444/2784" target="">Unihosp</a>
+</li>
+<li>
+<a href="/produtos/Pme/3809/5818" target="">Unimed Guaratingueta</a>
+</li>
+<li>
+<a href="/produtos/Pme/1416/1112" target="">Unimed Guarulhos</a>
+</li>
+<li>
+<a href="/produtos/Pme/1395/920" target="">Unimed Sao Jose dos Campos</a>
+</li>
+<li>
+<a href="/produtos/Pme/3688/5289" target="">Unimed Taubate</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/Adesao">
+<span data-refresh="true">Adesão</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/Adesao?operadora=1404" target="">Affix</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1370" target="">Allcare</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1575" target="">Clube de Saude</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1413" target="">Corpore</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1419" target="">Hebrom</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=3642" target="">Muito Mais Saúde</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=1398" target="">Nunes e Grossi</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=3634" target="">Plural</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=33" target="">Qualicorp</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=3729" target="">Safelife</a>
+</li>
+<li>
+<a href="/produtos/Adesao?operadora=46" target="">Voce Clube</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/PmeAdesao">
+<span data-refresh="true">PME adesão</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/PmeAdesao?operadora=1413" target="">Corpore</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/IndividualOdonto">
+<span data-refresh="true">Odonto</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/IndividualOdonto">
+<span data-refresh="true">Individual</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/IndividualOdonto/93/5472" target="">Amil Dental</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1485/106" target="">Bradesco Dental</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1485/5334" target="">Bradesco Dental Kids</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1429/1163" target="">Dental Plus</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1410/5628" target="">Dentalpar</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1496/2876" target="">Goldental</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/27/17" target="">Odontoprev</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/37/661" target="">Sao Cristovao Odonto</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/4/3914" target="">Sulamerica Odonto</a>
+</li>
+<li>
+<a href="/produtos/IndividualOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/FamiliarOdonto">
+<span data-refresh="true">Familiar</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/FamiliarOdonto/93/5472" target="">Amil Dental</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1485/106" target="">Bradesco Dental</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1429/1163" target="">Dental Plus</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1410/5628" target="">Dentalpar</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1496/2876" target="">Goldental</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/27/17" target="">Odontoprev</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/37/661" target="">Sao Cristovao Odonto</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/4/3914" target="">Sulamerica Odonto</a>
+</li>
+<li>
+<a href="/produtos/FamiliarOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/PmeOdonto">
+<span data-refresh="true">PME</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/PmeOdonto/93/5472" target="">Amil Dental</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1485/106" target="">Bradesco Dental</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/117/986" target="">Caixa Seguradora</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/91/1117" target="">Care Plus</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1429/1163" target="">Dental Plus</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1410/5628" target="">Dentalpar</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1496/2876" target="">Goldental</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1564/4170" target="">Hapvida Odonto</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/21/47" target="">Interodonto</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/27/17" target="">Odontoprev</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/28/624" target="">Omint</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/83/109" target="">Prevident</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/37/661" target="">Sao Cristovao Odonto</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/4/1110" target="">Sulamerica Odonto Pme</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/4/1111" target="">Sulamerica Odonto Pme Mais</a>
+</li>
+<li>
+<a href="/produtos/PmeOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/AdesaoOdonto">
+<span data-refresh="true">Adesão</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/AdesaoOdonto?operadora=1419" target="">Hebrom</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="/produtos/PetGrupal">
+<span data-refresh="true">Pet</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/produtos/PetGrupal">
+<span data-refresh="true">Pet</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/produtos/PetGrupal/1406/985" target="">Health For Pet</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-group"></i>
+<span>Clientes</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a class="dropdown-toggle" href="/indicacao">
+<span data-refresh="true">Indicações</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/indicacaofonte" target="">Fontes</a>
+</li>
+</ul>
+</li>
+<li>
+<a href="/estudo" target="">Estudos</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-paste"></i>
+<span>Corretora</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/producao" target="">Produções</a>
+</li>
+<li>
+<a href="/comissao" target="">Comissões</a>
+</li>
+<li>
+<a href="/notafiscal" target="">Notas Fiscais</a>
+</li>
+<li>
+<a href="/corretora" target="">Cadastro</a>
+</li>
+</ul>
+</li>
+<li>
+<a class="dropdown-toggle" href="#">
+<i class="icon-wrench"></i>
+<span>Ferramentas</span>
+<i class="icon-chevron-down"></i>
+</a>
+<ul class="submenu">
+<li>
+<a href="/redecredenciada" target="">Rede credenciada</a>
+</li>
+<li>
+<a href="/ferramenta/calculoimc" target="">Cálculo de IMC</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div class="content">
+
+<div class="breadcrumbs" id="breadcrumbs">
+<ul class="breadcrumb">
+<li>
+<i class="icon-home home-icon"></i>
+<a href="/" target="">Início</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+Produtos
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Individual" target="">Saúde</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Pme" target="">PME</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Pme/30/638" target="">Porto</a>
+</li>
+</ul>
+</div>
+<div class="container-fluid">
+<div id="pad-wrapper">
+
+<div id="main" class="main">
+<div class="row-fluid ">
+<div class="span8">
+<div class="stretch-item">
+<a class="thumbnail operadora-item">
+<span style="background-image:url('https://storage.googleapis.com/trindade-cdn-painel-v1-mr-us-prod/logotipos/porto.png')" class="logo-center"></span>
+</a>
+</div>
+<div class="stretch-item stretch">
+<h3 class="row-fluid">Porto Seguro Saúde - Litoral Paulista</h3>
+<strong class="text-left">Aviso Importante: informativo de caráter referencial. Valores, regras de comercialização, rede credenciada e condições contratuais são determinadas pelas seguradoras/operadoras e podem ser alterados pelas mesmas a qualquer momento. Os preços e condições estão sujeitos a confirmação no ato do fechamento do contrato.</strong>
+</div>
+</div>
+<div class="span4">
+<div class="produto-selector">
+<strong>Mais opções:</strong><br>
+<input type="text" class="search" placeholder="Busca"><i class="icon-search"></i>
+<br>
+<ul>
+<li class="" title="Porto Seguro Saúde - São Paulo">
+<a href="/produtos/Pme/30/638">
+Porto Seguro Saúde - São Paulo
+</a>
+</li>
+<li class="selected" title="Porto Seguro Saúde - Litoral Paulista">
+<a href="/produtos/Pme/30/5477">
+Porto Seguro Saúde - Litoral Paulista
+</a>
+</li>
+<li class="" title="Porto Seguro Saúde - Interior I">
+<a href="/produtos/Pme/30/5478">
+Porto Seguro Saúde - Interior I
+</a>
+</li>
+<li class="" title="Porto Seguro Saúde - Vale do Paraíba">
+<a href="/produtos/Pme/30/5480">
+Porto Seguro Saúde - Vale do Paraíba
+</a>
+</li>
+<li class="" title="Porto Seguro Saúde - Rio de Janeiro">
+<a href="/produtos/Pme/30/5479">
+Porto Seguro Saúde - Rio de Janeiro
+</a>
+</li>
+</ul>
+<input data-val="true" data-val-number="The field ProdutoId must be a number." id="ProdutoId" name="ProdutoId" type="hidden" value="5477">
+</div>
+</div>
+</div>
+<div class="row-fluid">
+<div class="span12">
+<fieldset class="produto-filter form-horizontal">
+<div class="control-group">
+<label class="control-label">Coparticipação</label>
+<div class="controls">
+<select name="Coparticipacao">
+<option value="">Indiferente</option>
+<option value="false">Sem coparticipação</option>
+<option value="true">Com coparticipação</option>
+</select>
+</div>
+</div>
+</fieldset>
+<hr>
+<div class="tabbable" id="tab">
+<ul class="nav nav-tabs hidden-phone">
+<li class="active"><a href="#tab-produto" title="Preços" data-toggle="tab" data-get="getprecotabela">Preços</a></li>
+<li><a href="#tab-redeCredenciada" title="Rede Credenciada" data-toggle="tab" data-get="getredecredenciada">Rede Credenciada</a></li>
+<li><a href="#tab-manualCorretor" title="Manual do Corretor" data-toggle="tab" data-get="getmanual">Manual do Corretor</a></li>
+<li><a href="#tab-criteriosReducao" title="Critérios de Redução" data-toggle="tab" data-get="getcriterioreducao">Critérios de Redução</a></li>
+<li><a href="#tab-anexos" title="Anexos" data-toggle="tab" data-get="getanexos">Anexos</a></li>
+<li class="dropdown">
+<a href="#" class="dropdown-toggle" title="Mais Opções" data-toggle="dropdown">Mais Opções&nbsp;<i class="icon-caret-down"></i></a>
+<ul class="dropdown-menu">
+<li>
+<a href="/ProdutoPrint/GetPrintModal?IdComercializacaoGrupo=12581&amp;ProdutoId=5477&amp;OperadoraId=30&amp;Modalidade=Pme&amp;Operadora=Porto%20Seguro&amp;Produto=Porto%20Seguro%20Sa%C3%BAde%20-%20Litoral%20Paulista&amp;Logotipo=https%3A%2F%2Fstorage.googleapis.com%2Ftrindade-cdn-painel-v1-mr-us-prod%2Flogotipos%2Fporto.png&amp;Manutencao=False&amp;Alvo=Indiferente&amp;Entidades=System.Collections.Generic.List%601%5BSisWebClient.Presentation.Web.Models.EntidadeModel%5D" class="btn-print">
+<i class="icon-print"></i>
+Imprimir
+</a>
+</li>
+<li>
+<a href="/ProdutoPrint/GetEmailModal?IdComercializacaoGrupo=12581&amp;ProdutoId=5477&amp;OperadoraId=30&amp;Modalidade=Pme&amp;Operadora=Porto%20Seguro&amp;Produto=Porto%20Seguro%20Sa%C3%BAde%20-%20Litoral%20Paulista&amp;Logotipo=https%3A%2F%2Fstorage.googleapis.com%2Ftrindade-cdn-painel-v1-mr-us-prod%2Flogotipos%2Fporto.png&amp;Manutencao=False&amp;Alvo=Indiferente&amp;Entidades=System.Collections.Generic.List%601%5BSisWebClient.Presentation.Web.Models.EntidadeModel%5D" class="btn-print">
+<i class="icon-envelope"></i>
+Enviar por email
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<div class="visible-phone">
+<select class="span12" id="cboProdutosMobile">
+<option value="#tab-produto">Preços</option>
+<option value="#tab-redeCredenciada">Rede Credenciada</option>
+<option value="#tab-manualCorretor">Manual do Corretor</option>
+<option value="#tab-criteriosReducao">Critérios de Redução</option>
+<option value="#tab-anexos">Anexos</option>
+<option value="#print-modal" data-mode="print">Imprimir</option>
+</select>
+</div>
+<div class="alert alert-warning" style="background-color: white">
+<table class="table table-condensed">
+<tbody><tr>
+<td class="no-wrap">
+<strong>Taxa de Cadastro</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;">R$ 5,00 por vida</li>
+<li style="list-style: none;">Sobre o valor final do cálculo incluir 2,38% de IOF.</li>
+<li style="list-style: none;">Para contratação de planos com rede Mediservice cobrar taxa de R$ 8,71 por vida, lembrando que haverá cobrança de IOF sobre este valor.</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+</tbody></table>
+<strong class="text-right">Aviso Importante: informativo de caráter referencial. Valores, regras de comercialização, rede credenciada e condições contratuais são determinadas pelas seguradoras/operadoras e podem ser alterados pelas mesmas a qualquer momento. Os preços e condições estão sujeitos a confirmação no ato do fechamento do contrato.</strong>
+</div>
+<div class="tab-content">
+<div class="tab-pane active" id="tab-produto">
+<div class="tab-inner-content">
+<h4>Sem Mediservice de 03 a 09 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">164,35</td>
+<td class="text-right " data-title="Bronze [E]">177,40</td>
+<td class="text-right " data-title="Bronze [A]">188,16</td>
+<td class="text-right " data-title="Prata Mais [E]">200,26</td>
+<td class="text-right " data-title="Prata Mais [A]">235,54</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">232,15</td>
+<td class="text-right " data-title="Bronze [E]">250,59</td>
+<td class="text-right " data-title="Bronze [A]">265,79</td>
+<td class="text-right " data-title="Prata Mais [E]">282,89</td>
+<td class="text-right " data-title="Prata Mais [A]">332,72</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">275,63</td>
+<td class="text-right " data-title="Bronze [E]">297,52</td>
+<td class="text-right " data-title="Bronze [A]">315,57</td>
+<td class="text-right " data-title="Prata Mais [E]">335,86</td>
+<td class="text-right " data-title="Prata Mais [A]">395,02</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">328,21</td>
+<td class="text-right " data-title="Bronze [E]">354,28</td>
+<td class="text-right " data-title="Bronze [A]">375,77</td>
+<td class="text-right " data-title="Prata Mais [E]">399,93</td>
+<td class="text-right " data-title="Prata Mais [A]">470,38</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">343,95</td>
+<td class="text-right " data-title="Bronze [E]">371,26</td>
+<td class="text-right " data-title="Bronze [A]">393,79</td>
+<td class="text-right " data-title="Prata Mais [E]">419,11</td>
+<td class="text-right " data-title="Prata Mais [A]">492,94</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">358,62</td>
+<td class="text-right " data-title="Bronze [E]">387,10</td>
+<td class="text-right " data-title="Bronze [A]">410,59</td>
+<td class="text-right " data-title="Prata Mais [E]">436,99</td>
+<td class="text-right " data-title="Prata Mais [A]">513,97</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">403,88</td>
+<td class="text-right " data-title="Bronze [E]">435,95</td>
+<td class="text-right " data-title="Bronze [A]">462,40</td>
+<td class="text-right " data-title="Prata Mais [E]">492,14</td>
+<td class="text-right " data-title="Prata Mais [A]">578,83</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">439,59</td>
+<td class="text-right " data-title="Bronze [E]">474,51</td>
+<td class="text-right " data-title="Bronze [A]">503,29</td>
+<td class="text-right " data-title="Prata Mais [E]">535,66</td>
+<td class="text-right " data-title="Prata Mais [A]">630,01</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">532,16</td>
+<td class="text-right " data-title="Bronze [E]">574,42</td>
+<td class="text-right " data-title="Bronze [A]">609,27</td>
+<td class="text-right " data-title="Prata Mais [E]">648,45</td>
+<td class="text-right " data-title="Prata Mais [A]">762,68</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">984,45</td>
+<td class="text-right " data-title="Bronze [E]">1.062,63</td>
+<td class="text-right " data-title="Bronze [A]">1.127,10</td>
+<td class="text-right " data-title="Prata Mais [E]">1.199,58</td>
+<td class="text-right " data-title="Prata Mais [A]">1.410,89</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 03 a 09 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">152,02</td>
+<td class="text-right " data-title="Bronze [E]">164,10</td>
+<td class="text-right " data-title="Bronze [A]">174,05</td>
+<td class="text-right " data-title="Prata Mais [E]">182,24</td>
+<td class="text-right " data-title="Prata Mais [A]">214,34</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">214,74</td>
+<td class="text-right " data-title="Bronze [E]">231,80</td>
+<td class="text-right " data-title="Bronze [A]">245,86</td>
+<td class="text-right " data-title="Prata Mais [E]">257,43</td>
+<td class="text-right " data-title="Prata Mais [A]">302,77</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">254,96</td>
+<td class="text-right " data-title="Bronze [E]">275,21</td>
+<td class="text-right " data-title="Bronze [A]">291,90</td>
+<td class="text-right " data-title="Prata Mais [E]">305,63</td>
+<td class="text-right " data-title="Prata Mais [A]">359,47</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">303,59</td>
+<td class="text-right " data-title="Bronze [E]">327,70</td>
+<td class="text-right " data-title="Bronze [A]">347,58</td>
+<td class="text-right " data-title="Prata Mais [E]">363,94</td>
+<td class="text-right " data-title="Prata Mais [A]">428,05</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">318,15</td>
+<td class="text-right " data-title="Bronze [E]">343,42</td>
+<td class="text-right " data-title="Bronze [A]">364,25</td>
+<td class="text-right " data-title="Prata Mais [E]">381,39</td>
+<td class="text-right " data-title="Prata Mais [A]">448,57</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">331,72</td>
+<td class="text-right " data-title="Bronze [E]">358,07</td>
+<td class="text-right " data-title="Bronze [A]">379,79</td>
+<td class="text-right " data-title="Prata Mais [E]">397,66</td>
+<td class="text-right " data-title="Prata Mais [A]">467,71</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">373,59</td>
+<td class="text-right " data-title="Bronze [E]">403,26</td>
+<td class="text-right " data-title="Bronze [A]">427,72</td>
+<td class="text-right " data-title="Prata Mais [E]">447,85</td>
+<td class="text-right " data-title="Prata Mais [A]">526,73</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">406,62</td>
+<td class="text-right " data-title="Bronze [E]">438,92</td>
+<td class="text-right " data-title="Bronze [A]">465,54</td>
+<td class="text-right " data-title="Prata Mais [E]">487,45</td>
+<td class="text-right " data-title="Prata Mais [A]">573,31</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">492,25</td>
+<td class="text-right " data-title="Bronze [E]">531,34</td>
+<td class="text-right " data-title="Bronze [A]">563,57</td>
+<td class="text-right " data-title="Prata Mais [E]">590,09</td>
+<td class="text-right " data-title="Prata Mais [A]">694,03</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">910,61</td>
+<td class="text-right " data-title="Bronze [E]">982,94</td>
+<td class="text-right " data-title="Bronze [A]">1.042,56</td>
+<td class="text-right " data-title="Prata Mais [E]">1.091,62</td>
+<td class="text-right " data-title="Prata Mais [A]">1.283,91</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 03 a 09 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">146,27</td>
+<td class="text-right " data-title="Bronze [E]">157,89</td>
+<td class="text-right " data-title="Bronze [A]">167,46</td>
+<td class="text-right " data-title="Prata Mais [E]">176,23</td>
+<td class="text-right " data-title="Prata Mais [A]">207,28</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">206,62</td>
+<td class="text-right " data-title="Bronze [E]">223,03</td>
+<td class="text-right " data-title="Bronze [A]">236,56</td>
+<td class="text-right " data-title="Prata Mais [E]">248,94</td>
+<td class="text-right " data-title="Prata Mais [A]">292,79</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">245,31</td>
+<td class="text-right " data-title="Bronze [E]">264,79</td>
+<td class="text-right " data-title="Bronze [A]">280,86</td>
+<td class="text-right " data-title="Prata Mais [E]">295,56</td>
+<td class="text-right " data-title="Prata Mais [A]">347,62</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">292,10</td>
+<td class="text-right " data-title="Bronze [E]">315,30</td>
+<td class="text-right " data-title="Bronze [A]">334,43</td>
+<td class="text-right " data-title="Prata Mais [E]">351,94</td>
+<td class="text-right " data-title="Prata Mais [A]">413,93</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">306,11</td>
+<td class="text-right " data-title="Bronze [E]">330,42</td>
+<td class="text-right " data-title="Bronze [A]">350,47</td>
+<td class="text-right " data-title="Prata Mais [E]">368,82</td>
+<td class="text-right " data-title="Prata Mais [A]">433,78</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">319,17</td>
+<td class="text-right " data-title="Bronze [E]">344,52</td>
+<td class="text-right " data-title="Bronze [A]">365,42</td>
+<td class="text-right " data-title="Prata Mais [E]">384,55</td>
+<td class="text-right " data-title="Prata Mais [A]">452,29</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">359,45</td>
+<td class="text-right " data-title="Bronze [E]">388,00</td>
+<td class="text-right " data-title="Bronze [A]">411,54</td>
+<td class="text-right " data-title="Prata Mais [E]">433,08</td>
+<td class="text-right " data-title="Prata Mais [A]">509,37</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">391,24</td>
+<td class="text-right " data-title="Bronze [E]">422,31</td>
+<td class="text-right " data-title="Bronze [A]">447,93</td>
+<td class="text-right " data-title="Prata Mais [E]">471,38</td>
+<td class="text-right " data-title="Prata Mais [A]">554,41</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">473,62</td>
+<td class="text-right " data-title="Bronze [E]">511,24</td>
+<td class="text-right " data-title="Bronze [A]">542,25</td>
+<td class="text-right " data-title="Prata Mais [E]">570,64</td>
+<td class="text-right " data-title="Prata Mais [A]">671,15</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">876,16</td>
+<td class="text-right " data-title="Bronze [E]">945,74</td>
+<td class="text-right " data-title="Bronze [A]">1.003,11</td>
+<td class="text-right " data-title="Prata Mais [E]">1.055,63</td>
+<td class="text-right " data-title="Prata Mais [A]">1.241,58</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 03 a 09 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">200,26</td>
+<td class="text-right " data-title="Prata Mais RC [A]">235,54</td>
+<td class="text-right " data-title="Ouro Mais [A]">309,50</td>
+<td class="text-right " data-title="Ouro Max Q [A]">393,40</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">596,43</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">686,27</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">282,89</td>
+<td class="text-right " data-title="Prata Mais RC [A]">332,72</td>
+<td class="text-right " data-title="Ouro Mais [A]">433,68</td>
+<td class="text-right " data-title="Ouro Max Q [A]">555,71</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">838,99</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">965,90</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">335,86</td>
+<td class="text-right " data-title="Prata Mais RC [A]">395,02</td>
+<td class="text-right " data-title="Ouro Mais [A]">513,30</td>
+<td class="text-right " data-title="Ouro Max Q [A]">659,78</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">994,51</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.145,18</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">399,93</td>
+<td class="text-right " data-title="Prata Mais RC [A]">470,38</td>
+<td class="text-right " data-title="Ouro Mais [A]">609,59</td>
+<td class="text-right " data-title="Ouro Max Q [A]">785,64</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.182,60</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.362,02</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">419,11</td>
+<td class="text-right " data-title="Prata Mais RC [A]">492,94</td>
+<td class="text-right " data-title="Ouro Mais [A]">638,42</td>
+<td class="text-right " data-title="Ouro Max Q [A]">823,31</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.238,91</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.426,92</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">436,99</td>
+<td class="text-right " data-title="Prata Mais RC [A]">513,97</td>
+<td class="text-right " data-title="Ouro Mais [A]">665,29</td>
+<td class="text-right " data-title="Ouro Max Q [A]">858,43</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.291,40</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.487,44</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">492,14</td>
+<td class="text-right " data-title="Prata Mais RC [A]">578,83</td>
+<td class="text-right " data-title="Ouro Mais [A]">748,17</td>
+<td class="text-right " data-title="Ouro Max Q [A]">966,77</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.453,30</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.674,08</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">535,66</td>
+<td class="text-right " data-title="Prata Mais RC [A]">630,01</td>
+<td class="text-right " data-title="Ouro Mais [A]">813,58</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.052,26</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.581,06</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.821,36</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">648,45</td>
+<td class="text-right " data-title="Prata Mais RC [A]">762,68</td>
+<td class="text-right " data-title="Ouro Mais [A]">983,11</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.273,83</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.912,19</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">2.203,09</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">1.199,58</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.410,89</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.811,43</td>
+<td class="text-right " data-title="Ouro Max Q [A]">2.356,48</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">3.530,16</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">4.068,30</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 03 a 09 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">182,24</td>
+<td class="text-right " data-title="Prata Mais RC [A]">214,34</td>
+<td class="text-right " data-title="Ouro Mais [A]">285,42</td>
+<td class="text-right " data-title="Ouro Max Q [A]">361,93</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">549,40</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">632,05</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">257,43</td>
+<td class="text-right " data-title="Prata Mais RC [A]">302,77</td>
+<td class="text-right " data-title="Ouro Mais [A]">399,66</td>
+<td class="text-right " data-title="Ouro Max Q [A]">511,25</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">772,55</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">889,31</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">305,63</td>
+<td class="text-right " data-title="Prata Mais RC [A]">359,47</td>
+<td class="text-right " data-title="Ouro Mais [A]">472,92</td>
+<td class="text-right " data-title="Ouro Max Q [A]">606,99</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">915,63</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.054,25</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">363,94</td>
+<td class="text-right " data-title="Prata Mais RC [A]">428,05</td>
+<td class="text-right " data-title="Ouro Mais [A]">561,51</td>
+<td class="text-right " data-title="Ouro Max Q [A]">722,78</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.088,68</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.253,74</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">381,39</td>
+<td class="text-right " data-title="Prata Mais RC [A]">448,57</td>
+<td class="text-right " data-title="Ouro Mais [A]">588,02</td>
+<td class="text-right " data-title="Ouro Max Q [A]">757,44</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.140,47</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.313,45</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">397,66</td>
+<td class="text-right " data-title="Prata Mais RC [A]">467,71</td>
+<td class="text-right " data-title="Ouro Mais [A]">612,75</td>
+<td class="text-right " data-title="Ouro Max Q [A]">789,76</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.188,77</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.369,12</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">447,85</td>
+<td class="text-right " data-title="Prata Mais RC [A]">526,73</td>
+<td class="text-right " data-title="Ouro Mais [A]">689,00</td>
+<td class="text-right " data-title="Ouro Max Q [A]">889,43</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.337,71</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.540,83</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">487,45</td>
+<td class="text-right " data-title="Prata Mais RC [A]">573,31</td>
+<td class="text-right " data-title="Ouro Mais [A]">749,18</td>
+<td class="text-right " data-title="Ouro Max Q [A]">968,08</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.455,26</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.676,33</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">590,09</td>
+<td class="text-right " data-title="Prata Mais RC [A]">694,03</td>
+<td class="text-right " data-title="Ouro Mais [A]">905,14</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.171,92</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.759,90</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">2.027,53</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">1.091,62</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.283,91</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.667,20</td>
+<td class="text-right " data-title="Ouro Max Q [A]">2.167,96</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">3.248,43</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.743,52</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 03 a 09 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">176,23</td>
+<td class="text-right " data-title="Prata Mais RC [A]">207,28</td>
+<td class="text-right " data-title="Ouro Mais [A]">276,39</td>
+<td class="text-right " data-title="Ouro Max Q [A]">350,13</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">531,76</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">611,72</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">248,94</td>
+<td class="text-right " data-title="Prata Mais RC [A]">292,79</td>
+<td class="text-right " data-title="Ouro Mais [A]">386,91</td>
+<td class="text-right " data-title="Ouro Max Q [A]">494,58</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">747,64</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">860,58</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">295,56</td>
+<td class="text-right " data-title="Prata Mais RC [A]">347,62</td>
+<td class="text-right " data-title="Ouro Mais [A]">457,77</td>
+<td class="text-right " data-title="Ouro Max Q [A]">587,20</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">886,05</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.020,15</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">351,94</td>
+<td class="text-right " data-title="Prata Mais RC [A]">413,93</td>
+<td class="text-right " data-title="Ouro Mais [A]">543,47</td>
+<td class="text-right " data-title="Ouro Max Q [A]">699,22</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.053,45</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.213,13</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">368,82</td>
+<td class="text-right " data-title="Prata Mais RC [A]">433,78</td>
+<td class="text-right " data-title="Ouro Mais [A]">569,13</td>
+<td class="text-right " data-title="Ouro Max Q [A]">732,74</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.103,56</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.270,90</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">384,55</td>
+<td class="text-right " data-title="Prata Mais RC [A]">452,29</td>
+<td class="text-right " data-title="Ouro Mais [A]">593,04</td>
+<td class="text-right " data-title="Ouro Max Q [A]">764,01</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.150,28</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.324,76</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">433,08</td>
+<td class="text-right " data-title="Prata Mais RC [A]">509,37</td>
+<td class="text-right " data-title="Ouro Mais [A]">666,81</td>
+<td class="text-right " data-title="Ouro Max Q [A]">860,42</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.294,37</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.490,86</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">471,38</td>
+<td class="text-right " data-title="Prata Mais RC [A]">554,41</td>
+<td class="text-right " data-title="Ouro Mais [A]">725,03</td>
+<td class="text-right " data-title="Ouro Max Q [A]">936,51</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.408,08</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.621,95</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">570,64</td>
+<td class="text-right " data-title="Prata Mais RC [A]">671,15</td>
+<td class="text-right " data-title="Ouro Mais [A]">875,90</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.133,71</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.702,78</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.961,69</td>
+</tr>
+ <tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">1.055,63</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.241,58</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.613,11</td>
+<td class="text-right " data-title="Ouro Max Q [A]">2.097,27</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">3.142,78</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.621,73</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 10 a 19 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">149,41</td>
+<td class="text-right " data-title="Bronze [E]">161,27</td>
+<td class="text-right " data-title="Bronze [A]">171,06</td>
+<td class="text-right " data-title="Prata Mais [E]">182,06</td>
+<td class="text-right " data-title="Prata Mais [A]">214,13</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">211,05</td>
+<td class="text-right " data-title="Bronze [E]">227,81</td>
+<td class="text-right " data-title="Bronze [A]">241,63</td>
+<td class="text-right " data-title="Prata Mais [E]">257,17</td>
+<td class="text-right " data-title="Prata Mais [A]">302,47</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">250,57</td>
+<td class="text-right " data-title="Bronze [E]">270,47</td>
+<td class="text-right " data-title="Bronze [A]">286,88</td>
+<td class="text-right " data-title="Prata Mais [E]">305,33</td>
+<td class="text-right " data-title="Prata Mais [A]">359,11</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">298,37</td>
+<td class="text-right " data-title="Bronze [E]">322,07</td>
+<td class="text-right " data-title="Bronze [A]">341,61</td>
+<td class="text-right " data-title="Prata Mais [E]">363,57</td>
+<td class="text-right " data-title="Prata Mais [A]">427,62</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">312,68</td>
+<td class="text-right " data-title="Bronze [E]">337,51</td>
+<td class="text-right " data-title="Bronze [A]">357,99</td>
+<td class="text-right " data-title="Prata Mais [E]">381,01</td>
+<td class="text-right " data-title="Prata Mais [A]">448,12</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">326,02</td>
+<td class="text-right " data-title="Bronze [E]">351,91</td>
+<td class="text-right " data-title="Bronze [A]">373,26</td>
+<td class="text-right " data-title="Prata Mais [E]">397,26</td>
+<td class="text-right " data-title="Prata Mais [A]">467,24</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">367,16</td>
+<td class="text-right " data-title="Bronze [E]">396,32</td>
+<td class="text-right " data-title="Bronze [A]">420,36</td>
+<td class="text-right " data-title="Prata Mais [E]">447,40</td>
+<td class="text-right " data-title="Prata Mais [A]">526,21</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">399,63</td>
+<td class="text-right " data-title="Bronze [E]">431,37</td>
+<td class="text-right " data-title="Bronze [A]">457,54</td>
+<td class="text-right " data-title="Prata Mais [E]">486,96</td>
+<td class="text-right " data-title="Prata Mais [A]">572,74</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">483,78</td>
+<td class="text-right " data-title="Bronze [E]">522,20</td>
+<td class="text-right " data-title="Bronze [A]">553,88</td>
+<td class="text-right " data-title="Prata Mais [E]">589,50</td>
+<td class="text-right " data-title="Prata Mais [A]">693,34</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">894,95</td>
+<td class="text-right " data-title="Bronze [E]">966,03</td>
+<td class="text-right " data-title="Bronze [A]">1.024,63</td>
+<td class="text-right " data-title="Prata Mais [E]">1.090,53</td>
+<td class="text-right " data-title="Prata Mais [A]">1.282,62</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 10 a 19 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">138,20</td>
+<td class="text-right " data-title="Bronze [E]">149,18</td>
+<td class="text-right " data-title="Bronze [A]">158,23</td>
+<td class="text-right " data-title="Prata Mais [E]">165,67</td>
+<td class="text-right " data-title="Prata Mais [A]">194,86</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">195,22</td>
+<td class="text-right " data-title="Bronze [E]">210,72</td>
+<td class="text-right " data-title="Bronze [A]">223,51</td>
+<td class="text-right " data-title="Prata Mais [E]">234,02</td>
+<td class="text-right " data-title="Prata Mais [A]">275,25</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">231,78</td>
+<td class="text-right " data-title="Bronze [E]">250,19</td>
+<td class="text-right " data-title="Bronze [A]">265,36</td>
+<td class="text-right " data-title="Prata Mais [E]">277,85</td>
+<td class="text-right " data-title="Prata Mais [A]">326,79</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">275,99</td>
+<td class="text-right " data-title="Bronze [E]">297,91</td>
+<td class="text-right " data-title="Bronze [A]">315,99</td>
+<td class="text-right " data-title="Prata Mais [E]">330,85</td>
+<td class="text-right " data-title="Prata Mais [A]">389,13</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">289,23</td>
+<td class="text-right " data-title="Bronze [E]">312,20</td>
+<td class="text-right " data-title="Bronze [A]">331,14</td>
+<td class="text-right " data-title="Prata Mais [E]">346,72</td>
+<td class="text-right " data-title="Prata Mais [A]">407,79</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">301,57</td>
+<td class="text-right " data-title="Bronze [E]">325,52</td>
+<td class="text-right " data-title="Bronze [A]">345,26</td>
+<td class="text-right " data-title="Prata Mais [E]">361,51</td>
+<td class="text-right " data-title="Prata Mais [A]">425,19</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">339,62</td>
+<td class="text-right " data-title="Bronze [E]">366,60</td>
+<td class="text-right " data-title="Bronze [A]">388,84</td>
+<td class="text-right " data-title="Prata Mais [E]">407,13</td>
+<td class="text-right " data-title="Prata Mais [A]">478,85</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">369,66</td>
+<td class="text-right " data-title="Bronze [E]">399,02</td>
+<td class="text-right " data-title="Bronze [A]">423,22</td>
+<td class="text-right " data-title="Prata Mais [E]">443,13</td>
+<td class="text-right " data-title="Prata Mais [A]">521,19</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">447,50</td>
+<td class="text-right " data-title="Bronze [E]">483,04</td>
+<td class="text-right " data-title="Bronze [A]">512,34</td>
+<td class="text-right " data-title="Prata Mais [E]">536,44</td>
+<td class="text-right " data-title="Prata Mais [A]">630,94</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">827,83</td>
+<td class="text-right " data-title="Bronze [E]">893,58</td>
+<td class="text-right " data-title="Bronze [A]">947,78</td>
+<td class="text-right " data-title="Prata Mais [E]">992,38</td>
+<td class="text-right " data-title="Prata Mais [A]">1.167,19</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 10 a 19 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">132,97</td>
+<td class="text-right " data-title="Bronze [E]">143,53</td>
+<td class="text-right " data-title="Bronze [A]">152,24</td>
+<td class="text-right " data-title="Prata Mais [E]">160,21</td>
+<td class="text-right " data-title="Prata Mais [A]">188,43</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">187,83</td>
+<td class="text-right " data-title="Bronze [E]">202,75</td>
+<td class="text-right " data-title="Bronze [A]">215,05</td>
+<td class="text-right " data-title="Prata Mais [E]">226,31</td>
+<td class="text-right " data-title="Prata Mais [A]">266,17</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">223,01</td>
+<td class="text-right " data-title="Bronze [E]">240,72</td>
+<td class="text-right " data-title="Bronze [A]">255,32</td>
+<td class="text-right " data-title="Prata Mais [E]">268,69</td>
+<td class="text-right " data-title="Prata Mais [A]">316,02</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">265,55</td>
+<td class="text-right " data-title="Bronze [E]">286,64</td>
+<td class="text-right " data-title="Bronze [A]">304,03</td>
+<td class="text-right " data-title="Prata Mais [E]">319,95</td>
+<td class="text-right " data-title="Prata Mais [A]">376,30</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">278,28</td>
+<td class="text-right " data-title="Bronze [E]">300,39</td>
+<td class="text-right " data-title="Bronze [A]">318,61</td>
+<td class="text-right " data-title="Prata Mais [E]">335,29</td>
+<td class="text-right " data-title="Prata Mais [A]">394,35</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">290,16</td>
+<td class="text-right " data-title="Bronze [E]">313,20</td>
+<td class="text-right " data-title="Bronze [A]">332,20</td>
+<td class="text-right " data-title="Prata Mais [E]">349,59</td>
+<td class="text-right " data-title="Prata Mais [A]">411,17</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">326,77</td>
+<td class="text-right " data-title="Bronze [E]">352,73</td>
+<td class="text-right " data-title="Bronze [A]">374,12</td>
+<td class="text-right " data-title="Prata Mais [E]">393,71</td>
+<td class="text-right " data-title="Prata Mais [A]">463,06</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">355,67</td>
+<td class="text-right " data-title="Bronze [E]">383,92</td>
+<td class="text-right " data-title="Bronze [A]">407,21</td>
+<td class="text-right " data-title="Prata Mais [E]">428,53</td>
+<td class="text-right " data-title="Prata Mais [A]">504,01</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">430,56</td>
+<td class="text-right " data-title="Bronze [E]">464,76</td>
+<td class="text-right " data-title="Bronze [A]">492,95</td>
+<td class="text-right " data-title="Prata Mais [E]">518,76</td>
+<td class="text-right " data-title="Prata Mais [A]">610,14</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">796,51</td>
+<td class="text-right " data-title="Bronze [E]">859,77</td>
+<td class="text-right " data-title="Bronze [A]">911,92</td>
+<td class="text-right " data-title="Prata Mais [E]">959,66</td>
+<td class="text-right " data-title="Prata Mais [A]">1.128,71</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 10 a 19 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">182,06</td>
+<td class="text-right " data-title="Prata Mais RC [A]">214,13</td>
+<td class="text-right " data-title="Ouro Mais [A]">282,14</td>
+<td class="text-right " data-title="Ouro Max Q [A]">357,64</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">542,98</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">624,66</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">257,17</td>
+<td class="text-right " data-title="Prata Mais RC [A]">302,47</td>
+<td class="text-right " data-title="Ouro Mais [A]">395,03</td>
+<td class="text-right " data-title="Ouro Max Q [A]">505,19</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">763,49</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">878,86</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">305,33</td>
+<td class="text-right " data-title="Prata Mais RC [A]">359,11</td>
+<td class="text-right " data-title="Ouro Mais [A]">467,41</td>
+<td class="text-right " data-title="Ouro Max Q [A]">599,80</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">904,88</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.041,85</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">363,57</td>
+<td class="text-right " data-title="Prata Mais RC [A]">427,62</td>
+<td class="text-right " data-title="Ouro Mais [A]">554,95</td>
+<td class="text-right " data-title="Ouro Max Q [A]">714,21</td>
+ <td class="text-right " data-title="Diamante Mais R1 [A]">1.075,87</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.238,97</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">381,01</td>
+<td class="text-right " data-title="Prata Mais RC [A]">448,12</td>
+<td class="text-right " data-title="Ouro Mais [A]">581,15</td>
+<td class="text-right " data-title="Ouro Max Q [A]">748,46</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.127,05</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.297,98</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">397,26</td>
+<td class="text-right " data-title="Prata Mais RC [A]">467,24</td>
+<td class="text-right " data-title="Ouro Mais [A]">605,58</td>
+<td class="text-right " data-title="Ouro Max Q [A]">780,39</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.174,77</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.352,99</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">447,40</td>
+<td class="text-right " data-title="Prata Mais RC [A]">526,21</td>
+<td class="text-right " data-title="Ouro Mais [A]">680,93</td>
+<td class="text-right " data-title="Ouro Max Q [A]">878,88</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.321,95</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.522,66</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">486,96</td>
+<td class="text-right " data-title="Prata Mais RC [A]">572,74</td>
+<td class="text-right " data-title="Ouro Mais [A]">740,40</td>
+<td class="text-right " data-title="Ouro Max Q [A]">956,60</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.438,10</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.656,56</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">589,50</td>
+<td class="text-right " data-title="Prata Mais RC [A]">693,34</td>
+<td class="text-right " data-title="Ouro Mais [A]">894,51</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.158,03</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.739,13</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">2.003,58</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">1.090,53</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.282,62</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.647,53</td>
+<td class="text-right " data-title="Ouro Max Q [A]">2.142,26</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">3.210,01</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.699,23</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 10 a 19 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">165,67</td>
+<td class="text-right " data-title="Prata Mais RC [A]">194,86</td>
+<td class="text-right " data-title="Ouro Mais [A]">260,25</td>
+<td class="text-right " data-title="Ouro Max Q [A]">329,03</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">500,23</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">575,37</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">234,02</td>
+<td class="text-right " data-title="Prata Mais RC [A]">275,25</td>
+<td class="text-right " data-title="Ouro Mais [A]">364,10</td>
+<td class="text-right " data-title="Ouro Max Q [A]">464,77</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">703,09</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">809,23</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">277,85</td>
+<td class="text-right " data-title="Prata Mais RC [A]">326,79</td>
+<td class="text-right " data-title="Ouro Mais [A]">430,70</td>
+<td class="text-right " data-title="Ouro Max Q [A]">551,81</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">833,17</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">959,18</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">330,85</td>
+<td class="text-right " data-title="Prata Mais RC [A]">389,13</td>
+<td class="text-right " data-title="Ouro Mais [A]">511,23</td>
+<td class="text-right " data-title="Ouro Max Q [A]">657,08</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">990,48</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.140,54</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">346,72</td>
+<td class="text-right " data-title="Prata Mais RC [A]">407,79</td>
+<td class="text-right " data-title="Ouro Mais [A]">535,34</td>
+<td class="text-right " data-title="Ouro Max Q [A]">688,59</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.037,57</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.194,82</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">361,51</td>
+<td class="text-right " data-title="Prata Mais RC [A]">425,19</td>
+<td class="text-right " data-title="Ouro Mais [A]">557,82</td>
+<td class="text-right " data-title="Ouro Max Q [A]">717,96</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.081,47</td>
+ <td class="text-right " data-title="Diamante Mais R2 [A]">1.245,43</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">407,13</td>
+<td class="text-right " data-title="Prata Mais RC [A]">478,85</td>
+<td class="text-right " data-title="Ouro Mais [A]">627,14</td>
+<td class="text-right " data-title="Ouro Max Q [A]">808,57</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.216,88</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.401,53</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">443,13</td>
+<td class="text-right " data-title="Prata Mais RC [A]">521,19</td>
+<td class="text-right " data-title="Ouro Mais [A]">681,84</td>
+<td class="text-right " data-title="Ouro Max Q [A]">880,07</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.323,73</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.524,71</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">536,44</td>
+<td class="text-right " data-title="Prata Mais RC [A]">630,94</td>
+<td class="text-right " data-title="Ouro Mais [A]">823,63</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.065,39</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.600,68</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.843,98</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">992,38</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.167,19</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.516,41</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.970,88</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">2.953,89</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.403,97</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 10 a 19 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">160,21</td>
+<td class="text-right " data-title="Prata Mais RC [A]">188,43</td>
+<td class="text-right " data-title="Ouro Mais [A]">252,04</td>
+<td class="text-right " data-title="Ouro Max Q [A]">318,30</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">484,19</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">556,88</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">226,31</td>
+ <td class="text-right " data-title="Prata Mais RC [A]">266,17</td>
+<td class="text-right " data-title="Ouro Mais [A]">352,51</td>
+<td class="text-right " data-title="Ouro Max Q [A]">449,62</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">680,44</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">783,12</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">268,69</td>
+<td class="text-right " data-title="Prata Mais RC [A]">316,02</td>
+<td class="text-right " data-title="Ouro Mais [A]">416,93</td>
+<td class="text-right " data-title="Ouro Max Q [A]">533,82</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">806,28</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">928,18</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">319,95</td>
+<td class="text-right " data-title="Prata Mais RC [A]">376,30</td>
+<td class="text-right " data-title="Ouro Mais [A]">494,84</td>
+<td class="text-right " data-title="Ouro Max Q [A]">635,65</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">958,46</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.103,62</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">335,29</td>
+<td class="text-right " data-title="Prata Mais RC [A]">394,35</td>
+<td class="text-right " data-title="Ouro Mais [A]">518,16</td>
+<td class="text-right " data-title="Ouro Max Q [A]">666,13</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.004,01</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.156,13</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">349,59</td>
+<td class="text-right " data-title="Prata Mais RC [A]">411,17</td>
+<td class="text-right " data-title="Ouro Mais [A]">539,90</td>
+<td class="text-right " data-title="Ouro Max Q [A]">694,55</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.046,48</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.205,10</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">393,71</td>
+<td class="text-right " data-title="Prata Mais RC [A]">463,06</td>
+<td class="text-right " data-title="Ouro Mais [A]">606,97</td>
+<td class="text-right " data-title="Ouro Max Q [A]">782,20</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.177,47</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.356,10</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">428,53</td>
+<td class="text-right " data-title="Prata Mais RC [A]">504,01</td>
+<td class="text-right " data-title="Ouro Mais [A]">659,89</td>
+<td class="text-right " data-title="Ouro Max Q [A]">851,37</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.280,85</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.475,27</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">518,76</td>
+<td class="text-right " data-title="Prata Mais RC [A]">610,14</td>
+<td class="text-right " data-title="Ouro Mais [A]">797,05</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.030,65</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.548,76</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.784,13</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">959,66</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.128,71</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.467,24</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.906,61</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">2.857,84</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.293,25</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 20 a 29 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">141,22</td>
+<td class="text-right " data-title="Bronze [E]">152,43</td>
+<td class="text-right " data-title="Bronze [A]">161,68</td>
+<td class="text-right " data-title="Prata Mais [E]">172,08</td>
+<td class="text-right " data-title="Prata Mais [A]">202,39</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">199,48</td>
+<td class="text-right " data-title="Bronze [E]">215,32</td>
+<td class="text-right " data-title="Bronze [A]">228,38</td>
+<td class="text-right " data-title="Prata Mais [E]">243,07</td>
+<td class="text-right " data-title="Prata Mais [A]">285,89</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">236,83</td>
+<td class="text-right " data-title="Bronze [E]">255,64</td>
+<td class="text-right " data-title="Bronze [A]">271,15</td>
+<td class="text-right " data-title="Prata Mais [E]">288,59</td>
+<td class="text-right " data-title="Prata Mais [A]">339,43</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">282,01</td>
+<td class="text-right " data-title="Bronze [E]">304,41</td>
+<td class="text-right " data-title="Bronze [A]">322,88</td>
+<td class="text-right " data-title="Prata Mais [E]">343,64</td>
+<td class="text-right " data-title="Prata Mais [A]">404,18</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">295,54</td>
+<td class="text-right " data-title="Bronze [E]">319,01</td>
+<td class="text-right " data-title="Bronze [A]">338,36</td>
+<td class="text-right " data-title="Prata Mais [E]">360,12</td>
+<td class="text-right " data-title="Prata Mais [A]">423,56</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">308,15</td>
+<td class="text-right " data-title="Bronze [E]">332,62</td>
+<td class="text-right " data-title="Bronze [A]">352,80</td>
+<td class="text-right " data-title="Prata Mais [E]">375,49</td>
+<td class="text-right " data-title="Prata Mais [A]">441,63</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">347,03</td>
+<td class="text-right " data-title="Bronze [E]">374,60</td>
+<td class="text-right " data-title="Bronze [A]">397,32</td>
+<td class="text-right " data-title="Prata Mais [E]">422,87</td>
+<td class="text-right " data-title="Prata Mais [A]">497,36</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">377,72</td>
+<td class="text-right " data-title="Bronze [E]">407,72</td>
+<td class="text-right " data-title="Bronze [A]">432,45</td>
+<td class="text-right " data-title="Prata Mais [E]">460,27</td>
+<td class="text-right " data-title="Prata Mais [A]">541,34</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">457,26</td>
+<td class="text-right " data-title="Bronze [E]">493,57</td>
+<td class="text-right " data-title="Bronze [A]">523,52</td>
+<td class="text-right " data-title="Prata Mais [E]">557,18</td>
+<td class="text-right " data-title="Prata Mais [A]">655,33</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">845,89</td>
+<td class="text-right " data-title="Bronze [E]">913,07</td>
+<td class="text-right " data-title="Bronze [A]">968,46</td>
+<td class="text-right " data-title="Prata Mais [E]">1.030,74</td>
+<td class="text-right " data-title="Prata Mais [A]">1.212,31</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 20 a 29 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">130,63</td>
+<td class="text-right " data-title="Bronze [E]">141,00</td>
+<td class="text-right " data-title="Bronze [A]">149,55</td>
+<td class="text-right " data-title="Prata Mais [E]">156,59</td>
+<td class="text-right " data-title="Prata Mais [A]">184,17</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">184,52</td>
+<td class="text-right " data-title="Bronze [E]">199,17</td>
+<td class="text-right " data-title="Bronze [A]">211,26</td>
+<td class="text-right " data-title="Prata Mais [E]">221,19</td>
+<td class="text-right " data-title="Prata Mais [A]">260,16</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">219,07</td>
+<td class="text-right " data-title="Bronze [E]">236,47</td>
+<td class="text-right " data-title="Bronze [A]">250,82</td>
+<td class="text-right " data-title="Prata Mais [E]">262,62</td>
+<td class="text-right " data-title="Prata Mais [A]">308,88</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">260,86</td>
+<td class="text-right " data-title="Bronze [E]">281,58</td>
+<td class="text-right " data-title="Bronze [A]">298,66</td>
+<td class="text-right " data-title="Prata Mais [E]">312,72</td>
+<td class="text-right " data-title="Prata Mais [A]">367,80</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">273,37</td>
+<td class="text-right " data-title="Bronze [E]">295,08</td>
+<td class="text-right " data-title="Bronze [A]">312,98</td>
+<td class="text-right " data-title="Prata Mais [E]">327,71</td>
+<td class="text-right " data-title="Prata Mais [A]">385,44</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">285,03</td>
+<td class="text-right " data-title="Bronze [E]">307,67</td>
+<td class="text-right " data-title="Bronze [A]">326,34</td>
+<td class="text-right " data-title="Prata Mais [E]">341,69</td>
+<td class="text-right " data-title="Prata Mais [A]">401,88</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">321,01</td>
+<td class="text-right " data-title="Bronze [E]">346,50</td>
+<td class="text-right " data-title="Bronze [A]">367,52</td>
+<td class="text-right " data-title="Prata Mais [E]">384,81</td>
+<td class="text-right " data-title="Prata Mais [A]">452,60</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">349,39</td>
+<td class="text-right " data-title="Bronze [E]">377,14</td>
+<td class="text-right " data-title="Bronze [A]">400,02</td>
+<td class="text-right " data-title="Prata Mais [E]">418,84</td>
+<td class="text-right " data-title="Prata Mais [A]">492,62</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">422,96</td>
+<td class="text-right " data-title="Bronze [E]">456,56</td>
+<td class="text-right " data-title="Bronze [A]">484,25</td>
+<td class="text-right " data-title="Prata Mais [E]">507,04</td>
+<td class="text-right " data-title="Prata Mais [A]">596,35</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">782,45</td>
+<td class="text-right " data-title="Bronze [E]">844,59</td>
+<td class="text-right " data-title="Bronze [A]">895,83</td>
+ <td class="text-right " data-title="Prata Mais [E]">937,98</td>
+<td class="text-right " data-title="Prata Mais [A]">1.103,20</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 20 a 29 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">125,68</td>
+<td class="text-right " data-title="Bronze [E]">135,67</td>
+<td class="text-right " data-title="Bronze [A]">143,89</td>
+<td class="text-right " data-title="Prata Mais [E]">151,43</td>
+<td class="text-right " data-title="Prata Mais [A]">178,10</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">177,54</td>
+<td class="text-right " data-title="Bronze [E]">191,64</td>
+<td class="text-right " data-title="Bronze [A]">203,26</td>
+<td class="text-right " data-title="Prata Mais [E]">213,90</td>
+<td class="text-right " data-title="Prata Mais [A]">251,58</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">210,78</td>
+<td class="text-right " data-title="Bronze [E]">227,52</td>
+<td class="text-right " data-title="Bronze [A]">241,33</td>
+<td class="text-right " data-title="Prata Mais [E]">253,96</td>
+<td class="text-right " data-title="Prata Mais [A]">298,70</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">250,99</td>
+<td class="text-right " data-title="Bronze [E]">270,93</td>
+<td class="text-right " data-title="Bronze [A]">287,36</td>
+<td class="text-right " data-title="Prata Mais [E]">302,41</td>
+<td class="text-right " data-title="Prata Mais [A]">355,67</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">263,03</td>
+<td class="text-right " data-title="Bronze [E]">283,92</td>
+<td class="text-right " data-title="Bronze [A]">301,14</td>
+<td class="text-right " data-title="Prata Mais [E]">316,91</td>
+<td class="text-right " data-title="Prata Mais [A]">372,73</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">274,25</td>
+<td class="text-right " data-title="Bronze [E]">296,03</td>
+<td class="text-right " data-title="Bronze [A]">313,99</td>
+<td class="text-right " data-title="Prata Mais [E]">330,43</td>
+<td class="text-right " data-title="Prata Mais [A]">388,63</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">308,86</td>
+<td class="text-right " data-title="Bronze [E]">333,39</td>
+<td class="text-right " data-title="Bronze [A]">353,61</td>
+<td class="text-right " data-title="Prata Mais [E]">372,13</td>
+<td class="text-right " data-title="Prata Mais [A]">437,68</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">336,17</td>
+<td class="text-right " data-title="Bronze [E]">362,87</td>
+<td class="text-right " data-title="Bronze [A]">384,88</td>
+<td class="text-right " data-title="Prata Mais [E]">405,03</td>
+<td class="text-right " data-title="Prata Mais [A]">476,38</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">406,96</td>
+<td class="text-right " data-title="Bronze [E]">439,28</td>
+<td class="text-right " data-title="Bronze [A]">465,93</td>
+<td class="text-right " data-title="Prata Mais [E]">490,32</td>
+<td class="text-right " data-title="Prata Mais [A]">576,69</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">752,84</td>
+<td class="text-right " data-title="Bronze [E]">812,63</td>
+<td class="text-right " data-title="Bronze [A]">861,93</td>
+<td class="text-right " data-title="Prata Mais [E]">907,05</td>
+<td class="text-right " data-title="Prata Mais [A]">1.066,83</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 20 a 29 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">172,08</td>
+<td class="text-right " data-title="Prata Mais RC [A]">202,39</td>
+<td class="text-right " data-title="Ouro Mais [A]">267,14</td>
+<td class="text-right " data-title="Ouro Max Q [A]">338,03</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">513,68</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">590,88</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">243,07</td>
+<td class="text-right " data-title="Prata Mais RC [A]">285,89</td>
+<td class="text-right " data-title="Ouro Mais [A]">373,84</td>
+<td class="text-right " data-title="Ouro Max Q [A]">477,50</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">722,10</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">831,15</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">288,59</td>
+<td class="text-right " data-title="Prata Mais RC [A]">339,43</td>
+<td class="text-right " data-title="Ouro Mais [A]">442,25</td>
+<td class="text-right " data-title="Ouro Max Q [A]">566,91</td>
+ <td class="text-right " data-title="Diamante Mais R1 [A]">855,74</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">985,20</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">343,64</td>
+<td class="text-right " data-title="Prata Mais RC [A]">404,18</td>
+<td class="text-right " data-title="Ouro Mais [A]">524,99</td>
+<td class="text-right " data-title="Ouro Max Q [A]">675,06</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.017,36</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.171,52</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">360,12</td>
+<td class="text-right " data-title="Prata Mais RC [A]">423,56</td>
+<td class="text-right " data-title="Ouro Mais [A]">549,76</td>
+<td class="text-right " data-title="Ouro Max Q [A]">707,43</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.065,73</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.227,29</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">375,49</td>
+<td class="text-right " data-title="Prata Mais RC [A]">441,63</td>
+<td class="text-right " data-title="Ouro Mais [A]">572,85</td>
+<td class="text-right " data-title="Ouro Max Q [A]">737,61</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.110,84</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.279,28</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">422,87</td>
+<td class="text-right " data-title="Prata Mais RC [A]">497,36</td>
+<td class="text-right " data-title="Ouro Mais [A]">644,07</td>
+<td class="text-right " data-title="Ouro Max Q [A]">830,70</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.249,95</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.439,65</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">460,27</td>
+<td class="text-right " data-title="Prata Mais RC [A]">541,34</td>
+<td class="text-right " data-title="Ouro Mais [A]">700,27</td>
+<td class="text-right " data-title="Ouro Max Q [A]">904,16</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.359,73</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.566,21</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">557,18</td>
+<td class="text-right " data-title="Prata Mais RC [A]">655,33</td>
+<td class="text-right " data-title="Ouro Mais [A]">845,94</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.094,54</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.644,25</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.894,21</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">1.030,74</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.212,31</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.557,68</td>
+<td class="text-right " data-title="Ouro Max Q [A]">2.024,82</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">3.034,50</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.496,91</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 20 a 29 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">156,59</td>
+<td class="text-right " data-title="Prata Mais RC [A]">184,17</td>
+<td class="text-right " data-title="Ouro Mais [A]">246,45</td>
+<td class="text-right " data-title="Ouro Max Q [A]">310,99</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">473,27</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">544,29</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">221,19</td>
+<td class="text-right " data-title="Prata Mais RC [A]">260,16</td>
+<td class="text-right " data-title="Ouro Mais [A]">344,61</td>
+<td class="text-right " data-title="Ouro Max Q [A]">439,30</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">665,02</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">765,34</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">262,62</td>
+<td class="text-right " data-title="Prata Mais RC [A]">308,88</td>
+<td class="text-right " data-title="Ouro Mais [A]">407,55</td>
+<td class="text-right " data-title="Ouro Max Q [A]">521,56</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">787,96</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">907,07</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">312,72</td>
+<td class="text-right " data-title="Prata Mais RC [A]">367,80</td>
+<td class="text-right " data-title="Ouro Mais [A]">483,67</td>
+<td class="text-right " data-title="Ouro Max Q [A]">621,06</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">936,65</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.078,48</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">327,71</td>
+<td class="text-right " data-title="Prata Mais RC [A]">385,44</td>
+<td class="text-right " data-title="Ouro Mais [A]">506,46</td>
+<td class="text-right " data-title="Ouro Max Q [A]">650,84</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">981,15</td>
+ <td class="text-right " data-title="Diamante Mais R2 [A]">1.129,78</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">341,69</td>
+<td class="text-right " data-title="Prata Mais RC [A]">401,88</td>
+<td class="text-right " data-title="Ouro Mais [A]">527,70</td>
+<td class="text-right " data-title="Ouro Max Q [A]">678,60</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.022,65</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.177,62</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">384,81</td>
+<td class="text-right " data-title="Prata Mais RC [A]">452,60</td>
+<td class="text-right " data-title="Ouro Mais [A]">593,23</td>
+<td class="text-right " data-title="Ouro Max Q [A]">764,24</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.150,63</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.325,16</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">418,84</td>
+<td class="text-right " data-title="Prata Mais RC [A]">492,62</td>
+<td class="text-right " data-title="Ouro Mais [A]">644,93</td>
+<td class="text-right " data-title="Ouro Max Q [A]">831,82</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.251,63</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.441,59</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">507,04</td>
+<td class="text-right " data-title="Prata Mais RC [A]">596,35</td>
+<td class="text-right " data-title="Ouro Mais [A]">778,94</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.006,98</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.513,40</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.743,36</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">937,98</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.103,20</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.433,75</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.862,83</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">2.792,42</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.217,83</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 20 a 29 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">151,43</td>
+ <td class="text-right " data-title="Prata Mais RC [A]">178,10</td>
+<td class="text-right " data-title="Ouro Mais [A]">238,69</td>
+<td class="text-right " data-title="Ouro Max Q [A]">300,85</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">458,11</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">526,82</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">213,90</td>
+<td class="text-right " data-title="Prata Mais RC [A]">251,58</td>
+<td class="text-right " data-title="Ouro Mais [A]">333,65</td>
+<td class="text-right " data-title="Ouro Max Q [A]">424,97</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">643,61</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">740,66</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">253,96</td>
+<td class="text-right " data-title="Prata Mais RC [A]">298,70</td>
+<td class="text-right " data-title="Ouro Mais [A]">394,54</td>
+<td class="text-right " data-title="Ouro Max Q [A]">504,55</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">762,54</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">877,77</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">302,41</td>
+<td class="text-right " data-title="Prata Mais RC [A]">355,67</td>
+<td class="text-right " data-title="Ouro Mais [A]">468,18</td>
+<td class="text-right " data-title="Ouro Max Q [A]">600,80</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">906,38</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.043,59</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">316,91</td>
+<td class="text-right " data-title="Prata Mais RC [A]">372,73</td>
+<td class="text-right " data-title="Ouro Mais [A]">490,22</td>
+<td class="text-right " data-title="Ouro Max Q [A]">629,61</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">949,44</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.093,22</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">330,43</td>
+<td class="text-right " data-title="Prata Mais RC [A]">388,63</td>
+<td class="text-right " data-title="Ouro Mais [A]">510,77</td>
+<td class="text-right " data-title="Ouro Max Q [A]">656,48</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">989,58</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.139,50</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">372,13</td>
+<td class="text-right " data-title="Prata Mais RC [A]">437,68</td>
+<td class="text-right " data-title="Ouro Mais [A]">574,16</td>
+<td class="text-right " data-title="Ouro Max Q [A]">739,32</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.113,39</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.282,23</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">405,03</td>
+<td class="text-right " data-title="Prata Mais RC [A]">476,38</td>
+<td class="text-right " data-title="Ouro Mais [A]">624,18</td>
+<td class="text-right " data-title="Ouro Max Q [A]">804,70</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.211,10</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.394,86</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">490,32</td>
+<td class="text-right " data-title="Prata Mais RC [A]">576,69</td>
+<td class="text-right " data-title="Ouro Mais [A]">753,82</td>
+<td class="text-right " data-title="Ouro Max Q [A]">974,14</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.464,32</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.686,79</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">907,05</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.066,83</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.387,27</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.802,09</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">2.701,64</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.113,18</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 30 a 99 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">141,22</td>
+<td class="text-right " data-title="Bronze [E]">152,43</td>
+<td class="text-right " data-title="Bronze [A]">161,68</td>
+<td class="text-right " data-title="Prata Mais [E]">172,08</td>
+<td class="text-right " data-title="Prata Mais [A]">202,39</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">199,48</td>
+<td class="text-right " data-title="Bronze [E]">215,32</td>
+<td class="text-right " data-title="Bronze [A]">228,38</td>
+<td class="text-right " data-title="Prata Mais [E]">243,07</td>
+<td class="text-right " data-title="Prata Mais [A]">285,89</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">236,83</td>
+<td class="text-right " data-title="Bronze [E]">255,64</td>
+<td class="text-right " data-title="Bronze [A]">271,15</td>
+<td class="text-right " data-title="Prata Mais [E]">288,59</td>
+<td class="text-right " data-title="Prata Mais [A]">339,43</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">282,01</td>
+<td class="text-right " data-title="Bronze [E]">304,41</td>
+<td class="text-right " data-title="Bronze [A]">322,88</td>
+<td class="text-right " data-title="Prata Mais [E]">343,64</td>
+<td class="text-right " data-title="Prata Mais [A]">404,18</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">295,54</td>
+<td class="text-right " data-title="Bronze [E]">319,01</td>
+<td class="text-right " data-title="Bronze [A]">338,36</td>
+<td class="text-right " data-title="Prata Mais [E]">360,12</td>
+<td class="text-right " data-title="Prata Mais [A]">423,56</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">308,15</td>
+<td class="text-right " data-title="Bronze [E]">332,62</td>
+<td class="text-right " data-title="Bronze [A]">352,80</td>
+<td class="text-right " data-title="Prata Mais [E]">375,49</td>
+<td class="text-right " data-title="Prata Mais [A]">441,63</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">347,03</td>
+<td class="text-right " data-title="Bronze [E]">374,60</td>
+<td class="text-right " data-title="Bronze [A]">397,32</td>
+<td class="text-right " data-title="Prata Mais [E]">422,87</td>
+<td class="text-right " data-title="Prata Mais [A]">497,36</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">377,72</td>
+<td class="text-right " data-title="Bronze [E]">407,72</td>
+<td class="text-right " data-title="Bronze [A]">432,45</td>
+<td class="text-right " data-title="Prata Mais [E]">460,27</td>
+<td class="text-right " data-title="Prata Mais [A]">541,34</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">457,26</td>
+<td class="text-right " data-title="Bronze [E]">493,57</td>
+<td class="text-right " data-title="Bronze [A]">523,52</td>
+<td class="text-right " data-title="Prata Mais [E]">557,18</td>
+<td class="text-right " data-title="Prata Mais [A]">655,33</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">845,89</td>
+<td class="text-right " data-title="Bronze [E]">913,07</td>
+<td class="text-right " data-title="Bronze [A]">968,46</td>
+<td class="text-right " data-title="Prata Mais [E]">1.030,74</td>
+<td class="text-right " data-title="Prata Mais [A]">1.212,31</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 30 a 99 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">130,63</td>
+<td class="text-right " data-title="Bronze [E]">141,00</td>
+<td class="text-right " data-title="Bronze [A]">149,55</td>
+<td class="text-right " data-title="Prata Mais [E]">156,59</td>
+<td class="text-right " data-title="Prata Mais [A]">184,17</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">184,52</td>
+<td class="text-right " data-title="Bronze [E]">199,17</td>
+<td class="text-right " data-title="Bronze [A]">211,26</td>
+<td class="text-right " data-title="Prata Mais [E]">221,19</td>
+<td class="text-right " data-title="Prata Mais [A]">260,16</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">219,07</td>
+<td class="text-right " data-title="Bronze [E]">236,47</td>
+<td class="text-right " data-title="Bronze [A]">250,82</td>
+<td class="text-right " data-title="Prata Mais [E]">262,62</td>
+<td class="text-right " data-title="Prata Mais [A]">308,88</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">260,86</td>
+<td class="text-right " data-title="Bronze [E]">281,58</td>
+<td class="text-right " data-title="Bronze [A]">298,66</td>
+<td class="text-right " data-title="Prata Mais [E]">312,72</td>
+<td class="text-right " data-title="Prata Mais [A]">367,80</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">273,37</td>
+<td class="text-right " data-title="Bronze [E]">295,08</td>
+<td class="text-right " data-title="Bronze [A]">312,98</td>
+<td class="text-right " data-title="Prata Mais [E]">327,71</td>
+<td class="text-right " data-title="Prata Mais [A]">385,44</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">285,03</td>
+<td class="text-right " data-title="Bronze [E]">307,67</td>
+<td class="text-right " data-title="Bronze [A]">326,34</td>
+<td class="text-right " data-title="Prata Mais [E]">341,69</td>
+<td class="text-right " data-title="Prata Mais [A]">401,88</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">321,01</td>
+<td class="text-right " data-title="Bronze [E]">346,50</td>
+<td class="text-right " data-title="Bronze [A]">367,52</td>
+<td class="text-right " data-title="Prata Mais [E]">384,81</td>
+<td class="text-right " data-title="Prata Mais [A]">452,60</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">349,39</td>
+<td class="text-right " data-title="Bronze [E]">377,14</td>
+<td class="text-right " data-title="Bronze [A]">400,02</td>
+<td class="text-right " data-title="Prata Mais [E]">418,84</td>
+<td class="text-right " data-title="Prata Mais [A]">492,62</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">422,96</td>
+<td class="text-right " data-title="Bronze [E]">456,56</td>
+<td class="text-right " data-title="Bronze [A]">484,25</td>
+<td class="text-right " data-title="Prata Mais [E]">507,04</td>
+<td class="text-right " data-title="Prata Mais [A]">596,35</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">782,45</td>
+<td class="text-right " data-title="Bronze [E]">844,59</td>
+<td class="text-right " data-title="Bronze [A]">895,83</td>
+<td class="text-right " data-title="Prata Mais [E]">937,98</td>
+<td class="text-right " data-title="Prata Mais [A]">1.103,20</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Sem Mediservice de 30 a 99 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Cristal [E]</th>
+<th class="text-right">Bronze [E]</th>
+<th class="text-right">Bronze [A]</th>
+<th class="text-right">Prata Mais [E]</th>
+<th class="text-right">Prata Mais [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Cristal [E]">125,68</td>
+<td class="text-right " data-title="Bronze [E]">135,67</td>
+<td class="text-right " data-title="Bronze [A]">143,89</td>
+<td class="text-right " data-title="Prata Mais [E]">151,43</td>
+<td class="text-right " data-title="Prata Mais [A]">178,10</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Cristal [E]">177,54</td>
+<td class="text-right " data-title="Bronze [E]">191,64</td>
+<td class="text-right " data-title="Bronze [A]">203,26</td>
+<td class="text-right " data-title="Prata Mais [E]">213,90</td>
+<td class="text-right " data-title="Prata Mais [A]">251,58</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Cristal [E]">210,78</td>
+<td class="text-right " data-title="Bronze [E]">227,52</td>
+<td class="text-right " data-title="Bronze [A]">241,33</td>
+<td class="text-right " data-title="Prata Mais [E]">253,96</td>
+<td class="text-right " data-title="Prata Mais [A]">298,70</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Cristal [E]">250,99</td>
+<td class="text-right " data-title="Bronze [E]">270,93</td>
+<td class="text-right " data-title="Bronze [A]">287,36</td>
+<td class="text-right " data-title="Prata Mais [E]">302,41</td>
+<td class="text-right " data-title="Prata Mais [A]">355,67</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Cristal [E]">263,03</td>
+<td class="text-right " data-title="Bronze [E]">283,92</td>
+<td class="text-right " data-title="Bronze [A]">301,14</td>
+<td class="text-right " data-title="Prata Mais [E]">316,91</td>
+<td class="text-right " data-title="Prata Mais [A]">372,73</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Cristal [E]">274,25</td>
+ <td class="text-right " data-title="Bronze [E]">296,03</td>
+<td class="text-right " data-title="Bronze [A]">313,99</td>
+<td class="text-right " data-title="Prata Mais [E]">330,43</td>
+<td class="text-right " data-title="Prata Mais [A]">388,63</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Cristal [E]">308,86</td>
+<td class="text-right " data-title="Bronze [E]">333,39</td>
+<td class="text-right " data-title="Bronze [A]">353,61</td>
+<td class="text-right " data-title="Prata Mais [E]">372,13</td>
+<td class="text-right " data-title="Prata Mais [A]">437,68</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Cristal [E]">336,17</td>
+<td class="text-right " data-title="Bronze [E]">362,87</td>
+<td class="text-right " data-title="Bronze [A]">384,88</td>
+<td class="text-right " data-title="Prata Mais [E]">405,03</td>
+<td class="text-right " data-title="Prata Mais [A]">476,38</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Cristal [E]">406,96</td>
+<td class="text-right " data-title="Bronze [E]">439,28</td>
+<td class="text-right " data-title="Bronze [A]">465,93</td>
+<td class="text-right " data-title="Prata Mais [E]">490,32</td>
+<td class="text-right " data-title="Prata Mais [A]">576,69</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Cristal [E]">752,84</td>
+<td class="text-right " data-title="Bronze [E]">812,63</td>
+<td class="text-right " data-title="Bronze [A]">861,93</td>
+<td class="text-right " data-title="Prata Mais [E]">907,05</td>
+<td class="text-right " data-title="Prata Mais [A]">1.066,83</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 30 a 99 Vidas - SEM Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">172,08</td>
+<td class="text-right " data-title="Prata Mais RC [A]">202,39</td>
+<td class="text-right " data-title="Ouro Mais [A]">267,14</td>
+<td class="text-right " data-title="Ouro Max Q [A]">338,03</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">513,68</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">590,88</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">243,07</td>
+<td class="text-right " data-title="Prata Mais RC [A]">285,89</td>
+<td class="text-right " data-title="Ouro Mais [A]">373,84</td>
+<td class="text-right " data-title="Ouro Max Q [A]">477,50</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">722,10</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">831,15</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">288,59</td>
+<td class="text-right " data-title="Prata Mais RC [A]">339,43</td>
+<td class="text-right " data-title="Ouro Mais [A]">442,25</td>
+<td class="text-right " data-title="Ouro Max Q [A]">566,91</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">855,74</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">985,20</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">343,64</td>
+<td class="text-right " data-title="Prata Mais RC [A]">404,18</td>
+<td class="text-right " data-title="Ouro Mais [A]">524,99</td>
+<td class="text-right " data-title="Ouro Max Q [A]">675,06</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.017,36</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.171,52</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">360,12</td>
+<td class="text-right " data-title="Prata Mais RC [A]">423,56</td>
+<td class="text-right " data-title="Ouro Mais [A]">549,76</td>
+<td class="text-right " data-title="Ouro Max Q [A]">707,43</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.065,73</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.227,29</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">375,49</td>
+<td class="text-right " data-title="Prata Mais RC [A]">441,63</td>
+<td class="text-right " data-title="Ouro Mais [A]">572,85</td>
+<td class="text-right " data-title="Ouro Max Q [A]">737,61</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.110,84</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.279,28</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">422,87</td>
+<td class="text-right " data-title="Prata Mais RC [A]">497,36</td>
+<td class="text-right " data-title="Ouro Mais [A]">644,07</td>
+<td class="text-right " data-title="Ouro Max Q [A]">830,70</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.249,95</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.439,65</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">460,27</td>
+<td class="text-right " data-title="Prata Mais RC [A]">541,34</td>
+<td class="text-right " data-title="Ouro Mais [A]">700,27</td>
+<td class="text-right " data-title="Ouro Max Q [A]">904,16</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.359,73</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.566,21</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">557,18</td>
+<td class="text-right " data-title="Prata Mais RC [A]">655,33</td>
+<td class="text-right " data-title="Ouro Mais [A]">845,94</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.094,54</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.644,25</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.894,21</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">1.030,74</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.212,31</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.557,68</td>
+<td class="text-right " data-title="Ouro Max Q [A]">2.024,82</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">3.034,50</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.496,91</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 30 a 99 Vidas - COM 20% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">156,59</td>
+<td class="text-right " data-title="Prata Mais RC [A]">184,17</td>
+<td class="text-right " data-title="Ouro Mais [A]">246,45</td>
+<td class="text-right " data-title="Ouro Max Q [A]">310,99</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">473,27</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">544,29</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">221,19</td>
+<td class="text-right " data-title="Prata Mais RC [A]">260,16</td>
+<td class="text-right " data-title="Ouro Mais [A]">344,61</td>
+<td class="text-right " data-title="Ouro Max Q [A]">439,30</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">665,02</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">765,34</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">262,62</td>
+<td class="text-right " data-title="Prata Mais RC [A]">308,88</td>
+<td class="text-right " data-title="Ouro Mais [A]">407,55</td>
+<td class="text-right " data-title="Ouro Max Q [A]">521,56</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">787,96</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">907,07</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">312,72</td>
+<td class="text-right " data-title="Prata Mais RC [A]">367,80</td>
+<td class="text-right " data-title="Ouro Mais [A]">483,67</td>
+<td class="text-right " data-title="Ouro Max Q [A]">621,06</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">936,65</td>
+ <td class="text-right " data-title="Diamante Mais R2 [A]">1.078,48</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">327,71</td>
+<td class="text-right " data-title="Prata Mais RC [A]">385,44</td>
+<td class="text-right " data-title="Ouro Mais [A]">506,46</td>
+<td class="text-right " data-title="Ouro Max Q [A]">650,84</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">981,15</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.129,78</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">341,69</td>
+<td class="text-right " data-title="Prata Mais RC [A]">401,88</td>
+<td class="text-right " data-title="Ouro Mais [A]">527,70</td>
+<td class="text-right " data-title="Ouro Max Q [A]">678,60</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.022,65</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.177,62</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">384,81</td>
+<td class="text-right " data-title="Prata Mais RC [A]">452,60</td>
+<td class="text-right " data-title="Ouro Mais [A]">593,23</td>
+<td class="text-right " data-title="Ouro Max Q [A]">764,24</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.150,63</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.325,16</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">418,84</td>
+<td class="text-right " data-title="Prata Mais RC [A]">492,62</td>
+<td class="text-right " data-title="Ouro Mais [A]">644,93</td>
+<td class="text-right " data-title="Ouro Max Q [A]">831,82</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.251,63</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.441,59</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">507,04</td>
+<td class="text-right " data-title="Prata Mais RC [A]">596,35</td>
+<td class="text-right " data-title="Ouro Mais [A]">778,94</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.006,98</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.513,40</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.743,36</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">937,98</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.103,20</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.433,75</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.862,83</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">2.792,42</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.217,83</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Com Mediservice de 30 a 99 Vidas - COM 30% de Coparticipação</h4>
+<p class="text-left muted red">Válido de 22/03/2021 até 30/06/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Prata Mais RC [E]</th>
+<th class="text-right">Prata Mais RC [A]</th>
+<th class="text-right">Ouro Mais [A]</th>
+<th class="text-right">Ouro Max Q [A]</th>
+<th class="text-right">Diamante Mais R1 [A]</th>
+<th class="text-right">Diamante Mais R2 [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Prata Mais RC [E]">151,43</td>
+<td class="text-right " data-title="Prata Mais RC [A]">178,10</td>
+<td class="text-right " data-title="Ouro Mais [A]">238,69</td>
+<td class="text-right " data-title="Ouro Max Q [A]">300,85</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">458,11</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">526,82</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Prata Mais RC [E]">213,90</td>
+<td class="text-right " data-title="Prata Mais RC [A]">251,58</td>
+<td class="text-right " data-title="Ouro Mais [A]">333,65</td>
+<td class="text-right " data-title="Ouro Max Q [A]">424,97</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">643,61</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">740,66</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Prata Mais RC [E]">253,96</td>
+<td class="text-right " data-title="Prata Mais RC [A]">298,70</td>
+<td class="text-right " data-title="Ouro Mais [A]">394,54</td>
+<td class="text-right " data-title="Ouro Max Q [A]">504,55</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">762,54</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">877,77</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Prata Mais RC [E]">302,41</td>
+<td class="text-right " data-title="Prata Mais RC [A]">355,67</td>
+<td class="text-right " data-title="Ouro Mais [A]">468,18</td>
+<td class="text-right " data-title="Ouro Max Q [A]">600,80</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">906,38</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.043,59</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Prata Mais RC [E]">316,91</td>
+<td class="text-right " data-title="Prata Mais RC [A]">372,73</td>
+<td class="text-right " data-title="Ouro Mais [A]">490,22</td>
+<td class="text-right " data-title="Ouro Max Q [A]">629,61</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">949,44</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.093,22</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Prata Mais RC [E]">330,43</td>
+<td class="text-right " data-title="Prata Mais RC [A]">388,63</td>
+<td class="text-right " data-title="Ouro Mais [A]">510,77</td>
+<td class="text-right " data-title="Ouro Max Q [A]">656,48</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">989,58</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.139,50</td>
+</tr>
+ <tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Prata Mais RC [E]">372,13</td>
+<td class="text-right " data-title="Prata Mais RC [A]">437,68</td>
+<td class="text-right " data-title="Ouro Mais [A]">574,16</td>
+<td class="text-right " data-title="Ouro Max Q [A]">739,32</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.113,39</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.282,23</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Prata Mais RC [E]">405,03</td>
+<td class="text-right " data-title="Prata Mais RC [A]">476,38</td>
+<td class="text-right " data-title="Ouro Mais [A]">624,18</td>
+<td class="text-right " data-title="Ouro Max Q [A]">804,70</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.211,10</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.394,86</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Prata Mais RC [E]">490,32</td>
+<td class="text-right " data-title="Prata Mais RC [A]">576,69</td>
+<td class="text-right " data-title="Ouro Mais [A]">753,82</td>
+<td class="text-right " data-title="Ouro Max Q [A]">974,14</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">1.464,32</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">1.686,79</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Prata Mais RC [E]">907,05</td>
+<td class="text-right " data-title="Prata Mais RC [A]">1.066,83</td>
+<td class="text-right " data-title="Ouro Mais [A]">1.387,27</td>
+<td class="text-right " data-title="Ouro Max Q [A]">1.802,09</td>
+<td class="text-right " data-title="Diamante Mais R1 [A]">2.701,64</td>
+<td class="text-right " data-title="Diamante Mais R2 [A]">3.113,18</td>
+</tr>
+</tbody>
+</table>
+<br></div>
+</div>
+<div class="tab-pane" id="tab-redeCredenciada">
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-manualCorretor">
+<i class="icon icon-info-sign text-info"></i> Informações exclusivas para o corretor. Não é enviado no estudo.<br>
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-criteriosReducao">
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-anexos">
+<div class="tab-inner-content"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="print-modal-container"></div>
+<input data-val="true" data-val-number="The field OperadoraId must be a number." id="OperadoraId" name="OperadoraId" type="hidden" value="30">
+<input data-val="true" data-val-number="The field IdComercializacaoGrupo must be a number." id="IdComercializacaoGrupo" name="IdComercializacaoGrupo" type="hidden" value="12581">
+<input id="ProdutoId" name="ProdutoId" type="hidden" value="5477">
+<input id="Modalidade" name="Modalidade" type="hidden" value="Pme">
+<input id="Entidade" name="Entidade" type="hidden" value="">
+</div>
+<footer>
+<hr>
+<span class="pull-left">© Trindade Tecnologia 2021</span>
+</footer>
+</div>
+</div>
+</div>
+</div>
+
+<div id="user-edit-container"></div>
+<div id="end" class="hide"></div>
+
+<script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">
+        var api = 'https://api.paineldocorretor.com.br/';
+        var rootUrl = '/';
+    </script>
+<script src="/scripts/jquery?v=OZk0hXAKMXUlU8eIlQQ5e2KbMwS3FaTejU3DpNE1gsI1"></script>
+<script src="/scripts/fileupload?v=QOrNixLQ3Pog9OrDnu3KDC63MKfI5GwBQpytu_CDTHg1"></script>
+<script>
+        var userId = "8.139031";
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-44915231-5', 'paineldocorretor.com.br');
+        if(userId !== '') ga('set', 'userId', userId);
+        ga('send', 'pageview');
+    </script>
+<script src="/scripts/jqueryval"></script>
+<script src="/scripts/produto?v=Qy47i79tqPpyyMEnUeMLGQugg3nTE5yzIFF_gAXe6Ik1"></script>
+<script>
+        $(function () {
+
+            var $produtoSelector = $('.produto-selector');
+
+            if ($produtoSelector.length) {
+                $produtoSelector.find('input.search').change(function () {
+                    var filter = $(this).val().toLowerCase();
+                    $.each($produtoSelector.find('ul li'), function () {
+                        var text = $(this).text().toLowerCase();
+                        if (text.indexOf(filter) == -1)
+                            $(this).addClass('hide');
+                        else
+                            $(this).removeClass('hide');
+                    });
+                });
+
+                var top = $produtoSelector.find('ul li.selected').offset().top - 260;
+                $produtoSelector.find('ul').scrollTop(top);
+            }
+        })
+    </script>
+
+</body></html>
