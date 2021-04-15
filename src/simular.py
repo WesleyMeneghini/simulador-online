@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 from src.db import conexao
-from src import selecaoPlanos, selecaoAdesao
+from src import selecaoPlanos, selecaoAdesao, notificacao
 
 count = 0
 def simulador(driver):
@@ -22,6 +22,10 @@ def simulador(driver):
             exit()
         simulador(driver)
     finally:
+
+        # Notificaçao de atualizaçao de preços, Pagina de boas vindas do simulador
+        notificacao.notificacao(driver=driver)
+
         # acessar area de simulacao
         driver.execute_script("document.getElementsByTagName('a')[5].click()")
 
