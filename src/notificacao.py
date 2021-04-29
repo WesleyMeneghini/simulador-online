@@ -38,6 +38,9 @@ def notificacao(driver):
         cursor.execute(sql)
         operadoras = cursor.fetchall()
 
+        number = acesso.getNumberWhatsNotificationPrice
+
+        count = 0
         for operadora in operadoras:
             nomeOperadora = operadora[1]
 
@@ -47,7 +50,6 @@ def notificacao(driver):
                     # Enviar notificaçao pelo whats
                     message = "*Notificaçao do simulador online*\n\n" \
                               f"{line.text}"
-                    number = acesso.getNumberWhatsNotificationPrice
 
                     select = f"select count(id) as qtt from tbl_log_whatsapp_msg " \
                              f"where numero like '%{number}%' and mensagem like '%{message}%';"
@@ -55,10 +57,11 @@ def notificacao(driver):
                     resSelect = cursor.fetchone()
                     qtt = resSelect[0]
 
-                    if qtt == 0:
+                    if qtt == 0 and conexao.notificationWhats():
                         res = apiWhats.sendMessage(message=message, number=number)
 
                         if int(res.status_code) == 200:
+                            count += 1
                             print("Mensagem Enviada com Sucesso!")
                             insert = f"INSERT INTO tbl_log_whatsapp_msg(numero, mensagem, retorno) " \
                                      f"values ('{number}', '{message}', '{res.text}');"
@@ -69,6 +72,17 @@ def notificacao(driver):
                     else:
                         print("Mensagem ja consta como enviada no sistema!")
 
+        # CAso nao tenha nenhuma atualização de preços, parar o processo
+        if count == 0:
+            message = "*Nenhuma* atualização de preços!"
+
+            res = apiWhats.sendMessage(message=message, number=number)
+            print(res)
+            driver.close()
+            exit()
+
+
+    driver.switch_to.default_content()
     cursor.close()
     conn.commit()
     conn.close()

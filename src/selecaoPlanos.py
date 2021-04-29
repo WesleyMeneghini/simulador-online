@@ -305,7 +305,7 @@ def rasparDados(driver):
             # Verificar qual o modelo de copart da ALLIANZ
             # print(subTitulo)
             if subTitulo is not None:
-                if re.search('20% consultas e exames limitado a', subTitulo) and nome_operadora == 'ALLIANZ':
+                if re.search('20% PARA CONSULTAS E EXAMES, LIMITADO A', str(subTitulo).upper()) and nome_operadora == 'ALLIANZ':
                     plano = f"{plano} M2"
 
             # Variacao de nome de planos SULAMERICA
@@ -461,6 +461,7 @@ def rasparDados(driver):
 
                             if updatePrecoPlano:
                                 res = cursor.execute(update)
+                                conn.commit()
                             else:
                                 res = 1
 
@@ -821,12 +822,14 @@ def verificarAtualizacao(driver, num):
             coparticipacao = 2
         elif re.search('COM COPART', str(tag_operadora).upper()):
 
-            if re.search('20% consultas e exames e 30% PS', tipo_contratacao):
+            if re.search('20% PARA CONSULTAS E EXAMES E 30% PARA PS', str(tipo_contratacao).upper()):
                 coparticipacao = 3
-            elif re.search('20% consultas e exames limitado a R 25,00 e 30% PS lim', tipo_contratacao):
+            elif re.search('20% PARA CONSULTAS E EXAMES, LIMITADO A', str(tipo_contratacao).upper()):
                 coparticipacao = 3
-            elif re.search('30% consultas', tipo_contratacao):
+            elif re.search('30% PARA CONSULTAS E EXAMES, LIMITADO A', str(tipo_contratacao).upper()):
                 coparticipacao = 5
+            else:
+                coparticipacao = 0
 
         # Verificar se e hospitalar
         if re.search('HOSPITALAR', tag_operadora):
