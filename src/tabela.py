@@ -71,6 +71,7 @@ def dadosPlano(driver, title):
     print("Pagina com os Preços")
 
     idCoparticipacao = 0
+    idArea = 0
 
     if re.search('COM REMISSÃO', title):
         driver.execute_script("history.back()")
@@ -278,7 +279,7 @@ def dadosPlano(driver, title):
                         res = cursor.execute(teste)
 
                         print(values, " -- extraidos do simulador")
-                        print(res)
+                        # print(res)
                         if res == 1 and valores[0] > 0:
                             select = cursor.fetchall()[0]
 
@@ -297,7 +298,7 @@ def dadosPlano(driver, title):
                                     valores[0]:
                                 print('Atualizar Data')
                                 update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{ultimaAlteracao}' WHERE `id`='{idSelect}';"
-                                print(update)
+                                # print(update)
                                 if atualizarDataReajuste:
                                     cursor.execute(update)
 
@@ -514,9 +515,9 @@ def navegacao(driver):
                                                                    textBox)) and not refCheckBoxDesabilited:
             refOperadora = True
         elif re.search('QSAÚDE', textBox):
-            refOperadora = True
+            refOperadora = False
         elif re.search('CENTRAL NACIONAL UNIMED', textBox):
-            refOperadora = True
+            refOperadora = False
 
         if refOperadora:
             driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()

@@ -125,7 +125,7 @@ def rasparDados(driver):
                 valorRee = str(reemb[1]).split(" ")[1].replace(".", "").replace(",", ".")
                 sql = f"UPDATE tbl_tipo_plano SET reembolso = '{valorRee}' " \
                       f"WHERE id_operadora = {id_operadora} AND titulo LIKE '{planoRee}' and id > 0 limit 1;"
-                print(sql)
+                # print(sql)
                 if not planoRee == "" and not valorRee == "":
                     res = cursor.execute(sql)
                     print(res)
@@ -676,13 +676,6 @@ def verificarAtualizacao(driver, num):
         tag_operadora = nome_operadora
         nome_operadora = nome_operadora.split(" ")[0]
 
-        # if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-        #     nome_operadora = str(nome_operadora).split(" -")[0]
-        # elif re.search('AMIL ONE -', str(nome_operadora).upper()):
-        #     nome_operadora = 'ONE HEALTH'
-        # else:
-        #     nome_operadora = str(nome_operadora).split(" ")[0]
-
         # Verificar de a area e de sao paulo
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
 
@@ -710,10 +703,14 @@ def verificarAtualizacao(driver, num):
                 coparticipacao = 3
             elif re.search('30', tipo_contratacao):
                 coparticipacao = 5
+        else:
+            print("ATENÇAO PASSOU DIRETO PELA COPART")
+            coparticipacao = 2
 
         # Verificar se e hospitalar
         if re.search('HOSPITALAR', tag_operadora):
             hospitalar = 2
+            coparticipacao = 2
         else:
             hospitalar = 1
 
@@ -723,6 +720,9 @@ def verificarAtualizacao(driver, num):
             tipo_contratacao = 'OPCI'
         else:
             tipo_contratacao = 'OPCI'
+    else:
+        print("Sulamerica com Remissao")
+        return False
 
     if re.search('SOMPO', str(nome_operadora).upper()):
 
@@ -948,8 +948,8 @@ def obterDados(driver, tipo_tabela_option):
     # 19 -> Rio de Janeiro
     # 25 -> Sao Paulo
 
-    estados = [7, 25, 19, 26, 24, 13]
-    # estados = [25]
+    # estados = [7, 25, 19, 26, 24, 13]
+    estados = [25]
 
     for estado in estados:
         if estadoSaoPaulo:
@@ -1066,13 +1066,13 @@ def obterDados(driver, tipo_tabela_option):
 
                         if not buscarTodasOperadoras:
                             if re.search('BRADESCO', nome_operadora):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('AMIL ONE -', str(nome_operadora).upper()):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('SULAMÉRICA', str(nome_operadora).upper()):
                                 refNomeOperadora = True
                             if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
@@ -1080,13 +1080,13 @@ def obterDados(driver, tipo_tabela_option):
                             if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
                                 refNomeOperadora = True
                             if re.search('SOMPO', str(nome_operadora).upper()):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('PORTO SEGURO', nome_operadora):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('ALLIANZ', nome_operadora):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
                             if re.search('NOTREDAME', nome_operadora):
-                                refNomeOperadora = True
+                                refNomeOperadora = False
 
                         if refNomeOperadora:
                             print("\n")
