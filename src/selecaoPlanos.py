@@ -2,10 +2,14 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
+
+from src.acesso import getNumberWhatsNotificationPrice
 from src.db import conexao
 import time
 import re
 from datetime import datetime
+
+from src.services import apiWhats
 
 id_area = 0
 id_operadora = 0
@@ -461,6 +465,9 @@ def rasparDados(driver):
 
                             if updatePrecoPlano:
                                 res = cursor.execute(update)
+                                mensagem = f"Plano: {plano} \nIdOperadora: {id_operadora}\n SQL:{sql}"
+                                res2 = apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
+                                print(res2)
                                 conn.commit()
                             else:
                                 res = 1
@@ -721,9 +728,6 @@ def verificarAtualizacao(driver, num):
             tipo_contratacao = 'OPCI'
         else:
             tipo_contratacao = 'OPCI'
-    else:
-        print("Sulamerica com Remissao")
-        return False
 
     if re.search('SOMPO', str(nome_operadora).upper()):
 
@@ -1069,27 +1073,27 @@ def obterDados(driver, tipo_tabela_option):
 
                         if not buscarTodasOperadoras:
                             if re.search('BRADESCO', nome_operadora):
-                                refNomeOperadora = False
+                                refNomeOperadora = True
                             if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
-                                refNomeOperadora = False
+                                refNomeOperadora = True
                             if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-                                refNomeOperadora = False
+                                refNomeOperadora = True
                             if re.search('AMIL ONE -', str(nome_operadora).upper()):
-                                refNomeOperadora = False
+                                refNomeOperadora = True
                             if re.search('SULAMÉRICA', str(nome_operadora).upper()):
-                                refNomeOperadora = True
-                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
-                                refNomeOperadora = True
-                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
-                                refNomeOperadora = True
-                            if re.search('SOMPO', str(nome_operadora).upper()):
                                 refNomeOperadora = False
+                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
+                                refNomeOperadora = False
+                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
+                                refNomeOperadora = False
+                            if re.search('SOMPO', str(nome_operadora).upper()):
+                                refNomeOperadora = True
                             if re.search('PORTO SEGURO', nome_operadora):
                                 refNomeOperadora = False
                             if re.search('ALLIANZ', nome_operadora):
-                                refNomeOperadora = False
+                                refNomeOperadora = True
                             if re.search('NOTREDAME', nome_operadora):
-                                refNomeOperadora = False
+                                refNomeOperadora = True
 
                         if refNomeOperadora:
                             print("\n")

@@ -10,9 +10,9 @@ if __name__ == '__main__':
     driver.maximize_window()
 
     simuladorOnline = True
-    affinityPortoSeguro = True
-    affinityOmint = True
-    affinitySompo = True
+    affinityPortoSeguro = False
+    affinityOmint = False
+    affinitySompo = False
 
     try:
         if simuladorOnline:

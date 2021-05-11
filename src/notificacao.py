@@ -77,10 +77,9 @@ def notificacao(driver):
             message = "*Nenhuma* atualização de preços!"
 
             res = apiWhats.sendMessage(message=message, number=number)
-            print(res)
-            driver.close()
-            exit()
-
+            # print(res)
+            # driver.close()
+            # exit()
 
     driver.switch_to.default_content()
     cursor.close()

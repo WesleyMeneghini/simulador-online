@@ -11,7 +11,10 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 import re
+
+from src.acesso import getNumberWhatsNotificationPrice
 from src.db import conexao
+from src.services import apiWhats
 
 conn = conexao.myConexao()
 cursor = conn.cursor()
@@ -334,6 +337,10 @@ def dadosPlano(driver, title):
 
                                 if updatePrecoPlano:
                                     res = cursor.execute(update)
+                                    mensagem = f"Plano: {plano} \nIdOperadora: {idOperadora}\n SQL:{sql}"
+                                    res2 = apiWhats.sendMessage(message=mensagem,
+                                                                number=getNumberWhatsNotificationPrice)
+                                    print(res2)
                                 else:
                                     res = 1
 
@@ -517,7 +524,7 @@ def navegacao(driver):
         elif re.search('QSAÚDE', textBox):
             refOperadora = False
         elif re.search('CENTRAL NACIONAL UNIMED', textBox):
-            refOperadora = False
+            refOperadora = True
 
         if refOperadora:
             driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()
