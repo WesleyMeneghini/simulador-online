@@ -42,7 +42,6 @@ estadoEspiritoSanto = False
 estadoMatoGrosso = False
 
 
-
 def insertDados(sql, values):
     conn = conexao.myConexao()
     cursor = conn.cursor()
@@ -92,7 +91,6 @@ def rasparDados(driver):
     print("Obtendo dados")
     time.sleep(5)
 
-
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     tables = soup.find_all('table', attrs={"static small ta-c"})
 
@@ -133,9 +131,6 @@ def rasparDados(driver):
                 if not planoRee == "" and not valorRee == "":
                     res = cursor.execute(sql)
                     print(res)
-
-
-
 
     for num_tables in range(1):
 
@@ -466,8 +461,8 @@ def rasparDados(driver):
                             if updatePrecoPlano:
                                 res = cursor.execute(update)
                                 mensagem = f"Plano: {plano} \nIdOperadora: {id_operadora}\n SQL:{sql}"
-                                res2 = apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
-                                print(res2)
+                                # res2 = apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
+                                # print(res2)
                                 conn.commit()
                             else:
                                 res = 1
