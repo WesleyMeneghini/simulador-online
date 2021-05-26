@@ -255,6 +255,8 @@ def rasparDados(driver):
         # print(dados)
         inseridos = 0
         del (dados[0])
+        mensagemWhats = "*ATUALIZAÇAO DE PREÇOS* \n\n"
+        mensagemWhatsInicial = mensagemWhats
         for dado in dados:
 
             print(dado)
@@ -460,9 +462,9 @@ def rasparDados(driver):
 
                             if updatePrecoPlano:
                                 res = cursor.execute(update)
-                                mensagem = f"Plano: {plano} \nIdOperadora: {id_operadora}\n SQL:{sql}"
-                                # res2 = apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
-                                # print(res2)
+                                mensagemWhats += f"Plano: *{nome_plano}* | Numero vidas: {min_vidas}-{max_vidas} | Nome Operadora: *{nome_operadora}* \n" \
+                                                 f"Antigo preco0_18: R$ {select[8]} | Atualizado preco0_18: R$ {valores[0]}\n" \
+                                                 f"Antigo preco_m59: R$ {select[17]} | Atualizado preco_m59: R$ {valores[9]}\n\n"
                                 conn.commit()
                             else:
                                 res = 1
@@ -518,6 +520,8 @@ def rasparDados(driver):
                 if ref_plano:
                     planos_sem_cadastros.append(f"{nome_plano}")
 
+        if not mensagemWhats == mensagemWhatsInicial:
+            apiWhats.sendMessage(message=mensagemWhats, number=getNumberWhatsNotificationPrice)
         print(f"Total de preços de planos atualizados: {inseridos}")
     cursor.close()
     conn.commit()
@@ -543,7 +547,7 @@ def verificarAtualizacao(driver, num):
     cursor = conn.cursor()
 
     try:
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, 30).until(
             EC.presence_of_element_located(
                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{num + 1}]/td[1]/p'))
         )
@@ -559,7 +563,7 @@ def verificarAtualizacao(driver, num):
             tipo_contratacao = 2
 
         try:
-            WebDriverWait(driver, 10).until(
+            WebDriverWait(driver, 30).until(
                 EC.presence_of_element_located(
                     (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{num + 1}]/td[1]/b'))
             )
@@ -690,6 +694,10 @@ def verificarAtualizacao(driver, num):
                 area = 'INTERIOR 2'
             else:
                 area = 'SP CAPITAL'
+
+            if re.search("CAMPINAS", str(tipo_contratacao).upper()):
+                area = 'CAMPINAS'
+
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
             area = "MINAS GERAIS"
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
@@ -945,6 +953,8 @@ def obterDados(driver, tipo_tabela_option):
     global estadoEspiritoSanto
     global estadoMatoGrosso
 
+    global nome_operadora
+
     # 07 -> Espirito Santo
     # 11 -> Mato Grosso
     # 19 -> Rio de Janeiro
@@ -1055,7 +1065,7 @@ def obterDados(driver, tipo_tabela_option):
                     finally:
                         pass
                     try:
-                        WebDriverWait(driver, 10).until(
+                        WebDriverWait(driver, 30).until(
                             EC.presence_of_element_located(
                                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
                         )

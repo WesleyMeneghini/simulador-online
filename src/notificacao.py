@@ -57,7 +57,7 @@ def notificacao(driver):
                     resSelect = cursor.fetchone()
                     qtt = resSelect[0]
 
-                    if qtt == 0 and conexao.notificationWhats():
+                    if qtt == 0:
                         res = apiWhats.sendMessage(message=message, number=number)
 
                         if int(res.status_code) == 200:
@@ -74,12 +74,9 @@ def notificacao(driver):
 
         # CAso nao tenha nenhuma atualização de preços, parar o processo
         if count == 0:
-            message = "*Nenhuma* atualização de preços!"
-
-            res = apiWhats.sendMessage(message=message, number=number)
-            # print(res)
-            # driver.close()
-            # exit()
+            message = "*Nenhuma* notificaçao de atualização de preços!"
+            print(message)
+            # res = apiWhats.sendMessage(message=message, number=number)
 
     driver.switch_to.default_content()
     cursor.close()

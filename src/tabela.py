@@ -110,8 +110,8 @@ def dadosPlano(driver, title):
             idArea = 2
         elif re.search('Tarifa 3', title):
             idArea = 3
-        else:
-            idArea = 1
+        elif re.search('CAMPINAS', title) and idOperadora == 4:
+            idArea = 20
 
     textBoxSubtitle = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[4]').text
 
@@ -129,7 +129,7 @@ def dadosPlano(driver, title):
     elif re.search('HOSPITALAR', title):
         idCoparticipacao = 2
         hospitalar = 2
-    elif not re.search('QSAÚDE', title) :
+    elif not re.search('QSAÚDE', title):
         idCoparticipacao = 2
 
     elemestsClassTaC = driver.find_elements_by_class_name('ta-c')
@@ -145,7 +145,6 @@ def dadosPlano(driver, title):
     maxVidas = 0
     teste = 0
     testeQsaude = 0
-
 
     for i, ele in enumerate(elemestsClassTaC):
         # print(ele.get_attribute("class"))
@@ -521,6 +520,7 @@ def navegacao(driver):
                                                  and not re.search('SEM REMISSÃO',
                                                                    textBox)) and not refCheckBoxDesabilited:
             refOperadora = True
+
         elif re.search('QSAÚDE', textBox):
             refOperadora = False
         elif re.search('CENTRAL NACIONAL UNIMED', textBox):

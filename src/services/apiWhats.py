@@ -2,6 +2,9 @@ import json
 import requests
 from src import acesso
 
+ativarEnvio = True
+ativarLog = True
+
 def sendMessage(message, number):
 
     url = f'{acesso.getUrlApiWhats}'
@@ -11,4 +14,12 @@ def sendMessage(message, number):
                'accept': 'application/json',
                'Authorization': f'{acesso.getAuthorization}'}
 
-    return requests.post(url, data=json.dumps(payload), headers=headers)
+    if ativarEnvio:
+        return requests.post(url, data=json.dumps(payload), headers=headers)
+    else:
+        return False
+
+
+def sendMessageLog(message, number):
+    if ativarLog:
+        sendMessage(message, number)

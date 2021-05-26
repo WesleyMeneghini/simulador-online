@@ -1,4 +1,4 @@
-from src.acesso import getNumberWhatsNotificationPrice
+from src.acesso import getNumberWhatsNotificationPrice, getNumberWhatsNotificationLog
 from src.config import webBrowser
 from src import acesso, login, simular, tabela
 from src.portoSeguroPrecos import obterPrecos
@@ -15,12 +15,12 @@ if __name__ == '__main__':
         formatHorario = "%d/%m/%Y, %H:%M:%S"
 
         mensagem = f"Inicio do script de preços: {datetime.now().strftime(formatHorario)}"
-        apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
+        apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
 
         driver = webBrowser.browser()
         driver.maximize_window()
 
-        simuladorOnline = False
+        simuladorOnline = True
         affinityPortoSeguro = False
         affinityOmint = False
         affinitySompo = False
@@ -57,10 +57,11 @@ if __name__ == '__main__':
         driver.close()
 
         mensagem = f"Final do processo - script de preços: {datetime.now().strftime(formatHorario)}"
-        apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
+        apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
 
     except Exception as e:
         mensagem = f"Erro no script de preços: {datetime.now().strftime(formatHorario)} \n{e}"
-        apiWhats.sendMessage(message=mensagem, number=getNumberWhatsNotificationPrice)
+        apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
+        print(e)
 
 
