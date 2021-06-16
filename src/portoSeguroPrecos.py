@@ -17,11 +17,11 @@ def insertDados(sql, values):
         return False
 
 def obterPrecos(driver):
-    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-saoapaulo.html?_ijt=tfjtds1aq142iso2a15d35tmd9'
-    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-saopaulointerior.html?_ijt=g693dve6jbqj4fof7stdhil8fj'
-    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-litoral-paulista.html?_ijt=5qm0m1o6utu94tm7j2igpsu83c'
-    # site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-vale-do-paraiba.html?_ijt=mm8p81e7en2ohl276l6aj1qe25'
-    site = 'http://localhost:63342/simuladorOnline/src/html/porto-seguro-riodejaneiro.html?_ijt=tks21fagp6a87slb08bgbmu75v'
+    # site = 'http://localhost:63342/SimuladorOnline/src/html/porto-seguro-saoapaulo.html?_ijt=14ikh86p154i5e0qft9v53hfs5'
+    # site = 'http://localhost:63342/SimuladorOnline/src/html/porto-seguro-saopaulointerior.html?_ijt=14ikh86p154i5e0qft9v53hfs5'
+    # site = 'http://localhost:63342/SimuladorOnline/src/html/porto-seguro-litoral-paulista.html?_ijt=i17hgaqtminijelopob0u916bv'
+    # site = 'http://localhost:63342/SimuladorOnline/src/html/porto-seguro-vale-do-paraiba.html?_ijt=q3ft618dngkl93qgs2dd7pee15'
+    site = 'http://localhost:63342/SimuladorOnline/src/html/porto-seguro-riodejaneiro.html?_ijt=igu1iir1fentoheho3l2thc84c'
 
 
     if re.search("porto-seguro-saoapaulo.html", site):
@@ -132,7 +132,7 @@ def obterPrecos(driver):
                         hospitalar = 1
                         id_tipo_empresa = 2
                         id_administradora = 0
-                        data_reajuste = '2021-03-22'
+                        data_reajuste = '2021-06-01'
                         id_tipo_contratacao_lead = 0
                         id_tipo_tabela = None
 

@@ -2,8 +2,8 @@ import json
 import requests
 from src import acesso
 
-ativarEnvio = True
-ativarLog = True
+ativarEnvio = False
+ativarLog = False
 
 def sendMessage(message, number):
 

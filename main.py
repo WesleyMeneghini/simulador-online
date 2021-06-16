@@ -1,4 +1,4 @@
-from src.acesso import getNumberWhatsNotificationPrice, getNumberWhatsNotificationLog
+from src.acesso import getNumberWhatsNotificationLog
 from src.config import webBrowser
 from src import acesso, login, simular, tabela
 from src.portoSeguroPrecos import obterPrecos
@@ -10,58 +10,49 @@ from src.services import apiWhats
 
 if __name__ == '__main__':
 
+    formatHorario = "%d/%m/%Y, %H:%M:%S"
+
+    mensagem = f"Inicio do script de preços: {datetime.now().strftime(formatHorario)}"
+    apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
+
+    driver = webBrowser.browser()
+    driver.maximize_window()
+
+    simuladorOnline = True
+    affinityPortoSeguro = False
+    affinityOmint = False
+    affinitySompo = False
+
     try:
-
-        formatHorario = "%d/%m/%Y, %H:%M:%S"
-
-        mensagem = f"Inicio do script de preços: {datetime.now().strftime(formatHorario)}"
-        apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
-
-        driver = webBrowser.browser()
-        driver.maximize_window()
-
-        simuladorOnline = True
-        affinityPortoSeguro = False
-        affinityOmint = False
-        affinitySompo = False
-
-        try:
-            if simuladorOnline:
-                driver.get(acesso.getSite)
-        except:
-            print("SEM INTERNET!")
-            exec()
-        finally:
-            pass
-
-        # fazer login no simulador Online
         if simuladorOnline:
+            driver.get(acesso.getSite)
+    except:
+        print("SEM INTERNET!")
+        exec()
+    finally:
+        pass
+
+    # fazer login no simulador Online
+    if simuladorOnline:
+        resLogin = login.login(driver)
+        while not resLogin:
             resLogin = login.login(driver)
-            while not resLogin:
-                resLogin = login.login(driver)
 
-            simular.simulador(driver)
+        simular.simulador(driver)
 
-            tabela.navegacao(driver)
+        # tabela.navegacao(driver)
 
-        # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)
-        if affinityPortoSeguro:
-            obterPrecos(driver)
+    # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)
+    if affinityPortoSeguro:
+        obterPrecos(driver)
 
-        if affinityOmint:
-            omintPrecos.obterPrecos(driver=driver)
+    if affinityOmint:
+        omintPrecos.obterPrecos(driver=driver)
 
-        if affinitySompo:
-            sompoPrecos.obterPrecos(driver=driver)
+    if affinitySompo:
+        sompoPrecos.obterPrecos(driver=driver)
 
-        driver.close()
+    driver.close()
 
-        mensagem = f"Final do processo - script de preços: {datetime.now().strftime(formatHorario)}"
-        apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
-
-    except Exception as e:
-        mensagem = f"Erro no script de preços: {datetime.now().strftime(formatHorario)} \n{e}"
-        apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
-        print(e)
-
-
+    mensagem = f"Final do processo - script de preços: {datetime.now().strftime(formatHorario)}"
+    apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)

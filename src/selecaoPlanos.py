@@ -271,6 +271,8 @@ def rasparDados(driver):
                 id_modalidade = 2
             if id_modalidade == "E":
                 id_modalidade = 1
+            if id_modalidade == "AMB":
+                id_modalidade = 2
 
             plano = plano_modalidade[0].strip()
 
@@ -302,6 +304,18 @@ def rasparDados(driver):
                     plano = "CLÁSSICO ENF"
                 elif id_modalidade == 2:
                     plano = "CLÁSSICO APT"
+
+            if id_operadora == 3:
+                if plano == 'TNW':
+                    if id_modalidade == 1:
+                        plano = 'TNME'
+                    elif id_modalidade == 2:
+                        plano = 'TNMQ'
+                elif plano == 'TNPX':
+                    plano = 'TNP 10'
+                elif plano == 'FCX':
+                    plano = 'FLEX'
+
 
             # Verificar qual o modelo de copart da ALLIANZ
             # print(subTitulo)
@@ -404,7 +418,7 @@ def rasparDados(driver):
                     )
 
                     teste = "select * from tbl_preco_faixa_etaria " \
-                            f"where id_area = {id_area} and id_operadora = {id_operadora} and id_tipo_plano = {id_plano} and id_modalidade = {id_modalidade} " \
+                            f"where id_area = {id_area} and id_operadora = {id_operadora} and id_tipo_plano = {id_plano} and id_modalidade = '{id_modalidade}' " \
                             f"and id_tipo_contratacao = {tipo_contratacao} and id_coparticipacao = {coparticipacao} and qtd_titulares = {qtd_titulares} " \
                             f"and min_vidas = {min_vidas} and max_vidas = {max_vidas} and id_sindicato is null and id_tipo_empresa = {id_tipo_empresa} and hospitalar = {hospitalar};"
                     print(teste)
@@ -456,6 +470,7 @@ def rasparDados(driver):
                                      f"`preco_m59`='{valores[9]}'," \
                                      f"`min_vidas`='{min_vidas}', " \
                                      f"`max_vidas`='{max_vidas}', " \
+                                     f"`status`='1', " \
                                      f"`ultimo_reajuste`='{data_reajuste}' " \
                                      f"WHERE `id`='{id}';"
                             print(update)
@@ -1070,50 +1085,62 @@ def obterDados(driver, tipo_tabela_option):
                                 (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
                         )
                     finally:
+                        try:
+                            WebDriverWait(driver, 30).until(
+                                EC.presence_of_element_located(
+                                    (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p'))
+                            )
+                        finally:
+                            pass
                         nome_operadora = driver.find_element_by_xpath(
                             f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
 
                         refNomeOperadora = False
                         buscarTodasOperadoras = False
 
-                        if not buscarTodasOperadoras:
-                            if re.search('BRADESCO', nome_operadora):
-                                refNomeOperadora = True
-                            if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
-                                refNomeOperadora = True
-                            if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-                                refNomeOperadora = True
-                            if re.search('AMIL ONE -', str(nome_operadora).upper()):
-                                refNomeOperadora = True
-                            if re.search('SULAMÉRICA', str(nome_operadora).upper()):
-                                refNomeOperadora = False
-                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
-                                refNomeOperadora = False
-                            if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
-                                refNomeOperadora = False
-                            if re.search('SOMPO', str(nome_operadora).upper()):
-                                refNomeOperadora = True
-                            if re.search('PORTO SEGURO', nome_operadora):
-                                refNomeOperadora = False
-                            if re.search('ALLIANZ', nome_operadora):
-                                refNomeOperadora = True
-                            if re.search('NOTREDAME', nome_operadora):
-                                refNomeOperadora = True
+                        try:
+                            elementoAtualizacao = driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[2]/b')
+                            if re.search('Essa Tabela está sendo atualizada neste momento', elementoAtualizacao.text):
+                                print(f"Em atualizacao de precos: {nome_operadora}")
+                        except:
+                            if not buscarTodasOperadoras:
+                                if re.search('BRADESCO', nome_operadora):
+                                    refNomeOperadora = True
+                                if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
+                                    refNomeOperadora = True
+                                if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
+                                    refNomeOperadora = True
+                                if re.search('AMIL ONE -', str(nome_operadora).upper()):
+                                    refNomeOperadora = True
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()):
+                                    refNomeOperadora = False
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
+                                    refNomeOperadora = False
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
+                                    refNomeOperadora = False
+                                if re.search('SOMPO', str(nome_operadora).upper()):
+                                    refNomeOperadora = True
+                                if re.search('PORTO SEGURO', nome_operadora):
+                                    refNomeOperadora = False
+                                if re.search('ALLIANZ', nome_operadora):
+                                    refNomeOperadora = True
+                                if re.search('NOTREDAME', nome_operadora):
+                                    refNomeOperadora = True
 
-                        if refNomeOperadora:
-                            print("\n")
-                            print(f"Lendo resultado: {i + 1}")
-                            try:
-                                WebDriverWait(driver, 10).until(
-                                    EC.presence_of_element_located(
-                                        (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
-                                )
-                            except:
-                                print("Erro ao listar os planos")
-                            finally:
-                                pass
+                            if refNomeOperadora:
+                                print("\n")
+                                print(f"Lendo resultado: {i + 1}")
+                                try:
+                                    WebDriverWait(driver, 10).until(
+                                        EC.presence_of_element_located(
+                                            (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
+                                    )
+                                except:
+                                    print("Erro ao listar os planos")
+                                finally:
+                                    pass
 
-                            if verificarAtualizacao(driver, i):
-                                selecionarPlano(driver, i)
-                            else:
-                                print(False)
+                                if verificarAtualizacao(driver, i):
+                                    selecionarPlano(driver, i)
+                                else:
+                                    print(False)
