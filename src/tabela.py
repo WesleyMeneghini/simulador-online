@@ -112,6 +112,8 @@ def dadosPlano(driver, title):
             idArea = 3
         elif re.search('CAMPINAS', title) and idOperadora == 4:
             idArea = 20
+        else:
+            idArea = 1
 
     textBoxSubtitle = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[4]').text
 
@@ -299,7 +301,7 @@ def dadosPlano(driver, title):
                             if (ultimo_reajuste is None or not (ultimo_reajuste == ultimaAlteracao)) and preco0_18 == \
                                     valores[0]:
                                 print('Atualizar Data')
-                                update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{ultimaAlteracao}' WHERE `id`='{idSelect}';"
+                                update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{ultimaAlteracao}', status = '1' WHERE `id`='{idSelect}';"
                                 # print(update)
                                 if atualizarDataReajuste:
                                     cursor.execute(update)
@@ -331,7 +333,10 @@ def dadosPlano(driver, title):
                                          f"`preco54_58`='{valores[8]}', " \
                                          f"`preco_m59`='{valores[9]}'," \
                                          f"`min_vidas`='{minVidas}', " \
-                                         f"`max_vidas`='{maxVidas}', ultimo_reajuste = '{ultimaAlteracao}' WHERE `id`='{idSelect}';"
+                                         f"`max_vidas`='{maxVidas}', " \
+                                         f"ultimo_reajuste = '{ultimaAlteracao}', " \
+                                         f"status = '1' " \
+                                         f"WHERE `id`='{idSelect}';"
                                 print(update)
 
                                 if updatePrecoPlano:
@@ -390,6 +395,9 @@ def dadosPlano(driver, title):
             if re.search('2 à 2 vidas', textVidas):
                 minVidas = 0
                 maxVidas = 2
+            elif re.search('2 à 29 vidas', textVidas):
+                minVidas = 2
+                maxVidas = 29
             elif re.search('3 à 29 vidas', textVidas):
                 minVidas = 3
                 maxVidas = 29
@@ -507,8 +515,6 @@ def navegacao(driver):
         #     print("Enviar mensagem pelo whats")
 
         refCheckBoxDesabilited = driver.find_element_by_xpath(
-            f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_property('class')
-        refCheckBoxDesabilited = driver.find_element_by_xpath(
             f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_attribute('class')
         if re.search("beautyCheck fullwidth opcy-7", refCheckBoxDesabilited):
             refCheckBoxDesabilited = True
@@ -524,7 +530,7 @@ def navegacao(driver):
         elif re.search('QSAÚDE', textBox):
             refOperadora = False
         elif re.search('CENTRAL NACIONAL UNIMED', textBox):
-            refOperadora = True
+            refOperadora = False
 
         if refOperadora:
             driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()

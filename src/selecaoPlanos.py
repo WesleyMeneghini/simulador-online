@@ -318,10 +318,14 @@ def rasparDados(driver):
 
 
             # Verificar qual o modelo de copart da ALLIANZ
-            # print(subTitulo)
-            if subTitulo is not None:
-                if re.search('20% PARA CONSULTAS E EXAMES, LIMITADO A', str(subTitulo).upper()) and nome_operadora == 'ALLIANZ':
-                    plano = f"{plano} M2"
+            if re.search('ALLIANZ', nome_operadora):
+
+                if plano == 'ESSENCIAL 20':
+                    plano = 'ESSENCIAL 10'
+
+                if subTitulo is not None:
+                    if re.search('20% PARA CONSULTAS E EXAMES, LIMITADO A', str(subTitulo).upper()) and nome_operadora == 'ALLIANZ':
+                        plano = f"{plano} M2"
 
             # Variacao de nome de planos SULAMERICA
             if re.search('SULAMÉRICA', nome_operadora):
@@ -337,7 +341,6 @@ def rasparDados(driver):
                     plano = 'SMART 200 - SP'
 
                 plano = plano.replace("-", "")
-
 
             nome_plano = plano
             plano = plano.replace(" ", "")
@@ -440,7 +443,7 @@ def rasparDados(driver):
                         # Condicao para alterar a data do reajuste caso os precos estejam iguais mais sem data
                         if (ultimo_reajuste is None or not( ultimo_reajuste == data_reajuste)) and preco0_18 == valores[0]:
                             print('Atualizar Data')
-                            update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{data_reajuste}' WHERE `id`='{id}';"
+                            update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{data_reajuste}', status = 1 WHERE `id`='{id}';"
                             print(update)
                             if atualizarDataReajuste:
                                 cursor.execute(update)
@@ -1119,7 +1122,7 @@ def obterDados(driver, tipo_tabela_option):
                                 if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
                                     refNomeOperadora = False
                                 if re.search('SOMPO', str(nome_operadora).upper()):
-                                    refNomeOperadora = True
+                                    refNomeOperadora = False
                                 if re.search('PORTO SEGURO', nome_operadora):
                                     refNomeOperadora = False
                                 if re.search('ALLIANZ', nome_operadora):

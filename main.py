@@ -38,9 +38,27 @@ if __name__ == '__main__':
         while not resLogin:
             resLogin = login.login(driver)
 
-        simular.simulador(driver)
+        try:
 
-        # tabela.navegacao(driver)
+            simular.simulador(driver)
+
+            mensagem = f"Preços pela Simulçao (Finalizado): {datetime.now().strftime(formatHorario)}"
+            apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
+        except Exception as e:
+            apiWhats.sendMessageLog(message=e, number=getNumberWhatsNotificationLog)
+            print(e)
+            pass
+        finally:
+
+            try:
+                tabela.navegacao(driver)
+            except Exception as e:
+                apiWhats.sendMessageLog(message=e, number=getNumberWhatsNotificationLog)
+                print(e)
+                pass
+            finally:
+                mensagem = f"Preços pela Tabela (Finalizado): {datetime.now().strftime(formatHorario)}"
+                apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
 
     # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)
     if affinityPortoSeguro:
