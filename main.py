@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
             simular.simulador(driver)
 
-            mensagem = f"Preços pela Simulçao (Finalizado): {datetime.now().strftime(formatHorario)}"
+            mensagem = f"Preços pela Simulaçao Tradicional (Finalizado): {datetime.now().strftime(formatHorario)}"
             apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
         except Exception as e:
             apiWhats.sendMessageLog(message=e, number=getNumberWhatsNotificationLog)

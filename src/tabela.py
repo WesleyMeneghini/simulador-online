@@ -168,7 +168,8 @@ def dadosPlano(driver, title):
 
             countPrecosTabela += 1
             # print(driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text)
-            ultimaAlteracao = driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text.split(": ")[1].split("/")
+            ultimaAlteracao = driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text.split(": ")[1].split(
+                "/")
             ultimaAlteracao = f"{ultimaAlteracao[2]}-{ultimaAlteracao[1]}-{ultimaAlteracao[0]}"
             ultimaAlteracao = datetime.strptime(str(ultimaAlteracao), '%Y-%m-%d').date()
 
@@ -342,8 +343,10 @@ def dadosPlano(driver, title):
                                 if updatePrecoPlano:
                                     res = cursor.execute(update)
                                     mensagem = f"Plano: {plano} \nIdOperadora: {idOperadora}\n SQL:{sql}"
-                                    res2 = apiWhats.sendMessage(message=mensagem,
-                                                                number=getNumberWhatsNotificationPrice)
+                                    res2 = apiWhats.sendMessageAlert(
+                                        message=mensagem,
+                                        number=getNumberWhatsNotificationPrice
+                                    )
                                     print(res2)
                                 else:
                                     res = 1
@@ -482,7 +485,7 @@ def navegacao(driver):
     qttResults = int(str(driver.find_element_by_class_name('bgGray').text).split("(")[1].split(")")[0])
 
     voltar = False
-    for i in range(0, qttResults-1):
+    for i in range(0, qttResults - 1):
         # for i in range(235, 242):
 
         if voltar:

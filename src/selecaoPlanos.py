@@ -14,6 +14,7 @@ from src.services import apiWhats
 id_area = 0
 id_operadora = 0
 nome_operadora = ""
+nomeOperadoraTitle = ""
 coparticipacao = 2
 hospitalar = 0
 tipo_contratacao = 0
@@ -65,6 +66,7 @@ def rasparDados(driver):
 
     global id_operadora
     global nome_operadora
+    global nomeOperadoraTitle
     global coparticipacao
     global hospitalar
     global min_vidas
@@ -255,7 +257,7 @@ def rasparDados(driver):
         # print(dados)
         inseridos = 0
         del (dados[0])
-        mensagemWhats = "*ATUALIZAÇAO DE PREÇOS* \n\n"
+        mensagemWhats = f"*ATUALIZAÇÃO DE PREÇOS* \n\n{nomeOperadoraTitle.upper()}\n"
         mensagemWhatsInicial = mensagemWhats
         for dado in dados:
 
@@ -269,10 +271,13 @@ def rasparDados(driver):
             id_modalidade = plano_modalidade[1].strip().replace(")", "")
             if id_modalidade == "A":
                 id_modalidade = 2
-            if id_modalidade == "E":
+            elif id_modalidade == "E":
                 id_modalidade = 1
-            if id_modalidade == "AMB":
+            elif id_modalidade == "AMB":
                 id_modalidade = 2
+            else:
+                print("Modalidade nao encontrada!")
+                break
 
             plano = plano_modalidade[0].strip()
 
@@ -296,8 +301,6 @@ def rasparDados(driver):
             elif (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and id_operadora == 12 and id_modalidade == 2:
                 plano = "CLÁSSICO APT"
 
-
-
             if (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and (
                     id_operadora == 2 or id_operadora == 5 or id_operadora == 8):
                 if id_modalidade == 1:
@@ -307,15 +310,11 @@ def rasparDados(driver):
 
             if id_operadora == 3:
                 if plano == 'TNW':
-                    if id_modalidade == 1:
-                        plano = 'TNME'
-                    elif id_modalidade == 2:
-                        plano = 'TNMQ'
+                    plano = 'TNO'
                 elif plano == 'TNPX':
                     plano = 'TNP 10'
                 elif plano == 'FCX':
                     plano = 'FLEX'
-
 
             # Verificar qual o modelo de copart da ALLIANZ
             if re.search('ALLIANZ', nome_operadora):
@@ -539,7 +538,7 @@ def rasparDados(driver):
                     planos_sem_cadastros.append(f"{nome_plano}")
 
         if not mensagemWhats == mensagemWhatsInicial:
-            apiWhats.sendMessage(message=mensagemWhats, number=getNumberWhatsNotificationPrice)
+            apiWhats.sendMessageAlert(message=mensagemWhats, number=getNumberWhatsNotificationPrice)
         print(f"Total de preços de planos atualizados: {inseridos}")
     cursor.close()
     conn.commit()
@@ -970,6 +969,7 @@ def obterDados(driver, tipo_tabela_option):
     global estadoMinasGerais
     global estadoEspiritoSanto
     global estadoMatoGrosso
+    global nomeOperadoraTitle
 
     global nome_operadora
 
@@ -1096,6 +1096,9 @@ def obterDados(driver, tipo_tabela_option):
                         finally:
                             pass
                         nome_operadora = driver.find_element_by_xpath(
+                            f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
+
+                        nomeOperadoraTitle = driver.find_element_by_xpath(
                             f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[1]/p').text
 
                         refNomeOperadora = False

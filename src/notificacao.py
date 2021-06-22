@@ -58,17 +58,20 @@ def notificacao(driver):
                     qtt = resSelect[0]
 
                     if qtt == 0:
-                        res = apiWhats.sendMessage(message=message, number=number)
+                        res = apiWhats.sendMessageAlert(message=message, number=number)
 
-                        if int(res.status_code) == 200:
-                            count += 1
-                            print("Mensagem Enviada com Sucesso!")
-                            insert = f"INSERT INTO tbl_log_whatsapp_msg(numero, mensagem, retorno) " \
-                                     f"values ('{number}', '{message}', '{res.text}');"
-                            cursor.execute(insert)
-                            conn.commit()
+                        if res:
+                            if int(res.status_code) == 200:
+                                count += 1
+                                print("Mensagem Enviada com Sucesso!")
+                                insert = f"INSERT INTO tbl_log_whatsapp_msg(numero, mensagem, retorno) " \
+                                         f"values ('{number}', '{message}', '{res.text}');"
+                                cursor.execute(insert)
+                                conn.commit()
+                            else:
+                                print(f"Erro ao enviar a mensagem! STATUS CODE -> {res}")
                         else:
-                            print(f"Erro ao enviar a mensagem! STATUS CODE -> {res}")
+                            print(f"Envio de mensagem (status): {res}")
                     else:
                         print("Mensagem ja consta como enviada no sistema!")
 

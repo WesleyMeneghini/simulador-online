@@ -3,9 +3,12 @@ import requests
 from src import acesso
 
 ativarEnvio = False
-ativarLog = False
+ativarLog = True
+
 
 def sendMessage(message, number):
+
+    global ativarEnvio
 
     url = f'{acesso.getUrlApiWhats}'
     payload = {'message': f'{message}',
@@ -14,12 +17,24 @@ def sendMessage(message, number):
                'accept': 'application/json',
                'Authorization': f'{acesso.getAuthorization}'}
 
-    if ativarEnvio:
-        return requests.post(url, data=json.dumps(payload), headers=headers)
+    return requests.post(url, data=json.dumps(payload), headers=headers)
+
+
+def sendMessageLog(message, number):
+
+    global ativarLog
+
+    if ativarLog:
+        return sendMessage(message, number)
     else:
         return False
 
 
-def sendMessageLog(message, number):
+def sendMessageAlert(message, number):
+
+    global ativarEnvio
+
     if ativarLog:
-        sendMessage(message, number)
+        return sendMessage(message, number)
+    else:
+        return False
