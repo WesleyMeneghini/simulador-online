@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+<meta charset="utf-8">
+<title>Painel do Corretor | Sompo Saúde - Interior/SP</title>
+<meta name="viewport" content="width=device-width">
+<link href="/content/styles?v=KXojy2qX3ZJ_OYOsQu1SuygA87La8-w8EE-z46Y8WLM1" rel="stylesheet">
+<style>
+        .ajax-loader {
+            margin: 50px auto;
+            width: 250px;
+        }
+
+        table table td {
+            vertical-align: middle !important;
+        }
+
+        .produto-selector {
+            margin-bottom: 20px;
+            position: relative;
+            float: right;
+            /*width: 250px;*/
+        }
+
+            .produto-selector ul {
+                list-style: none;
+                margin: 0;
+                max-height: 60px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                border: 1px solid #d0dde9;
+                border-top: none;
+                box-sizing: border-box;
+                padding-left: 2px;
+            }
+
+                .produto-selector ul li {
+                    white-space: nowrap;
+                }
+
+                .produto-selector ul li {
+                    margin-left: 15px;
+                    margin-right: 5px;
+                    position: relative;
+                }
+
+                    .produto-selector ul li a {
+                        color: inherit;
+                        text-overflow: ellipsis;
+                        display: block;
+                        overflow: hidden;
+                    }
+
+                    .produto-selector ul li.selected:before {
+                        content: "\f14a";
+                        font-family: FontAwesome;
+                        color: green;
+                        left: -13px;
+                        position: absolute;
+                    }
+
+            .produto-selector input {
+                width: 100%;
+                border-radius: 0;
+                padding-right: 25px;
+            }
+
+            .produto-selector i {
+                position: absolute;
+                top: 27px;
+                right: 7px;
+                color: lightgray;
+            }
+
+        .operadora-item {
+            margin-right: 10px;
+        }
+
+        .stretch-item {
+            vertical-align: top;
+        }
+    </style>
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body style="">
+<div class="wrapper">
+
+<div class="navbar navbar-inverse">
+<div class="navbar-inner">
+<div class="container">
+<button type="button" class="btn btn-navbar visible-phone" id="menu-toggler">
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="brand" href="/">Painel do Corretor</a>
+<div class="">
+ <div class="pull-right">
+<ul class="nav pull-right">
+<li><a href="/" id="loginLink">Entrar</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div id="sidebar-nav">
+<ul id="dashboard-menu">
+</ul>
+</div>
+
+<div class="content">
+
+<div class="breadcrumbs" id="breadcrumbs">
+<ul class="breadcrumb">
+<li>
+<i class="icon-home home-icon"></i>
+Produtos
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Individual" target="">Saúde</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Pme" target="">PME</a>
+<span class="divider">
+<i class="icon-angle-right arrow-icon"></i>
+</span>
+</li>
+<li>
+<a href="/produtos/Pme/1471/1366" target="">Sompo Seguros</a>
+</li>
+</ul>
+</div>
+<div class="container-fluid">
+<div id="pad-wrapper">
+
+<div id="main" class="main">
+<div class="row-fluid ">
+<div class="span8">
+<div class="stretch-item">
+<a class="thumbnail operadora-item">
+<span style="background-image:url('https://storage.googleapis.com/trindade-cdn-painel-v1-mr-us-prod/logotipos/sompo-seguros.png')" class="logo-center"></span>
+</a>
+</div>
+<div class="stretch-item stretch">
+<h3 class="row-fluid">Sompo Saúde - Interior/SP</h3>
+<strong class="text-left">Aviso Importante: informativo de caráter referencial. Valores, regras de comercialização, rede credenciada e condições contratuais são determinadas pelas seguradoras/operadoras e podem ser alterados pelas mesmas a qualquer momento. Os preços e condições estão sujeitos a confirmação no ato do fechamento do contrato.</strong>
+</div>
+</div>
+<div class="span4">
+<div class="produto-selector">
+<strong>Mais opções:</strong><br>
+<input type="text" class="search" placeholder="Busca"><i class="icon-search"></i>
+<br>
+<ul>
+<li class="" title="Sompo Saúde - Grupo de Estados">
+<a href="/produtos/Pme/1471/1366">
+Sompo Saúde - Grupo de Estados
+</a>
+</li>
+<li class="" title="Sompo Saúde - Grupo de Municípios">
+<a href="/produtos/Pme/1471/5833">
+Sompo Saúde - Grupo de Municípios
+</a>
+</li>
+<li class="selected" title="Sompo Saúde - Interior/SP">
+<a href="/produtos/Pme/1471/5491">
+Sompo Saúde - Interior/SP
+</a>
+</li>
+<li class="" title="Sompo Saúde - Rio de Janeiro">
+<a href="/produtos/Pme/1471/5914">
+Sompo Saúde - Rio de Janeiro
+</a>
+</li>
+</ul>
+<input data-val="true" data-val-number="The field ProdutoId must be a number." id="ProdutoId" name="ProdutoId" type="hidden" value="5491">
+</div>
+</div>
+</div>
+<div class="row-fluid">
+<div class="span12">
+<fieldset class="produto-filter form-horizontal">
+<div class="control-group">
+<label class="control-label">Coparticipação</label>
+<div class="controls">
+<select name="Coparticipacao">
+<option value="">Indiferente</option>
+<option value="false">Sem coparticipação</option>
+<option value="true">Com coparticipação</option>
+</select>
+</div>
+</div>
+</fieldset>
+<hr>
+<div class="tabbable" id="tab">
+<ul class="nav nav-tabs hidden-phone">
+<li class="active"><a href="#tab-produto" title="Preços" data-toggle="tab" data-get="getprecotabela">Preços</a></li>
+<li><a href="#tab-redeCredenciada" title="Rede Credenciada" data-toggle="tab" data-get="getredecredenciada">Rede Credenciada</a></li>
+<li><a href="#tab-manualCorretor" title="Manual do Corretor" data-toggle="tab" data-get="getmanual">Manual do Corretor</a></li>
+<li><a href="#tab-criteriosReducao" title="Critérios de Redução" data-toggle="tab" data-get="getcriterioreducao">Critérios de Redução</a></li>
+<li><a href="#tab-anexos" title="Anexos" data-toggle="tab" data-get="getanexos">Anexos</a></li>
+</ul>
+<div class="visible-phone">
+<select class="span12" id="cboProdutosMobile">
+<option value="#tab-produto">Preços</option>
+<option value="#tab-redeCredenciada">Rede Credenciada</option>
+<option value="#tab-manualCorretor">Manual do Corretor</option>
+<option value="#tab-criteriosReducao">Critérios de Redução</option>
+<option value="#tab-anexos">Anexos</option>
+</select>
+</div>
+<div class="alert alert-warning" style="background-color: white">
+<table class="table table-condensed">
+<tbody><tr>
+<td class="no-wrap">
+<strong>Desconto Promocional</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;">A SOMPO está concedendo um desconto de 7% para São Paulo/Capital e 10% para Interior, já incluso nas tabelas, para propostas protocoladas de 15/06/2021 até 31/07/2021.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="no-wrap">
+<strong>Taxa de Cadastro</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;">R$ 6,00 por vida.</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="no-wrap">
+<strong>Formação do Grupo</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;"><strong>PME</strong> de 03 a 29 vidas.<br>Mínimo de 01 titular com vínculo + 02 dependentes</li>
+</ul>
+</td>
+</tr>
+<tr>
+<td class="no-wrap">
+<strong>Composição</strong>
+</td>
+<td style="width: 99%;">
+<ul>
+<li style="list-style: none;"><strong>Agregados</strong>: pai, mãe, sogro e sogra até 58 anos 11 meses e 29 dias&nbsp;para empresas a partir&nbsp;de&nbsp;21 vidas que devem estar no plano anterior. Para vidas entre 59 e&nbsp;70 anos, verificar a TABELA PARA VIDAS A PARTIR DE 59 ANOS</li>
+</ul>
+</td>
+</tr>
+<tr></tr>
+</tbody></table>
+<strong class="text-right">Aviso Importante: informativo de caráter referencial. Valores, regras de comercialização, rede credenciada e condições contratuais são determinadas pelas seguradoras/operadoras e podem ser alterados pelas mesmas a qualquer momento. Os preços e condições estão sujeitos a confirmação no ato do fechamento do contrato.</strong>
+</div>
+<div class="tab-content">
+<div class="tab-pane active" id="tab-produto">
+<div class="tab-inner-content">
+<h4>Compulsório - Interior de 03 a 29 Vidas SEM Coparticipação - 1 Tit + 2 Dep</h4>
+<p class="text-left muted red">Válido de 01/04/2021 até 31/07/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">251,72</td>
+<td class="text-right " data-title="Acesso [A]">277,53</td>
+<td class="text-right " data-title="Classico [E]">259,49</td>
+<td class="text-right " data-title="Classico [A]">285,89</td>
+<td class="text-right " data-title="Estilo A [A]">305,90</td>
+<td class="text-right " data-title="Estilo B [A]">339,64</td>
+<td class="text-right " data-title="Absoluto A [A]">661,10</td>
+<td class="text-right " data-title="Absoluto B [A]">723,91</td>
+<td class="text-right " data-title="Absoluto C [A]">764,02</td>
+<td class="text-right " data-title="Supremo A [A]">1.064,35</td>
+<td class="text-right " data-title="Supremo B [A]">1.182,61</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">305,95</td>
+<td class="text-right " data-title="Acesso [A]">337,31</td>
+<td class="text-right " data-title="Classico [E]">315,39</td>
+<td class="text-right " data-title="Classico [A]">347,47</td>
+<td class="text-right " data-title="Estilo A [A]">371,78</td>
+<td class="text-right " data-title="Estilo B [A]">412,79</td>
+<td class="text-right " data-title="Absoluto A [A]">803,50</td>
+<td class="text-right " data-title="Absoluto B [A]">879,85</td>
+<td class="text-right " data-title="Absoluto C [A]">928,60</td>
+<td class="text-right " data-title="Supremo A [A]">1.293,61</td>
+<td class="text-right " data-title="Supremo B [A]">1.437,34</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">377,84</td>
+<td class="text-right " data-title="Acesso [A]">416,57</td>
+<td class="text-right " data-title="Classico [E]">389,50</td>
+<td class="text-right " data-title="Classico [A]">429,13</td>
+<td class="text-right " data-title="Estilo A [A]">459,16</td>
+<td class="text-right " data-title="Estilo B [A]">509,80</td>
+<td class="text-right " data-title="Absoluto A [A]">992,31</td>
+<td class="text-right " data-title="Absoluto B [A]">1.086,61</td>
+<td class="text-right " data-title="Absoluto C [A]">1.146,81</td>
+<td class="text-right " data-title="Supremo A [A]">1.597,61</td>
+<td class="text-right " data-title="Supremo B [A]">1.775,12</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+ <td class="text-right " data-title="Acesso [E]">413,74</td>
+<td class="text-right " data-title="Acesso [A]">456,15</td>
+<td class="text-right " data-title="Classico [E]">426,51</td>
+<td class="text-right " data-title="Classico [A]">469,90</td>
+<td class="text-right " data-title="Estilo A [A]">502,78</td>
+<td class="text-right " data-title="Estilo B [A]">558,23</td>
+<td class="text-right " data-title="Absoluto A [A]">1.086,59</td>
+<td class="text-right " data-title="Absoluto B [A]">1.189,83</td>
+<td class="text-right " data-title="Absoluto C [A]">1.255,76</td>
+<td class="text-right " data-title="Supremo A [A]">1.749,38</td>
+<td class="text-right " data-title="Supremo B [A]">1.943,76</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">448,91</td>
+<td class="text-right " data-title="Acesso [A]">494,92</td>
+<td class="text-right " data-title="Classico [E]">462,76</td>
+<td class="text-right " data-title="Classico [A]">509,84</td>
+<td class="text-right " data-title="Estilo A [A]">545,52</td>
+<td class="text-right " data-title="Estilo B [A]">605,68</td>
+<td class="text-right " data-title="Absoluto A [A]">1.178,95</td>
+<td class="text-right " data-title="Absoluto B [A]">1.290,98</td>
+<td class="text-right " data-title="Absoluto C [A]">1.362,51</td>
+<td class="text-right " data-title="Supremo A [A]">1.898,07</td>
+<td class="text-right " data-title="Supremo B [A]">2.108,97</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">518,49</td>
+<td class="text-right " data-title="Acesso [A]">571,63</td>
+<td class="text-right " data-title="Classico [E]">534,49</td>
+<td class="text-right " data-title="Classico [A]">588,87</td>
+<td class="text-right " data-title="Estilo A [A]">630,07</td>
+<td class="text-right " data-title="Estilo B [A]">699,57</td>
+<td class="text-right " data-title="Absoluto A [A]">1.361,68</td>
+<td class="text-right " data-title="Absoluto B [A]">1.491,07</td>
+<td class="text-right " data-title="Absoluto C [A]">1.573,69</td>
+<td class="text-right " data-title="Supremo A [A]">2.192,28</td>
+<td class="text-right " data-title="Supremo B [A]">2.435,87</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">621,40</td>
+<td class="text-right " data-title="Acesso [A]">685,10</td>
+<td class="text-right " data-title="Classico [E]">640,58</td>
+<td class="text-right " data-title="Classico [A]">705,76</td>
+<td class="text-right " data-title="Estilo A [A]">755,13</td>
+<td class="text-right " data-title="Estilo B [A]">838,42</td>
+<td class="text-right " data-title="Absoluto A [A]">1.631,98</td>
+<td class="text-right " data-title="Absoluto B [A]">1.787,05</td>
+<td class="text-right " data-title="Absoluto C [A]">1.886,07</td>
+<td class="text-right " data-title="Supremo A [A]">2.627,44</td>
+<td class="text-right " data-title="Supremo B [A]">2.919,39</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">734,94</td>
+<td class="text-right " data-title="Acesso [A]">810,27</td>
+<td class="text-right " data-title="Classico [E]">757,62</td>
+<td class="text-right " data-title="Classico [A]">834,70</td>
+<td class="text-right " data-title="Estilo A [A]">893,09</td>
+<td class="text-right " data-title="Estilo B [A]">991,60</td>
+<td class="text-right " data-title="Absoluto A [A]">1.930,14</td>
+<td class="text-right " data-title="Absoluto B [A]">2.113,55</td>
+<td class="text-right " data-title="Absoluto C [A]">2.230,66</td>
+<td class="text-right " data-title="Supremo A [A]">3.107,48</td>
+<td class="text-right " data-title="Supremo B [A]">3.452,76</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">891,48</td>
+<td class="text-right " data-title="Acesso [A]">982,86</td>
+<td class="text-right " data-title="Classico [E]">918,99</td>
+<td class="text-right " data-title="Classico [A]">1.012,48</td>
+<td class="text-right " data-title="Estilo A [A]">1.083,33</td>
+<td class="text-right " data-title="Estilo B [A]">1.202,82</td>
+<td class="text-right " data-title="Absoluto A [A]">2.341,26</td>
+<td class="text-right " data-title="Absoluto B [A]">2.563,74</td>
+<td class="text-right " data-title="Absoluto C [A]">2.705,79</td>
+<td class="text-right " data-title="Supremo A [A]">3.769,37</td>
+<td class="text-right " data-title="Supremo B [A]">4.188,19</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.510,16</td>
+<td class="text-right " data-title="Acesso [A]">1.664,96</td>
+<td class="text-right " data-title="Classico [E]">1.556,77</td>
+<td class="text-right " data-title="Classico [A]">1.715,15</td>
+<td class="text-right " data-title="Estilo A [A]">1.835,15</td>
+<td class="text-right " data-title="Estilo B [A]">2.037,57</td>
+<td class="text-right " data-title="Absoluto A [A]">3.966,09</td>
+<td class="text-right " data-title="Absoluto B [A]">4.342,98</td>
+<td class="text-right " data-title="Absoluto C [A]">4.583,62</td>
+<td class="text-right " data-title="Supremo A [A]">6.385,32</td>
+<td class="text-right " data-title="Supremo B [A]">7.094,80</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Interior de 03 a 29 Vidas COM 20% de Coparticipação - 1 Tit + 2 Dep</h4>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">203,89</td>
+<td class="text-right " data-title="Acesso [A]">224,80</td>
+<td class="text-right " data-title="Classico [E]">210,19</td>
+<td class="text-right " data-title="Classico [A]">231,57</td>
+<td class="text-right " data-title="Estilo A [A]">247,78</td>
+<td class="text-right " data-title="Estilo B [A]">275,11</td>
+<td class="text-right " data-title="Absoluto A [A]">535,49</td>
+<td class="text-right " data-title="Absoluto B [A]">586,37</td>
+<td class="text-right " data-title="Absoluto C [A]">618,86</td>
+<td class="text-right " data-title="Supremo A [A]">907,50</td>
+<td class="text-right " data-title="Supremo B [A]">1.008,33</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">247,82</td>
+<td class="text-right " data-title="Acesso [A]">273,22</td>
+<td class="text-right " data-title="Classico [E]">255,47</td>
+<td class="text-right " data-title="Classico [A]">281,45</td>
+<td class="text-right " data-title="Estilo A [A]">301,14</td>
+<td class="text-right " data-title="Estilo B [A]">334,36</td>
+<td class="text-right " data-title="Absoluto A [A]">650,84</td>
+<td class="text-right " data-title="Absoluto B [A]">712,68</td>
+<td class="text-right " data-title="Absoluto C [A]">752,17</td>
+<td class="text-right " data-title="Supremo A [A]">1.102,97</td>
+<td class="text-right " data-title="Supremo B [A]">1.225,52</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">306,05</td>
+<td class="text-right " data-title="Acesso [A]">337,42</td>
+<td class="text-right " data-title="Classico [E]">315,50</td>
+<td class="text-right " data-title="Classico [A]">347,60</td>
+<td class="text-right " data-title="Estilo A [A]">371,92</td>
+<td class="text-right " data-title="Estilo B [A]">412,94</td>
+<td class="text-right " data-title="Absoluto A [A]">803,77</td>
+<td class="text-right " data-title="Absoluto B [A]">880,15</td>
+<td class="text-right " data-title="Absoluto C [A]">928,92</td>
+<td class="text-right " data-title="Supremo A [A]">1.362,17</td>
+<td class="text-right " data-title="Supremo B [A]">1.513,53</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">335,13</td>
+<td class="text-right " data-title="Acesso [A]">369,48</td>
+<td class="text-right " data-title="Classico [E]">345,47</td>
+<td class="text-right " data-title="Classico [A]">380,62</td>
+<td class="text-right " data-title="Estilo A [A]">407,25</td>
+<td class="text-right " data-title="Estilo B [A]">452,17</td>
+<td class="text-right " data-title="Absoluto A [A]">880,14</td>
+<td class="text-right " data-title="Absoluto B [A]">963,76</td>
+<td class="text-right " data-title="Absoluto C [A]">1.017,17</td>
+<td class="text-right " data-title="Supremo A [A]">1.491,57</td>
+<td class="text-right " data-title="Supremo B [A]">1.657,31</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">363,62</td>
+<td class="text-right " data-title="Acesso [A]">400,89</td>
+ <td class="text-right " data-title="Classico [E]">374,84</td>
+<td class="text-right " data-title="Classico [A]">412,97</td>
+<td class="text-right " data-title="Estilo A [A]">441,87</td>
+<td class="text-right " data-title="Estilo B [A]">490,60</td>
+<td class="text-right " data-title="Absoluto A [A]">954,95</td>
+<td class="text-right " data-title="Absoluto B [A]">1.045,69</td>
+<td class="text-right " data-title="Absoluto C [A]">1.103,63</td>
+<td class="text-right " data-title="Supremo A [A]">1.618,36</td>
+<td class="text-right " data-title="Supremo B [A]">1.798,18</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">419,98</td>
+<td class="text-right " data-title="Acesso [A]">463,02</td>
+<td class="text-right " data-title="Classico [E]">432,94</td>
+<td class="text-right " data-title="Classico [A]">476,98</td>
+<td class="text-right " data-title="Estilo A [A]">510,36</td>
+<td class="text-right " data-title="Estilo B [A]">566,65</td>
+<td class="text-right " data-title="Absoluto A [A]">1.102,96</td>
+<td class="text-right " data-title="Absoluto B [A]">1.207,77</td>
+<td class="text-right " data-title="Absoluto C [A]">1.274,69</td>
+<td class="text-right " data-title="Supremo A [A]">1.869,20</td>
+<td class="text-right " data-title="Supremo B [A]">2.076,90</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">503,33</td>
+<td class="text-right " data-title="Acesso [A]">554,93</td>
+<td class="text-right " data-title="Classico [E]">518,87</td>
+<td class="text-right " data-title="Classico [A]">571,67</td>
+<td class="text-right " data-title="Estilo A [A]">611,66</td>
+<td class="text-right " data-title="Estilo B [A]">679,12</td>
+<td class="text-right " data-title="Absoluto A [A]">1.321,90</td>
+<td class="text-right " data-title="Absoluto B [A]">1.447,51</td>
+<td class="text-right " data-title="Absoluto C [A]">1.527,72</td>
+<td class="text-right " data-title="Supremo A [A]">2.240,24</td>
+<td class="text-right " data-title="Supremo B [A]">2.489,16</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">595,30</td>
+<td class="text-right " data-title="Acesso [A]">656,32</td>
+<td class="text-right " data-title="Classico [E]">613,67</td>
+<td class="text-right " data-title="Classico [A]">676,11</td>
+<td class="text-right " data-title="Estilo A [A]">723,40</td>
+<td class="text-right " data-title="Estilo B [A]">803,20</td>
+<td class="text-right " data-title="Absoluto A [A]">1.563,41</td>
+<td class="text-right " data-title="Absoluto B [A]">1.711,98</td>
+<td class="text-right " data-title="Absoluto C [A]">1.806,83</td>
+<td class="text-right " data-title="Supremo A [A]">2.649,53</td>
+<td class="text-right " data-title="Supremo B [A]">2.943,93</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">722,10</td>
+<td class="text-right " data-title="Acesso [A]">796,12</td>
+<td class="text-right " data-title="Classico [E]">744,38</td>
+<td class="text-right " data-title="Classico [A]">820,11</td>
+<td class="text-right " data-title="Estilo A [A]">877,50</td>
+<td class="text-right " data-title="Estilo B [A]">974,28</td>
+<td class="text-right " data-title="Absoluto A [A]">1.896,42</td>
+<td class="text-right " data-title="Absoluto B [A]">2.076,63</td>
+<td class="text-right " data-title="Absoluto C [A]">2.191,69</td>
+<td class="text-right " data-title="Supremo A [A]">3.213,89</td>
+<td class="text-right " data-title="Supremo B [A]">3.570,98</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.223,23</td>
+<td class="text-right " data-title="Acesso [A]">1.348,62</td>
+<td class="text-right " data-title="Classico [E]">1.260,98</td>
+<td class="text-right " data-title="Classico [A]">1.389,27</td>
+<td class="text-right " data-title="Estilo A [A]">1.486,47</td>
+<td class="text-right " data-title="Estilo B [A]">1.650,43</td>
+<td class="text-right " data-title="Absoluto A [A]">3.212,53</td>
+<td class="text-right " data-title="Absoluto B [A]">3.517,81</td>
+<td class="text-right " data-title="Absoluto C [A]">3.712,73</td>
+<td class="text-right " data-title="Supremo A [A]">5.444,33</td>
+<td class="text-right " data-title="Supremo B [A]">6.049,25</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Interior de 03 a 29 Vidas COM 30% de Coparticipação - 1 Tit + 2 Dep</h4>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">192,57</td>
+<td class="text-right " data-title="Acesso [A]">212,31</td>
+<td class="text-right " data-title="Classico [E]">198,51</td>
+<td class="text-right " data-title="Classico [A]">218,71</td>
+<td class="text-right " data-title="Estilo A [A]">234,01</td>
+<td class="text-right " data-title="Estilo B [A]">259,82</td>
+<td class="text-right " data-title="Absoluto A [A]">505,74</td>
+<td class="text-right " data-title="Absoluto B [A]">553,79</td>
+<td class="text-right " data-title="Absoluto C [A]">584,48</td>
+<td class="text-right " data-title="Supremo A [A]">857,08</td>
+<td class="text-right " data-title="Supremo B [A]">952,31</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">234,05</td>
+<td class="text-right " data-title="Acesso [A]">258,04</td>
+<td class="text-right " data-title="Classico [E]">241,27</td>
+ <td class="text-right " data-title="Classico [A]">265,81</td>
+<td class="text-right " data-title="Estilo A [A]">284,41</td>
+<td class="text-right " data-title="Estilo B [A]">315,78</td>
+<td class="text-right " data-title="Absoluto A [A]">614,68</td>
+<td class="text-right " data-title="Absoluto B [A]">673,09</td>
+<td class="text-right " data-title="Absoluto C [A]">710,38</td>
+<td class="text-right " data-title="Supremo A [A]">1.041,69</td>
+<td class="text-right " data-title="Supremo B [A]">1.157,44</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">289,05</td>
+<td class="text-right " data-title="Acesso [A]">318,68</td>
+<td class="text-right " data-title="Classico [E]">297,97</td>
+<td class="text-right " data-title="Classico [A]">328,28</td>
+<td class="text-right " data-title="Estilo A [A]">351,26</td>
+<td class="text-right " data-title="Estilo B [A]">390,00</td>
+<td class="text-right " data-title="Absoluto A [A]">759,12</td>
+<td class="text-right " data-title="Absoluto B [A]">831,26</td>
+<td class="text-right " data-title="Absoluto C [A]">877,31</td>
+<td class="text-right " data-title="Supremo A [A]">1.286,49</td>
+<td class="text-right " data-title="Supremo B [A]">1.429,44</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">316,51</td>
+<td class="text-right " data-title="Acesso [A]">348,95</td>
+<td class="text-right " data-title="Classico [E]">326,28</td>
+<td class="text-right " data-title="Classico [A]">359,47</td>
+<td class="text-right " data-title="Estilo A [A]">384,63</td>
+<td class="text-right " data-title="Estilo B [A]">427,05</td>
+<td class="text-right " data-title="Absoluto A [A]">831,24</td>
+<td class="text-right " data-title="Absoluto B [A]">910,22</td>
+<td class="text-right " data-title="Absoluto C [A]">960,66</td>
+<td class="text-right " data-title="Supremo A [A]">1.408,71</td>
+<td class="text-right " data-title="Supremo B [A]">1.565,24</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">343,42</td>
+<td class="text-right " data-title="Acesso [A]">378,61</td>
+<td class="text-right " data-title="Classico [E]">354,01</td>
+<td class="text-right " data-title="Classico [A]">390,03</td>
+<td class="text-right " data-title="Estilo A [A]">417,32</td>
+<td class="text-right " data-title="Estilo B [A]">463,35</td>
+<td class="text-right " data-title="Absoluto A [A]">901,90</td>
+<td class="text-right " data-title="Absoluto B [A]">987,60</td>
+<td class="text-right " data-title="Absoluto C [A]">1.042,32</td>
+<td class="text-right " data-title="Supremo A [A]">1.528,45</td>
+<td class="text-right " data-title="Supremo B [A]">1.698,28</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">396,64</td>
+<td class="text-right " data-title="Acesso [A]">437,30</td>
+<td class="text-right " data-title="Classico [E]">408,88</td>
+<td class="text-right " data-title="Classico [A]">450,49</td>
+ <td class="text-right " data-title="Estilo A [A]">482,00</td>
+<td class="text-right " data-title="Estilo B [A]">535,17</td>
+<td class="text-right " data-title="Absoluto A [A]">1.041,69</td>
+<td class="text-right " data-title="Absoluto B [A]">1.140,67</td>
+<td class="text-right " data-title="Absoluto C [A]">1.203,87</td>
+<td class="text-right " data-title="Supremo A [A]">1.765,36</td>
+<td class="text-right " data-title="Supremo B [A]">1.961,51</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">475,37</td>
+<td class="text-right " data-title="Acesso [A]">524,10</td>
+<td class="text-right " data-title="Classico [E]">490,04</td>
+<td class="text-right " data-title="Classico [A]">539,91</td>
+<td class="text-right " data-title="Estilo A [A]">577,67</td>
+<td class="text-right " data-title="Estilo B [A]">641,39</td>
+<td class="text-right " data-title="Absoluto A [A]">1.248,46</td>
+<td class="text-right " data-title="Absoluto B [A]">1.367,09</td>
+<td class="text-right " data-title="Absoluto C [A]">1.442,84</td>
+<td class="text-right " data-title="Supremo A [A]">2.115,78</td>
+<td class="text-right " data-title="Supremo B [A]">2.350,88</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">562,23</td>
+<td class="text-right " data-title="Acesso [A]">619,86</td>
+<td class="text-right " data-title="Classico [E]">579,58</td>
+<td class="text-right " data-title="Classico [A]">638,55</td>
+<td class="text-right " data-title="Estilo A [A]">683,21</td>
+<td class="text-right " data-title="Estilo B [A]">758,57</td>
+<td class="text-right " data-title="Absoluto A [A]">1.476,56</td>
+<td class="text-right " data-title="Absoluto B [A]">1.616,87</td>
+<td class="text-right " data-title="Absoluto C [A]">1.706,45</td>
+<td class="text-right " data-title="Supremo A [A]">2.502,34</td>
+<td class="text-right " data-title="Supremo B [A]">2.780,38</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">681,98</td>
+<td class="text-right " data-title="Acesso [A]">751,89</td>
+<td class="text-right " data-title="Classico [E]">703,03</td>
+<td class="text-right " data-title="Classico [A]">774,55</td>
+<td class="text-right " data-title="Estilo A [A]">828,75</td>
+<td class="text-right " data-title="Estilo B [A]">920,16</td>
+<td class="text-right " data-title="Absoluto A [A]">1.791,06</td>
+<td class="text-right " data-title="Absoluto B [A]">1.961,26</td>
+<td class="text-right " data-title="Absoluto C [A]">2.069,93</td>
+<td class="text-right " data-title="Supremo A [A]">3.035,34</td>
+<td class="text-right " data-title="Supremo B [A]">3.372,59</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.155,27</td>
+<td class="text-right " data-title="Acesso [A]">1.273,69</td>
+<td class="text-right " data-title="Classico [E]">1.190,93</td>
+<td class="text-right " data-title="Classico [A]">1.312,09</td>
+<td class="text-right " data-title="Estilo A [A]">1.403,89</td>
+<td class="text-right " data-title="Estilo B [A]">1.558,74</td>
+<td class="text-right " data-title="Absoluto A [A]">3.034,06</td>
+<td class="text-right " data-title="Absoluto B [A]">3.322,38</td>
+<td class="text-right " data-title="Absoluto C [A]">3.506,47</td>
+<td class="text-right " data-title="Supremo A [A]">5.141,86</td>
+<td class="text-right " data-title="Supremo B [A]">5.713,18</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Grupos de 30 a 99 Vidas SEM Coparticipaçao</h4>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">207,76</td>
+<td class="text-right " data-title="Acesso [A]">230,24</td>
+<td class="text-right " data-title="Classico [E]">224,75</td>
+<td class="text-right " data-title="Classico [A]">247,62</td>
+<td class="text-right " data-title="Estilo A [A]">262,41</td>
+<td class="text-right " data-title="Estilo B [A]">283,06</td>
+<td class="text-right " data-title="Absoluto A [A]">580,56</td>
+<td class="text-right " data-title="Absoluto B [A]">635,72</td>
+<td class="text-right " data-title="Absoluto C [A]">670,94</td>
+<td class="text-right " data-title="Supremo A [A]">983,89</td>
+<td class="text-right " data-title="Supremo B [A]">1.093,20</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">252,51</td>
+<td class="text-right " data-title="Acesso [A]">279,84</td>
+<td class="text-right " data-title="Classico [E]">273,17</td>
+<td class="text-right " data-title="Classico [A]">300,95</td>
+<td class="text-right " data-title="Estilo A [A]">318,93</td>
+<td class="text-right " data-title="Estilo B [A]">344,02</td>
+<td class="text-right " data-title="Absoluto A [A]">705,61</td>
+<td class="text-right " data-title="Absoluto B [A]">772,66</td>
+<td class="text-right " data-title="Absoluto C [A]">815,47</td>
+<td class="text-right " data-title="Supremo A [A]">1.195,80</td>
+<td class="text-right " data-title="Supremo B [A]">1.328,67</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">311,84</td>
+<td class="text-right " data-title="Acesso [A]">345,60</td>
+<td class="text-right " data-title="Classico [E]">337,35</td>
+<td class="text-right " data-title="Classico [A]">371,68</td>
+<td class="text-right " data-title="Estilo A [A]">393,88</td>
+<td class="text-right " data-title="Estilo B [A]">424,87</td>
+<td class="text-right " data-title="Absoluto A [A]">871,44</td>
+<td class="text-right " data-title="Absoluto B [A]">954,24</td>
+<td class="text-right " data-title="Absoluto C [A]">1.007,11</td>
+<td class="text-right " data-title="Supremo A [A]">1.476,82</td>
+<td class="text-right " data-title="Supremo B [A]">1.640,91</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">341,47</td>
+<td class="text-right " data-title="Acesso [A]">378,43</td>
+<td class="text-right " data-title="Classico [E]">369,41</td>
+<td class="text-right " data-title="Classico [A]">406,99</td>
+<td class="text-right " data-title="Estilo A [A]">431,30</td>
+<td class="text-right " data-title="Estilo B [A]">465,23</td>
+<td class="text-right " data-title="Absoluto A [A]">954,22</td>
+<td class="text-right " data-title="Absoluto B [A]">1.044,89</td>
+<td class="text-right " data-title="Absoluto C [A]">1.102,78</td>
+<td class="text-right " data-title="Supremo A [A]">1.617,12</td>
+<td class="text-right " data-title="Supremo B [A]">1.796,81</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">370,49</td>
+<td class="text-right " data-title="Acesso [A]">410,60</td>
+<td class="text-right " data-title="Classico [E]">400,80</td>
+<td class="text-right " data-title="Classico [A]">441,58</td>
+<td class="text-right " data-title="Estilo A [A]">467,97</td>
+<td class="text-right " data-title="Estilo B [A]">504,77</td>
+<td class="text-right " data-title="Absoluto A [A]">1.035,33</td>
+<td class="text-right " data-title="Absoluto B [A]">1.133,71</td>
+<td class="text-right " data-title="Absoluto C [A]">1.196,52</td>
+<td class="text-right " data-title="Supremo A [A]">1.754,57</td>
+<td class="text-right " data-title="Supremo B [A]">1.949,53</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">427,93</td>
+<td class="text-right " data-title="Acesso [A]">474,24</td>
+<td class="text-right " data-title="Classico [E]">462,92</td>
+<td class="text-right " data-title="Classico [A]">510,03</td>
+<td class="text-right " data-title="Estilo A [A]">540,50</td>
+<td class="text-right " data-title="Estilo B [A]">583,02</td>
+<td class="text-right " data-title="Absoluto A [A]">1.195,80</td>
+<td class="text-right " data-title="Absoluto B [A]">1.309,43</td>
+<td class="text-right " data-title="Absoluto C [A]">1.381,99</td>
+<td class="text-right " data-title="Supremo A [A]">2.026,53</td>
+<td class="text-right " data-title="Supremo B [A]">2.251,70</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">512,86</td>
+<td class="text-right " data-title="Acesso [A]">568,38</td>
+<td class="text-right " data-title="Classico [E]">554,81</td>
+<td class="text-right " data-title="Classico [A]">611,27</td>
+<td class="text-right " data-title="Estilo A [A]">647,78</td>
+<td class="text-right " data-title="Estilo B [A]">698,74</td>
+<td class="text-right " data-title="Absoluto A [A]">1.433,17</td>
+<td class="text-right " data-title="Absoluto B [A]">1.569,35</td>
+<td class="text-right " data-title="Absoluto C [A]">1.656,31</td>
+<td class="text-right " data-title="Supremo A [A]">2.428,80</td>
+<td class="text-right " data-title="Supremo B [A]">2.698,67</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">606,57</td>
+<td class="text-right " data-title="Acesso [A]">672,22</td>
+<td class="text-right " data-title="Classico [E]">656,19</td>
+<td class="text-right " data-title="Classico [A]">722,96</td>
+<td class="text-right " data-title="Estilo A [A]">766,12</td>
+<td class="text-right " data-title="Estilo B [A]">826,41</td>
+<td class="text-right " data-title="Absoluto A [A]">1.695,01</td>
+<td class="text-right " data-title="Absoluto B [A]">1.856,07</td>
+<td class="text-right " data-title="Absoluto C [A]">1.958,92</td>
+<td class="text-right " data-title="Supremo A [A]">2.872,54</td>
+<td class="text-right " data-title="Supremo B [A]">3.191,71</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">735,77</td>
+<td class="text-right " data-title="Acesso [A]">815,41</td>
+<td class="text-right " data-title="Classico [E]">795,95</td>
+<td class="text-right " data-title="Classico [A]">876,94</td>
+<td class="text-right " data-title="Estilo A [A]">929,32</td>
+<td class="text-right " data-title="Estilo B [A]">1.002,44</td>
+<td class="text-right " data-title="Absoluto A [A]">2.056,05</td>
+<td class="text-right " data-title="Absoluto B [A]">2.251,41</td>
+<td class="text-right " data-title="Absoluto C [A]">2.376,15</td>
+<td class="text-right " data-title="Supremo A [A]">3.484,39</td>
+<td class="text-right " data-title="Supremo B [A]">3.871,55</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.246,39</td>
+<td class="text-right " data-title="Acesso [A]">1.381,31</td>
+<td class="text-right " data-title="Classico [E]">1.348,35</td>
+<td class="text-right " data-title="Classico [A]">1.485,53</td>
+<td class="text-right " data-title="Estilo A [A]">1.574,26</td>
+<td class="text-right " data-title="Estilo B [A]">1.698,13</td>
+<td class="text-right " data-title="Absoluto A [A]">3.482,94</td>
+<td class="text-right " data-title="Absoluto B [A]">3.813,91</td>
+<td class="text-right " data-title="Absoluto C [A]">4.025,23</td>
+<td class="text-right " data-title="Supremo A [A]">5.902,57</td>
+<td class="text-right " data-title="Supremo B [A]">6.558,41</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Grupos de 30 a 99 Vidas COM 20% de Coparticipaçao</h4>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+ <th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">186,98</td>
+<td class="text-right " data-title="Acesso [A]">207,22</td>
+<td class="text-right " data-title="Classico [E]">202,27</td>
+<td class="text-right " data-title="Classico [A]">222,86</td>
+<td class="text-right " data-title="Estilo A [A]">236,17</td>
+<td class="text-right " data-title="Estilo B [A]">254,76</td>
+<td class="text-right " data-title="Absoluto A [A]">522,50</td>
+<td class="text-right " data-title="Absoluto B [A]">572,14</td>
+<td class="text-right " data-title="Absoluto C [A]">603,85</td>
+<td class="text-right " data-title="Supremo A [A]">885,50</td>
+<td class="text-right " data-title="Supremo B [A]">983,88</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">227,26</td>
+<td class="text-right " data-title="Acesso [A]">251,85</td>
+<td class="text-right " data-title="Classico [E]">245,85</td>
+<td class="text-right " data-title="Classico [A]">270,86</td>
+<td class="text-right " data-title="Estilo A [A]">287,03</td>
+<td class="text-right " data-title="Estilo B [A]">309,62</td>
+<td class="text-right " data-title="Absoluto A [A]">635,05</td>
+<td class="text-right " data-title="Absoluto B [A]">695,39</td>
+<td class="text-right " data-title="Absoluto C [A]">733,92</td>
+<td class="text-right " data-title="Supremo A [A]">1.076,22</td>
+<td class="text-right " data-title="Supremo B [A]">1.195,80</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">280,66</td>
+<td class="text-right " data-title="Acesso [A]">311,04</td>
+<td class="text-right " data-title="Classico [E]">303,62</td>
+<td class="text-right " data-title="Classico [A]">334,51</td>
+<td class="text-right " data-title="Estilo A [A]">354,50</td>
+<td class="text-right " data-title="Estilo B [A]">382,38</td>
+<td class="text-right " data-title="Absoluto A [A]">784,29</td>
+<td class="text-right " data-title="Absoluto B [A]">858,82</td>
+<td class="text-right " data-title="Absoluto C [A]">906,40</td>
+<td class="text-right " data-title="Supremo A [A]">1.329,14</td>
+<td class="text-right " data-title="Supremo B [A]">1.476,82</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">307,32</td>
+<td class="text-right " data-title="Acesso [A]">340,59</td>
+<td class="text-right " data-title="Classico [E]">332,47</td>
+<td class="text-right " data-title="Classico [A]">366,29</td>
+<td class="text-right " data-title="Estilo A [A]">388,17</td>
+<td class="text-right " data-title="Estilo B [A]">418,71</td>
+<td class="text-right " data-title="Absoluto A [A]">858,80</td>
+<td class="text-right " data-title="Absoluto B [A]">940,40</td>
+<td class="text-right " data-title="Absoluto C [A]">992,51</td>
+<td class="text-right " data-title="Supremo A [A]">1.455,41</td>
+<td class="text-right " data-title="Supremo B [A]">1.617,13</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">333,45</td>
+<td class="text-right " data-title="Acesso [A]">369,54</td>
+<td class="text-right " data-title="Classico [E]">360,72</td>
+<td class="text-right " data-title="Classico [A]">397,43</td>
+<td class="text-right " data-title="Estilo A [A]">421,17</td>
+<td class="text-right " data-title="Estilo B [A]">454,30</td>
+<td class="text-right " data-title="Absoluto A [A]">931,80</td>
+<td class="text-right " data-title="Absoluto B [A]">1.020,34</td>
+<td class="text-right " data-title="Absoluto C [A]">1.076,87</td>
+<td class="text-right " data-title="Supremo A [A]">1.579,11</td>
+<td class="text-right " data-title="Supremo B [A]">1.754,57</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">385,14</td>
+<td class="text-right " data-title="Acesso [A]">426,81</td>
+<td class="text-right " data-title="Classico [E]">416,63</td>
+<td class="text-right " data-title="Classico [A]">459,03</td>
+<td class="text-right " data-title="Estilo A [A]">486,45</td>
+<td class="text-right " data-title="Estilo B [A]">524,72</td>
+<td class="text-right " data-title="Absoluto A [A]">1.076,22</td>
+<td class="text-right " data-title="Absoluto B [A]">1.178,49</td>
+<td class="text-right " data-title="Absoluto C [A]">1.243,79</td>
+<td class="text-right " data-title="Supremo A [A]">1.823,88</td>
+<td class="text-right " data-title="Supremo B [A]">2.026,53</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">461,57</td>
+<td class="text-right " data-title="Acesso [A]">511,54</td>
+<td class="text-right " data-title="Classico [E]">499,33</td>
+<td class="text-right " data-title="Classico [A]">550,14</td>
+<td class="text-right " data-title="Estilo A [A]">583,00</td>
+<td class="text-right " data-title="Estilo B [A]">628,87</td>
+<td class="text-right " data-title="Absoluto A [A]">1.289,85</td>
+<td class="text-right " data-title="Absoluto B [A]">1.412,42</td>
+<td class="text-right " data-title="Absoluto C [A]">1.490,68</td>
+<td class="text-right " data-title="Supremo A [A]">2.185,92</td>
+<td class="text-right " data-title="Supremo B [A]">2.428,80</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">545,92</td>
+<td class="text-right " data-title="Acesso [A]">605,00</td>
+<td class="text-right " data-title="Classico [E]">590,57</td>
+<td class="text-right " data-title="Classico [A]">650,66</td>
+<td class="text-right " data-title="Estilo A [A]">689,51</td>
+<td class="text-right " data-title="Estilo B [A]">743,77</td>
+<td class="text-right " data-title="Absoluto A [A]">1.525,51</td>
+<td class="text-right " data-title="Absoluto B [A]">1.670,47</td>
+<td class="text-right " data-title="Absoluto C [A]">1.763,03</td>
+<td class="text-right " data-title="Supremo A [A]">2.585,29</td>
+<td class="text-right " data-title="Supremo B [A]">2.872,54</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">662,19</td>
+<td class="text-right " data-title="Acesso [A]">733,87</td>
+<td class="text-right " data-title="Classico [E]">716,35</td>
+<td class="text-right " data-title="Classico [A]">789,24</td>
+<td class="text-right " data-title="Estilo A [A]">836,39</td>
+<td class="text-right " data-title="Estilo B [A]">902,19</td>
+<td class="text-right " data-title="Absoluto A [A]">1.850,44</td>
+<td class="text-right " data-title="Absoluto B [A]">2.026,27</td>
+<td class="text-right " data-title="Absoluto C [A]">2.138,54</td>
+<td class="text-right " data-title="Supremo A [A]">3.135,95</td>
+<td class="text-right " data-title="Supremo B [A]">3.484,39</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.121,75</td>
+<td class="text-right " data-title="Acesso [A]">1.243,18</td>
+<td class="text-right " data-title="Classico [E]">1.213,51</td>
+<td class="text-right " data-title="Classico [A]">1.336,98</td>
+<td class="text-right " data-title="Estilo A [A]">1.416,83</td>
+<td class="text-right " data-title="Estilo B [A]">1.528,32</td>
+<td class="text-right " data-title="Absoluto A [A]">3.134,65</td>
+<td class="text-right " data-title="Absoluto B [A]">3.432,51</td>
+<td class="text-right " data-title="Absoluto C [A]">3.622,71</td>
+<td class="text-right " data-title="Supremo A [A]">5.312,31</td>
+<td class="text-right " data-title="Supremo B [A]">5.902,57</td>
+</tr>
+</tbody>
+</table>
+<br><h4>Compulsório - Grupos de 30 a 99 Vidas COM 30% de Coparticipaçao</h4>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
+<table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
+<thead>
+<tr>
+<th>Idade</th>
+<th class="text-right">Acesso [E]</th>
+<th class="text-right">Acesso [A]</th>
+<th class="text-right">Classico [E]</th>
+<th class="text-right">Classico [A]</th>
+<th class="text-right">Estilo A [A]</th>
+<th class="text-right">Estilo B [A]</th>
+<th class="text-right">Absoluto A [A]</th>
+<th class="text-right">Absoluto B [A]</th>
+<th class="text-right">Absoluto C [A]</th>
+<th class="text-right">Supremo A [A]</th>
+<th class="text-right">Supremo B [A]</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="">00 a 18</td>
+<td class="text-right " data-title="Acesso [E]">176,59</td>
+<td class="text-right " data-title="Acesso [A]">195,71</td>
+<td class="text-right " data-title="Classico [E]">191,04</td>
+<td class="text-right " data-title="Classico [A]">210,48</td>
+<td class="text-right " data-title="Estilo A [A]">223,05</td>
+<td class="text-right " data-title="Estilo B [A]">240,60</td>
+<td class="text-right " data-title="Absoluto A [A]">493,48</td>
+<td class="text-right " data-title="Absoluto B [A]">540,36</td>
+<td class="text-right " data-title="Absoluto C [A]">570,30</td>
+<td class="text-right " data-title="Supremo A [A]">836,30</td>
+<td class="text-right " data-title="Supremo B [A]">929,22</td>
+</tr>
+<tr>
+<td class="">19 a 23</td>
+<td class="text-right " data-title="Acesso [E]">214,64</td>
+<td class="text-right " data-title="Acesso [A]">237,86</td>
+<td class="text-right " data-title="Classico [E]">232,19</td>
+<td class="text-right " data-title="Classico [A]">255,81</td>
+<td class="text-right " data-title="Estilo A [A]">271,09</td>
+<td class="text-right " data-title="Estilo B [A]">292,42</td>
+<td class="text-right " data-title="Absoluto A [A]">599,77</td>
+<td class="text-right " data-title="Absoluto B [A]">656,76</td>
+<td class="text-right " data-title="Absoluto C [A]">693,15</td>
+<td class="text-right " data-title="Supremo A [A]">1.016,43</td>
+<td class="text-right " data-title="Supremo B [A]">1.129,37</td>
+</tr>
+<tr>
+<td class="">24 a 28</td>
+<td class="text-right " data-title="Acesso [E]">265,07</td>
+<td class="text-right " data-title="Acesso [A]">293,76</td>
+<td class="text-right " data-title="Classico [E]">286,75</td>
+<td class="text-right " data-title="Classico [A]">315,93</td>
+<td class="text-right " data-title="Estilo A [A]">334,80</td>
+<td class="text-right " data-title="Estilo B [A]">361,14</td>
+<td class="text-right " data-title="Absoluto A [A]">740,72</td>
+<td class="text-right " data-title="Absoluto B [A]">811,10</td>
+<td class="text-right " data-title="Absoluto C [A]">856,04</td>
+<td class="text-right " data-title="Supremo A [A]">1.255,30</td>
+<td class="text-right " data-title="Supremo B [A]">1.394,78</td>
+</tr>
+<tr>
+<td class="">29 a 33</td>
+<td class="text-right " data-title="Acesso [E]">290,25</td>
+<td class="text-right " data-title="Acesso [A]">321,67</td>
+<td class="text-right " data-title="Classico [E]">314,00</td>
+<td class="text-right " data-title="Classico [A]">345,94</td>
+<td class="text-right " data-title="Estilo A [A]">366,61</td>
+<td class="text-right " data-title="Estilo B [A]">395,45</td>
+<td class="text-right " data-title="Absoluto A [A]">811,09</td>
+<td class="text-right " data-title="Absoluto B [A]">888,15</td>
+<td class="text-right " data-title="Absoluto C [A]">937,37</td>
+<td class="text-right " data-title="Supremo A [A]">1.374,56</td>
+<td class="text-right " data-title="Supremo B [A]">1.527,29</td>
+</tr>
+<tr>
+<td class="">34 a 38</td>
+<td class="text-right " data-title="Acesso [E]">314,92</td>
+<td class="text-right " data-title="Acesso [A]">349,01</td>
+<td class="text-right " data-title="Classico [E]">340,68</td>
+<td class="text-right " data-title="Classico [A]">375,35</td>
+<td class="text-right " data-title="Estilo A [A]">397,77</td>
+<td class="text-right " data-title="Estilo B [A]">429,06</td>
+<td class="text-right " data-title="Absoluto A [A]">880,03</td>
+<td class="text-right " data-title="Absoluto B [A]">963,65</td>
+<td class="text-right " data-title="Absoluto C [A]">1.017,05</td>
+<td class="text-right " data-title="Supremo A [A]">1.491,38</td>
+<td class="text-right " data-title="Supremo B [A]">1.657,10</td>
+</tr>
+<tr>
+<td class="">39 a 43</td>
+<td class="text-right " data-title="Acesso [E]">363,74</td>
+<td class="text-right " data-title="Acesso [A]">403,10</td>
+<td class="text-right " data-title="Classico [E]">393,49</td>
+<td class="text-right " data-title="Classico [A]">433,53</td>
+<td class="text-right " data-title="Estilo A [A]">459,42</td>
+<td class="text-right " data-title="Estilo B [A]">495,57</td>
+<td class="text-right " data-title="Absoluto A [A]">1.016,43</td>
+<td class="text-right " data-title="Absoluto B [A]">1.113,02</td>
+<td class="text-right " data-title="Absoluto C [A]">1.174,69</td>
+<td class="text-right " data-title="Supremo A [A]">1.722,55</td>
+<td class="text-right " data-title="Supremo B [A]">1.913,95</td>
+</tr>
+<tr>
+<td class="">44 a 48</td>
+<td class="text-right " data-title="Acesso [E]">435,93</td>
+<td class="text-right " data-title="Acesso [A]">483,13</td>
+<td class="text-right " data-title="Classico [E]">471,59</td>
+<td class="text-right " data-title="Classico [A]">519,58</td>
+<td class="text-right " data-title="Estilo A [A]">550,61</td>
+<td class="text-right " data-title="Estilo B [A]">593,93</td>
+<td class="text-right " data-title="Absoluto A [A]">1.218,20</td>
+<td class="text-right " data-title="Absoluto B [A]">1.333,95</td>
+<td class="text-right " data-title="Absoluto C [A]">1.407,86</td>
+<td class="text-right " data-title="Supremo A [A]">2.064,48</td>
+<td class="text-right " data-title="Supremo B [A]">2.293,87</td>
+</tr>
+<tr>
+<td class="">49 a 53</td>
+<td class="text-right " data-title="Acesso [E]">515,59</td>
+<td class="text-right " data-title="Acesso [A]">571,39</td>
+<td class="text-right " data-title="Classico [E]">557,76</td>
+<td class="text-right " data-title="Classico [A]">614,51</td>
+<td class="text-right " data-title="Estilo A [A]">651,21</td>
+<td class="text-right " data-title="Estilo B [A]">702,45</td>
+<td class="text-right " data-title="Absoluto A [A]">1.440,76</td>
+<td class="text-right " data-title="Absoluto B [A]">1.577,66</td>
+<td class="text-right " data-title="Absoluto C [A]">1.665,08</td>
+<td class="text-right " data-title="Supremo A [A]">2.441,66</td>
+<td class="text-right " data-title="Supremo B [A]">2.712,96</td>
+</tr>
+<tr>
+<td class="">54 a 58</td>
+<td class="text-right " data-title="Acesso [E]">625,40</td>
+<td class="text-right " data-title="Acesso [A]">693,10</td>
+<td class="text-right " data-title="Classico [E]">676,55</td>
+<td class="text-right " data-title="Classico [A]">745,40</td>
+<td class="text-right " data-title="Estilo A [A]">789,92</td>
+<td class="text-right " data-title="Estilo B [A]">852,07</td>
+<td class="text-right " data-title="Absoluto A [A]">1.747,64</td>
+<td class="text-right " data-title="Absoluto B [A]">1.913,70</td>
+<td class="text-right " data-title="Absoluto C [A]">2.019,73</td>
+<td class="text-right " data-title="Supremo A [A]">2.961,73</td>
+<td class="text-right " data-title="Supremo B [A]">3.290,81</td>
+</tr>
+<tr>
+<td class="">59 ou +</td>
+<td class="text-right " data-title="Acesso [E]">1.059,43</td>
+<td class="text-right " data-title="Acesso [A]">1.174,11</td>
+<td class="text-right " data-title="Classico [E]">1.146,09</td>
+<td class="text-right " data-title="Classico [A]">1.262,70</td>
+<td class="text-right " data-title="Estilo A [A]">1.338,12</td>
+<td class="text-right " data-title="Estilo B [A]">1.443,41</td>
+<td class="text-right " data-title="Absoluto A [A]">2.960,50</td>
+<td class="text-right " data-title="Absoluto B [A]">3.241,82</td>
+<td class="text-right " data-title="Absoluto C [A]">3.421,45</td>
+<td class="text-right " data-title="Supremo A [A]">5.017,18</td>
+<td class="text-right " data-title="Supremo B [A]">5.574,65</td>
+</tr>
+</tbody>
+</table>
+<br></div>
+</div>
+<div class="tab-pane" id="tab-redeCredenciada">
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-manualCorretor">
+<i class="icon icon-info-sign text-info"></i> Informações exclusivas para o corretor. Não é enviado no estudo.<br>
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-criteriosReducao">
+<div class="tab-inner-content"></div>
+</div>
+<div class="tab-pane" id="tab-anexos">
+<div class="tab-inner-content"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="print-modal-container"></div>
+<input data-val="true" data-val-number="The field OperadoraId must be a number." id="OperadoraId" name="OperadoraId" type="hidden" value="1471">
+<input data-val="true" data-val-number="The field IdComercializacaoGrupo must be a number." id="IdComercializacaoGrupo" name="IdComercializacaoGrupo" type="hidden" value="12627">
+<input id="ProdutoId" name="ProdutoId" type="hidden" value="5491">
+<input id="Modalidade" name="Modalidade" type="hidden" value="Pme">
+<input id="Entidade" name="Entidade" type="hidden" value="">
+</div>
+<footer>
+<hr>
+<span class="pull-left">© Trindade Tecnologia 2021</span>
+</footer>
+</div>
+</div>
+</div>
+</div>
+
+<div id="user-edit-container"></div>
+<div id="end" class="hide"></div>
+
+<script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">
+        var api = 'https://api.paineldocorretor.com.br/';
+        var rootUrl = '/';
+    </script>
+<script src="/scripts/jquery?v=3BYaXH8AdUZqDUo6n6pdzHiKNQN9ObgQa6tM3MM8FFw1"></script>
+<script src="/scripts/fileupload?v=QOrNixLQ3Pog9OrDnu3KDC63MKfI5GwBQpytu_CDTHg1"></script>
+<script>
+        var userId = "";
+
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-44915231-5', 'paineldocorretor.com.br');
+        if(userId !== '') ga('set', 'userId', userId);
+        ga('send', 'pageview');
+    </script>
+<script src="/scripts/jqueryval"></script>
+<script src="/scripts/produto?v=Qy47i79tqPpyyMEnUeMLGQugg3nTE5yzIFF_gAXe6Ik1"></script>
+<script>
+        $(function () {
+
+            var $produtoSelector = $('.produto-selector');
+
+            if ($produtoSelector.length) {
+                $produtoSelector.find('input.search').change(function () {
+                    var filter = $(this).val().toLowerCase();
+                    $.each($produtoSelector.find('ul li'), function () {
+                        var text = $(this).text().toLowerCase();
+                        if (text.indexOf(filter) == -1)
+                            $(this).addClass('hide');
+                        else
+                            $(this).removeClass('hide');
+                    });
+                });
+
+                var top = $produtoSelector.find('ul li.selected').offset().top - 260;
+                $produtoSelector.find('ul').scrollTop(top);
+            }
+        })
+    </script>
+
+</body></html>

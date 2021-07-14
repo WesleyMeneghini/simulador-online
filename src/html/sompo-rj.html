@@ -106,34 +106,8 @@
 <a class="brand" href="/">Painel do Corretor</a>
 <div class="">
  <div class="pull-right">
-<form action="/Account/Logout" class="hide" id="logoutForm" method="post"><input name="__RequestVerificationToken" type="hidden" value="s-3liovu0ewNo1ne0YNIyC7U3DpYxzTAayFx320NpnEVeS6NpSXOCuFrGiL84VhOQWPn-SxBm1AUq-cApUZs76srAe6_vv3lrImPpIUCEJxxHHEteeVMKDLqxb4gsjM1hADqS1runGzyzqvNeKJdaA2"></form> <input type="hidden" id="currentUserId" value="139031">
-<input type="hidden" id="currentCorretoraId" value="64329">
 <ul class="nav pull-right">
-<li class="hidden-phone">
-</li>
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="hidden-phone">Bem vindo JOAO</span> <b class="caret"></b></a>
-<ul class="dropdown-menu">
-<li>
-<a href="#" id="user-edit">
-<i class="icon-user"></i>
-Meu perfil
-</a>
-</li>
-<li>
-<a href="https://account.trindadetecnologia.com.br/profile/manage/changepassword" target="_blank">
-<i class="icon-lock"></i>
-Alterar senha
-</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="javascript:document.getElementById('logoutForm').submit()">
-<i class="icon-off"></i>
-Sair
-</a>
-</li>
+<li><a href="/" id="loginLink">Entrar</a></li>
 </ul>
 </div>
 </div>
@@ -143,649 +117,6 @@ Sair
 
 <div id="sidebar-nav">
 <ul id="dashboard-menu">
-<li>
-<a href="/">
-<i class="icon-home"></i>
-<span>Início</span>
-</a>
-</li>
-<li>
-<a class="dropdown-toggle" href="#">
-<i class="icon-th-large"></i>
-<span>Produtos</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a class="dropdown-toggle" href="/produtos/Individual">
-<span data-refresh="true">Saúde</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a class="dropdown-toggle" href="/produtos/Individual">
-<span data-refresh="true">Individual</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/Individual/84/111" target="">Aacl</a>
-</li>
-<li>
-<a href="/produtos/Individual/1436/1185" target="">Biosaude</a>
-</li>
-<li>
-<a href="/produtos/Individual/1436/4125" target="">Biosaude Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/1353/4076" target="">Biovida</a>
-</li>
-<li>
-<a href="/produtos/Individual/1353/4075" target="">Biovida Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/49/750" target="">Blue Med</a>
-</li>
-<li>
-<a href="/produtos/Individual/49/4008" target="">Blue Med Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/1506/5951" target="">Clinipam</a>
-</li>
-<li>
-<a href="/produtos/Individual/3764/5668" target="">Cruz Azul</a>
-</li>
-<li>
-<a href="/produtos/Individual/5/5678" target="">Gndi</a>
-</li>
-<li>
-<a href="/produtos/Individual/1347/651" target="">Gs Garantia</a>
-</li>
-<li>
-<a href="/produtos/Individual/1428/1161" target="">Health Santaris</a>
-</li>
-<li>
-<a href="/produtos/Individual/1389/847" target="">Med Tour</a>
-</li>
-<li>
-<a href="/produtos/Individual/1430/5651" target="">Medical Health</a>
-</li>
-<li>
-<a href="/produtos/Individual/1440/1197" target="">Plena Saude</a>
-</li>
-<li>
-<a href="/produtos/Individual/1582/2760" target="">Prevent Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/37/5610" target="">Sao Cristovao</a>
-</li>
-<li>
-<a href="/produtos/Individual/37/2868" target="">Sao Cristovao Viva Melhor</a>
-</li>
-<li>
-<a href="/produtos/Individual/1487/1418" target="">Sao Miguel Saude</a>
-</li>
-<li>
-<a href="/produtos/Individual/3752/5643" target="">Saude Santa Casa Maua</a>
-</li>
-<li>
-<a href="/produtos/Individual/3712/5441" target="">Total Medcare</a>
-</li>
-<li>
-<a href="/produtos/Individual/3712/5916" target="">Total Medcare Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/50/841" target="">Trasmontano</a>
-</li>
-<li>
-<a href="/produtos/Individual/50/5564" target="">Trasmontano Pop Consulta</a>
-</li>
-<li>
-<a href="/produtos/Individual/50/1155" target="">Trasmontano Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/1444/2784" target="">Unihosp</a>
-</li>
-<li>
-<a href="/produtos/Individual/1444/2878" target="">Unihosp Senior</a>
-</li>
-<li>
-<a href="/produtos/Individual/1416/1112" target="">Unimed Guarulhos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/Familiar">
-<span data-refresh="true">Familiar</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/Familiar/84/111" target="">Aacl</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1436/1185" target="">Biosaude</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1436/4125" target="">Biosaude Senior</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1353/4076" target="">Biovida</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1353/4075" target="">Biovida Senior</a>
-</li>
-<li>
-<a href="/produtos/Familiar/49/750" target="">Blue Med</a>
-</li>
-<li>
-<a href="/produtos/Familiar/49/4008" target="">Blue Med Senior</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1506/5951" target="">Clinipam</a>
-</li>
-<li>
-<a href="/produtos/Familiar/3764/5668" target="">Cruz Azul</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1347/651" target="">Gs Garantia</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1428/1161" target="">Health Santaris</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1389/847" target="">Med Tour</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1430/5651" target="">Medical Health</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1440/1197" target="">Plena Saude</a>
-</li>
-<li>
-<a href="/produtos/Familiar/37/5610" target="">Sao Cristovao</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1487/1418" target="">Sao Miguel Saude</a>
-</li>
-<li>
-<a href="/produtos/Familiar/3752/5643" target="">Saude Santa Casa Maua</a>
-</li>
-<li>
-<a href="/produtos/Familiar/3712/5441" target="">Total Medcare</a>
-</li>
-<li>
-<a href="/produtos/Familiar/50/841" target="">Trasmontano</a>
-</li>
-<li>
-<a href="/produtos/Familiar/50/5564" target="">Trasmontano Pop Consulta</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1444/2784" target="">Unihosp</a>
-</li>
-<li>
- <a href="/produtos/Familiar/1444/2878" target="">Unihosp Senior</a>
-</li>
-<li>
-<a href="/produtos/Familiar/1416/1112" target="">Unimed Guarulhos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/Pme">
-<span data-refresh="true">PME</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/Pme/84/111" target="">Aacl</a>
-</li>
-<li>
-<a href="/produtos/Pme/1370/1475" target="">Allcare</a>
-</li>
-<li>
-<a href="/produtos/Pme/59/1258" target="">Allianz</a>
-</li>
-<li>
-<a href="/produtos/Pme/1356/6082" target="">Ameplan</a>
-</li>
-<li>
-<a href="/produtos/Pme/93/5689" target="">Amil Facil Linha Selecionada</a>
-</li>
-<li>
-<a href="/produtos/Pme/93/5953" target="">Amil Linha Coordenada</a>
-</li>
-<li>
-<a href="/produtos/Pme/93/5692" target="">Amil Linha Selecionada</a>
-</li>
-<li>
-<a href="/produtos/Pme/93/5710" target="">Amil One Linha Selecionada</a>
-</li>
-<li>
-<a href="/produtos/Pme/93/5432" target="">Amil Saude</a>
-</li>
-<li>
-<a href="/produtos/Pme/1436/1185" target="">Biosaude</a>
-</li>
-<li>
-<a href="/produtos/Pme/1353/4076" target="">Biovida</a>
-</li>
-<li>
-<a href="/produtos/Pme/49/750" target="">Blue Med</a>
-</li>
-<li>
-<a href="/produtos/Pme/6/3982" target="">Bradesco Efetivo</a>
-</li>
-<li>
-<a href="/produtos/Pme/6/1323" target="">Bradesco Hospitalar</a>
-</li>
-<li>
-<a href="/produtos/Pme/6/923" target="">Bradesco Nacional</a>
-</li>
-<li>
-<a href="/produtos/Pme/6/622" target="">Bradesco Nacional Flex</a>
-</li>
-<li>
-<a href="/produtos/Pme/6/1039" target="">Bradesco Preferencial Plus</a>
-</li>
-<li>
-<a href="/produtos/Pme/6/5995" target="">Bradesco Saude 1</a>
-</li>
-<li>
-<a href="/produtos/Pme/91/370" target="">Care Plus</a>
-</li>
-<li>
-<a href="/produtos/Pme/1445/1227" target="">Central Nacional Unimed</a>
-</li>
-<li>
-<a href="/produtos/Pme/1506/5951" target="">Clinipam</a>
-</li>
-<li>
-<a href="/produtos/Pme/1413/670" target="">Corpore</a>
-</li>
-<li>
-<a href="/produtos/Pme/3764/5668" target="">Cruz Azul</a>
-</li>
-<li>
-<a href="/produtos/Pme/5/1261" target="">Gndi</a>
-</li>
-<li>
-<a href="/produtos/Pme/5/3889" target="">Gndi Mei</a>
-</li>
-<li>
-<a href="/produtos/Pme/1496/5468" target="">Golden Cross</a>
-</li>
-<li>
-<a href="/produtos/Pme/1347/651" target="">Gs Garantia</a>
-</li>
-<li>
-<a href="/produtos/Pme/1428/1161" target="">Health Santaris</a>
-</li>
-<li>
-<a href="/produtos/Pme/1389/847" target="">Med Tour</a>
-</li>
-<li>
-<a href="/produtos/Pme/1430/5651" target="">Medical Health</a>
-</li>
-<li>
-<a href="/produtos/Pme/28/5573" target="">Omint</a>
-</li>
-<li>
-<a href="/produtos/Pme/1440/1197" target="">Plena Saude</a>
-</li>
-<li>
-<a href="/produtos/Pme/30/638" target="">Porto</a>
-</li>
-<li>
-<a href="/produtos/Pme/33/1475" target="">Qualicorp</a>
-</li>
-<li>
-<a href="/produtos/Pme/1359/678" target="">Santa Helena</a>
-</li>
-<li>
-<a href="/produtos/Pme/37/5610" target="">Sao Cristovao</a>
-</li>
-<li>
-<a href="/produtos/Pme/1487/1418" target="">Sao Miguel Saude</a>
-</li>
-<li>
-<a href="/produtos/Pme/3752/5643" target="">Saude Santa Casa Maua</a>
-</li>
-<li>
-<a href="/produtos/Pme/114/1280" target="">Seguros Unimed</a>
-</li>
-<li>
-<a href="/produtos/Pme/1471/1366" target="">Sompo Seguros</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/5681" target="">Sul America Direto</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/5961" target="">Sul America Direto Empresario Individual</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/5682" target="">Sul America Direto Flex</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/1377" target="">Sul America Empresario Individual</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/2669" target="">Sul America Hospitalar Empresario Individual</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/2724" target="">Sul America Hospitalar Flex</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/2621" target="">Sul America Mais Flex</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/655" target="">Sulamerica Flex</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/768" target="">Sulamerica Hospitalar</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/646" target="">Sulamerica Mais</a>
-</li>
-<li>
-<a href="/produtos/Pme/4/324" target="">Sulamerica Pme</a>
-</li>
-<li>
-<a href="/produtos/Pme/3712/5441" target="">Total Medcare</a>
-</li>
-<li>
-<a href="/produtos/Pme/50/841" target="">Trasmontano</a>
-</li>
-<li>
-<a href="/produtos/Pme/1444/2784" target="">Unihosp</a>
-</li>
-<li>
-<a href="/produtos/Pme/1416/1112" target="">Unimed Guarulhos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/Adesao">
-<span data-refresh="true">Adesão</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/Adesao?operadora=1404" target="">Affix</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=1370" target="">Allcare</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=1575" target="">Clube de Saude</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=1413" target="">Corpore</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=1419" target="">Hebrom</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=3642" target="">Muito Mais Saúde</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=1398" target="">Nunes e Grossi</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=3634" target="">Plural</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=33" target="">Qualicorp</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=3729" target="">Safelife</a>
-</li>
-<li>
-<a href="/produtos/Adesao?operadora=46" target="">Voce Clube</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/PmeAdesao">
-<span data-refresh="true">PME adesão</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/PmeAdesao?operadora=1413" target="">Corpore</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/IndividualOdonto">
-<span data-refresh="true">Odonto</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a class="dropdown-toggle" href="/produtos/IndividualOdonto">
-<span data-refresh="true">Individual</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/IndividualOdonto/93/5472" target="">Amil Dental</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/1485/106" target="">Bradesco Dental</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/1485/5334" target="">Bradesco Dental Kids</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/1429/1163" target="">Dental Plus</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/1410/5628" target="">Dentalpar</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/1496/2876" target="">Goldental</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/27/17" target="">Odontoprev</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/37/661" target="">Sao Cristovao Odonto</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/4/3914" target="">Sulamerica Odonto</a>
-</li>
-<li>
-<a href="/produtos/IndividualOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/FamiliarOdonto">
-<span data-refresh="true">Familiar</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/FamiliarOdonto/93/5472" target="">Amil Dental</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/1485/106" target="">Bradesco Dental</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/1429/1163" target="">Dental Plus</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/1410/5628" target="">Dentalpar</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/1496/2876" target="">Goldental</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/27/17" target="">Odontoprev</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/37/661" target="">Sao Cristovao Odonto</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/4/3914" target="">Sulamerica Odonto</a>
-</li>
-<li>
-<a href="/produtos/FamiliarOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/PmeOdonto">
-<span data-refresh="true">PME</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/PmeOdonto/93/5472" target="">Amil Dental</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/1485/106" target="">Bradesco Dental</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/117/986" target="">Caixa Seguradora</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/91/1117" target="">Care Plus</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/1429/1163" target="">Dental Plus</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/1410/5628" target="">Dentalpar</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/1496/2876" target="">Goldental</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/1564/4170" target="">Hapvida Odonto</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/21/47" target="">Interodonto</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/27/17" target="">Odontoprev</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/28/624" target="">Omint</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/83/109" target="">Prevident</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/37/661" target="">Sao Cristovao Odonto</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/4/1110" target="">Sulamerica Odonto Pme</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/4/1111" target="">Sulamerica Odonto Pme Mais</a>
-</li>
-<li>
-<a href="/produtos/PmeOdonto/1348/4015" target="">Uniodonto Sao Jose dos Campos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/AdesaoOdonto">
-<span data-refresh="true">Adesão</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/AdesaoOdonto?operadora=1419" target="">Hebrom</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="/produtos/PetGrupal">
-<span data-refresh="true">Pet</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a class="dropdown-toggle" href="/produtos/PetGrupal">
-<span data-refresh="true">Pet</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/produtos/PetGrupal/1406/985" target="">Health For Pet</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="#">
-<i class="icon-group"></i>
-<span>Clientes</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a class="dropdown-toggle" href="/indicacao">
-<span data-refresh="true">Indicações</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/indicacaofonte" target="">Fontes</a>
-</li>
-</ul>
-</li>
-<li>
-<a href="/estudo" target="">Estudos</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="#">
-<i class="icon-paste"></i>
-<span>Corretora</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/producao" target="">Produções</a>
-</li>
-<li>
-<a href="/comissao" target="">Comissões</a>
-</li>
-<li>
-<a href="/notafiscal" target="">Notas Fiscais</a>
-</li>
-<li>
-<a href="/corretora" target="">Cadastro</a>
-</li>
-</ul>
-</li>
-<li>
-<a class="dropdown-toggle" href="#">
-<i class="icon-wrench"></i>
-<span>Ferramentas</span>
-<i class="icon-chevron-down"></i>
-</a>
-<ul class="submenu">
-<li>
-<a href="/redecredenciada" target="">Rede credenciada</a>
-</li>
-<li>
-<a href="/ferramenta/calculoimc" target="">Cálculo de IMC</a>
-</li>
-</ul>
-</li>
 </ul>
 </div>
 
@@ -795,12 +126,6 @@ Sair
 <ul class="breadcrumb">
 <li>
 <i class="icon-home home-icon"></i>
-<a href="/" target="">Início</a>
-<span class="divider">
-<i class="icon-angle-right arrow-icon"></i>
-</span>
-</li>
-<li>
 Produtos
 <span class="divider">
 <i class="icon-angle-right arrow-icon"></i>
@@ -883,7 +208,7 @@ Sompo Saúde - Rio de Janeiro
 </select>
 </div>
 </div>
- </fieldset>
+</fieldset>
 <hr>
 <div class="tabbable" id="tab">
 <ul class="nav nav-tabs hidden-phone">
@@ -892,23 +217,6 @@ Sompo Saúde - Rio de Janeiro
 <li><a href="#tab-manualCorretor" title="Manual do Corretor" data-toggle="tab" data-get="getmanual">Manual do Corretor</a></li>
 <li><a href="#tab-criteriosReducao" title="Critérios de Redução" data-toggle="tab" data-get="getcriterioreducao">Critérios de Redução</a></li>
 <li><a href="#tab-anexos" title="Anexos" data-toggle="tab" data-get="getanexos">Anexos</a></li>
-<li class="dropdown">
-<a href="#" class="dropdown-toggle" title="Mais Opções" data-toggle="dropdown">Mais Opções&nbsp;<i class="icon-caret-down"></i></a>
-<ul class="dropdown-menu">
-<li>
-<a href="/ProdutoPrint/GetPrintModal?IdComercializacaoGrupo=14390&amp;ProdutoId=5914&amp;OperadoraId=1471&amp;Modalidade=Pme&amp;Operadora=Sompo%20Seguros&amp;Produto=Sompo%20Sa%C3%BAde%20-%20Rio%20de%20Janeiro&amp;Logotipo=https%3A%2F%2Fstorage.googleapis.com%2Ftrindade-cdn-painel-v1-mr-us-prod%2Flogotipos%2Fsompo-seguros.png&amp;Manutencao=False&amp;Alvo=Indiferente&amp;Entidades=System.Collections.Generic.List%601%5BSisWebClient.Presentation.Web.Models.EntidadeModel%5D" class="btn-print">
-<i class="icon-print"></i>
-Imprimir
-</a>
-</li>
-<li>
-<a href="/ProdutoPrint/GetEmailModal?IdComercializacaoGrupo=14390&amp;ProdutoId=5914&amp;OperadoraId=1471&amp;Modalidade=Pme&amp;Operadora=Sompo%20Seguros&amp;Produto=Sompo%20Sa%C3%BAde%20-%20Rio%20de%20Janeiro&amp;Logotipo=https%3A%2F%2Fstorage.googleapis.com%2Ftrindade-cdn-painel-v1-mr-us-prod%2Flogotipos%2Fsompo-seguros.png&amp;Manutencao=False&amp;Alvo=Indiferente&amp;Entidades=System.Collections.Generic.List%601%5BSisWebClient.Presentation.Web.Models.EntidadeModel%5D" class="btn-print">
-<i class="icon-envelope"></i>
-Enviar por email
-</a>
-</li>
-</ul>
-</li>
 </ul>
 <div class="visible-phone">
 <select class="span12" id="cboProdutosMobile">
@@ -917,7 +225,6 @@ Enviar por email
 <option value="#tab-manualCorretor">Manual do Corretor</option>
 <option value="#tab-criteriosReducao">Critérios de Redução</option>
 <option value="#tab-anexos">Anexos</option>
-<option value="#print-modal" data-mode="print">Imprimir</option>
 </select>
 </div>
 <div class="alert alert-warning" style="background-color: white">
@@ -960,7 +267,7 @@ Enviar por email
 <div class="tab-pane active" id="tab-produto">
 <div class="tab-inner-content">
 <h4>Compulsório - Rio de Janeiro de 03 a 29 Vidas SEM Coparticipação - 1 Tit + 2 Dep</h4>
-<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
 <table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
 <thead>
 <tr>
@@ -1023,7 +330,7 @@ Enviar por email
 </tr>
 <tr>
 <td class="">29 a 33</td>
- <td class="text-right " data-title="Acesso [E]">391,27</td>
+<td class="text-right " data-title="Acesso [E]">391,27</td>
 <td class="text-right " data-title="Acesso [A]">435,06</td>
 <td class="text-right " data-title="Classico [E]">444,40</td>
 <td class="text-right " data-title="Classico [A]">478,46</td>
@@ -1122,7 +429,7 @@ Enviar por email
 </tbody>
 </table>
 <br><h4>Compulsório - Rio de Janeiro de 03 a 29 Vidas COM 20% de Coparticipação - 1 Tit + 2 Dep</h4>
-<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
 <table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
 <thead>
 <tr>
@@ -1201,7 +508,7 @@ Enviar por email
 <td class="">34 a 38</td>
 <td class="text-right " data-title="Acesso [E]">382,08</td>
 <td class="text-right " data-title="Acesso [A]">424,84</td>
- <td class="text-right " data-title="Classico [E]">433,95</td>
+<td class="text-right " data-title="Classico [E]">433,95</td>
 <td class="text-right " data-title="Classico [A]">467,21</td>
 <td class="text-right " data-title="Estilo A [A]">559,93</td>
 <td class="text-right " data-title="Estilo B [A]">648,73</td>
@@ -1284,7 +591,7 @@ Enviar por email
 </tbody>
 </table>
 <br><h4>Compulsório - Rio de Janeiro de 03 a 29 Vidas COM 30% de Coparticipação - 1 Tit + 2 Dep</h4>
-<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
 <table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
 <thead>
 <tr>
@@ -1322,7 +629,7 @@ Enviar por email
 <td class="text-right " data-title="Acesso [E]">245,93</td>
 <td class="text-right " data-title="Acesso [A]">273,45</td>
 <td class="text-right " data-title="Classico [E]">279,33</td>
- <td class="text-right " data-title="Classico [A]">300,73</td>
+<td class="text-right " data-title="Classico [A]">300,73</td>
 <td class="text-right " data-title="Estilo A [A]">360,41</td>
 <td class="text-right " data-title="Estilo B [A]">417,56</td>
 <td class="text-right " data-title="Absoluto A [A]">748,26</td>
@@ -1435,7 +742,7 @@ Enviar por email
 <td class="text-right " data-title="Acesso [A]">1.349,79</td>
 <td class="text-right " data-title="Classico [E]">1.378,76</td>
 <td class="text-right " data-title="Classico [A]">1.484,42</td>
-<td class="text-right " data-title="Estilo A [A]">1.779,00</td>
+ <td class="text-right " data-title="Estilo A [A]">1.779,00</td>
 <td class="text-right " data-title="Estilo B [A]">2.061,13</td>
 <td class="text-right " data-title="Absoluto A [A]">3.693,45</td>
 <td class="text-right " data-title="Absoluto B [A]">3.986,17</td>
@@ -1446,7 +753,7 @@ Enviar por email
 </tbody>
 </table>
 <br><h4>Compulsório - Grupos de 30 a 99 Vidas SEM Coparticipaçao</h4>
-<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
 <table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
 <thead>
 <tr>
@@ -1493,7 +800,7 @@ Enviar por email
 <td class="text-right " data-title="Supremo A [A]">1.129,37</td>
 <td class="text-right " data-title="Supremo B [A]">1.254,85</td>
 </tr>
- <tr>
+<tr>
 <td class="">24 a 28</td>
 <td class="text-right " data-title="Acesso [E]">327,68</td>
 <td class="text-right " data-title="Acesso [A]">366,25</td>
@@ -1551,7 +858,7 @@ Enviar por email
 </tr>
 <tr>
 <td class="">44 a 48</td>
- <td class="text-right " data-title="Acesso [E]">538,90</td>
+<td class="text-right " data-title="Acesso [E]">538,90</td>
 <td class="text-right " data-title="Acesso [A]">602,34</td>
 <td class="text-right " data-title="Classico [E]">642,32</td>
 <td class="text-right " data-title="Classico [A]">691,55</td>
@@ -1608,7 +915,7 @@ Enviar por email
 </tbody>
 </table>
 <br><h4>Compulsório - Grupos de 30 a 99 Vidas COM 20% de Coparticipaçao</h4>
-<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
 <table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
 <thead>
 <tr>
@@ -1770,7 +1077,7 @@ Enviar por email
 </tbody>
 </table>
 <br><h4>Compulsório - Grupos de 30 a 99 Vidas COM 30% de Coparticipaçao</h4>
-<p class="text-left muted ">Válido a partir de 01/04/2021</p>
+<p class="text-left muted red">Válido de 15/06/2021 até 31/07/2021</p>
 <table class="table table-condensed table-striped no-more-tables" style="table-layout: fixed">
 <thead>
 <tr>
@@ -1973,10 +1280,10 @@ Enviar por email
         var api = 'https://api.paineldocorretor.com.br/';
         var rootUrl = '/';
     </script>
-<script src="/scripts/jquery?v=OZk0hXAKMXUlU8eIlQQ5e2KbMwS3FaTejU3DpNE1gsI1"></script>
+<script src="/scripts/jquery?v=3BYaXH8AdUZqDUo6n6pdzHiKNQN9ObgQa6tM3MM8FFw1"></script>
 <script src="/scripts/fileupload?v=QOrNixLQ3Pog9OrDnu3KDC63MKfI5GwBQpytu_CDTHg1"></script>
 <script>
-        var userId = "8.139031";
+        var userId = "";
 
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
