@@ -41,6 +41,7 @@ estadoSantaCatarina = False
 estadoMinasGerais = False
 estadoEspiritoSanto = False
 estadoMatoGrosso = False
+estadoAmapa = False
 
 
 def insertDados(sql, values):
@@ -257,7 +258,7 @@ def rasparDados(driver):
         # print(dados)
         inseridos = 0
         del (dados[0])
-        mensagemWhats = f"*ATUALIZAÇÃO DE PREÇOS* \n\n{nomeOperadoraTitle.upper()}\n"
+        mensagemWhats = f"*ATUALIZAÇÃO DE PREÇOS* \n\n*{nomeOperadoraTitle.upper()}*\n\n"
         mensagemWhatsInicial = mensagemWhats
         for dado in dados:
 
@@ -479,9 +480,9 @@ def rasparDados(driver):
 
                             if updatePrecoPlano:
                                 res = cursor.execute(update)
-                                mensagemWhats += f"Plano: *{nome_plano}* | Numero vidas: {min_vidas}-{max_vidas} | Nome Operadora: *{nome_operadora}* \n" \
-                                                 f"Antigo preco0_18: R$ {select[8]} | Atualizado preco0_18: R$ {valores[0]}\n" \
-                                                 f"Antigo preco_m59: R$ {select[17]} | Atualizado preco_m59: R$ {valores[9]}\n\n"
+                                mensagemWhats += f"Plano: *{nome_plano}* | Numero vidas: {min_vidas}-{max_vidas} \n" \
+                                                 f"Preço antigo preco0_18: R$ {select[8]} | Atualizado preco0_18: R$ {valores[0]}\n" \
+                                                 f"Preço antigo preco_m59: R$ {select[17]} | Atualizado preco_m59: R$ {valores[9]}\n\n"
                                 conn.commit()
                             else:
                                 res = 1
@@ -511,6 +512,11 @@ def rasparDados(driver):
                             #     print("Deletando registro desatualizado")
                             #     delete = f"delete from tbl_preco_faixa_etaria where id = {id}"
                             #     cursor.execute(delete)
+                        elif preco0_18 == valores[0] and preco59 == valores[9]:
+                            updateStatus = "UPDATE `tbl_preco_faixa_etaria` SET " \
+                                           f"status = '1' " \
+                                           f"WHERE `id`='{id}';"
+                            cursor.execute(updateStatus)
                     elif res == 0:
                         print("------------------------------- Cadastrar Novo")
                         print(f'{sql} {values}')
@@ -619,6 +625,8 @@ def verificarAtualizacao(driver, num):
             area = 'MINAS GERAIS'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[7]').is_selected():
             area = 'ESPIRITO SANTO'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[3]').is_selected():
+            area = 'AMAPA'
 
         tipo_contratacao = str(tipo_contratacao).split("-")
         print(tipo_contratacao)
@@ -969,6 +977,7 @@ def obterDados(driver, tipo_tabela_option):
     global estadoMinasGerais
     global estadoEspiritoSanto
     global estadoMatoGrosso
+    global estadoAmapa
     global nomeOperadoraTitle
 
     global nome_operadora
@@ -982,6 +991,7 @@ def obterDados(driver, tipo_tabela_option):
     estados = [25]
 
     for estado in estados:
+        estadoOption = driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]')
         if estadoSaoPaulo:
             driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
             print("Estado de Sao Paulo")
@@ -1003,6 +1013,9 @@ def obterDados(driver, tipo_tabela_option):
         elif estadoEspiritoSanto:
             driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
             print("Estado de Espirito Santo")
+        elif estadoAmapa:
+            estadoOption.click()
+            print(f"Estado de {estadoOption.text}")
 
         # TIPO DE PLANO -> saude
         driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()

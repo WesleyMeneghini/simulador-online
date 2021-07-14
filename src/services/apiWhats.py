@@ -3,7 +3,7 @@ import requests
 from src import acesso
 
 ativarEnvio = False
-ativarLog = True
+ativarLog = False
 
 
 def sendMessage(message, number):

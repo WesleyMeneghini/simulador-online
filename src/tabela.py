@@ -95,6 +95,8 @@ def dadosPlano(driver, title):
         idCoparticipacao = 1
     elif re.search('CENTRAL NACIONAL UNIMED ', title):
         idOperadora = 6
+    elif re.search('PORTO SEGURO', title):
+        idOperadora = 11
 
     # Tipo de contratacao
     if re.search('FLEX', title):
@@ -104,16 +106,24 @@ def dadosPlano(driver, title):
 
     if idArea == 0:
         # Area
-        if re.search('Tarifa 1', title):
-            idArea = 1
-        elif re.search('Tarifa 2', title):
-            idArea = 2
-        elif re.search('Tarifa 3', title):
-            idArea = 3
-        elif re.search('CAMPINAS', title) and idOperadora == 4:
-            idArea = 20
+        if idOperadora == 11:
+            if re.search('INTERIOR', title):
+                idArea = 2
+            elif re.search('LITORAL', title):
+                idArea = 18
+            else:
+                idArea = 1
         else:
-            idArea = 1
+            if re.search('Tarifa 1', title):
+                idArea = 1
+            elif re.search('Tarifa 2', title):
+                idArea = 2
+            elif re.search('Tarifa 3', title):
+                idArea = 3
+            elif re.search('CAMPINAS', title) and idOperadora == 4:
+                idArea = 20
+            else:
+                idArea = 1
 
     textBoxSubtitle = driver.find_element_by_xpath('//*[@id="geral-content"]/section/div[2]/div[1]/div[1]/div[4]').text
 
@@ -165,6 +175,8 @@ def dadosPlano(driver, title):
                 testeQsaude += 1
             elif idOperadora == 6:
                 refPrecos = False
+            elif idOperadora == 11:
+                refPrecos = False
 
             countPrecosTabela += 1
             # print(driver.find_elements_by_class_name('fz-8')[countPrecosTabela].text)
@@ -183,11 +195,16 @@ def dadosPlano(driver, title):
 
                 plano = dado[0]
 
+                if idOperadora == 6:
+                    plano = f"{plano} NACIONAL"
+                elif idOperadora == 11:
+                    if plano == 'OURO MAIS':
+                        plano = f"{plano} Q"
+                    elif plano == 'OURO MAX':
+                        plano = f"{plano} Q"
+
                 plano = plano.replace(" ", "")
                 plano = plano.replace("-", "")
-
-                if idOperadora == 6:
-                    plano = f"{plano}NACIONAL"
 
                 sql = f"select * from tbl_tipo_plano where id_operadora = {idOperadora} and replace(titulo, ' ', '') like '{plano.upper()}';"
                 # print(sql)
@@ -309,8 +326,7 @@ def dadosPlano(driver, title):
 
                             # print(type(preco0_18), type(valores[0]))
                             # print(preco0_18, valores[0])
-                            if not preco0_18 == valores[0] or not preco59 == valores[
-                                9]:  # and not ultimo_reajuste == data_reajuste
+                            if not preco0_18 == valores[0] or not preco59 == valores[9]:  # and not ultimo_reajuste == data_reajuste
                                 print("Atualizar Precos! -----")
                                 planos_atualizados.append(plano)
 
@@ -376,6 +392,12 @@ def dadosPlano(driver, title):
                                 #     print("Deletando registro desatualizado")
                                 #     delete = f"delete from tbl_preco_faixa_etaria where id = {id}"
                                 #     cursor.execute(delete)
+                            elif preco0_18 == valores[0] and preco59 == valores[9]:
+                                updateStatus = "UPDATE `tbl_preco_faixa_etaria` SET " \
+                                         f"status = '1' " \
+                                         f"WHERE `id`='{idSelect}';"
+                                cursor.execute(updateStatus)
+
                         elif res == 0 and valores[0] > 0:
                             print("------------------------------- Cadastrar Novo")
                             print(f'{sql} {values}')
@@ -390,7 +412,8 @@ def dadosPlano(driver, title):
                         elif res > 1:
                             print("Mais de um plano cadastrado")
                 else:
-                    print("nothing")
+                    print(f"nothing plano nao encontrado: {plano} \n{sql}")
+                    breakpoint()
 
         if re.search('vidas/beneficiários', ele.text):
             textVidas = ele.text
@@ -402,7 +425,10 @@ def dadosPlano(driver, title):
                 minVidas = 2
                 maxVidas = 29
             elif re.search('3 à 29 vidas', textVidas):
-                minVidas = 3
+                if idOperadora == 11:
+                    minVidas = 0
+                else:
+                    minVidas = 3
                 maxVidas = 29
             elif re.search('30 à 99 vidas', textVidas):
                 minVidas = 30
@@ -461,6 +487,9 @@ def navegacao(driver):
 
     driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[25]').click()
     idArea = 1
+
+    # driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[13]').click()
+    # idArea = 6
 
     time.sleep(1)
     try:
@@ -525,15 +554,14 @@ def navegacao(driver):
             refCheckBoxDesabilited = False
         # print(refCheckBoxDesabilited)
 
-        if re.search('SULAMÉRICA', textBox) and (not re.search('COM REMISSÃO', textBox)
-                                                 and not re.search('SEM REMISSÃO',
-                                                                   textBox)) and not refCheckBoxDesabilited:
+        if re.search('SULAMÉRICA', textBox):
             refOperadora = True
-
+        elif re.search('PORTO SEGURO', textBox):
+            refOperadora = True
         elif re.search('QSAÚDE', textBox):
             refOperadora = False
         elif re.search('CENTRAL NACIONAL UNIMED', textBox):
-            refOperadora = False
+            refOperadora = True
 
         if refOperadora:
             driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()

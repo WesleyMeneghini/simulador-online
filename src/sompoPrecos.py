@@ -1,4 +1,13 @@
+import time
+from telnetlib import EC
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+
+from src.acesso import getSiteAffinity, getUserAffinity, getPasswordAffinity
 from src.db import conexao
+from src.repository import operadoraRepository
+
 
 import re
 from datetime import datetime
@@ -18,9 +27,91 @@ def insertDados(sql, values):
         return False
 
 
+def login(driver):
+    print("Logando no Sitema...")
+    driver.find_element_by_xpath("//*[@id='username']").send_keys(getUserAffinity)
+    driver.find_element_by_xpath("//*[@id='password']").send_keys(getPasswordAffinity)
+    driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/form/fieldset/div[4]/button").click()
+
+
 def obterPrecos(driver):
-    site = 'http://localhost:63342/simuladorOnline/src/html/sompo-rj.html?_ijt=mb5eur2gb0cmarr4e53ufsi0to'
-    driver.get(site)
+
+    escolherOperadora = "SOMPO"
+
+    driver.get(getSiteAffinity)
+
+    driver.switch_to.frame(driver.find_element_by_xpath("//*[@id='frame']"))
+
+    login(driver)
+
+    try:
+        # element = WebDriverWait(driver, 20).until(
+        #     EC.presence_of_element_located((By.ID, "sidebar-nav"))
+        # )
+        time.sleep(4)
+    finally:
+        driver.find_elements_by_class_name("dropdown-toggle")[1].click()
+        time.sleep(1)
+        driver.find_elements_by_class_name("dropdown-toggle")[2].click()
+        time.sleep(1)
+        driver.find_elements_by_class_name("dropdown-toggle")[5].click()
+
+        liSubMenuPme = driver.find_elements_by_class_name("active")[-1].find_elements_by_tag_name("li")
+
+        links = []
+
+        for i, li in enumerate(liSubMenuPme):
+            nomeOperadoraCompletaLi = li.text.upper()
+            operadora = str(li.text).split(" ")[0].upper()
+
+            if re.search(escolherOperadora.upper(), nomeOperadoraCompletaLi):
+
+                resOperadora = operadoraRepository.getOperadoraByName(escolherOperadora.upper())
+                link = li.find_elements_by_tag_name('a')[0].get_attribute('href')
+
+                if len(resOperadora) >= 1:
+                    links.append(link)
+                    print(operadora, link)
+
+        count = 0
+        for url in links:
+            driver.get(url)
+
+            try:
+                # WebDriverWait(driver, 15).until(
+                #     EC.presence_of_element_located((By.ID, "main"))
+                # )
+                time.sleep(3)
+            except Exception as e:
+                print(e)
+            finally:
+                estados = driver.find_elements_by_class_name('produto-selector')[0].find_elements_by_tag_name('a')
+
+                rowsEstados = len(estados)
+                print(f"Numero de links {rowsEstados}")
+                for j, estado in enumerate(estados):
+                    time.sleep(4)
+
+
+                    # Area
+                    id_area = 0
+                    if re.search('Grupo de Estados', estado.text):
+                        id_area = 1
+                    elif re.search('Interior/SP', estado.text):
+                        id_area = 2
+                    elif re.search('Rio de Janeiro', estado.text):
+                        id_area = 4
+                    print(id_area)
+                    if id_area > 0:
+                        print(f"Pegar preços de {id_area}")
+
+                    if j > 0 :
+                        print("Click")
+                        estado.click()
+
+        breakpoint()
+        exit()
+        breakpoint()
     planos_atualizados = []
     planos_sem_cadastros = []
     planos_inseridos = []

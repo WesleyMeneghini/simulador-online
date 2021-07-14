@@ -1,6 +1,6 @@
 from src.acesso import getNumberWhatsNotificationLog
 from src.config import webBrowser
-from src import acesso, login, simular, tabela
+from src import acesso, login, simular, tabela, sompoProvisorio
 from src.portoSeguroPrecos import obterPrecos
 import src.omintPrecos as omintPrecos
 import src.sompoPrecos as sompoPrecos
@@ -51,6 +51,7 @@ if __name__ == '__main__':
         finally:
 
             try:
+                print("Iniciando os preços pela tabela!")
                 tabela.navegacao(driver)
             except Exception as e:
                 apiWhats.sendMessageLog(message=e, number=getNumberWhatsNotificationLog)
@@ -66,9 +67,11 @@ if __name__ == '__main__':
 
     if affinityOmint:
         omintPrecos.obterPrecos(driver=driver)
+        # driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[13]').is_selected()
 
     if affinitySompo:
-        sompoPrecos.obterPrecos(driver=driver)
+        # sompoPrecos.obterPrecos(driver=driver)
+        sompoProvisorio.obterPrecos(driver=driver)
 
     driver.close()
 
