@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 
-from src.acesso import getNumberWhatsNotificationPrice
+from src.acesso import getNumbersWhatsNotificationPrice
 from src.db import conexao
 import time
 import re
@@ -21,7 +21,7 @@ tipo_contratacao = 0
 id_tipo_empresa = 2
 id_tipo_contratacao = 0
 
-#min e max de vidas 0-29 e 30-0
+# min e max de vidas 0-29 e 30-0
 min_vidas_pesquisa = 0
 min_vidas = 0
 max_vidas = 29
@@ -33,7 +33,7 @@ id_tipo_tabela = None
 regional = False
 planos_sem_cadastros = []
 
-#Estado de Pesquisa
+# Estado de Pesquisa
 estadoSaoPaulo = True
 estadoRioDeJaneiro = False
 estadoSergipe = False
@@ -41,6 +41,7 @@ estadoSantaCatarina = False
 estadoMinasGerais = False
 estadoEspiritoSanto = False
 estadoMatoGrosso = False
+estadoMatoGrossoSul = False
 estadoAmapa = False
 
 
@@ -84,6 +85,7 @@ def rasparDados(driver):
     global estadoRioDeJaneiro
     global estadoEspiritoSanto
     global estadoMatoGrosso
+    global estadoMatoGrossoSul
 
     qtd_titulares = '1'
     planos_atualizados = []
@@ -122,7 +124,7 @@ def rasparDados(driver):
                 if n == 1:
                     for num, td in enumerate(tr.find_elements_by_tag_name('td')):
                         reembolsoArray[num].append(td.text)
-            del(reembolsoArray[0])
+            del (reembolsoArray[0])
             print(reembolsoArray)
 
             for reemb in reembolsoArray:
@@ -223,7 +225,7 @@ def rasparDados(driver):
             max_vidas = 49
             qtd_titulares = '2'
 
-        elif re.search('NOTREDAME', nome_operadora) :
+        elif re.search('NOTREDAME', nome_operadora):
             if min_vidas == 0:
                 min_vidas = 0
                 max_vidas = 29
@@ -286,20 +288,21 @@ def rasparDados(driver):
             if plano == 'AMIL FÁCIL 50 ABC / BX':
                 plano = 'AMIL FÁCIL 50 ABC'
 
-            #Variacao do nome do plano AMIL - Estado RJ
+            # Variacao do nome do plano AMIL - Estado RJ
             if estadoRioDeJaneiro:
                 if plano == 'AMIL CO330' and id_modalidade == 2:
                     plano = 'AMIL CO330 Q'
                 elif plano == 'AMIL CO330' and id_modalidade == 1:
                     plano = 'AMIL CO330 E'
 
-
             if regional:
                 plano = f"{plano} REGIONAL"
 
-            if (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and id_operadora == 12 and id_modalidade == 1:
+            if (re.search('CLASSICO', plano) or re.search('CLÁSSICO',
+                                                          plano)) and id_operadora == 12 and id_modalidade == 1:
                 plano = "CLÁSSICO ENF"
-            elif (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and id_operadora == 12 and id_modalidade == 2:
+            elif (re.search('CLASSICO', plano) or re.search('CLÁSSICO',
+                                                            plano)) and id_operadora == 12 and id_modalidade == 2:
                 plano = "CLÁSSICO APT"
 
             if (re.search('CLASSICO', plano) or re.search('CLÁSSICO', plano)) and (
@@ -317,6 +320,12 @@ def rasparDados(driver):
                 elif plano == 'FCX':
                     plano = 'FLEX'
 
+            if id_operadora == 11:
+                if plano == 'OURO MAIS' and id_modalidade == 2:
+                    plano = 'OURO MAIS Q'
+                elif plano == 'OURO MAX' and id_modalidade == 2:
+                    plano = 'OURO MAX Q'
+
             # Verificar qual o modelo de copart da ALLIANZ
             if re.search('ALLIANZ', nome_operadora):
 
@@ -324,7 +333,8 @@ def rasparDados(driver):
                     plano = 'ESSENCIAL 10'
 
                 if subTitulo is not None:
-                    if re.search('20% PARA CONSULTAS E EXAMES, LIMITADO A', str(subTitulo).upper()) and nome_operadora == 'ALLIANZ':
+                    if re.search('20% PARA CONSULTAS E EXAMES, LIMITADO A',
+                                 str(subTitulo).upper()) and nome_operadora == 'ALLIANZ':
                         plano = f"{plano} M2"
 
             # Variacao de nome de planos SULAMERICA
@@ -345,7 +355,9 @@ def rasparDados(driver):
             nome_plano = plano
             plano = plano.replace(" ", "")
 
-            sql = f"select * from tbl_tipo_plano where id_operadora = {id_operadora} and replace(titulo, ' ', '') like '{plano.upper()}';"
+            sql = f"select * from tbl_tipo_plano " \
+                  f"where id_operadora = {id_operadora} and replace(titulo, ' ', '') like '{plano.upper()}';"
+            print(sql)
             res = cursor.execute(sql)
             valores = []
             # print(res)
@@ -441,7 +453,8 @@ def rasparDados(driver):
                         print(select[1:28], f"ID: {id} -- banco de dados")
 
                         # Condicao para alterar a data do reajuste caso os precos estejam iguais mais sem data
-                        if (ultimo_reajuste is None or not( ultimo_reajuste == data_reajuste)) and preco0_18 == valores[0]:
+                        if (ultimo_reajuste is None or not (ultimo_reajuste == data_reajuste)) and preco0_18 == valores[
+                            0]:
                             print('Atualizar Data')
                             update = f"UPDATE `tbl_preco_faixa_etaria` SET `ultimo_reajuste`='{data_reajuste}', status = 1 WHERE `id`='{id}';"
                             print(update)
@@ -450,7 +463,8 @@ def rasparDados(driver):
 
                         # print(type(preco0_18), type(valores[0]))
                         # print(preco0_18, valores[0])
-                        if not preco0_18 == valores[0] or not preco59 == valores[9]:  # and not ultimo_reajuste == data_reajuste
+                        if not preco0_18 == valores[0] or not preco59 == valores[
+                            9]:  # and not ultimo_reajuste == data_reajuste
                             print("Atualizar Precos! -----")
                             planos_atualizados.append(plano)
 
@@ -544,7 +558,7 @@ def rasparDados(driver):
                     planos_sem_cadastros.append(f"{nome_plano}")
 
         if not mensagemWhats == mensagemWhatsInicial:
-            apiWhats.sendMessageAlert(message=mensagemWhats, number=getNumberWhatsNotificationPrice)
+            apiWhats.sendMessageAlert(message=mensagemWhats, number=getNumbersWhatsNotificationPrice)
         print(f"Total de preços de planos atualizados: {inseridos}")
     cursor.close()
     conn.commit()
@@ -621,12 +635,16 @@ def verificarAtualizacao(driver, num):
             area = 'SANTA CATARINA'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
             area = 'MATO GROSSO'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[12]').is_selected():
+            area = 'MATO GROSSO DO SUL'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[13]').is_selected():
             area = 'MINAS GERAIS'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[7]').is_selected():
             area = 'ESPIRITO SANTO'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[3]').is_selected():
             area = 'AMAPA'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[16]').is_selected():
+            area = 'PARANÁ'
 
         tipo_contratacao = str(tipo_contratacao).split("-")
         print(tipo_contratacao)
@@ -669,7 +687,8 @@ def verificarAtualizacao(driver, num):
 
         # Verificar o estado
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
-            if re.search('INTERIOR', str(tipo_contratacao).upper()) or re.search('INTERIOR', str(tag_operadora).upper()):
+            if re.search('INTERIOR', str(tipo_contratacao).upper()) or re.search('INTERIOR',
+                                                                                 str(tag_operadora).upper()):
                 area = 'INTERIOR 1'
             else:
                 area = 'SP CAPITAL'
@@ -685,6 +704,10 @@ def verificarAtualizacao(driver, num):
             area = 'SANTA CATARINA'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
             area = 'MATO GROSSO'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[12]').is_selected():
+            area = 'MATO GROSSO DO SUL'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[16]').is_selected():
+            area = 'PARANÁ'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -727,7 +750,8 @@ def verificarAtualizacao(driver, num):
             area = "MINAS GERAIS"
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[11]').is_selected():
             area = 'MATO GROSSO'
-
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[12]').is_selected():
+            area = 'MATO GROSSO DO SUL'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -805,37 +829,40 @@ def verificarAtualizacao(driver, num):
         # Verificar de a area e de sao paulo
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
 
-            if re.search('SEM COPART', str(tag_operadora).upper()):
-                coparticipacao = 2
-            elif re.search('COM COPART', str(tag_operadora).upper()):
-
-                if re.search('10', tipo_contratacao):
-                    coparticipacao = 1
-                elif re.search('20', tipo_contratacao):
-                    coparticipacao = 3
-                elif re.search('30', tipo_contratacao):
-                    coparticipacao = 5
-
-            # Verificar se e hospitalar
-            if re.search('HOSPITALAR', tag_operadora):
-                hospitalar = 2
-            else:
-                hospitalar = 1
-
             if re.search('INTERIOR', str(tag_operadora).upper()):
                 area = 'INTERIOR 1'
             else:
                 area = 'SP CAPITAL'
 
-            if re.search('REGIONAL', str(tipo_contratacao).upper()):
-                regional = True
-            else:
-                regional = False
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[19]').is_selected():
+            area = 'RIO DE JANEIRO'
 
-            if re.search('OPCIONAL', str(tipo_contratacao).upper()):
-                tipo_contratacao = 'OPCI'
-            else:
-                tipo_contratacao = 'COMP'
+        if re.search('SEM COPART', str(tag_operadora).upper()):
+            coparticipacao = 2
+        elif re.search('COM COPART', str(tag_operadora).upper()):
+
+            if re.search('10', tipo_contratacao):
+                coparticipacao = 1
+            elif re.search('20', tipo_contratacao):
+                coparticipacao = 3
+            elif re.search('30', tipo_contratacao):
+                coparticipacao = 5
+
+        # Verificar se e hospitalar
+        if re.search('HOSPITALAR', tag_operadora):
+            hospitalar = 2
+        else:
+            hospitalar = 1
+
+        if re.search('REGIONAL', str(tipo_contratacao).upper()):
+            regional = True
+        else:
+            regional = False
+
+        if re.search('OPCIONAL', str(tipo_contratacao).upper()):
+            tipo_contratacao = 'OPCI'
+        else:
+            tipo_contratacao = 'COMP'
 
     if re.search('ALLIANZ', str(nome_operadora).upper()):
 
@@ -878,7 +905,8 @@ def verificarAtualizacao(driver, num):
 
         # Verificar de a area e de sao paulo
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[25]').is_selected():
-            if re.search('INTERIOR', str(tag_operadora).upper()) or re.search('SOROCABA', str(tipo_contratacao).upper()):
+            if re.search('INTERIOR', str(tag_operadora).upper()) or re.search('SOROCABA',
+                                                                              str(tipo_contratacao).upper()):
                 area = 'INTERIOR 1'
             else:
                 area = 'SP CAPITAL'
@@ -904,8 +932,9 @@ def verificarAtualizacao(driver, num):
 
         tipo_contratacao = 'COMP'
 
-
-    sql = f"select * from tbl_operadora, tbl_area, tbl_tipo_contratacao where tbl_operadora.titulo like '{nome_operadora}' and tbl_area.area like '%{area}%' and  tbl_tipo_contratacao.titulo like '%{tipo_contratacao}%';"
+    sql = f"SELECT tbl_operadora.id AS id_operadora, tbl_area.id as id_area, tbl_tipo_contratacao.id as id_tipo_contratacao " \
+          f"FROM tbl_operadora, tbl_area, tbl_tipo_contratacao " \
+          f"WHERE tbl_operadora.titulo like '{nome_operadora}' and tbl_area.area like '%{area}%' and  tbl_tipo_contratacao.titulo like '%{tipo_contratacao}%';"
     print(sql)
     res = cursor.execute(sql)
 
@@ -925,10 +954,9 @@ def verificarAtualizacao(driver, num):
         print(select)
 
         id_operadora = select[0]
-        id_area = select[3]
-        tipo_contratacao = select[6]
-        id_tipo_contratacao = select[6]
-
+        id_area = select[1]
+        tipo_contratacao = select[2]
+        id_tipo_contratacao = select[2]
 
         # print(id_operadora, id_area, tipo_contratacao)
 
@@ -982,40 +1010,25 @@ def obterDados(driver, tipo_tabela_option):
 
     global nome_operadora
 
-    # 07 -> Espirito Santo
-    # 11 -> Mato Grosso
-    # 19 -> Rio de Janeiro
-    # 25 -> Sao Paulo
-
-    # estados = [7, 25, 19, 26, 24, 13]
-    estados = [25]
+    estados = [
+        "São Paulo",
+        "Rio de Janeiro",
+        "Minas Gerais",
+        "Santa Catarina",
+        "Paraná",
+        "Espírito Santo",
+        "Mato Grosso",
+        "Mato Grosso do Sul",
+    ]
 
     for estado in estados:
-        estadoOption = driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]')
-        if estadoSaoPaulo:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Sao Paulo")
-        elif estadoRioDeJaneiro:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Rio de Janeiro")
-        elif estadoSergipe:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Sergipe")
-        elif estadoSantaCatarina:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Santa Catarina")
-        elif estadoMinasGerais:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Minas Gerais")
-        elif estadoMatoGrosso:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Mato Grosso")
-        elif estadoEspiritoSanto:
-            driver.find_element_by_xpath(f'//*[@id="simulacao_regiao"]/option[{estado}]').click()
-            print("Estado de Espirito Santo")
-        elif estadoAmapa:
-            estadoOption.click()
-            print(f"Estado de {estadoOption.text}")
+
+        estadoOption = driver.find_element_by_xpath(f"//option[contains(text(),'{estado}')]")
+        estadoOption.click()
+        time.sleep(0.5)
+
+        print(f"\n------------------------------------------------------------\n"
+              f"Iniciando a pesquisa no Estado de: {estadoOption.text}")
 
         # TIPO DE PLANO -> saude
         driver.find_element_by_xpath('//*[@id="simulacao_tipoPlano"]/option[2]').click()
@@ -1023,23 +1036,20 @@ def obterDados(driver, tipo_tabela_option):
         # Tipo de Tabela
         driver.find_element_by_xpath(f'//*[@id="simulacao_tipoTabela"]/option[{tipo_tabela_option}]').click()
 
-        # desmarcar as informaçoes opcionais
+        # Desmarcar as informaçoes opcionais
         for i in range(5):
             if driver.find_element_by_id(f"simulacao_info_{str(i)}").is_selected() and not i == 2:
                 driver.find_element_by_id(f"simulacao_info_{str(i)}").click()
 
-        # colocar no minimo uma vida por faixa_etaria
+        # Colocando o numero de vidas
         for i in range(10):
-            # driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(Keys.DELETE)
             driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').clear()
             if min_vidas >= 29 and i == 5:
                 driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(30)
             else:
                 driver.find_element_by_xpath(f'//*[@id="simulacao_faixas_{str(i)}_vidas"]').send_keys(1)
-
-        # pesquisar
-
         time.sleep(1)
+
         try:
             WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.ID, 'btn-get-planos'))
@@ -1048,7 +1058,8 @@ def obterDados(driver, tipo_tabela_option):
             time.sleep(2)
             try:
                 driver.execute_script("document.getElementById('btn-get-planos').click()")
-            except:
+            except Exception as e:
+                print(e)
                 time.sleep(2)
                 driver.find_element_by_id('btn-get-planos').click()
             finally:
@@ -1059,36 +1070,37 @@ def obterDados(driver, tipo_tabela_option):
             WebDriverWait(driver, 10).until(
                 EC.presence_of_element_located((By.CLASS_NAME, 'sim-op-planos'))
             )
-        except:
+        except Exception as e:
+            print(e)
             print("Erro ao listar os planos")
             driver.close()
         finally:
             time.sleep(1)
             quantidade_results = len(driver.find_elements_by_class_name('sim-op-planos'))
-            print(f"Achou {quantidade_results} na pesquisa!")
-
-            # if quantidade_results == 0:
-            #     obterDados(driver, tipo_tabela_option)
+            print(f"Quantidade de Resultados da Pesquisa: {quantidade_results}")
 
             for i in range(quantidade_results):
 
-                if i >= 0 and i <= 1000:
+                if 0 <= i <= 1000:
                     try:
                         if driver.find_element_by_id('btn-get-planos').is_displayed():
                             try:
                                 driver.find_element_by_id('btn-get-planos').click()
                                 time.sleep(1)
-                            except:
+                            except Exception as e:
+                                print(e)
                                 time.sleep(3)
                                 driver.execute_script("document.getElementById('btn-get-planos').click()")
                             finally:
                                 time.sleep(1)
-                    except:
+                    except Exception as e:
+                        print(e)
                         time.sleep(2)
                         try:
                             driver.find_element_by_id('btn-get-planos').click()
                             time.sleep(1)
-                        except:
+                        except Exception as e:
+                            print(e)
                             time.sleep(3)
                             driver.execute_script("document.getElementById('btn-get-planos').click()")
                         finally:
@@ -1118,33 +1130,37 @@ def obterDados(driver, tipo_tabela_option):
                         buscarTodasOperadoras = False
 
                         try:
-                            elementoAtualizacao = driver.find_element_by_xpath(f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[2]/b')
+                            elementoAtualizacao = driver.find_element_by_xpath(
+                                f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]/td[2]/b')
                             if re.search('Essa Tabela está sendo atualizada neste momento', elementoAtualizacao.text):
                                 print(f"Em atualizacao de precos: {nome_operadora}")
                         except:
                             if not buscarTodasOperadoras:
                                 if re.search('BRADESCO', nome_operadora):
-                                    refNomeOperadora = True
-                                if re.search('AMIL -', str(nome_operadora).upper()) and not str(nome_operadora).upper() == 'AMIL - Linha Coordenada':
-                                    refNomeOperadora = True
+                                    refNomeOperadora = False
+                                if re.search('AMIL -', str(nome_operadora).upper()) and not str(
+                                        nome_operadora).upper() == 'AMIL - Linha Coordenada':
+                                    refNomeOperadora = False
                                 if re.search('AMIL FÁCIL -', str(nome_operadora).upper()):
-                                    refNomeOperadora = True
+                                    refNomeOperadora = False
                                 if re.search('AMIL ONE -', str(nome_operadora).upper()):
-                                    refNomeOperadora = True
+                                    refNomeOperadora = False
                                 if re.search('SULAMÉRICA', str(nome_operadora).upper()):
                                     refNomeOperadora = False
-                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO',
+                                                                                                      str(nome_operadora).upper()):
                                     refNomeOperadora = False
-                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR',
+                                                                                                      str(nome_operadora).upper()):
                                     refNomeOperadora = False
                                 if re.search('SOMPO', str(nome_operadora).upper()):
                                     refNomeOperadora = False
                                 if re.search('PORTO SEGURO', nome_operadora):
                                     refNomeOperadora = False
                                 if re.search('ALLIANZ', nome_operadora):
-                                    refNomeOperadora = True
+                                    refNomeOperadora = False
                                 if re.search('NOTREDAME', nome_operadora):
-                                    refNomeOperadora = True
+                                    refNomeOperadora = False
 
                             if refNomeOperadora:
                                 print("\n")
@@ -1154,7 +1170,8 @@ def obterDados(driver, tipo_tabela_option):
                                         EC.presence_of_element_located(
                                             (By.XPATH, f'//*[@id="div-planos-loaded"]/table/tbody/tr[{i + 1}]'))
                                     )
-                                except:
+                                except Exception as e:
+                                    print(e)
                                     print("Erro ao listar os planos")
                                 finally:
                                     pass
