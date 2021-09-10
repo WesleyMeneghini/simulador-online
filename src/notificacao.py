@@ -38,7 +38,7 @@ def notificacao(driver):
         cursor.execute(sql)
         operadoras = cursor.fetchall()
 
-        number = acesso.getNumberWhatsNotificationPrice
+        numbers = acesso.getNumbersWhatsNotificationPrice
 
         count = 0
         for operadora in operadoras:
@@ -47,33 +47,34 @@ def notificacao(driver):
             for line in timeLine:
                 if re.search(nomeOperadora.upper(), str(line.text).upper()):
 
-                    # Enviar notificaçao pelo whats
-                    message = "*Notificaçao do simulador online*\n\n" \
-                              f"{line.text}"
+                    for number in numbers:
+                        # Enviar notificaçao pelo whats
+                        message = "*Notificaçao do simulador online*\n\n" \
+                                  f"{line.text}"
 
-                    select = f"select count(id) as qtt from tbl_log_whatsapp_msg " \
-                             f"where numero like '%{number}%' and mensagem like '%{message}%';"
-                    cursor.execute(select)
-                    resSelect = cursor.fetchone()
-                    qtt = resSelect[0]
+                        select = f"select count(id) as qtt from tbl_log_whatsapp_msg " \
+                                 f"where numero like '%{number}%' and mensagem like '%{message}%';"
+                        cursor.execute(select)
+                        resSelect = cursor.fetchone()
+                        qtt = resSelect[0]
 
-                    if qtt == 0:
-                        res = apiWhats.sendMessageAlert(message=message, number=number)
+                        if qtt == 0:
+                            res = apiWhats.sendMessageAlert(message=message, number=number)
 
-                        if res:
-                            if int(res.status_code) == 200:
-                                count += 1
-                                print("Mensagem Enviada com Sucesso!")
-                                insert = f"INSERT INTO tbl_log_whatsapp_msg(numero, mensagem, retorno) " \
-                                         f"values ('{number}', '{message}', '{res.text}');"
-                                cursor.execute(insert)
-                                conn.commit()
+                            if res:
+                                if int(res.status_code) == 200:
+                                    count += 1
+                                    print("Mensagem Enviada com Sucesso!")
+                                    insert = f"INSERT INTO tbl_log_whatsapp_msg(numero, mensagem, retorno) " \
+                                             f"values ('{number}', '{message}', '{res.text}');"
+                                    cursor.execute(insert)
+                                    conn.commit()
+                                else:
+                                    print(f"Erro ao enviar a mensagem! STATUS CODE -> {res}")
                             else:
-                                print(f"Erro ao enviar a mensagem! STATUS CODE -> {res}")
+                                print(f"Envio de mensagem (status): {res}")
                         else:
-                            print(f"Envio de mensagem (status): {res}")
-                    else:
-                        print("Mensagem ja consta como enviada no sistema!")
+                            print("Mensagem ja consta como enviada no sistema!")
 
         # CAso nao tenha nenhuma atualização de preços, parar o processo
         if count == 0:

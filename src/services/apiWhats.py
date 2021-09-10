@@ -34,7 +34,7 @@ def sendMessageAlert(message, number):
 
     global ativarEnvio
 
-    if ativarLog:
+    if ativarEnvio:
         return sendMessage(message, number)
     else:
         return False
