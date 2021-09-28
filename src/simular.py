@@ -4,7 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 from src.db import conexao
-from src import selecaoPlanos, selecaoAdesao, notificacao
+from src import simulacaoTradicional, selecaoAdesao, notificacao
 
 count = 0
 def simulador(driver):
@@ -109,13 +109,13 @@ def simulador(driver):
                     selecaoAdesao.obterDados(driver, tipo_tabela_option, administradora_option, operadora_option, entidade_option)
 
                 elif tipo_tabela_option == 4:
-                    selecaoPlanos.obterDados(driver, tipo_tabela_option)
+                    simulacaoTradicional.obterDados(driver, tipo_tabela_option)
 
             else:
 
                 tipo_tabela_option = 4
 
-            selecaoPlanos.obterDados(driver, tipo_tabela_option)
+            simulacaoTradicional.obterDados(driver, tipo_tabela_option)
 
             # for i in range(14, 15):
             # # TESTES PARA ADESAO
