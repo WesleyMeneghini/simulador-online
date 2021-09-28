@@ -1,8 +1,3 @@
-# from selenium import webdriver
-#
-# teste = webdriver.Chrome()
-
-from bs4 import BeautifulSoup
 from datetime import datetime
 
 from selenium.webdriver.support.ui import WebDriverWait
@@ -12,8 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import re
 
-from src.acesso import getNumberWhatsNotificationPrice
+from src.acesso import getNumbersWhatsNotificationPrice
 from src.db import conexao
+from src.repository import AreaRepository
 from src.services import apiWhats
 
 conn = conexao.myConexao()
@@ -24,6 +20,8 @@ atualizarDataReajuste = conexao.atualizaDataReajuste()
 updatePrecoPlano = conexao.updatePrecoPlano()
 
 idArea = 0
+textBox = ""
+estadoNome = ""
 
 
 def insertDados(sql, values):
@@ -74,7 +72,9 @@ def dadosPlano(driver, title):
     print("Pagina com os Preços")
 
     idCoparticipacao = 0
-    idArea = 0
+
+    if estadoNome == "SÃO PAULO":
+        idArea = 0
 
     if re.search('COM REMISSÃO', title):
         driver.execute_script("history.back()")
@@ -100,6 +100,8 @@ def dadosPlano(driver, title):
 
     # Tipo de contratacao
     if re.search('FLEX', title):
+        idTipoContratacao = 1
+    elif re.search('LIVRE ADESÃO', title):
         idTipoContratacao = 1
     else:
         idTipoContratacao = 2
@@ -129,7 +131,7 @@ def dadosPlano(driver, title):
 
     hospitalar = 1
 
-    if re.search('COM COPART', title):
+    if re.search('COM COPART', title) or re.search('DE COPART', title):
         if re.search('30%', title):
             idCoparticipacao = 5
         elif re.search('20%', title):
@@ -188,6 +190,18 @@ def dadosPlano(driver, title):
             dados = obterPrecos(ele)
             id_modalidade = dados[1]
 
+            nomeModalidade = ""
+            if id_modalidade == 1:
+                nomeModalidade = "Enfermaria"
+            elif id_modalidade == 2:
+                nomeModalidade == "Apartamento"
+
+            mensagemWhats = f"*ATUALIZAÇÃO DE PREÇOS* \n\n" \
+                            f"*ESTADO:* {estadoNome}\n" \
+                            f"*{title.upper()}*\n{textBoxSubtitle}\n"
+
+            mensagemWhatsInicial = mensagemWhats
+
             for dado in dados[0]:
                 dado[0] = str(dado[0]).replace("(R1)", "R1")
                 dado[0] = str(dado[0]).replace("(R2)", "R2")
@@ -203,6 +217,7 @@ def dadosPlano(driver, title):
                     elif plano == 'OURO MAX':
                         plano = f"{plano} Q"
 
+                nome_plano = plano
                 plano = plano.replace(" ", "")
                 plano = plano.replace("-", "")
 
@@ -216,9 +231,16 @@ def dadosPlano(driver, title):
                     id_plano = result_select[0]
                     id_categoria_plano = result_select[3]
                     if id_plano > 0:
+
+                        acrescimo = 0
+                        if id_plano == 161 and idOperadora == 11:
+                            acrescimo = 8.51
+
                         for u, valor in enumerate(dado):
                             if u > 0 and not valor == "-":
-                                valores.append(float(str(valor).split(" ")[1].replace(".", "").replace(",", ".")))
+                                precoFormatado = float(str(valor).split(" ")[1].replace(".", "").replace(",", "."))
+                                precoFormatado = round(precoFormatado + acrescimo, 2)
+                                valores.append(precoFormatado)
                             elif u > 0 and valor == "-":
                                 valores.append(0)
 
@@ -358,12 +380,11 @@ def dadosPlano(driver, title):
 
                                 if updatePrecoPlano:
                                     res = cursor.execute(update)
-                                    mensagem = f"Plano: {plano} \nIdOperadora: {idOperadora}\n SQL:{sql}"
-                                    res2 = apiWhats.sendMessageAlert(
-                                        message=mensagem,
-                                        number=getNumberWhatsNotificationPrice
-                                    )
-                                    print(res2)
+                                    # print("Atualizou!!!")
+                                    mensagemWhats += f"Plano: *{nome_plano} ({nomeModalidade})* | Numero vidas: {minVidas}-{maxVidas} \n" \
+                                                     f"Preço antigo preco0_18: ~R$ {select[8]}~ | Atualizado preco0_18: R$ {valores[0]}\n" \
+                                                     f"Preço antigo preco_m59: ~R$ {select[17]}~ | Atualizado preco_m59: R$ {valores[9]}\n\n"
+
                                 else:
                                     res = 1
 
@@ -382,9 +403,11 @@ def dadosPlano(driver, title):
                                                  f"({idSelect}, {select[8]}, {select[9]}, {select[10]}, {select[11]}, {select[12]}, {select[13]}, {select[14]}, {select[15]}, {select[16]}, {select[17]}, '{ultimo_reajuste}'); "
 
                                     print(insert)
-                                    if salvar:
+                                    if updatePrecoPlano:
                                         res = cursor.execute(insert)
                                         print(res, "sucesso")
+
+                                    conn.commit()
 
                                 # if not insertDados(sql, values):
                                 #     print("ERROR: erro ao inserir precos no banco de dados!")
@@ -411,9 +434,16 @@ def dadosPlano(driver, title):
                                     inseridos += 1
                         elif res > 1:
                             print("Mais de um plano cadastrado")
+
+                        conn.commit()
                 else:
                     print(f"nothing plano nao encontrado: {plano} \n{sql}")
                     breakpoint()
+
+            if not mensagemWhats == mensagemWhatsInicial:
+                apiWhats.sendMessageAlert(message=mensagemWhats, number=getNumbersWhatsNotificationPrice)
+
+            conn.commit()
 
         if re.search('vidas/beneficiários', ele.text):
             textVidas = ele.text
@@ -422,26 +452,23 @@ def dadosPlano(driver, title):
                 minVidas = 0
                 maxVidas = 2
             elif re.search('2 à 29 vidas', textVidas):
-                minVidas = 2
+                minVidas = 0
                 maxVidas = 29
             elif re.search('3 à 29 vidas', textVidas):
-                if idOperadora == 11:
-                    minVidas = 0
-                else:
-                    minVidas = 3
+                minVidas = 0
                 maxVidas = 29
             elif re.search('30 à 99 vidas', textVidas):
                 minVidas = 30
-                if idOperadora == 6:
-                    maxVidas = 99
-                else:
-                    maxVidas = 0
+                maxVidas = 99
             elif re.search('100 à 199 vidas', textVidas):
                 minVidas = 100
                 maxVidas = 199
             elif re.search('2 à 29', textVidas):
                 minVidas = 0
                 maxVidas = 29
+            elif re.search('2 à 99', textVidas):
+                minVidas = 0
+                maxVidas = 99
 
             refPrecos = True
 
@@ -467,10 +494,6 @@ def dadosPlano(driver, title):
 
             refPrecos = True
 
-            # print(f"CONFIGURACOES: \nidOperadora: {idOperadora} "
-            #       f"\nidTipoContratacao: {idTipoContratacao} \nidCoparticipacao: {idCoparticipacao} \n"
-            #       f"minVidas: {minVidas} \nmaxVidas: {maxVidas} \nidTipoEmpresa: {id_tipo_empresa}")
-
     conn.commit()
 
     driver.execute_script("history.back()")
@@ -478,102 +501,111 @@ def dadosPlano(driver, title):
 
 def navegacao(driver):
     global idArea
+    global estadoNome
     driver.find_element_by_xpath('//*[@id="geral-content"]/nav/ul/li[1]/a').click()
 
-    # driver.find_element_by_id('tabela_tiposTabela_1').click()
-    # driver.find_element_by_id('tabela_tiposTabela_2').click()
-    driver.find_element_by_id('tabela_tiposTabela_3').click()
+    # Marcando as opçoes do tipo de tabela: ['Individual', 'PME/Empresarial']
     driver.find_element_by_id('tabela_tiposPlano_1').click()
+    driver.find_element_by_id('tabela_tiposTabela_3').click()
 
-    driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[25]').click()
-    idArea = 1
+    estados = [
+        "São Paulo",
+        "Rio de Janeiro",
+        "Minas Gerais",
+        "Santa Catarina",
+        "Paraná",
+        "Espírito Santo",
+        "Mato Grosso",
+        "Mato Grosso do Sul",
+    ]
 
-    # driver.find_element_by_xpath(f'//*[@id="tabela_regiao"]/option[13]').click()
-    # idArea = 6
+    for estado in estados:
 
-    time.sleep(1)
-    try:
-        WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located(
-                (By.ID, 'btn-get-opes'))
-        )
-    finally:
-        pass
+        estadoOption = driver.find_element_by_xpath(f"//option[contains(text(),'{estado}')]")
+        estadoOption.click()
+        time.sleep(1)
+        estadoNome = estadoOption.text.strip().upper()
 
-    # driver.find_element_by_id('btn-get-opes').click()
-    driver.execute_script('document.getElementById("btn-get-opes").click()')
+        print("\n\n********************************************************\n"
+              f"Pesquisando estado: {estadoNome}")
 
-    try:
-        WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located(
-                (By.CLASS_NAME, 'bgGray'))
-        )
-    finally:
-        pass
+        area = AreaRepository.findByName(estadoNome)
+        idArea = area.id
 
-    qttResults = int(str(driver.find_element_by_class_name('bgGray').text).split("(")[1].split(")")[0])
+        time.sleep(1)
+        try:
+            WebDriverWait(driver, 20).until(
+                EC.presence_of_element_located(
+                    (By.ID, 'btn-get-opes'))
+            )
+        finally:
+            pass
 
-    voltar = False
-    for i in range(0, qttResults - 1):
-        # for i in range(235, 242):
-
-        if voltar:
-            driver.find_element_by_id('btn-get-opes').click()
-            time.sleep(2)
-            voltar = False
+        # driver.find_element_by_id('btn-get-opes').click()
+        driver.execute_script('document.getElementById("btn-get-opes").click()')
+        time.sleep(2)
 
         try:
             WebDriverWait(driver, 20).until(
                 EC.presence_of_element_located(
-                    (By.ID, 'div-opes-loaded'))
+                    (By.CLASS_NAME, 'bgGray'))
             )
         finally:
             pass
-        try:
-            textBox = driver.find_element_by_xpath(
-                f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').find_element_by_class_name("text").text
-        except:
-            time.sleep(3)
-            textBox = driver.find_element_by_xpath(
-                f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').find_element_by_class_name("text").text
-        finally:
-            pass
-        refOperadora = False
 
-        # textAlteracao = driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/div/b[2]').text
-        #
-        # if re.search('Essa Tabela está sendo atualizada neste momento', textAlteracao):
-        #     # enviar pensagem pelo whats com o title do plano de saude
-        #     print("Enviar mensagem pelo whats")
+        qttResults = int(str(driver.find_element_by_class_name('bgGray').text).split("(")[1].split(")")[0])
+        print(f"Quantidade de resultados: {qttResults}")
+        voltar = False
+        for i in range(0, qttResults - 1):
+            # for i in range(235, 242):
 
-        refCheckBoxDesabilited = driver.find_element_by_xpath(
-            f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_attribute('class')
-        if re.search("beautyCheck fullwidth opcy-7", refCheckBoxDesabilited):
-            refCheckBoxDesabilited = True
-        else:
-            refCheckBoxDesabilited = False
-        # print(refCheckBoxDesabilited)
+            if voltar:
+                driver.find_element_by_id('btn-get-opes').click()
+                time.sleep(2)
+                voltar = False
 
-        if re.search('SULAMÉRICA', textBox):
-            refOperadora = True
-        elif re.search('PORTO SEGURO', textBox):
-            refOperadora = True
-        elif re.search('QSAÚDE', textBox):
+            try:
+                WebDriverWait(driver, 20).until(
+                    EC.presence_of_element_located(
+                        (By.ID, 'div-opes-loaded'))
+                )
+            finally:
+                pass
+            try:
+                textBox = driver.find_element_by_xpath(
+                    f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').find_element_by_class_name("text").text
+            except:
+                time.sleep(3)
+                textBox = driver.find_element_by_xpath(
+                    f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').find_element_by_class_name("text").text
+            finally:
+                pass
             refOperadora = False
-        elif re.search('CENTRAL NACIONAL UNIMED', textBox):
-            refOperadora = True
 
-        if refOperadora:
-            driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()
-            # driver.execute_script(f"document.getElementsByName('tabela[tabelas][]')[{i}].click()")
-            time.sleep(2)
-            driver.execute_script("document.getElementById('btSubmit').click()")
+            refCheckBoxDesabilited = driver.find_element_by_xpath(
+                f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]').get_attribute('class')
+            if not re.search("beautyCheck fullwidth opcy-7", refCheckBoxDesabilited):
+                if re.search('SULAMÉRICA', textBox):
+                    refOperadora = True
+                elif re.search('PORTO SEGURO', textBox):
+                    refOperadora = True
+                elif re.search('QSAÚDE', textBox):
+                    refOperadora = False
+                elif re.search('CENTRAL NACIONAL UNIMED', textBox):
+                    refOperadora = True
+            else:
+                refOperadora = False
 
-            print(f"\n------------------------------------------------------------------------"
-                  f"------------------------------------------\nLendo {i}: {textBox}")
-            dadosPlano(driver, textBox)
+            if refOperadora:
+                driver.find_element_by_xpath(f'//*[@id="div-opes-loaded"]/div/label[{i + 1}]/input').click()
+                time.sleep(2)
+                driver.execute_script("document.getElementById('btSubmit').click()")
 
-            voltar = True
+                print(f"\n-------------------------------------------------------------------------------------------\n"
+                      f"Lendo {i}: {textBox}")
+                dadosPlano(driver, textBox)
+
+                voltar = True
 
     cursor.close()
     conn.commit()
