@@ -159,7 +159,7 @@ def rasparDados(driver):
 
             if min_vidas_pesquisa == 30:
                 min_vidas = 30
-                max_vidas = 0
+                max_vidas = 99
             elif min_vidas_pesquisa == 0:
                 min_vidas = 0
                 max_vidas = 29
@@ -176,17 +176,17 @@ def rasparDados(driver):
                 qtd_titulares = '1'
             elif min_vidas > 29:
                 min_vidas = 30
-                max_vidas = 0
+                max_vidas = 99
                 qtd_titulares = '1'
 
         elif re.search('SULAMÉRICA', nome_operadora):
             if min_vidas == 0:
-                min_vidas = 3
+                min_vidas = 0
                 max_vidas = 29
                 qtd_titulares = '1'
             elif min_vidas > 29:
                 min_vidas = 30
-                max_vidas = 0
+                max_vidas = 99
                 qtd_titulares = '1'
 
             if re.search(' MEI', titulo):
@@ -207,7 +207,7 @@ def rasparDados(driver):
                 qtd_titulares = '1'
             elif min_vidas > 29:
                 min_vidas = 30
-                max_vidas = 0
+                max_vidas = 99
                 qtd_titulares = '1'
 
         elif re.search('PORTO SEGURO', nome_operadora):
@@ -232,7 +232,7 @@ def rasparDados(driver):
                 qtd_titulares = '1'
             elif min_vidas > 29:
                 min_vidas = 30
-                max_vidas = 0
+                max_vidas = 99
                 qtd_titulares = '1'
 
             if re.search(' MEI', titulo):
