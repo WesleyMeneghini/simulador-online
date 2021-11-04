@@ -223,7 +223,7 @@ def rasparDados(driver):
         elif re.search('ALLIANZ', nome_operadora):
             min_vidas = 0
             max_vidas = 49
-            qtd_titulares = '2'
+            qtd_titulares = '1'
 
         elif re.search('NOTREDAME', nome_operadora):
             if min_vidas == 0:
@@ -650,6 +650,8 @@ def verificarAtualizacao(driver, num):
             area = 'AMAPA'
         if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[16]').is_selected():
             area = 'PARANÁ'
+        if driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[4]').is_selected():
+            area = 'AMAZONAS'
 
         coparticipacao = ""
         tipo_contratacao = str(tipo_contratacao).split("-")
@@ -727,6 +729,8 @@ def verificarAtualizacao(driver, num):
             area = 'MATO GROSSO DO SUL'
         elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[16]').is_selected():
             area = 'PARANÁ'
+        elif driver.find_element_by_xpath('//*[@id="simulacao_regiao"]/option[4]').is_selected():
+            area = 'AMAZONAS'
 
         if re.search('SEM COPART', str(tag_operadora).upper()):
             coparticipacao = 2
@@ -741,7 +745,7 @@ def verificarAtualizacao(driver, num):
 
         if re.search('LIVRE ADESÃO', str(tipo_contratacao).upper()):
             tipo_contratacao = 'OPCI'
-        elif re.search('COMPULSÓRIA', str(tipo_contratacao).upper()):
+        elif re.search('COMPULSÓRI', str(tipo_contratacao).upper()):
             tipo_contratacao = 'COMP'
 
     if re.search('SULAMÉRICA', str(nome_operadora).upper()) and not re.search('COM REMISSÃO',
@@ -1043,6 +1047,7 @@ def obterDados(driver, tipo_tabela_option):
         "Espírito Santo",
         "Mato Grosso",
         "Mato Grosso do Sul",
+        "Amazonas"
     ]
 
     for estado in estados:
