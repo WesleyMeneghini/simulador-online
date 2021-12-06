@@ -1,0 +1,5 @@
+selenium==3.141.0
+mysql-connector-python==8.0.21
+requests==2.24.0
+beautifulsoup4
+PyMySQL==1.0.2

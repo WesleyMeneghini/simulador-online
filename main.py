@@ -8,6 +8,8 @@ from datetime import datetime
 
 from src.services import apiWhats
 
+logs = open("logs.txt", "a+", encoding="utf-8")
+
 if __name__ == '__main__':
 
     formatHorario = "%d/%m/%Y, %H:%M:%S"
@@ -45,8 +47,15 @@ if __name__ == '__main__':
             mensagem = f"Preços pela Simulaçao Tradicional (Finalizado): {datetime.now().strftime(formatHorario)}"
             apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
         except Exception as e:
-            apiWhats.sendMessageLog(message=e, number=getNumberWhatsNotificationLog)
-            print(e)
+            apiWhats.sendMessageLog(message="Erro interno - Simulação Tradicional: Consulte os logs no script", number=getNumberWhatsNotificationLog)
+
+            logs.seek(0)
+            data = datetime.now().strftime(formatHorario)
+
+            logs.write(data + " - Simulação Tradicional: ")
+            logs.write(str(e))
+            logs.write("\n")
+
             pass
         finally:
 
@@ -54,11 +63,22 @@ if __name__ == '__main__':
                 print("Iniciando os preços pela tabela!")
                 tabela.navegacao(driver)
             except Exception as e:
-                apiWhats.sendMessageLog(message=e, number=getNumberWhatsNotificationLog)
-                print(e)
+                apiWhats.sendMessageLog(message="Erro interno - Tabela: Consulte os logs no script", number=getNumberWhatsNotificationLog)
+
+                logs.seek(0)
+                data = datetime.now().strftime(formatHorario)
+
+                logs.write(data + " - Tabela: ")
+                logs.write(str(e))
+                logs.write("\n")
+
                 pass
             finally:
                 mensagem = f"Preços pela Tabela (Finalizado): {datetime.now().strftime(formatHorario)}"
+                apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
+
+                planos = open("planos.txt", "r", encoding="utf-8").read()
+                mensagem = f"Planos que não foram encontrados no banco:\n\n{planos}"
                 apiWhats.sendMessageLog(message=mensagem, number=getNumberWhatsNotificationLog)
 
     # Pegar os preços do site da affinity (OPERADORA: Porto Seguro)

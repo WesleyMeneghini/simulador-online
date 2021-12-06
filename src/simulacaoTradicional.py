@@ -44,6 +44,7 @@ estadoMatoGrosso = False
 estadoMatoGrossoSul = False
 estadoAmapa = False
 
+arquivo = open("planos.txt", "a+", encoding="utf-8")
 
 def insertDados(sql, values):
     conn = conexao.myConexao()
@@ -468,8 +469,8 @@ def rasparDados(driver):
 
                         # print(type(preco0_18), type(valores[0]))
                         # print(preco0_18, valores[0])
-                        if not preco0_18 == valores[0] or not preco59 == valores[
-                            9]:  # and not ultimo_reajuste == data_reajuste
+
+                        if not preco0_18 == valores[0] or not preco59 == valores[9]:  # and not ultimo_reajuste == data_reajuste
                             print("Atualizar Precos! -----")
                             planos_atualizados.append(plano)
 
@@ -572,6 +573,15 @@ def rasparDados(driver):
     print(f"Planos que nao foram encontrados: \n {planos_sem_cadastros}")
     print(f"Planos que sofreram alteracoes: \n {planos_atualizados}")
 
+    # Exportar para o arquivo planos.txt os planos que não foram encontrados
+    for plano in planos_sem_cadastros:
+        arquivo.seek(0)
+        arquivo.truncate()
+        planos = arquivo.read()
+
+        if plano not in planos:
+            arquivo.write(plano)
+            arquivo.write("\n")
 
 def verificarAtualizacao(driver, num):
     global data_reajuste
@@ -1176,11 +1186,9 @@ def obterDados(driver, tipo_tabela_option):
                                     refNomeOperadora = True
                                 if re.search('SULAMÉRICA', str(nome_operadora).upper()):
                                     refNomeOperadora = False
-                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO',
-                                                                                                      str(nome_operadora).upper()):
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('DIRETO', str(nome_operadora).upper()):
                                     refNomeOperadora = False
-                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR',
-                                                                                                      str(nome_operadora).upper()):
+                                if re.search('SULAMÉRICA', str(nome_operadora).upper()) and re.search('HOSPITALAR', str(nome_operadora).upper()):
                                     refNomeOperadora = False
                                 if re.search('SOMPO', str(nome_operadora).upper()):
                                     refNomeOperadora = False
